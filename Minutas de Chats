@@ -1,1 +1,58 @@
+# MINUTA DE REUNIÓN — 29/08/2026
+
+**Participantes:** Arquitecto (Jorge) y Asistente (IA de Internet)
+**Tema:** Optimización de la interacción con IA y estructura de memoria del proyecto STRATOS.
+
+---
+
+## 1. PROBLEMA IDENTIFICADO
+- La IA interna del sistema (VS Code / Cline) está limitada por **tokens diarios**.
+- El Arquitecto desea cambiar de IA o de chat sin perder el contexto del proyecto.
+- La comunicación actual en el chat consume demasiados tokens por repreguntas y explicaciones largas.
+
+## 2. DECISIONES ESTRUCTURALES (Tomadas hoy)
+
+### A. Separación de Memorias
+Se decidió separar la **memoria operativa** (lo que se hace en el sistema) de la **memoria estratégica** (lo que hablamos aquí).
+
+- **Memoria Operativa:** Dentro de `Proyecto-Stratos`.
+  - `MEMORIA.md`: Estado actual, bitácora y pendientes.
+  - `A_DONDE_VA_STRATOS.md`: Visión del proyecto.
+  - `instrucciones.md`: Protocolo interno de trabajo con la IA del sistema.
+- **Memoria Estratégica:** En GitHub, externa al proyecto.
+  - `Comunicaci-n-IA-Internet`: Manual de arranque para IA de internet.
+  - `Minutas Internet`: Resúmenes de reuniones, ideas y decisiones.
+
+### B. Protocolo de arranque para IA de Internet
+Se creó el texto exacto para `Arranque de Interacción`, el cual obliga a la IA de internet a:
+- Leer todo el contexto de `Proyecto-Stratos`.
+- Leer todas las minutas.
+- Confirmar que entendió.
+- **NO intentar hacer cambios en el sistema local** (solo asesorar y redactar textos para que el Arquitecto los pegue en su sistema).
+
+### C. Optimización de Tokens (En el sistema interno)
+- Se definió que cuando el Arquitecto diga **"Leer explicación"**, la IA del sistema debe leer `explicacion.txt` y actuar **sin preguntar ni explicar en el chat**.
+- Se definió que cuando el Arquitecto diga **"Grabar Bitácora"**, la IA del sistema debe subir los cambios a GitHub y **borrar inmediatamente el contenido de `explicacion.txt`**.
+- **Regla de oro:** El chat es solo para confirmaciones cortas. La IA no debe gastar tokens en explicaciones innecesarias.
+
+### D. Sincronización con GitHub
+- Se corrigió y subió el sistema a GitHub. 
+- **Importante:** El script automático `subir_automatico.ps1` no detecta los cambios de `Ctrl+S` en la versión de VS Code del Arquitecto. Por eso se definió que la IA del sistema debe ejecutar **manualmente** los 3 comandos de Git (add, commit, push) cuando se le ordene subir.
+
+## 3. ACUERDOS FINALES
+- El Arquitecto no se complica: prefiere copiar y pegar textos definidos aquí, en lugar de intentar cambiar sistemas complejos.
+- Cualquier IA nueva (interna o de internet) debe leer primero la memoria para no empezar en cero.
+- La idea de crear carpetas externas a GitHub (Comunicación y Minutas) es la solución definitiva para mantener el proyecto limpio y las ideas claras.
+
+---
+
+**Próximos pasos sugeridos:**
+1. Actualizar `MEMORIA.md` de Stratos con esta minuta para que la IA interna también sepa lo que se decidió.
+2. Confirmar que los archivos nuevos en GitHub están correctamente subidos.
+3. Probar el sistema con un chat nuevo (decir "Lee Arranque de Interacción").
+
+--- 
+*Fin de la minuta.*
+
+
 
