@@ -54,5 +54,31 @@ Se creó el texto exacto para `Arranque de Interacción`, el cual obliga a la IA
 --- 
 *Fin de la minuta.*
 
+### Avance: Pantalla de Comunicación (Lluvia de ideas)
+**Fecha:** 29/08/2026 (sesión 2)
 
+**1. Dos vías de comunicación:**
+- **Correo:** Formal, con historial y asignaciones.
+- **Teléfono:** Vía rápida para mensajes, comentarios cortos y tareas rápidas.
+
+**2. Formato del correo de Stratos:**
+- Campos básicos: **DE** y **PARA**.
+- **Clasificación:** Informativo, Respuesta, Acción a tomar (el usuario puede modificar).
+- **Prioridad:** Alta, Media, Baja (definida por el usuario).
+- **Interno vs. Externo:** Se define automáticamente según si el destinatario está en los contactos del organigrama (interno) o fuera (foráneo/externo).
+
+**3. Detección inteligente por IA:**
+- La IA analiza la redacción del correo y detecta si contiene: **Cita, Asignación de Tarea o Informativo.**
+- Si detecta una Cita o Tarea, le muestra al emisor una ventana de confirmación pre-rellenada con: **Lugar, Hora, Participantes, Prioridad y Nombre.**
+- El usuario puede editar esos campos antes de enviar.
+
+**4. Acción en el receptor (según prioridad):**
+- **Alta/Media:** En cuanto el receptor abre el correo, se graba automáticamente en su calendario.
+- **Baja:** Se queda como correo normal; el receptor decide si lo agrega a su calendario.
+- **Calendario y Gantt:** Las citas y tareas insertadas alimentan la gráfica de Gantt (trazabilidad y avance).
+
+**5. Periodicidad de avisos (Lógica Gaussiana):**
+- El sistema calcula el porcentaje de tiempo restante (de hoy al deadline).
+- Con esa fórmula, determina cuántos avisos se envían y cada cuánto tiempo (ej: 90% de tiempo = aviso semanal; 10% de tiempo = aviso diario/urgente).
+- **Nota:** El detalle de conectar direcciones de correo externas se deja para después (fase avanzada).
 
