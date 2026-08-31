@@ -1,171 +1,84 @@
-# MINUTA DE REUNIÓN — 29/08/2026
+# MINUTAS DE CHATS — RESUMEN GENERAL
 
-**Participantes:** Arquitecto (Jorge) y Asistente (IA de Internet)
-**Tema:** Optimización de la interacción con IA y estructura de memoria del proyecto STRATOS.
+> **Documento de continuidad para IA de Internet.**
+> Este archivo resume TODO lo que se ha hablado, decidido y acordado en los chats externos.
+> Cualquier IA que lea este archivo entenderá el contexto completo antes de trabajar.
 
 ---
 
-## 1. PROBLEMA IDENTIFICADO
-- La IA interna del sistema (VS Code / Cline) está limitada por **tokens diarios**.
-- El Arquitecto desea cambiar de IA o de chat sin perder el contexto del proyecto.
-- La comunicación actual en el chat consume demasiados tokens por repreguntas y explicaciones largas.
+## PARTE 1: CONFIGURACIÓN DEL SISTEMA DE COMUNICACIÓN
 
-## 2. DECISIONES ESTRUCTURALES (Tomadas hoy)
+### A. La estructura de memorias (Importante)
+Se decidió separar claramente dos tipos de información:
 
-### A. Separación de Memorias
-Se decidió separar la **memoria operativa** (lo que se hace en el sistema) de la **memoria estratégica** (lo que hablamos aquí).
+1. **Memoria Operativa (Dentro de `Proyecto-Stratos`):**
+   - `MEMORIA.md`: Estado actual del proyecto, bitácora y pendientes.
+   - `A_DONDE_VA_STRATOS.md`: Visión del proyecto.
+   - `instrucciones.md`: Protocolo interno de trabajo con la IA del sistema.
 
-- **Memoria Operativa:** Dentro de `Proyecto-Stratos`.
-  - `MEMORIA.md`: Estado actual, bitácora y pendientes.
-  - `A_DONDE_VA_STRATOS.md`: Visión del proyecto.
-  - `instrucciones.md`: Protocolo interno de trabajo con la IA del sistema.
-- **Memoria Estratégica:** En GitHub, externa al proyecto.
-  - `Comunicaci-n-IA-Internet`: Manual de arranque para IA de internet.
-  - `Minutas Internet`: Resúmenes de reuniones, ideas y decisiones.
+2. **Memoria Estratégica (Externa al proyecto, en GitHub):**
+   - `Comunicaci-n-IA-Internet`: Manual de arranque para las IA de internet.
+   - `Minutas de Chats`: Resúmenes de reuniones, ideas y decisiones estratégicas.
 
 ### B. Protocolo de arranque para IA de Internet
-Se creó el texto exacto para `Arranque de Interacción`, el cual obliga a la IA de internet a:
-- Leer todo el contexto de `Proyecto-Stratos`.
-- Leer todas las minutas.
-- Confirmar que entendió.
-- **NO intentar hacer cambios en el sistema local** (solo asesorar y redactar textos para que el Arquitecto los pegue en su sistema).
+- La IA de internet debe leer el archivo `Arranque de Interacción`.
+- Debe leer todo el contexto del proyecto `Proyecto-Stratos`.
+- Debe leer todas las minutas.
+- Debe confirmar que entendió.
+- **Regla de oro:** La IA de internet NO tiene acceso al sistema local. Solo asesora, analiza y redacta textos exactos para que el Arquitecto los copie y pegue en su sistema.
 
-### C. Optimización de Tokens (En el sistema interno)
-- Se definió que cuando el Arquitecto diga **"Leer explicación"**, la IA del sistema debe leer `explicacion.txt` y actuar **sin preguntar ni explicar en el chat**.
-- Se definió que cuando el Arquitecto diga **"Grabar Bitácora"**, la IA del sistema debe subir los cambios a GitHub y **borrar inmediatamente el contenido de `explicacion.txt`**.
-- **Regla de oro:** El chat es solo para confirmaciones cortas. La IA no debe gastar tokens en explicaciones innecesarias.
+### C. Optimización de tokens (En el sistema interno)
+- Cuando el Arquitecto diga **"Leer explicación"**, la IA del sistema lee `explicacion.txt` y actúa **sin preguntar ni explicar en el chat**.
+- Cuando el Arquitecto diga **"Grabar Bitácora"**, la IA del sistema sube los cambios a GitHub y **borra el contenido de `explicacion.txt`**.
+- **Regla de oro del chat:** Solo confirmaciones cortas. La IA no debe gastar tokens en explicaciones innecesarias.
 
 ### D. Sincronización con GitHub
-- Se corrigió y subió el sistema a GitHub. 
-- **Importante:** El script automático `subir_automatico.ps1` no detecta los cambios de `Ctrl+S` en la versión de VS Code del Arquitecto. Por eso se definió que la IA del sistema debe ejecutar **manualmente** los 3 comandos de Git (add, commit, push) cuando se le ordene subir.
-
-## 3. ACUERDOS FINALES
-- El Arquitecto no se complica: prefiere copiar y pegar textos definidos aquí, en lugar de intentar cambiar sistemas complejos.
-- Cualquier IA nueva (interna o de internet) debe leer primero la memoria para no empezar en cero.
-- La idea de crear carpetas externas a GitHub (Comunicación y Minutas) es la solución definitiva para mantener el proyecto limpio y las ideas claras.
+- El script `subir_automatico.ps1` no detecta los cambios de `Ctrl+S` en la versión actual de VS Code.
+- **Solución:** La IA del sistema debe ejecutar manualmente los 3 comandos de Git (`git add .`, `git commit -m "..."`, `git push origin main`) cuando se le ordene "Grabar Bitácora".
 
 ---
 
-**Próximos pasos sugeridos:**
-1. Actualizar `MEMORIA.md` de Stratos con esta minuta para que la IA interna también sepa lo que se decidió.
-2. Confirmar que los archivos nuevos en GitHub están correctamente subidos.
-3. Probar el sistema con un chat nuevo (decir "Lee Arranque de Interacción").
+## PARTE 2: DISEÑO CONCEPTUAL DE LA PANTALLA DE COMUNICACIÓN (Lluvia de ideas)
 
---- 
-*Fin de la minuta.*
-
-### Avance: Pantalla de Comunicación (Lluvia de ideas)
-**Fecha:** 29/08/2026 (sesión 2)
-
-**1. Dos vías de comunicación:**
+### 1. Vías de comunicación
 - **Correo:** Formal, con historial y asignaciones.
 - **Teléfono:** Vía rápida para mensajes, comentarios cortos y tareas rápidas.
 
-**2. Formato del correo de Stratos:**
+### 2. Formato del correo de Stratos
 - Campos básicos: **DE** y **PARA**.
 - **Clasificación:** Informativo, Respuesta, Acción a tomar (el usuario puede modificar).
 - **Prioridad:** Alta, Media, Baja (definida por el usuario).
 - **Interno vs. Externo:** Se define automáticamente según si el destinatario está en los contactos del organigrama (interno) o fuera (foráneo/externo).
 
-**3. Detección inteligente por IA:**
+### 3. Detección inteligente por IA
 - La IA analiza la redacción del correo y detecta si contiene: **Cita, Asignación de Tarea o Informativo.**
 - Si detecta una Cita o Tarea, le muestra al emisor una ventana de confirmación pre-rellenada con: **Lugar, Hora, Participantes, Prioridad y Nombre.**
 - El usuario puede editar esos campos antes de enviar.
 
-**4. Acción en el receptor (según prioridad):**
+### 4. Acción en el receptor (según prioridad)
 - **Alta/Media:** En cuanto el receptor abre el correo, se graba automáticamente en su calendario.
 - **Baja:** Se queda como correo normal; el receptor decide si lo agrega a su calendario.
 - **Calendario y Gantt:** Las citas y tareas insertadas alimentan la gráfica de Gantt (trazabilidad y avance).
 
-**5. Periodicidad de avisos (Lógica Gaussiana):**
-- El sistema calcula el porcentaje de tiempo restante (de hoy al deadline).
-- Con esa fórmula, determina cuántos avisos se envían y cada cuánto tiempo (ej: 90% de tiempo = aviso semanal; 10% de tiempo = aviso diario/urgente).
-- **Nota:** El detalle de conectar direcciones de correo externas se deja para después (fase avanzada).
-
-# MINUTA DE REUNIÓN — 29/08/2026 (Actualizada)
-
-**Participantes:** Arquitecto (Jorge) y Asistente (IA de Internet)
-**Tema:** Optimización de la interacción con IA, estructura de memoria del proyecto STRATOS y diseño conceptual de la Pantalla de Comunicación.
-
----
-
-## 1. PROBLEMA IDENTIFICADO
-- La IA interna del sistema (VS Code / Cline) está limitada por **tokens diarios**.
-- El Arquitecto desea cambiar de IA o de chat sin perder el contexto del proyecto.
-- La comunicación actual en el chat consume demasiados tokens por repreguntas y explicaciones largas.
-
-## 2. DECISIONES ESTRUCTURALES (Tomadas hoy)
-
-### A. Separación de Memorias
-Se decidió separar la **memoria operativa** (lo que se hace en el sistema) de la **memoria estratégica** (lo que hablamos aquí).
-
-- **Memoria Operativa:** Dentro de `Proyecto-Stratos`.
-  - `MEMORIA.md`: Estado actual, bitácora y pendientes.
-  - `A_DONDE_VA_STRATOS.md`: Visión del proyecto.
-  - `instrucciones.md`: Protocolo interno de trabajo con la IA del sistema.
-- **Memoria Estratégica:** En GitHub, externa al proyecto.
-  - `Comunicaci-n-IA-Internet`: Manual de arranque para IA de internet.
-  - `Minutas Internet`: Resúmenes de reuniones, ideas y decisiones.
-
-### B. Protocolo de arranque para IA de Internet
-Se creó el texto exacto para `Arranque de Interacción`, el cual obliga a la IA de internet a:
-- Leer todo el contexto de `Proyecto-Stratos`.
-- Leer todas las minutas.
-- Confirmar que entendió.
-- **NO intentar hacer cambios en el sistema local** (solo asesorar y redactar textos para que el Arquitecto los pegue en su sistema).
-
-### C. Optimización de Tokens (En el sistema interno)
-- Se definió que cuando el Arquitecto diga **"Leer explicación"**, la IA del sistema debe leer `explicacion.txt` y actuar **sin preguntar ni explicar en el chat**.
-- Se definió que cuando el Arquitecto diga **"Grabar Bitácora"**, la IA del sistema debe subir los cambios a GitHub y **borrar inmediatamente el contenido de `explicacion.txt`**.
-- **Regla de oro:** El chat es solo para confirmaciones cortas. La IA no debe gastar tokens en explicaciones innecesarias.
-
-### D. Sincronización con GitHub
-- Se corrigió y subió el sistema a GitHub. 
-- **Importante:** El script automático `subir_automatico.ps1` no detecta los cambios de `Ctrl+S` en la versión de VS Code del Arquitecto. Por eso se definió que la IA del sistema debe ejecutar **manualmente** los 3 comandos de Git (add, commit, push) cuando se le ordene subir.
-
----
-
-## 3. AVANCE: PANTALLA DE COMUNICACIÓN (Lluvia de ideas)
-
-**Vías de comunicación:**
-- **Correo:** Formal, con historial y asignaciones.
-- **Teléfono:** Vía rápida para mensajes, comentarios cortos y tareas rápidas.
-
-**Formato del correo de Stratos:**
-- Campos básicos: **DE** y **PARA**.
-- **Clasificación:** Informativo, Respuesta, Acción a tomar (el usuario puede modificar).
-- **Prioridad:** Alta, Media, Baja (definida por el usuario).
-- **Interno vs. Externo:** Se define automáticamente según si el destinatario está en los contactos del organigrama (interno) o fuera (foráneo/externo).
-
-**Detección inteligente por IA:**
-- La IA analiza la redacción del correo y detecta si contiene: **Cita, Asignación de Tarea o Informativo.**
-- Si detecta una Cita o Tarea, le muestra al emisor una ventana de confirmación pre-rellenada con: **Lugar, Hora, Participantes, Prioridad y Nombre.**
-- El usuario puede editar esos campos antes de enviar.
-
-**Acción en el receptor (según prioridad):**
-- **Alta/Media:** En cuanto el receptor abre el correo, se graba automáticamente en su calendario.
-- **Baja:** Se queda como correo normal; el receptor decide si lo agrega a su calendario.
-- **Calendario y Gantt:** Las citas y tareas insertadas alimentan la gráfica de Gantt (trazabilidad y avance).
-
-**Periodicidad de avisos (Lógica Gaussiana):**
+### 5. Periodicidad de avisos (Lógica Gaussiana)
 - El sistema calcula el porcentaje de tiempo restante (de hoy al deadline).
 - Con esa fórmula, determina cuántos avisos se envían y cada cuánto tiempo (ej: 90% de tiempo = aviso semanal; 10% de tiempo = aviso diario/urgente).
 - **Nota:** El detalle de conectar direcciones de correo externas se deja para después (fase avanzada).
 
 ---
 
-## 4. ACUERDOS FINALES
+## PARTE 3: ACUERDOS FINALES Y PRÓXIMOS PASOS
+
+### Acuerdos:
 - El Arquitecto no se complica: prefiere copiar y pegar textos definidos aquí, en lugar de intentar cambiar sistemas complejos.
 - Cualquier IA nueva (interna o de internet) debe leer primero la memoria para no empezar en cero.
 - La idea de crear carpetas externas a GitHub (Comunicación y Minutas) es la solución definitiva para mantener el proyecto limpio y las ideas claras.
 
----
-
-**Próximos pasos sugeridos:**
+### Próximos pasos sugeridos:
 1. Actualizar `MEMORIA.md` de Stratos con esta minuta para que la IA interna también sepa lo que se decidió.
 2. Confirmar que los archivos nuevos en GitHub están correctamente subidos.
 3. Probar el sistema con un chat nuevo (decir "Lee Arranque de Interacción").
 
 --- 
-*Fin de la minuta actualizada.*
+*Fin de las minutas actualizadas.*
 
