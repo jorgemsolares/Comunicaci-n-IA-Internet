@@ -86,10 +86,10 @@ Se decidió separar claramente dos tipos de información:
 - Cualquier IA nueva (interna o de internet) debe leer primero la memoria para no empezar en cero.
 - La idea de crear carpetas externas a GitHub (Comunicación y Minutas) es la solución definitiva para mantener el proyecto limpio y las ideas claras.
 
-### Próximos pasos sugeridos:
-1. Actualizar `MEMORIA.md` de Stratos con esta minuta para que la IA interna también sepa lo que se decidió.
-2. Confirmar que los archivos nuevos en GitHub están correctamente subidos.
-3. Probar el sistema con un chat nuevo (decir "Lee Arranque de Interacción").
+### Próximos pasos reales (Definidos el 31/08/2026):
+1. **Continuar el diseño de la Pantalla de Comunicación:** Definir el **Formato Base del Correo** (cómo se ve la pantalla, los campos, los nodos y el flujo de envío).
+2. **Definir el Módulo de Mensajes (Chats):** Estructura y funcionalidad básica.
+3. **Actualizar el protocolo de arranque en `Comunicaci-n-IA-Internet`:** Asegurar que la IA de internet lea **exactamente** los archivos correctos de `Proyecto-Stratos` y `Minutas de Chats`, para evitar alucinaciones.
 
 --- 
 *Fin de las minutas actualizadas.*
