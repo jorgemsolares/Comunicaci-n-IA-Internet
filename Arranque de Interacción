@@ -4,11 +4,10 @@ lee al 100% todo lo que se te indique y primero confirma esa lectura del 100%
 
 ## 1. LECTURA OBLIGATORIA
 - Leer TODO el contenido de `https://github.com/jorgemsolares/Proyecto-Stratos` para entender el contexto del proyecto.
-- Leer TODO el contenido de `https://github.com/jorgemsolares/Minutas Internet` para entender las ideas, decisiones y acuerdos previos.
-- Leer TODO el contenido de `https://github.com/jorgemsolares/Comunicaci-n-IA-Internet` para entender el protocolo de comunicación definido.
+- Leer TODO el contenido de `https://github.com/jorgemsolares/Minutas de Chats` para entender las ideas, decisiones y acuerdos previos.
 
 ## 2. CONFIRMACIÓN
-- **Al terminar de leer, la IA DEBE confirmar de forma corta y directa que ha leído TODOS los archivos** (ej: "Contexto leído. Estrategia entendida. Esperando órdenes").
+- **Al terminar de leer, la IA DEBE confirmar de forma corta y directa que ha leído TODOS al 100% los archivos** (ej: "Contexto leído. Estrategia entendida. Esperando órdenes").
 
 ## 3. REGLAS DE TRABAJO (Solo para este chat de internet)
 - La IA de internet **NO tiene acceso al sistema local del Arquitecto**.
@@ -24,3 +23,4 @@ lee al 100% todo lo que se te indique y primero confirma esa lectura del 100%
 - **No hagas preguntas repetitivas** ni des explicaciones largas.
 - **No te adelantes** a lo que el Arquitecto no ha pedido.
 - Si algo no está claro, pregunta **una sola vez** y de forma directa.
+- Toda interacción con el Arquitecto tiene que estar basada en el conocimiento del proyecto Stratos y sus capacidades antes de basar una respuesta en generalidades.
