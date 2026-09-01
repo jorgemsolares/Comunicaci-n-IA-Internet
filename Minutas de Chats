@@ -28,17 +28,17 @@ Se decidió separar claramente dos tipos de información:
 - **Regla de oro:** La IA de internet NO tiene acceso al sistema local. Solo asesora, analiza y redacta textos exactos para que el Arquitecto los copie y pegue en su sistema.
 
 ### C. Optimización de tokens (En el sistema interno)
-- Cuando el Arquitecto diga **"Leer explicación"**, la IA del sistema lee `explicacion.txt` y actúa **sin preguntar ni explicar en el chat**.
-- Cuando el Arquitecto diga **"Grabar Bitácora"**, la IA del sistema sube los cambios a GitHub y **borra el contenido de `explicacion.txt`**.
+- Quando el Arquitecto diga **"Leer explicación"**, la IA del sistema lee `explicacion.txt` y actúa **sin preguntar ni explicar en el chat**.
+- Quando el Arquitecto diga **"Grabar Bitácora"**, la IA del sistema sube los cambios a GitHub et **borra el contenido de `explicacion.txt`**.
 - **Regla de oro del chat:** Solo confirmaciones cortas. La IA no debe gastar tokens en explicaciones innecesarias.
 
 ### D. Sincronización con GitHub
 - El script `subir_automatico.ps1` no detecta los cambios de `Ctrl+S` en la versión actual de VS Code.
-- **Solución:** La IA del sistema debe ejecutar manualmente los 3 comandos de Git (`git add .`, `git commit -m "..."`, `git push origin main`) cuando se le ordene "Grabar Bitácora".
+- **Solución:** La IA del sistema debe ejecutar manuelmente los 3 comandos de Git (`git add .`, `git commit -m "..."`, `git push origin main`) quando se le ordene "Grabar Bitácora".
 
 ---
 
-## PARTE 2: DISEÑO CONCEPTUAL DE LA PANTALLA DE COMUNICACIÓN (Lluvia de ideas)
+## PARTE 2: DISEÑO CONCEPTUAL DE LA PANTALLA DE COMUNICACIÓN
 
 ### 1. Vías de comunicación
 - **Correo:** Formal, con historial y asignaciones.
@@ -51,23 +51,34 @@ Se decidió separar claramente dos tipos de información:
 - **Interno vs. Externo:** Se define automáticamente según si el destinatario está en los contactos del organigrama (interno) o fuera (foráneo/externo).
 
 ### 3. Detección inteligente por IA
-- La IA analiza la redacción del correo y detecta si contiene: **Cita, Asignación de Tarea o Informativo.**
+- La IA analiza la redacción du correo et detecta si contiene: **Cita, Asignación de Tarea o Informativo.**
 - Si detecta una Cita o Tarea, le muestra al emisor una ventana de confirmación pre-rellenada con: **Lugar, Hora, Participantes, Prioridad y Nombre.**
 - El usuario puede editar esos campos antes de enviar.
 
-### 4. Acción en el receptor (según prioridad)
-- **Alta/Media:** En cuanto el receptor abre el correo, se graba automáticamente en su calendario.
-- **Baja:** Se queda como correo normal; el receptor decide si lo agrega a su calendario.
-- **Calendario y Gantt:** Las citas y tareas insertadas alimentan la gráfica de Gantt (trazabilidad y avance).
+### 4. Flujo de envío del correo (El "Nodo de Acción Automática")
+- **El usuario hace clic en "Enviar"** (lo más natural y sin fricción).
+- **La IA analiza el correo en ese instante** et decide:
+  - **Si detecta un Título vacío:** Abre una ventana con el título sugerido.
+  - **Si detecta una Reunión** (el cuerpo del correo detalla fecha, hora, lugar, participantes): Abre la ventana del **Nodo de Reunión** (para confirmar y que se inserte en el calendario).
+  - **Si detecta una Alerta Futura:** Abre la ventana du **Nodo de Reloj** (con la propuesta de alarma).
+  - **Si NO detecta nada:** NO abre ninguna ventana, el correo se envía y la IA lo registra silenciosamente.
 
-### 5. Periodicidad de avisos (Lógica Gaussiana)
-- El sistema calcula el porcentaje de tiempo restante (de hoy al deadline).
-- Con esa fórmula, determina cuántos avisos se envían y cada cuánto tiempo (ej: 90% de tiempo = aviso semanal; 10% de tiempo = aviso diario/urgente).
-- **Nota:** El detalle de conectar direcciones de correo externas se deja para después (fase avanzada).
+### 5. Diseño de experiencia de usuario (El "Nodo Comparativo")
+- **Problema identificado (Outlook):** Si el usuario no confirmas la reunión, el correo no sale. Eso genera frustración y pérdida de tiempo.
+- **Solución de Stratos:** La IA muestra un **"Nodo Comparativo"** (ventana de doble columna):
+  - **Lado izquierdo:** Lo que el usuario escribió (texto original).
+  - **Lado derecho:** La propuesta de la IA (título sugerido, campos de reunión rellenos, alarma propuesta).
+- **El usuario compara, edita si quiere, et tiene libertad de acción:** Si no le da importancia, puede cerrar el nodo y enviar el correo así nomás.
+- **El envío NO se bloquea:** El usuario siempre tiene la opción de ignorar la propuesta de la IA.
+
+### 6. Registro silencioso (Medición de Compromiso)
+- **Si el usuario cierra el nodo o ignora la propuesta de la IA**, el sistema **registra silenciosamente ese acto**.
+- Ese registro alimenta los KPIs de **Compromiso y Eficiencia** (porque se registra que el usuario no utilizó la asistencia que se le ofreció).
+- **Regla de oro:** La IA no molesta, pero siempre mide.
 
 ---
 
-## PARTE 3: ACUERDOS FINALES Y PRÓXIMOS PASOS
+## PARTE 3: ACUERDOS Y PRÓXIMOS PASOS
 
 ### Acuerdos:
 - El Arquitecto no se complica: prefiere copiar y pegar textos definidos aquí, en lugar de intentar cambiar sistemas complejos.
@@ -81,78 +92,3 @@ Se decidió separar claramente dos tipos de información:
 
 --- 
 *Fin de las minutas actualizadas.*
-
-
-# MINUTA DE REUNIÓN — 31/08/2026
-
-**Participantes:** Arquitecto (Jorge) y Asistente (IA de Internet)
-**Tema:** Diseño conceptual de la Pantalla de Comunicación y Lógica de Jerarquía.
-
----
-
-## 1. RESUMEN DEL AVANCE (Continuación del 29/08)
-
-### A. Lógica de Jerarquía y Conflictos (Correo y Citas)
-- **Invitación en Reserva:** Cuando un subordinado envía una invitación, a todos les queda la fecha "en reserva" (marcada pero sin confirmar), porque nadie ha aceptado aún.
-- **Flujo de Negociación:** Si el superior propone un cambio, el emisor acepta, el sistema avisa a todos que la reunión tuvo modificaciones (así ya hayan aceptado antes).
-- **Bloqueo Jerárquico (Crudo y Real):** Si el superior ya aceptó, el subalterno NO puede rechazar la cita por conflicto. El sistema le bloquea y le dice: "Lo lamento, no es posible. [Nombre del superior] ya aceptó". 
-- **Avisos Prácticos (Sin ruido):** El emisor NO necesita saber quién aceptó o rechazó. Solo necesita saber que la reunión está en pie. El tiempo de respuesta de los participantes sí alimenta los KPIs.
-
-### B. Los KPIs y el Peso de la Posición
-- **Correo vs. KPIs:** El correo es puramente jerárquico (quién manda, quién acepta). El peso (carga de responsabilidad) SOLO alimenta los KPIs.
-- **Peso Dinámico (No estático):** El peso NO debe estar en el perfil del usuario, sino que debe ser **calculado automáticamente por la IA** según su posición en el organigrama, sus recursos asignados y la acumulación de actividades (ej: un 3º nivel con más peso que otro 3º nivel de otro par).
-- **Medición Justa:** Dos personas en la misma línea pueden tener pesos diferentes. La eficiencia en una tarea afecta o no el KPI, **dependiendo del peso de la posición**.
-
-### C. La IA como Asesora de KPIs
-- **Una sola IA:** No hay módulos separados. Es la misma IA que analiza correos, detecta citas, aprende de los usuarios y sugiere KPIs.
-- **Asesor Práctico (Nodo de Información):** Cuando el jefe quiere definir KPIs, la IA analiza el entorno y le muestra a la derecha una **sugerencia clara y concisa (máximo 150 caracteres)**.
-- **Guía, no limitación:** La IA no le dice al jefe "no hagas esto", sino "si haces esto, ten en cuenta que...". Si el jefe cambia la definición, la IA se adapta.
-- **Función de Asesor Estratégico:** La IA analiza el organigrama, propone los KPIs y ajusta porcentajes cuando el organigrama cambia.
-
----
-
-## 2. DECISIÓN TÉCNICA (CRÍTICA)
-- **Introducción de la IA:** Se decidió **NO introducir la IA todavía**. Primero se debe construir la **base técnica** (Pantalla de Comunicación, correo, calendario, tareas, usuarios y organigrama). 
-- **El orden lógico:** Sin datos ni estructura, una IA solo dará sugerencias teóricas. La IA se introduce **cuando la base esté funcionando** y genere datos reales para analizar.
-
----
-
-## 3. PRÓXIMO PASO (Dónde nos quedamos)
-- **Definir el Formato Base del Correo:** Cómo se ve la pantalla, qué campos tiene (DE, PARA, Clasificación, Prioridad) y cómo se envía. 
-- **Nota:** El detalle de conectar direcciones de correo externas se deja para después (fase avanzada).
-
-
-# MINUTA DE REUNIÓN — 31/08/2026 (PARTE 2: Avance detallado)
-
-## 1. FLUJO DE ENVÍO DEL CORREO (El "Nodo de Acción Automática")
-
-- **El usuario hace clic en "Enviar"** (lo más natural y sin fricción).
-- **La IA analiza el correo en ese instante** y decide qué hacer:
-  - **Si detecta un Título vacío:** Abre una ventana con el título sugerido.
-  - **Si detecta una Reunión** (el cuerpo del correo detalla fecha, hora, lugar, participantes): Abre la ventana del **Nodo de Reunión** (para confirmar y que se inserte en el calendario).
-  - **Si detecta una Alerta Futura:** Abre la ventana del **Nodo de Reloj** (con la propuesta de alarma).
-  - **Si NO detecta nada** (el correo es solo informativo o están contactándose): **NO abre ninguna ventana**, el correo se envía y la IA lo registra silenciosamente.
-
-## 2. DISEÑO DE EXPERIENCIA DE USUARIO (El "Nodo Comparativo")
-
-- **Problema identificado (Outlook):** Si el usuario no confirmas la reunión, el correo no sale. Eso genera frustración y pérdida de tiempo.
-- **Solución de Stratos:** La IA muestra un **"Nodo Comparativo"** (ventana de doble columna):
-  - **Lado izquierdo:** Lo que el usuario escribió (texto original).
-  - **Lado derecho:** La propuesta de la IA (título sugerido, campos de reunión rellenos, alarma propuesta).
-- **El usuario compara, edita si quiere, y tiene libertad de acción:** Si no le da importancia, puede cerrar el nodo y enviar el correo así nomás.
-- **El envío NO se bloquea:** El usuario siempre tiene la opción de ignorar la propuesta de la IA.
-
-## 3. REGISTRO SILENCIOSO (Medición de Compromiso)
-
-- **Si el usuario cierra el nodo o ignora la propuesta de la IA**, el sistema **registra silenciosamente ese acto**.
-- Ese registro alimenta los KPIs de **Compromiso y Eficiencia** (porque se registra que el usuario no utilizó la asistencia que se le ofreció).
-- **Regla de oro:** La IA no molesta, pero siempre mide.
-
-## 4. PREGUNTA PARA DEFINIR MÁS ADELANTE (Pendiente de respuesta)
-
-- **¿El sistema tiene la "Certeza de Medición" detallada?** (ej: "El grado de certeza del KPI es de 75% porque el 15% no se ha tomado en cuenta al no activar el módulo XX"). Esta parte queda pendiente de definir con el No.1 cuando se trabaje el tema de KPIs.
-
----
-*Fin de la Parte 2.*
---- 
-*Fin de la minuta.*
