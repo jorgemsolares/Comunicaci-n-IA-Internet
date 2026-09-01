@@ -121,5 +121,38 @@ Se decidió separar claramente dos tipos de información:
 - **Definir el Formato Base del Correo:** Cómo se ve la pantalla, qué campos tiene (DE, PARA, Clasificación, Prioridad) y cómo se envía. 
 - **Nota:** El detalle de conectar direcciones de correo externas se deja para después (fase avanzada).
 
+
+# MINUTA DE REUNIÓN — 31/08/2026 (PARTE 2: Avance detallado)
+
+## 1. FLUJO DE ENVÍO DEL CORREO (El "Nodo de Acción Automática")
+
+- **El usuario hace clic en "Enviar"** (lo más natural y sin fricción).
+- **La IA analiza el correo en ese instante** y decide qué hacer:
+  - **Si detecta un Título vacío:** Abre una ventana con el título sugerido.
+  - **Si detecta una Reunión** (el cuerpo del correo detalla fecha, hora, lugar, participantes): Abre la ventana del **Nodo de Reunión** (para confirmar y que se inserte en el calendario).
+  - **Si detecta una Alerta Futura:** Abre la ventana del **Nodo de Reloj** (con la propuesta de alarma).
+  - **Si NO detecta nada** (el correo es solo informativo o están contactándose): **NO abre ninguna ventana**, el correo se envía y la IA lo registra silenciosamente.
+
+## 2. DISEÑO DE EXPERIENCIA DE USUARIO (El "Nodo Comparativo")
+
+- **Problema identificado (Outlook):** Si el usuario no confirmas la reunión, el correo no sale. Eso genera frustración y pérdida de tiempo.
+- **Solución de Stratos:** La IA muestra un **"Nodo Comparativo"** (ventana de doble columna):
+  - **Lado izquierdo:** Lo que el usuario escribió (texto original).
+  - **Lado derecho:** La propuesta de la IA (título sugerido, campos de reunión rellenos, alarma propuesta).
+- **El usuario compara, edita si quiere, y tiene libertad de acción:** Si no le da importancia, puede cerrar el nodo y enviar el correo así nomás.
+- **El envío NO se bloquea:** El usuario siempre tiene la opción de ignorar la propuesta de la IA.
+
+## 3. REGISTRO SILENCIOSO (Medición de Compromiso)
+
+- **Si el usuario cierra el nodo o ignora la propuesta de la IA**, el sistema **registra silenciosamente ese acto**.
+- Ese registro alimenta los KPIs de **Compromiso y Eficiencia** (porque se registra que el usuario no utilizó la asistencia que se le ofreció).
+- **Regla de oro:** La IA no molesta, pero siempre mide.
+
+## 4. PREGUNTA PARA DEFINIR MÁS ADELANTE (Pendiente de respuesta)
+
+- **¿El sistema tiene la "Certeza de Medición" detallada?** (ej: "El grado de certeza del KPI es de 75% porque el 15% no se ha tomado en cuenta al no activar el módulo XX"). Esta parte queda pendiente de definir con el No.1 cuando se trabaje el tema de KPIs.
+
+---
+*Fin de la Parte 2.*
 --- 
 *Fin de la minuta.*
