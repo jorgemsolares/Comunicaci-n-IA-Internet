@@ -27,14 +27,14 @@ Se decidió separar claramente dos tipos de información:
 - Debe confirmar que entendió.
 - **Regla de oro:** La IA de internet NO tiene acceso al sistema local. Solo asesora, analiza y redacta textos exactos para que el Arquitecto los copie y pegue en su sistema.
 
-### C. Optimización de tokens (En el sistema interno, esto es informativo para la IA de internet)
+### C. Optimización de tokens (En el sistema interno)
 - Cuando el Arquitecto diga **"Leer explicación"**, la IA del sistema lee `explicacion.txt` y actúa **sin preguntar ni explicar en el chat**.
-- Cuando el Arquitecto diga **"Grabar Bitácora"**, la IA del sistema sube los cambios a GitHub et **borra el contenido de `explicacion.txt`**.
+- Cuando el Arquitecto diga **"Grabar Bitácora"**, la IA del sistema sube los cambios a GitHub y **borra el contenido de `explicacion.txt`**.
 - **Regla de oro del chat:** Solo confirmaciones cortas. La IA no debe gastar tokens en explicaciones innecesarias.
 
-### D. Sincronización con GitHub (esto es informativo para la IA de Internet)
+### D. Sincronización con GitHub
 - El script `subir_automatico.ps1` no detecta los cambios de `Ctrl+S` en la versión actual de VS Code.
-- **Solución:** La IA del sistema debe ejecutar manuelmente los 3 comandos de Git (`git add .`, `git commit -m "..."`, `git push origin main`) quando se le ordene "Grabar Bitácora".
+- **Solución:** La IA del sistema debe ejecutar manualmente los 3 comandos de Git (`git add .`, `git commit -m "..."`, `git push origin main`) cuando se le ordene "Grabar Bitácora".
 
 ---
 
@@ -52,30 +52,33 @@ Se decidió separar claramente dos tipos de información:
 
 ### 3. Detección inteligente por IA
 - La IA analiza la redacción del correo y detecta si contiene: **Cita, Asignación de Tarea o Informativo.**
-- Si detecta una Cita o Tarea, le muestra al emisor una ventana de confirmación pre-rellenada con: **Lugar, Hora, Participantes, Prioridad y Nombre de actividad.**
-- El usuario puede editar esos campos antes de enviar si así lo desea, sino quedaran grabados los determinados por la IA al presionar ENVIAR.
+- Si detecta una Cita o Tarea, le muestra al emisor una ventana de confirmación pre-rellenada con: **Lugar, Hora, Participantes, Prioridad y Nombre.**
+- El usuario puede editar esos campos antes de enviar.
 
 ### 4. Flujo de envío del correo (El "Nodo de Acción Automática")
 - **El usuario hace clic en "Enviar"** (lo más natural y sin fricción).
-- **La IA analiza el correo en ese instante**  y decide:
-  - **Si detecta un Título vacío:** Abre una ventana con un título sugerido.
+- **La IA analiza el correo en ese instante** y decide:
+  - **Si detecta un Título vacío:** Abre una ventana con el título sugerido.
   - **Si detecta una Reunión** (el cuerpo del correo detalla fecha, hora, lugar, participantes): Abre la ventana del **Nodo de Reunión** (para confirmar y que se inserte en el calendario).
-  - **Si detecta una Alerta Futura:** Abre la ventana del **Nodo de Reloj** (con la propuesta de alarma).
+  - **Si detecta una Alerta futura:** Abre la ventana del **Nodo de Alarma** (con la propuesta de alarma).
   - **Si NO detecta nada:** NO abre ninguna ventana, el correo se envía y la IA lo registra silenciosamente.
 
-### 5. Diseño de experiencia de usuario (El "Nodo Comparativo")
-- **Problema identificado (Outlook):** Si el usuario no confirmas la reunión, el correo no sale. Eso genera frustración y pérdida de tiempo.
-- **Solución de Stratos:** La IA muestra un **"Nodo Comparativo"** (ventana de doble columna):
-  - **Lado izquierdo:** Lo que el usuario escribió (texto original).
-  - **Lado derecho:** La propuesta de la IA (título sugerido, campos de reunión rellenos, alarma propuesta).
-- **El usuario compara, edita si quiere, y tiene libertad de acción:** Si no le da importancia, puede cerrar el nodo y enviar el correo así nomás.
-- **El envío NO se bloquea:** El usuario siempre tiene la opción de ignorar la propuesta de la IA.
-- **Este nodo comparativo, es cuando la IA detecta conflictos entre lo descrito en el correo y lo que puede ser un conflicto con algo programado anteriormente o posibles errores de tecleado o inconsistencias con la realidad.
+### 5. Fenómeno de confirmación (Siempre abierta)
+- **La ventana donde se confirma el Título, la Clasificación y la Prioridad se abre SIEMPRE** (en cada correo enviado).
+- **Si el usuario ya puso su título:** La IA abre la ventana con su título, y le muestra la propuesta de Clasificación y Prioridad. El usuario edita si quiere.
+- **Si el usuario no puso título:** La IA abre la ventana, propone un título, y le muestra la Clasificación y Prioridad.
+- **Si detecta una Reunión o Alarma:** La ventana se expande para mostrar los campos adicionales.
+- **Texto diluido en el campo Título:** *"Escribe el título del correo... o espera, la IA te lo sugerirá al enviar"*.
 
 ### 6. Registro silencioso (Medición de Compromiso)
 - **Si el usuario cierra el nodo o ignora la propuesta de la IA**, el sistema **registra silenciosamente ese acto**.
-- Ese registro alimenta los KPIs de **Compromiso y Eficiencia** (porque se registra que el usuario no utilizó la asistencia que se le ofreció).
-- **Regla de oro:** La IA no molesta, pero siempre ayuda y mide dejando constancia en el banco de datos del usuario.
+- Ese registro alimenta los KPIs de **Compromiso y Eficiencia**.
+- **Regla de oro:** La IA no molesta, pero siempre mide.
+
+### 7. Correo vs. KPIs (Separación clara)
+- **Correo = Jerarquía:** Solo lógica de comunicación (quién manda, quién acepta, quién modifica). No se mide el "peso" aquí.
+- **KPIs = Eficiencia y Compromiso:** El tiempo de respuesta a un correo simple alimenta el KPI de **Eficiencia**.
+- **Regla:** Ser lento en responder un correo no afecta directamente el KPI de un puesto con poco "peso", pero sí afecta a un puesto con mucho "peso" (porque su responsabilidad es mayor).
 
 ---
 
@@ -86,10 +89,10 @@ Se decidió separar claramente dos tipos de información:
 - Cualquier IA nueva (interna o de internet) debe leer primero la memoria para no empezar en cero.
 - La idea de crear carpetas externas a GitHub (Comunicación y Minutas) es la solución definitiva para mantener el proyecto limpio y las ideas claras.
 
-### Próximos pasos reales (Definidos el 31/08/2026):
-1. **Continuar el diseño de la Pantalla de Comunicación:** Definir el **Formato Base del Correo** (cómo se ve la pantalla, los campos, los nodos y el flujo de envío).
-2. **Definir el Módulo de Mensajes (Chats):** Estructura y funcionalidad básica.
+### Próximos pasos sugeridos (Definidos el 31/08/2026):
+1. **Continúa el diseño de la Pantalla de Comunicación:** Definir el **Formato Base del Correo** (cómo se ve la pantalla, los campos, el flujo de envío).
+2. **Definir el Módulo de Mensajes (Chats):** Estructura y funcionalidad de base.
 3. **Actualizar el protocolo de arranque en `Comunicaci-n-IA-Internet`:** Asegurar que la IA de internet lea **exactamente** los archivos correctos de `Proyecto-Stratos` y `Minutas de Chats`, para evitar alucinaciones.
 
---- 
+---
 *Fin de las minutas actualizadas.*
