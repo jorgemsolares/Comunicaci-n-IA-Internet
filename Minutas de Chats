@@ -94,5 +94,38 @@ Se decidió separar claramente dos tipos de información:
 2. **Definir el Módulo de Mensajes (Chats):** Estructura y funcionalidad de base.
 3. **Actualizar el protocolo de arranque en `Comunicaci-n-IA-Internet`:** Asegurar que la IA de internet lea **exactamente** los archivos correctos de `Proyecto-Stratos` y `Minutas de Chats`, para evitar alucinaciones.
 
+## COMPLEMENTO: CONEXIÓN CON WHATSAPP (MÓDULO CHATS) — 01/09/2026
+
+### 1. El objetivo
+- El usuario **NO debe usar otra APP** (WhatsApp) fuera de Stratos.
+- Stratos debe ser el **único lugar donde el usuario ve y usa su WhatsApp** (chats, grupos, mensajes).
+- **Ejemplo crítico:** Un piloto de camión que solo tiene un celular. Si usa Stratos, debe ver su WhatsApp **dentro** de Stratos, no en la APP aparte.
+
+### 2. La tecnología real (para hacerlo posible)
+- Stratos se conecta a la cuenta de WhatsApp del usuario usando **WhatsApp Business API** (que es gratis y se configura con el mismo número de celular).
+- **Si la empresa da el celular:** Se configura como WhatsApp Business.
+- **Si el usuario usa su celular personal:** Se le pide que lo convierta a WhatsApp Business (gratis y sin cambios para el usuario).
+
+### 3. El flujo inicial (Para el nuevo usuario, ej: el piloto)
+- El usuario recibe la **invitación** (ej: un mensaje de texto donde se le explica que debe instalar Stratos).
+- Al instalar Stratos, el sistema le guía paso a paso (sin ayudas externas):
+  1. **Iniciar sesión** (con la invitación recibida).
+  2. **Configurar WhatsApp:** El sistema le explica de forma intuitiva que su número será convertido a WhatsApp Business (sin que él tenga que hacer nada técnico).
+  3. **Se abre la pantalla de Comunicación** (con los botones: Correo, Chats, Calendario, Alarmas).
+- **Al presionar el botón "CHATS":** Se abre la lista de sus chats/grupos **exactamente igual** que en WhatsApp, pero **dentro de Stratos**.
+
+### 4. El registro de trazabilidad (Lo que mide el sistema)
+- **Sin leer el contenido:** El sistema registra:
+  - Hora de envío/recepción.
+  - Tiempo de respuesta.
+  - Quién participó en qué chat o grupo.
+  - Frecuencia de uso.
+- **Nota legal:** El contenido del mensaje NO se lee. Solo se registran las **actividades** (métricas).
+
+### 5. No hay conflicto de dispositivos
+- **Si el usuario solo tiene un celular:** Stratos es la interfaz donde él ve su WhatsApp.
+- **Si el usuario también tiene computadora:** Puede vincular su cuenta (escaneando un código QR) para ver su WhatsApp desde Stratos en la compu.
+- **La vinculación es OPCIONAL** (si no hay un segundo dispositivo, no hay problema).
+
 ---
 *Fin de las minutas actualizadas.*
