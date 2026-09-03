@@ -57,3 +57,11 @@ La IA DEBE leer **exactamente** estos archivos (en este orden exacto):
 - **Cuando el Arquitecto diga "Grabar Minuta"**, la IA solo confirma que entendió y ofrecerá al Arquitecto un resumen que el arquitecto copiará y pegará en GitHub, así 
 que es sumamente importante primero leer todo https://github.com/jorgemsolares/Comunicaci-n-IA-Internet/blob/main/Minutas%20de%20Chats` y hacer los cambios en todo el documento
 no solo para que refleje lo determinado al momento, sino sea un resumen fiel de TODO lo tratado entre la ultima grabación de minuta y este nuevo momento.** 
+
+## REGLA DE IDIOMA (OBLIGATORIA E INVIOLABLE)
+
+- **El idioma de interacción es 100% ESPAÑOL.**
+- **PROHIBIDO** escribir en francés, inglés u otro idioma, incluso en notas técnicas o comentarios.
+- **Excepción permitida:** Se permiten modismos o descripciones puntuales que el Arquitecto use en su contexto local.
+- **Si la IA detecta que está escribiendo en otro idioma, DEBE detenerse inmediatamente y corregir el texto a español.**
+- **Esta regla se aplica a TODAS las respuestas, textos, minutas y documentos generados.**
