@@ -82,7 +82,17 @@ Se decidió separar claramente dos tipos de información:
 
 ---
 
-## PARTE 3: MÓDULO DE CHATS (WHATSAPP)
+## PARTE 3: EL NODO COMPARATIVO (Reubicado en la Definición de KPIs)
+
+- **Concepto:** Cuando el No.1 quiere definir un KPI o parámetro de medición, la IA muestra una **ventana de doble columna**:
+  - **Lado izquierdo:** Lo que el No.1 escribió o propuso.
+  - **Lado derecho:** La propuesta de la IA (con datos analizados del organigrama, módulos activos, etc.).
+- **Función:** El No.1 compara, edita si quiere, y tiene libertad de acción. El sistema **no bloquea** la definición, solo **guía** y **asesora**.
+- **Nota:** Este concepto NO pertenece al correo. Se reubicó aquí porque es parte de la **definición de variables y parámetros de medición**.
+
+---
+
+## PARTE 4: MÓDULO DE CHATS (WHATSAPP)
 
 ### 1. Funcionamiento de base
 - **Obligatorio:** El sistema debe estar conectado a WhatsApp Business (el usuario convierte su número, o la empresa le proporciona un teléfono con WhatsApp Business).
@@ -91,10 +101,8 @@ Se decidió separar claramente dos tipos de información:
 ### 2. Diferenciación visual (Fondos)
 - **Laboral:** El usuario escribe ** (el símbolo) al inicio de la primera conversación con un contacto externo.
 - **La IA reconoce:** Que este contacto es "Laboral Externo".
-- **Fondo:** El chat con este contacto tendrá el fondo con la marca de agua du logo de la empresa.
-- **Personal:** Los chats con contactos personales (mamá, amigos) n'ont pas ce fond. La différenciation est claire.
-
-*(CORREGIDO: El fondo con marca de agua se aplica SOLO a los contactos laborales. Los chats personales tienen el fondo normal de WhatsApp Business).*
+- **Fondo:** El chat con este contacto tendrá el fondo con la marca de agua del logo de la empresa.
+- **Personal:** Los chats con contactos personales (mamá, amigos) no tienen este fondo. La diferenciación es clara.
 
 ### 3. Clasificación automática (La IA)
 - **Primera vez:** El usuario escribe ** al inicio de la conversación con un cliente/proveedor.
@@ -108,7 +116,7 @@ Se decidió separar claramente dos tipos de información:
 
 ---
 
-## PARTE 4: ACUERDOS Y PRÓXIMOS PASOS
+## PARTE 5: ACUERDOS Y PRÓXIMOS PASOS
 
 ### Acuerdos:
 - El Arquitecto no se complica: prefiere copiar y pegar textos definidos aquí, en lugar de intentar cambiar sistemas complejos.
