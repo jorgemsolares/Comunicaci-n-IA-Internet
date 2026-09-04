@@ -155,7 +155,7 @@ Se decidió separar claramente dos tipos de información:
 - **Nada se borra en el banco de datos:** Cada acción, clic o rechazo queda registrado para siempre.
 - La pantalla es solo una "ventana" al banco de datos; el usuario solo ve lo activo, pero el sistema **siempre sabe** qué pasó.
 
---
+---
 
 ## PARTE 6: ACUERDOS
 
