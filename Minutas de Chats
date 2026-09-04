@@ -15,6 +15,7 @@ Se decidió separar claramente dos tipos de información:
    - `MEMORIA.md`: Estado actual del proyecto, bitácora y pendientes.
    - `A_DONDE_VA_STRATOS.md`: Visión del proyecto.
    - `instrucciones.md`: Protocolo interno de trabajo con la IA del sistema.
+   - `Historial_Bitacora.md`: Historial de las sesiones anteriores (26/08, 27/08, etc.).
 
 2. **Memoria Estratégica (Externa al proyecto, en GitHub):**
    - `Comunicaci-n-IA-Internet`: Manual de arranque para las IA de internet.
@@ -116,17 +117,50 @@ Se decidió separar claramente dos tipos de información:
 
 ---
 
-## PARTE 5: ACUERDOS Y PRÓXIMOS PASOS
+## PARTE 5: MÓDULO DE ALARMAS (El "Asistente Personalizado")
+
+### 1. Creación por voz y texto
+- **Voz:** El usuario dice: "Recuérdame llamar al cliente el jueves a las 3pm".
+- **Texto:** El usuario escribe la alarma.
+- **La IA procesa** y abre una ventana emergente donde muestra: **Fecha, Hora, Tema, Prioridad** y si es una alarma para él o para otro.
+
+### 2. Detección inteligente
+- La IA detecta las alarmas en los correos y chats (ej: "Te envío el informe mañana").
+- **Si detecta una reunión:** Utiliza las informaciones ya almacenadas en el calendario (lugar, hora, participantes), y **pregunta al usuario si la alarma es para preparar los documentos o para un recordatorio personal**.
+- **Ella "piensa" y "cuestiona":** Utiliza el contexto para clarificar antes de actuar.
+
+### 3. Voz del asistente (Hombre/Femenina)
+- **En configuración:** El usuario presiona el botón "Programa tu asistente".
+- **La IA se presenta:** "Hola [Nombre del usuario]. Considérame tu asistente. ¿Te es agradable mi voz?" (con voz masculina).
+- **Si el usuario presiona nuevamente:** "Quizás esta voz te parezca más agradable?" (con voz femenina).
+- **Si el usuario no presiona más:** La IA continúa: "Si voy a ser tu asistente, dime cómo quieres que me llame."
+- **El usuario da un nombre** (ej: "Vero").
+- **La IA se presenta:** "Excelente. Me llamo Vero. Puedes activarme presionando el botón en la parte baja de tu pantalla, o activando tu micrófono y diciendo **'HOLA VERO'**".
+- **Si el usuario presiona una tercera vez:** La IA hace una pequeña broma: "OK, veo que eres un poco curioso... o indeciso". (Esto relaja al usuario).
+
+### 4. Configuración del perfil (Nuevo flujo)
+- **El usuario recibe la invitación:** Entra a la pantalla donde pone sus datos.
+- **Presiona "Salvar datos":** **NO debe reiniciarse de inmediato.** Debe ser llevado a **"Configuración General"** para completar la configuración (asistente, idioma, alarmas, etc.).
+- **Presiona "Salvar Configuración":** En ese momento, **el sistema se reinicia** y abre la **Pantalla 1**.
+- **Guía inicial:** La IA guía al usuario por primera (y única) vez: "Estás en la pantalla de Comunicación. Aquí puedes presionar Correo, Chats, Calendario, Alarmas. Presiona Correo para ver cómo funciona...".
+
+---
+
+## PARTE 6: ACUERDOS
 
 ### Acuerdos:
 - El Arquitecto no se complica: prefiere copiar y pegar textos definidos aquí, en lugar de intentar cambiar sistemas complejos.
 - Cualquier IA nueva (interna o de internet) debe leer primero la memoria para no empezar en cero.
 - La idea de crear carpetas externas a GitHub (Comunicación y Minutas) es la solución definitiva para mantener el proyecto limpio y las ideas claras.
 
-### Próximos pasos sugeridos (Definidos el 31/08/2026):
-1. **Continuar el diseño de la Pantalla de Comunicación:** Definir el **Formato Base del Correo** (cómo se ve la pantalla, los campos, el flujo de envío).
-2. **Definir el Módulo de Mensajes (Chats):** Estructura y funcionalidad de base.
-3. **Actualizar el protocolo de arranque en `Comunicaci-n-IA-Internet`:** Asegurar que la IA de internet lea **exactamente** los archivos correctos de `Proyecto-Stratos` y `Minutas de Chats`, para evitar alucinaciones.
+---
+
+## PRÓXIMOS PASOS A TRATAR (03/09/2026)
+
+1. **Definir la pantalla de Recibidos, Leídos, No leídos, Spam, etc.** (Pendiente de la sesión de hoy, pertenece al módulo de Correo).
+2. **Definir el Módulo de Calendario** (Cómo se integra con el correo, las tareas y las alarmas).
+3. **Definir la absorción y desconexión de las aplicaciones existentes** (Google Calendar, Outlook, etc.) y cómo se le explica al usuario este proceso.
+4. **Actualizar el protocolo de arranque en `Comunicaci-n-IA-Internet`** (Asegurar que la IA de internet lea exactamente los archivos correctos y evite alucinaciones).
 
 ---
 *Fin de las minutas actualizadas.*
