@@ -166,12 +166,31 @@ Se decidió separar claramente dos tipos de información:
 
 ---
 
-## PRÓXIMOS PASOS A TRATAR (03/09/2026)
+## PARTE 7: MEMORIA Y ALMACENAMIENTO (Pendiente de tratar)
 
-1. **Definir la pantalla de Recibidos, Leídos, No leídos, Spam, etc.** (Pendiente de la sesión de hoy, pertenece al módulo de Correo).
-2. **Definir el Módulo de Calendario** (Cómo se integra con el correo, las tareas y las alarmas).
-3. **Definir la absorción y desconexión de las aplicaciones existentes** (Google Calendar, Outlook, etc.) y cómo se le explica al usuario este proceso.
-4. **Actualizar el protocolo de arranque en `Comunicaci-n-IA-Internet`** (Asegurar que la IA de internet lea exactamente los archivos correctos y evite alucinaciones).
+### 1. El dueño de la información es el cliente
+- El banco de datos pertenece al cliente (No.1) y se almacena en el servidor que él designe.
+- Stratos solo procesa la información, nunca tiene posesión de los datos.
+
+### 2. Estrategia de "Purgas Controladas" (Retención de Datos)
+- **El cliente decide** qué conservar (últimos 3 meses, 6 meses, 1 año, etc.).
+- **La IA sugiere:** "Tu banco de datos ya tiene X cantidad de información. Para optimizar tu memoria, ¿quieres eliminar los correos más antiguos que 3 meses?"
+- **La IA analiza** cuánto espacio ocuparía esa purga y le responde: "Si borras los correos de hace 3 meses, liberas XX gigas. ¿Procedo?"
+- **La IA no borra nada sin permiso.** Solo analiza, sugiere y espera la confirmación del cliente.
+
+### 3. La realidad latina (y de cualquier empresa)
+- No todos tienen servidores infinitos. Esta función es esencial para que Stratos sea práctico en empresas medianas y pequeñas.
+- "Hay que borrar parte del espacio" es una conversación que la IA inicia, pero el cliente decide.
 
 ---
+
+## PRÓXIMOS PASOS A TRATAR  (04/09/26)
+
+1. **Definir la pantalla de Recibidos, Leídos, No leídos, Spam, etc.** (Pertenece al módulo de Correo).
+2. **Definir el Módulo de Calendario** (Cómo se integra con el correo, las tareas y las alarmas).
+3. **Definir la absorción y desconexión de las aplicaciones existentes** (Google Calendar, Outlook, etc.) y cómo se le explica al usuario este proceso.
+4. **Definir la estrategia de "Purgas Controladas"** (El cliente decide cuánto tiempo conservar y la IA asesora cuánto espacio liberar).
+---
+
+
 *Fin de las minutas actualizadas.*
