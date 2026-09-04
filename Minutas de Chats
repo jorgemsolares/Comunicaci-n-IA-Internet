@@ -119,32 +119,43 @@ Se decidió separar claramente dos tipos de información:
 
 ## PARTE 5: MÓDULO DE ALARMAS (El "Asistente Personalizado")
 
-### 1. Creación por voz y texto
-- **Voz:** El usuario dice: "Recuérdame llamar al cliente el jueves a las 3pm".
-- **Texto:** El usuario escribe la alarma.
-- **La IA procesa** y abre una ventana emergente donde muestra: **Fecha, Hora, Tema, Prioridad** y si es una alarma para él o para otro.
+### 1. Listado de alarmas
+- **Vista:** Listado vertical (una debajo de otra).
+- **Cada línea muestra:** Fecha, Hora, Tema/Descripción (máximo 200 caracteres), Prioridad y Estado.
+- **Lugar en el listado:** Por **Prioridad** (Alta primero, luego Media, luego Baja).
+- **Color de fondo:** Por **Estado**:
+  - **Verde:** Programada y en tiempo.
+  - **Naranja:** Pendiente (sin confirmar).
+  - **Amarillo:** Programada y poco tiempo.
+  - **Rojo:** Programada y muy poco tiempo (urgente).
+- **Filtros:** Opción de filtrar por prioridad, estado, fecha.
+- **Al concretarse:** Desaparecen de la lista (pero quedan en el banco de datos).
 
-### 2. Detección inteligente
-- La IA detecta las alarmas en los correos y chats (ej: "Te envío el informe mañana").
-- **Si detecta una reunión:** Utiliza las informaciones ya almacenadas en el calendario (lugar, hora, participantes), y **pregunta al usuario si la alarma es para preparar los documentos o para un recordatorio personal**.
-- **Ella "piensa" y "cuestiona":** Utiliza el contexto para clarificar antes de actuar.
+### 2. Botones de creación
+- **Dos botones:** Uno para crear **manualmente** (texto) y otro para **voz** (micrófono).
 
-### 3. Voz del asistente (Hombre/Femenina)
-- **En configuración:** El usuario presiona el botón "Programa tu asistente".
-- **La IA se presenta:** "Hola [Nombre del usuario]. Considérame tu asistente. ¿Te es agradable mi voz?" (con voz masculina).
-- **Si el usuario presiona nuevamente:** "Quizás esta voz te parezca más agradable?" (con voz femenina).
-- **Si el usuario no presiona más:** La IA continúa: "Si voy a ser tu asistente, dime cómo quieres que me llame."
-- **El usuario da un nombre** (ej: "Vero").
-- **La IA se presenta:** "Excelente. Me llamo Vero. Puedes activarme presionando el botón en la parte baja de tu pantalla, o activando tu micrófono y diciendo **'HOLA VERO'**".
-- **Si el usuario presiona una tercera vez:** La IA hace una pequeña broma: "OK, veo que eres un poco curioso... o indeciso". (Esto relaja al usuario).
+### 3. Asistencia ejecutiva (La IA)
+- La IA lee correos y chats, detecta alarmas y **ofrece opciones**.
+- Si se equivoca, el usuario **edita**.
+- **Ejemplo:** "Te envío el informe mañana" → La IA propone una alarma, el usuario confirma o edita.
 
-### 4. Configuración del perfil (Nuevo flujo)
-- **El usuario recibe la invitación:** Entra a la pantalla donde pone sus datos.
-- **Presiona "Salvar datos":** **NO debe reiniciarse de inmediato.** Debe ser llevado a **"Configuración General"** para completar la configuración (asistente, idioma, alarmas, etc.).
-- **Presiona "Salvar Configuración":** En ese momento, **el sistema se reinicia** y abre la **Pantalla 1**.
-- **Guía inicial:** La IA guía al usuario por primera (y única) vez: "Estás en la pantalla de Comunicación. Aquí puedes presionar Correo, Chats, Calendario, Alarmas. Presiona Correo para ver cómo funciona...".
+### 4. Ejecución (Ventana instantánea)
+- **Notificación** con el contacto y **dos botones**: "Presiona y llamo" y "Reprogramar".
+- **Todas las ventanas** tienen la "X" para cerrar.
+- **Internamente:** El sistema registra el cierre (para KPIs).
 
----
+### 5. Alarma para otra persona
+- Le aparece en **sus mensajes** como una solicitud.
+- El receptor **acepta, rechaza o modifica** (con jerarquía).
+- **El emisor recibe:** "Manrique solicita cambios a tu cita XX". Puede aceptar, reprogramar o llamar.
+- **La IA traquea todo** y deja constancia. Si no hay aceptación, queda **Pendiente**.
+
+### 6. Banco de datos (Nada se borra)
+- Al concretarse, la alarma **desaparece de la pantalla**, pero **queda registrada** para alimentar las mediciones.
+- **Nada se borra en el banco de datos:** Cada acción, clic o rechazo queda registrado para siempre.
+- La pantalla es solo una "ventana" al banco de datos; el usuario solo ve lo activo, pero el sistema **siempre sabe** qué pasó.
+
+--
 
 ## PARTE 6: ACUERDOS
 
