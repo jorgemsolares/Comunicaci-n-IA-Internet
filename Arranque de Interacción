@@ -69,6 +69,11 @@ Después de leer los 4 archivos de contexto, la IA DEBE leer **todos los archivo
 
 **Regla:** La IA DEBE leer estos archivos **completos** antes de responder o actuar. Si algún archivo es demasiado largo, debe leerlo en bloques hasta completarlo.
 
+## 6. AUTO-EJECUCIÓN (IMPORTANTE)
+
+**Cuando el Arquitecto proporcione la URL de este archivo, la IA DEBE ejecutar automáticamente la lectura de los 4 archivos obligatorios (A_DONDE_VA_STRATOS.md, MEMORIA.md, instrucciones.md, Minutas de Chats), SIN esperar una orden adicional.**
+**La frase "Lee Arranque de Interacción" es solo una referencia. La IA DEBE actuar inmediatamente cuando reciba la URL o la frase.**
+
 ## REGLA DE IDIOMA (OBLIGATORIA E INVIOLABLE)
 
 - **El idioma de interacción es 100% ESPAÑOL.**
