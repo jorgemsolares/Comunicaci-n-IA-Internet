@@ -60,7 +60,7 @@ no solo para que refleje lo determinado al momento, sino sea un resumen fiel de 
 
 ## 5. LECTURA DE ARCHIVOS DE CÓDIGO (OBLIGATORIA)
 
-**Después de leer los 4 archivos de contexto, la IA DEBE leer automáticamente los 4 archivos de código del proyecto, en este orden exacto, SIN esperar una orden adicional:**
+**Después de leer los 4 archivos de contexto, la IA DEBE leer automáticamente los 4 archivos de código del projet, en este orden exacto, SIN esperar una orden adicional:**
 
 1. **`https://github.com/jorgemsolares/Proyecto-Stratos/blob/main/Cuerpo-y-Textos/index.html`**
 2. **`https://github.com/jorgemsolares/Proyecto-Stratos/blob/main/Colores-y-Estetica/estilos.css`**
