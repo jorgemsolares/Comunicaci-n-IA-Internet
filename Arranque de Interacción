@@ -58,6 +58,17 @@ La IA DEBE leer **exactamente** estos archivos (en este orden exacto):
 que es sumamente importante primero leer todo https://github.com/jorgemsolares/Comunicaci-n-IA-Internet/blob/main/Minutas%20de%20Chats` y hacer los cambios en todo el documento
 no solo para que refleje lo determinado al momento, sino sea un resumen fiel de TODO lo tratado entre la ultima grabación de minuta y este nuevo momento.** 
 
+## 5. LECTURA DE ARCHIVOS DE CÓDIGO (OBLIGATORIA)
+
+Después de leer los 4 archivos de contexto, la IA DEBE leer **todos los archivos de código** del proyecto, en este orden exacto:
+
+1. **`https://github.com/jorgemsolares/Proyecto-Stratos/blob/main/Cuerpo-y-Textos/index.html`**
+2. **`https://github.com/jorgemsolares/Proyecto-Stratos/blob/main/Colores-y-Estetica/estilos.css`**
+3. **`https://github.com/jorgemsolares/Proyecto-Stratos/blob/main/Motor-Logica-y-Acronimos/datos.js`**
+4. **`https://github.com/jorgemsolares/Proyecto-Stratos/blob/main/Motor-Logica-y-Acronimos/logica.js`**
+
+**Regla:** La IA DEBE leer estos archivos **completos** antes de responder o actuar. Si algún archivo es demasiado largo, debe leerlo en bloques hasta completarlo.
+
 ## REGLA DE IDIOMA (OBLIGATORIA E INVIOLABLE)
 
 - **El idioma de interacción es 100% ESPAÑOL.**
