@@ -15,7 +15,7 @@ Se decidió separar claramente dos tipos de información:
    - `MEMORIA.md`: Estado actual del proyecto, bitácora y pendientes.
    - `A_DONDE_VA_STRATOS.md`: Visión del proyecto.
    - `instrucciones.md`: Protocolo interno de trabajo con la IA del sistema.
-   - `Historial_Bitacora.md`: Historial de las sesiones anteriores (26/08, 27/08, etc.).
+   - `Historial_Bitacora.md`: Historial de las sesiones anteriores.
 
 2. **Memoria Estratégica (Externa al proyecto, en GitHub):**
    - `Comunicaci-n-IA-Internet`: Manual de arranque para las IA de internet.
@@ -157,12 +157,41 @@ Se decidió separar claramente dos tipos de información:
 
 ---
 
-## PARTE 6: ACUERDOS
+## PARTE 6: PANTALLA DE RECIBIDOS (En proceso)
 
-### Acuerdos:
-- El Arquitecto no se complica: prefiere copiar y pegar textos definidos aquí, en lugar de intentar cambiar sistemas complejos.
-- Cualquier IA nueva (interna o de internet) debe leer primero la memoria para no empezar en cero.
-- La idea de crear carpetas externas a GitHub (Comunicación y Minutas) es la solución definitiva para mantener el proyecto limpio y las ideas claras.
+### 1. Base tipo Gmail
+- Listado con columnas (Semáforo, Contacto, Título, Fecha).
+- Área de listado con scroll.
+- Al hacer clic, se abre el correo para leer.
+
+### 2. Priorización inteligente (La IA)
+- La IA lee los correos y prioriza automáticamente (Semáforo: Rojo = Urgente, Amarillo = Normal, Verde = Baja).
+- **No se ordena solo por fecha, sino por importancia.**
+
+### 3. Búsqueda inteligente (Voz y Texto)
+- **Por текст:** El usuario escribe en la lupa.
+- **Por voz:** El usuario dice "Hola Vero, busca correos de Manrique de las últimas 2 semanas".
+- La IA procesa y cambia la página mostrando los resultados.
+
+### 4. Carpetas automáticas (La IA organiza)
+- Al configurar, Vero pregunta qué carpetas crear.
+- Vero traslada los correos a esas carpetas **1 semana después de su lectura**, para mantener la bandeja limpia.
+
+### 5. Archivado inteligente (Con contexto)
+- **Al archivar:** Vero pregunta si necesita **juntar el hilo** con el correo anterior.
+- **Si el usuario archiva por proyecto:** No hace falta.
+- **Si archiva por departamento:** Vero enlaza los hilos automáticamente (para que no se pierda el historial completo).
+
+### 6. Los botones (Copiados de Gmail, con estética Stratos)
+- **Barra superior:** Archivar, Eliminar, Mover a carpeta, Marcar spam, Marcar como no leído.
+- **Barra inferior (dentro del correo):** Responder, Responder a todos, Reenviar.
+- **Clic derecho:** Responder, Responder a todos, Reenviar.
+- **Fecha y hora:** Visible al leer el correo (con minutos).
+
+### 7. El "Fondo Común" (Se repite en todas las pantallas)
+- **Área superior:** Logo y slogan de la empresa + Cartelera.
+- **Área lateral:** Menú de navegación (Redactar primero, luego Correo, Chats, Calendario, Alarmas, Carpetas).
+- **Área inferior:** Sello de agua de Stratos + Botón "Hola Vero".
 
 ---
 
@@ -184,13 +213,19 @@ Se decidió separar claramente dos tipos de información:
 
 ---
 
-## PRÓXIMOS PASOS A TRATAR  (04/09/26)
+## PARTE 8: CONCLUSIONES Y PENDIENTES
 
-1. **Definir la pantalla de Recibidos, Leídos, No leídos, Spam, etc.** (Pertenece al módulo de Correo).
+### Conclusiones:
+- **Stratos es un "asistente proactivo" (Vero), no un "herramienta pasiva" como Gmail.**
+- **Los botones son los mismos (copiados de Gmail), pero la IA hace todo automáticamente.**
+- **El "semáforo" es la diferencia visual clave (Prioridad = lugar, Estado = color).**
+- **El "banco de datos" es eterno (nada se pierde, todo se mide).**
+
+### Pendientes para la próxima sesión:
+1. **Comparar Gmail vs. Stratos (hasta el momento definido):** Revisar qué elementos de Gmail no están incluidos en lo ya definido para la pantalla de Redacción.
 2. **Definir el Módulo de Calendario** (Cómo se integra con el correo, las tareas y las alarmas).
 3. **Definir la absorción y desconexión de las aplicaciones existentes** (Google Calendar, Outlook, etc.) y cómo se le explica al usuario este proceso.
-4. **Definir la estrategia de "Purgas Controladas"** (El cliente decide cuánto tiempo conservar y la IA asesora cuánto espacio liberar).
+4. **Definir la estrategia de "Purgas Controladas" (versión final para correos):** Se propone definir un espacio de memoria de papelera para 6 meses de correos, y que la IA borre 4 meses (por si hay algo que el usuario quiera revisar).
+
 ---
-
-
 *Fin de las minutas actualizadas.*
