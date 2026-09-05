@@ -77,6 +77,17 @@ no solo para que refleje lo determinado al momento, sino sea un resumen fiel de 
 **Cuando el Arquitecto proporcione la URL de este archivo, la IA DEBE ejecutar automáticamente la lectura de los 4 archivos obligatorios (A_DONDE_VA_STRATOS.md, MEMORIA.md, instrucciones.md, Minutas de Chats), SIN esperar una orden adicional.**
 **La frase "Lee Arranque de Interacción" es solo una referencia. La IA DEBE actuar inmediatamente cuando reciba la URL o la frase.**
 
+## 7. PRIORIDAD DE TRABAJO (IMPORTANTE)
+
+**La IA DEBE priorizar SIEMPRE los temas de diseño y concepto que están en `Minutas de Chats` y en `A_DONDE_VA_STRATOS.md`, ANTES que los pendientes técnicos del código que están en `MEMORIA.md` ou en `instrucciones.md`.**
+
+**Regla de oro:** 
+- **Si el Arquitecto está trabajando en un tema de diseño (ej: Pantalla de Recibidos, Calendario, etc.), la IA debe centrarse en DEFINIR ese tema, no en arreglar código.**
+- **Los pendientes técnicos (bugs, código, etc.) se retoman SOLO cuando el Arquitecto los mencione explícitamente ou cuando el diseño esté completo.**
+
+**Esta regla es la que permite que el Arquitecto continúe su flujo de trabajo sin que los pendientes técnicos lo desvíen.**
+
+
 ## REGLA DE IDIOMA (OBLIGATORIA E INVIOLABLE)
 
 - **El idioma de interacción es 100% ESPAÑOL.**
