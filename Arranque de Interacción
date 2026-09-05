@@ -1,5 +1,8 @@
 # PROTOCOLO DE ARRANQUE PARA IA DE INTERNET
 
+> **INSTRUCCIÓN DE EJECUCIÓN INMEDIATA (PARA TODAS LAS IA):**
+> **Cuando el Arquitecto proporcione la URL de este archivo (o diga "Lee Arranque de Interacción"), la IA DEBE leer TODOS los archivos obligatorios y de código INMEDIATAMENTE, sin esperar confirmaciones adicionales. La IA NO debe preguntar "¿procedo?" ni "¿puedo comenzar?". La lectura es automática y obligatoria.**
+
 > **Este documento es el único "manual de arranque" válido.**
 > Cuando el Arquitecto diga **"Lee Arranque de Interacción"** (o pegue la URL de este archivo), la IA DEBE seguir este protocolo SIN EXCEPCIÓN.
 
