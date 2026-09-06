@@ -229,3 +229,102 @@ Se decidió separar claramente dos tipos de información:
 
 ---
 *Fin de las minutas actualizadas.*
+
+MINUTA CORREGIDA (versión final)
+MINUTA – 05/09/2026
+1. DEFINICIONES CONSOLIDADAS
+1.1. Estructura Fija de Pantalla
+Zona	Elemento
+Superior Izquierda	Logo de Stratos + Slogan de la compañía usuaria (mover de centro a izquierda)
+Superior Restante	Área de Mensajes (Cartelera) - fija
+Inferior Izquierda	Sello de agua y slogan de Stratos
+Inferior Centro	Botón de IA (efecto visual + sonido + indicador de detección de voz)
+Inferior Derecha	Botón "Libro" (menú general)
+1.2. Cartelera de Avisos
+Rotación: automática (ya implementado).
+
+Desaparición: al completar la tarea (ya implementado).
+
+Nuevo: duración por prioridad:
+
+Prioridad	Duración
+Alta	10 segundos
+Media	6 segundos
+Baja	4 segundos
+Anuncio Motivacional Diario: ya existe (cambia 1 vez al día). Nuevo: duración 6 segundos (media).
+
+1.3. Configuración de Vero (Flujo Inicial)
+Eliminar: Sonido, Vibración, Modo Nocturno.
+
+Añadir: Configuración de IA.
+
+Flujo:
+
+Datos Generales → "Grabar" → Configuración.
+Voz: Un botón alterna voz masculina/femenina (muestra en texto cuál está activa).
+Nombre: Campo de texto + "Confirmar nombre". La IA dice:
+"Ok, de ahora en adelante soy [nombre]. Estaré activa con que presiones el botón en cualquier pantalla y comiences con 'Hola [nombre]' tu oración."
+"Grabar Cambios": Guarda, reinicia, redirige a Login.
+1.4. Pantalla de Login
+Saludo: "Hola [Nombre]" (campo "Nombre" de Datos Generales).
+
+Redirección: a Pantalla de Comunicación (ya implementado, no se modifica).
+
+1.5. Pantalla de Comunicación
+Botones grandes y claros:
+
+Correos
+
+Chats
+
+Tareas
+
+Alarmas
+
+Calendario
+
+1.6. La Asistente IA "Vero"
+Nombre conceptual: Vero (cambiable).
+
+Tipo: Asistente personal conversacional.
+
+Interacción: Ventana emergente + voz.
+
+Activación: Botón flotante o "Hola [nombre]".
+
+Principio: Más rápido que hacerlo con clics.
+
+2. PENDIENTES
+2.1. Pendientes de Definición (Discusión)
+Pantalla de Comunicación (diseño específico).
+
+Chats (definir módulo).
+
+Tareas y Alarmas (integración con IA).
+
+Calendario (integración con IA).
+
+Límites de IA (legales y privacidad, caso por caso).
+
+Rastro de auditoría (qué registrar).
+
+2.2. Pendientes de Acción (Cambios al sistema)
+Mover logo + slogan a superior izquierda.
+
+Implementar duración de avisos por prioridad (10, 6, 4 segundos).
+
+Asignar duración de 6 segundos al anuncio motivacional diario.
+
+Eliminar Sonido/Vibración/Nocturno de Configuración.
+
+Implementar nuevo flujo de Configuración de IA.
+
+Implementar saludo "Hola [Nombre]" en Login.
+
+Crear botón de IA (efectos visuales + sonido + indicador de voz).
+
+Botón "Libro" (menú general).
+
+Pantalla de Comunicación con botones a Correos, Chats, Tareas, Alarmas, Calendario.
+
+
