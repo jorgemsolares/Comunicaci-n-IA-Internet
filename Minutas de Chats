@@ -105,19 +105,246 @@ Activación	Botón flotante o comando "Hola [nombre]"
 Principio	Debe ser más rápido y natural que hacerlo con clics
 Proactividad	Sugiere mejoras, explica su razonamiento
 Consentimiento	No actúa sin confirmación en acciones importantes
+
+MINUTA – 06/09/2026
+TEMA: DEFINICIONES Y CIERRE DE TAREAS, CONTACTOS Y ESTRUCTURA DE PANTALLA
+DEFINICIONES CONSOLIDADAS
+1. ESTRUCTURA FIJA DE PANTALLA
+Zona	Elemento	Estado
+Superior Izquierda	Logo de Stratos + Slogan de la compañía usuaria	Cambio: Mover de centro a izquierda
+Superior Restante	Área de Mensajes (Cartelera)	Fijo
+Inferior Izquierda	Sello de agua y slogan de Stratos	Fijo
+Inferior Centro	Botón de IA	Nuevo: Con efectos visuales, sonido de micrófono e indicador de detección de voz
+Inferior Derecha	Botón "Libro" (Menú General)	Fijo
+2. COMPORTAMIENTO DE LA CARTELERA DE AVISOS
+Lo que ya existe:
+
+Rotación automática de avisos.
+
+Desaparición al completar la tarea asociada.
+
+Lo nuevo:
+
+Prioridad	Duración
+Alta (crítico)	10 segundos
+Media (importante)	6 segundos
+Baja (informativo)	4 segundos
+Anuncio Motivacional Diario:
+
+Ya existe (cambia 1 vez al día).
+
+Nuevo: Duración de 6 segundos (prioridad media).
+
+3. CONFIGURACIÓN DE LA ASISTENTE IA (VERO) – FLUJO INICIAL
+Cambios en Configuración:
+
+Eliminar: Opciones de Sonido, Vibración, Modo Nocturno.
+
+Añadir: Configuración exclusiva de la IA.
+
+Flujo completo:
+
+Usuario completa Datos Generales.
+
+Presiona "Grabar" → redirige a Configuración (en lugar de Login).
+
+Configuración de voz:
+
+Un solo botón alterna entre voz masculina y femenina.
+
+Cada clic muestra en texto la opción activa.
+
+El usuario puede probar todas las veces que quiera.
+
+Configuración de nombre:
+
+Campo de texto (sugerencia: "Vero").
+
+Botón "Confirmar nombre".
+
+Al confirmar, la IA dice (texto + voz):
+
+"Ok, de ahora en adelante soy [nombre]. Estaré activa con que presiones el botón en cualquier pantalla y comiences con 'Hola [nombre]' tu oración."
+
+Botón "Grabar Cambios":
+
+Guarda las preferencias.
+
+Reinicia el sistema.
+
+Redirige a la pantalla de Login.
+
+4. PANTALLA DE LOGIN Y SALUDO PERSONALIZADO
+Saludo:
+
+Al presionar "ENTRAR", muestra: "Hola [Nombre]".
+
+El nombre se toma del campo "Nombre" en Datos Generales (no el nombre completo).
+
+Redirección:
+
+Tras el saludo, lleva a la Pantalla de Comunicación (ya implementado).
+
+5. PANTALLA DE COMUNICACIÓN
+Botones grandes y claros:
+
+Correos
+
+Chats
+
+Tareas
+
+Alarmas
+
+Calendario
+
+6. LA ASISTENTE IA "VERO"
+Aspecto	Definición
+Nombre	Vero (cambiable por el usuario)
+Tipo	Asistente personal conversacional (no comandos rígidos)
+Interacción	Ventana emergente + voz en vivo
+Activación	Botón flotante o comando "Hola [nombre]"
+Principio	Debe ser más rápido y natural que hacerlo con clics
+Proactividad	Sugiere mejoras, explica su razonamiento
+Consentimiento	No actúa sin confirmación en acciones importantes
+7. TAREAS
+7.1. Vista Principal (Listado)
+Botón "Crear tarea": En la parte superior del listado.
+
+Columnas: Título, F. Emisión, Periodo (ej. "2d 4h").
+
+Al hacer clic: Se abre ventana emergente con detalle completo.
+
+7.2. Ventana de Detalle / Creación
+Campos: Título, fechas (inicio/fin), prioridad, integrantes.
+
+Asignar a: Autocompletado al escribir, o scroll en lista completa.
+
+Área de Mensaje / Contexto: Tamaño razonable, con scroll/barra lateral para textos largos.
+
+Botones: Enviar y Editar en la parte inferior.
+
+Uniformidad: Mismos colores y forma que ventanas de organigramas.
+
+7.3. Comportamiento Visual
+Indicador de tiempo: Película semitransparente tipo Gantt.
+
+Color: Verde → Rojo según campana de Gauss.
+
+Al terminar: Pierde el color y pasa a "completada".
+
+7.4. Archivo
+Automático: Al terminar, la tarea se archiva automáticamente.
+
+Trazabilidad: El sistema traquea todo, independientemente de si el usuario archiva antes o después.
+
+7.5. Seguimiento
+La IA propone automáticamente tareas de seguimiento al delegar una tarea.
+
+Propósito: Seguridad de cumplimiento.
+
+8. CONTACTOS
+8.1. Vinculación y Sincronización
+Stratos sincroniza con Gmail (contactos, nombres, correos, notas, categorías).
+
+No se crean campos nuevos. Solo se sincroniza lo que Gmail ya tiene.
+
+La IA vincula contactos de Gmail, Chat y Sistema.
+
+8.2. Alias / Nickname
+La IA añade en silencio el nombre del sistema como alias al contacto de Gmail.
+
+No modifica el nombre original, solo lo complementa.
+
+8.3. Detección de Discrepancias
+Si la IA encuentra coincidencias exactas (correo + celular), vincula en silencio.
+
+Si encuentra coincidencias parciales, marca el caso y crea una tarea pendiente.
+
+8.4. Resolución de Discrepancias
+Aviso en cartelera: "Tienes X casos pendientes de revisión en Contactos."
+
+Tarea creada: "Revisar discrepancias de contactos."
+
+Resolución: El usuario puede ir a Contactos o a Tareas.
+
+Autolimpieza: Si el usuario resuelve desde Contactos, la IA elimina automáticamente la tarea.
+
+8.5. Sugerencia de Contactos Nuevos
+Basada en frecuencia de comunicación (correos, chats).
+
+La IA analiza la carga de trabajo y sugiere en momentos de baja actividad.
+
+El usuario decide si acepta o rechaza.
+
+8.6. Agrupación por Categorías
+Sincroniza las categorías de Gmail (Clientes, Proveedores, Equipo, etc.).
+
+La IA puede sugerir categorías basándose en el historial.
+
+9. MIGRACIÓN COMPLETA
+La IA apoya al usuario en la migración:
+
+Analiza el historial de correos, tareas, contactos y archivos.
+
+Detecta datos incompletos, duplicados o inconsistentes.
+
+Pregunta sobre lo que detecta y sugiere acciones.
+
+No inventa datos ni asume que todo es correcto.
+
+Al migrar, la IA:
+
+Vincula contactos de Gmail, Chat y Sistema.
+
+Extrae contactos automáticamente del historial.
+
+Detecta duplicados y los fusiona en silencio o los marca para revisión.
+
+Archivos locales:
+
+La IA, con autorización del usuario, puede analizar archivos en carpetas locales (Descargas, Documentos, Escritorio, etc.) y preguntar si desea migrarlos.
+
+10. SEMANA TÍPICA Y MEJORA CONTINUA
+Concepto:
+
+La semana típica no es una regla fija.
+
+Es un marco de orden y rendimiento que se adapta a imprevistos.
+
+La IA analiza cargas, tiempos, prioridades y sugiere ajustes.
+
+Con el tiempo, crea rutinas y hábitos que mejoran la productividad.
+
+Ciclo:
+
+Usuario usa el sistema.
+
+IA analiza patrones.
+
+IA sugiere ajustes.
+
+Usuario acepta o rechaza.
+
+Se crean rutinas.
+
+Las rutinas crean hábitos.
+
+Los hábitos mejoran productividad.
+
+La IA sigue ajustando.
+
 PENDIENTES
 Pendientes de Definición (Discusión pendiente)
-Diseño específico de la Pantalla de Comunicación.
+Chats: Definir módulo y rol de la IA.
 
-Definición del módulo de Chats y rol de la IA.
+Alarmas: Definir integración con IA.
 
-Definición de Tareas y Alarmas (integración con IA).
+Calendario: Definir integración con IA.
 
-Definición de Calendario (integración con IA).
+Límites de IA: Legales y privacidad (caso por caso).
 
-Límites legales y de privacidad de la IA (caso por caso).
-
-Rastro de auditoría (qué acciones registrar).
+Rastro de auditoría: Qué acciones registrar y cómo.
 
 Pendientes de Acción (Cambios al sistema actual)
 #	Acción
@@ -129,33 +356,15 @@ Pendientes de Acción (Cambios al sistema actual)
 6	Implementar saludo "Hola [Nombre]" en Login
 7	Crear botón de IA (efectos visuales + sonido + indicador de voz)
 8	Crear Pantalla de Comunicación con botones a Correos, Chats, Tareas, Alarmas, Calendario
-RESUMEN DE CAMBIOS
-Lo que es NUEVO (no estaba en minutas anteriores)
-Duración diferenciada de avisos según prioridad.
-
-Anuncio motivacional diario con duración de 6 segundos.
-
-Configuración de Voz (alternar masculino/femenino).
-
-Configuración de Nombre de la asistente.
-
-Botón de IA (con efectos y sonido).
-
-Saludo personalizado en Login ("Hola [Nombre]").
-
-Pantalla de Comunicación (botones a Correos, Chats, Tareas, Alarmas, Calendario).
-
-Concepto de Vero como asistente personal conversacional.
-
-Lo que es CORRECCIÓN (cambio a lo ya existente)
-Mover logo + slogan de la compañía de centro a superior izquierda.
-
-Eliminar Sonido, Vibración, Modo Nocturno de Configuración.
-
-Redirigir a Configuración después de "Grabar" (en lugar de Login).
-
-Botón "Grabar Cambios" en Configuración (reinicia y redirige a Login).
-
-Fin de la minuta del 05/09/2026.
+9	Implementar vista principal de Tareas (columnas, botón crear)
+10	Implementar ventana de detalle/creación de Tareas (uniforme con organigramas)
+11	Implementar comportamiento visual de Tareas (Gantt + color Gauss)
+12	Implementar archivo automático de Tareas al completar
+13	Implementar vinculación de Contactos con Gmail, Chat y Sistema
+14	Implementar alias/nickname en Contactos
+15	Implementar detección y resolución de discrepancias en Contactos
+16	Implementar autolimpieza de tareas generadas por IA
+17	Implementar migración completa (correos, tareas, contactos, archivos locales)
+Fin de la minuta del 06/09/2026.
 
 
