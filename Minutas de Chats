@@ -6,271 +6,84 @@
 
 ---
 
-## PARTE 1: CONFIGURACIÓN DEL SISTEMA DE COMUNICACIÓN
-
-### A. La estructura de memorias (Importante)
-Se decidió separar claramente dos tipos de información:
-
-1. **Memoria Operativa (Dentro de `Proyecto-Stratos`):**
-   - `MEMORIA.md`: Estado actual del proyecto, bitácora y pendientes.
-   - `A_DONDE_VA_STRATOS.md`: Visión del proyecto.
-   - `instrucciones.md`: Protocolo interno de trabajo con la IA del sistema.
-   - `Historial_Bitacora.md`: Historial de las sesiones anteriores.
-
-2. **Memoria Estratégica (Externa al proyecto, en GitHub):**
-   - `Comunicaci-n-IA-Internet`: Manual de arranque para las IA de internet.
-   - `Minutas de Chats`: Resúmenes de reuniones, ideas y decisiones estratégicas.
-
-### B. Protocolo de arranque para IA de Internet
-- La IA de internet debe leer el archivo `Arranque de Interacción`.
-- Debe leer todo el contexto del proyecto `Proyecto-Stratos`.
-- Debe leer todas las minutas.
-- Debe confirmar que entendió.
-- **Regla de oro:** La IA de internet NO tiene acceso al sistema local. Solo asesora, analiza y redacta textos exactos para que el Arquitecto los copie y pegue en su sistema.
-
-### C. Optimización de tokens (En el sistema interno)
-- Cuando el Arquitecto diga **"Leer explicación"**, la IA del sistema lee `explicacion.txt` y actúa **sin preguntar ni explicar en el chat**.
-- Cuando el Arquitecto diga **"Grabar Bitácora"**, la IA del sistema sube los cambios a GitHub y **borra el contenido de `explicacion.txt`**.
-- **Regla de oro del chat:** Solo confirmaciones cortas. La IA no debe gastar tokens en explicaciones innecesarias.
-
-### D. Sincronización con GitHub
-- El script `subir_automatico.ps1` no detecta los cambios de `Ctrl+S` en la versión actual de VS Code.
-- **Solución:** La IA del sistema debe ejecutar manualmente los 3 comandos de Git (`git add .`, `git commit -m "..."`, `git push origin main`) cuando se le ordene "Grabar Bitácora".
-
----
-
-## PARTE 2: DISEÑO CONCEPTUAL DE LA PANTALLA DE COMUNICACIÓN
-
-### 1. Vías de comunicación
-- **Correo:** Formal, con historial y asignaciones.
-- **Teléfono:** Vía rápida para mensajes, comentarios cortos y tareas rápidas.
-
-### 2. Formato del correo de Stratos
-- Campos básicos: **DE** y **PARA**.
-- **Clasificación:** Informativo, Respuesta, Acción a tomar (el usuario puede modificar).
-- **Prioridad:** Alta, Media, Baja (definida por el usuario).
-- **Interno vs. Externo:** Se define automáticamente según si el destinatario está en los contactos del organigrama (interno) o fuera (foráneo/externo).
-
-### 3. Detección inteligente por IA
-- La IA analiza la redacción del correo y detecta si contiene: **Cita, Asignación de Tarea o Informativo.**
-- Si detecta una Cita o Tarea, le muestra al emisor una ventana de confirmación pre-rellenada con: **Lugar, Hora, Participantes, Prioridad y Nombre.**
-- El usuario puede editar esos campos antes de enviar.
-
-### 4. Flujo de envío del correo (El "Nodo de Acción Automática")
-- **El usuario hace clic en "Enviar"** (lo más natural y sin fricción).
-- **La IA analiza el correo en ese instante** y decide:
-  - **Si detecta un Título vacío:** Abre una ventana con el título sugerido.
-  - **Si detecta una Reunión** (el cuerpo del correo detalla fecha, hora, lugar, participantes): Abre la ventana del **Nodo de Reunión** (para confirmar y que se inserte en el calendario).
-  - **Si detecta una Alerta futura:** Abre la ventana del **Nodo de Alarma** (con la propuesta de alarma).
-  - **Si NO detecta nada:** NO abre ninguna ventana, el correo se envía y la IA lo registra silenciosamente.
-
-### 5. Fenómeno de confirmación (Siempre abierta)
-- **La ventana donde se confirma el Título, la Clasificación y la Prioridad se abre SIEMPRE** (en cada correo enviado).
-- **Si el usuario ya puso su título:** La IA abre la ventana con su título, y le muestra la propuesta de Clasificación y Prioridad. El usuario edita si quiere.
-- **Si el usuario no puso título:** La IA abre la ventana, propone un título, y le muestra la Clasificación y Prioridad.
-- **Si detecta una Reunión o Alarma:** La ventana se expande para mostrar los campos adicionales.
-- **Texto diluido en el campo Título:** *"Escribe el título del correo... o espera, la IA te lo sugerirá al enviar"*.
-
-### 6. Registro silencioso (Medición de Compromiso)
-- **Si el usuario cierra el nodo o ignora la propuesta de la IA**, el sistema **registra silenciosamente ese acto**.
-- Ese registro alimenta los KPIs de **Compromiso y Eficiencia**.
-- **Regla de oro:** La IA no molesta, pero siempre mide.
-
-### 7. Correo vs. KPIs (Separación clara)
-- **Correo = Jerarquía:** Solo lógica de comunicación (quién manda, quién acepta, quién modifica). No se mide el "peso" aquí.
-- **KPIs = Eficiencia y Compromiso:** El tiempo de respuesta a un correo simple alimenta el KPI de **Eficiencia**.
-- **Regla:** Ser lento en responder un correo no afecta directamente el KPI de un puesto con poco "peso", pero sí afecta a un puesto con mucho "peso" (porque su responsabilidad es mayor).
-
----
-
-## PARTE 3: EL NODO COMPARATIVO (Reubicado en la Definición de KPIs)
-
-- **Concepto:** Cuando el No.1 quiere definir un KPI o parámetro de medición, la IA muestra una **ventana de doble columna**:
-  - **Lado izquierdo:** Lo que el No.1 escribió o propuso.
-  - **Lado derecho:** La propuesta de la IA (con datos analizados del organigrama, módulos activos, etc.).
-- **Función:** El No.1 compara, edita si quiere, y tiene libertad de acción. El sistema **no bloquea** la definición, solo **guía** y **asesora**.
-- **Nota:** Este concepto NO pertenece al correo. Se reubicó aquí porque es parte de la **definición de variables y parámetros de medición**.
-
----
-
-## PARTE 4: MÓDULO DE CHATS (WHATSAPP)
-
-### 1. Funcionamiento de base
-- **Obligatorio:** El sistema debe estar conectado a WhatsApp Business (el usuario convierte su número, o la empresa le proporciona un teléfono con WhatsApp Business).
-- **Cambio de aplicación:** El WhatsApp normal ya no funciona (es reemplazado por WhatsApp Business). El mensaje "Instala WhatsApp Business" es el único cambio para el usuario.
-
-### 2. Diferenciación visual (Fondos)
-- **Laboral:** El usuario escribe ** (el símbolo) al inicio de la primera conversación con un contacto externo.
-- **La IA reconoce:** Que este contacto es "Laboral Externo".
-- **Fondo:** El chat con este contacto tendrá el fondo con la marca de agua del logo de la empresa.
-- **Personal:** Los chats con contactos personales (mamá, amigos) no tienen este fondo. La diferenciación es clara.
-
-### 3. Clasificación automática (La IA)
-- **Primera vez:** El usuario escribe ** al inicio de la conversación con un cliente/proveedor.
-- **Después:** La IA "recuerda" que este contacto es laboral y **registra automáticamente** todas las futuras conversaciones con él (sin leer el contenido).
-- **Privacidad:** Si el usuario no escribe **, la conversación no se registra (protegida).
-
-### 4. Cartelera de mensajes
-- **Avisos:** Los avisos (ej: "Te mencionaron en Grupo Firme", "Chat de Juan Nuevo") aparecen en la **"Cartelera"** (área de mensajes).
-- **La IA sabe:** Quién es el emisor, si es una conversación individual o de grupo, y lo muestra de manera **familiar y clara**.
-- **El usuario ve:** Un mensaje corto y preciso en la zona de mensajes.
-
----
-
-## PARTE 5: MÓDULO DE ALARMAS (El "Asistente Personalizado")
-
-### 1. Listado de alarmas
-- **Vista:** Listado vertical (una debajo de otra).
-- **Cada línea muestra:** Fecha, Hora, Tema/Descripción (máximo 200 caracteres), Prioridad y Estado.
-- **Lugar en el listado:** Por **Prioridad** (Alta primero, luego Media, luego Baja).
-- **Color de fondo:** Por **Estado**:
-  - **Verde:** Programada y en tiempo.
-  - **Naranja:** Pendiente (sin confirmar).
-  - **Amarillo:** Programada y poco tiempo.
-  - **Rojo:** Programada y muy poco tiempo (urgente).
-- **Filtros:** Opción de filtrar por prioridad, estado, fecha.
-- **Al concretarse:** Desaparecen de la lista (pero quedan en el banco de datos).
-
-### 2. Botones de creación
-- **Dos botones:** Uno para crear **manualmente** (texto) y otro para **voz** (micrófono).
-
-### 3. Asistencia ejecutiva (La IA)
-- La IA lee correos y chats, detecta alarmas y **ofrece opciones**.
-- Si se equivoca, el usuario **edita**.
-- **Ejemplo:** "Te envío el informe mañana" → La IA propone una alarma, el usuario confirma o edita.
-
-### 4. Ejecución (Ventana instantánea)
-- **Notificación** con el contacto y **dos botones**: "Presiona y llamo" y "Reprogramar".
-- **Todas las ventanas** tienen la "X" para cerrar.
-- **Internamente:** El sistema registra el cierre (para KPIs).
-
-### 5. Alarma para otra persona
-- Le aparece en **sus mensajes** como una solicitud.
-- El receptor **acepta, rechaza o modifica** (con jerarquía).
-- **El emisor recibe:** "Manrique solicita cambios a tu cita XX". Puede aceptar, reprogramar o llamar.
-- **La IA traquea todo** y deja constancia. Si no hay aceptación, queda **Pendiente**.
-
-### 6. Banco de datos (Nada se borra)
-- Al concretarse, la alarma **desaparece de la pantalla**, pero **queda registrada** para alimentar las mediciones.
-- **Nada se borra en el banco de datos:** Cada acción, clic o rechazo queda registrado para siempre.
-- La pantalla es solo una "ventana" al banco de datos; el usuario solo ve lo activo, pero el sistema **siempre sabe** qué pasó.
-
----
-
-## PARTE 6: PANTALLA DE RECIBIDOS (En proceso)
-
-### 1. Base tipo Gmail
-- Listado con columnas (Semáforo, Contacto, Título, Fecha).
-- Área de listado con scroll.
-- Al hacer clic, se abre el correo para leer.
-
-### 2. Priorización inteligente (La IA)
-- La IA lee los correos y prioriza automáticamente (Semáforo: Rojo = Urgente, Amarillo = Normal, Verde = Baja).
-- **No se ordena solo por fecha, sino por importancia.**
-
-### 3. Búsqueda inteligente (Voz y Texto)
-- **Por текст:** El usuario escribe en la lupa.
-- **Por voz:** El usuario dice "Hola Vero, busca correos de Manrique de las últimas 2 semanas".
-- La IA procesa y cambia la página mostrando los resultados.
-
-### 4. Carpetas automáticas (La IA organiza)
-- Al configurar, Vero pregunta qué carpetas crear.
-- Vero traslada los correos a esas carpetas **1 semana después de su lectura**, para mantener la bandeja limpia.
-
-### 5. Archivado inteligente (Con contexto)
-- **Al archivar:** Vero pregunta si necesita **juntar el hilo** con el correo anterior.
-- **Si el usuario archiva por proyecto:** No hace falta.
-- **Si archiva por departamento:** Vero enlaza los hilos automáticamente (para que no se pierda el historial completo).
-
-### 6. Los botones (Copiados de Gmail, con estética Stratos)
-- **Barra superior:** Archivar, Eliminar, Mover a carpeta, Marcar spam, Marcar como no leído.
-- **Barra inferior (dentro del correo):** Responder, Responder a todos, Reenviar.
-- **Clic derecho:** Responder, Responder a todos, Reenviar.
-- **Fecha y hora:** Visible al leer el correo (con minutos).
-
-### 7. El "Fondo Común" (Se repite en todas las pantallas)
-- **Área superior:** Logo y slogan de la empresa + Cartelera.
-- **Área lateral:** Menú de navegación (Redactar primero, luego Correo, Chats, Calendario, Alarmas, Carpetas).
-- **Área inferior:** Sello de agua de Stratos + Botón "Hola Vero".
-
----
-
-## PARTE 7: MEMORIA Y ALMACENAMIENTO (Pendiente de tratar)
-
-### 1. El dueño de la información es el cliente
-- El banco de datos pertenece al cliente (No.1) y se almacena en el servidor que él designe.
-- Stratos solo procesa la información, nunca tiene posesión de los datos.
-
-### 2. Estrategia de "Purgas Controladas" (Retención de Datos)
-- **El cliente decide** qué conservar (últimos 3 meses, 6 meses, 1 año, etc.).
-- **La IA sugiere:** "Tu banco de datos ya tiene X cantidad de información. Para optimizar tu memoria, ¿quieres eliminar los correos más antiguos que 3 meses?"
-- **La IA analiza** cuánto espacio ocuparía esa purga y le responde: "Si borras los correos de hace 3 meses, liberas XX gigas. ¿Procedo?"
-- **La IA no borra nada sin permiso.** Solo analiza, sugiere y espera la confirmación del cliente.
-
-### 3. La realidad latina (y de cualquier empresa)
-- No todos tienen servidores infinitos. Esta función es esencial para que Stratos sea práctico en empresas medianas y pequeñas.
-- "Hay que borrar parte del espacio" es una conversación que la IA inicia, pero el cliente decide.
-
----
-
-## PARTE 8: CONCLUSIONES Y PENDIENTES
-
-### Conclusiones:
-- **Stratos es un "asistente proactivo" (Vero), no un "herramienta pasiva" como Gmail.**
-- **Los botones son los mismos (copiados de Gmail), pero la IA hace todo automáticamente.**
-- **El "semáforo" es la diferencia visual clave (Prioridad = lugar, Estado = color).**
-- **El "banco de datos" es eterno (nada se pierde, todo se mide).**
-
-### Pendientes para la próxima sesión:
-1. **Comparar Gmail vs. Stratos (hasta el momento definido):** Revisar qué elementos de Gmail no están incluidos en lo ya definido para la pantalla de Redacción.
-2. **Definir el Módulo de Calendario** (Cómo se integra con el correo, las tareas y las alarmas).
-3. **Definir la absorción y desconexión de las aplicaciones existentes** (Google Calendar, Outlook, etc.) y cómo se le explica al usuario este proceso.
-4. **Definir la estrategia de "Purgas Controladas" (versión final para correos):** Se propone definir un espacio de memoria de papelera para 6 meses de correos, y que la IA borre 4 meses (por si hay algo que el usuario quiera revisar).
-
----
-*Fin de las minutas actualizadas.*
-
-MINUTA CORREGIDA (versión final)
 MINUTA – 05/09/2026
-1. DEFINICIONES CONSOLIDADAS
-1.1. Estructura Fija de Pantalla
-Zona	Elemento
-Superior Izquierda	Logo de Stratos + Slogan de la compañía usuaria (mover de centro a izquierda)
-Superior Restante	Área de Mensajes (Cartelera) - fija
-Inferior Izquierda	Sello de agua y slogan de Stratos
-Inferior Centro	Botón de IA (efecto visual + sonido + indicador de detección de voz)
-Inferior Derecha	Botón "Libro" (menú general)
-1.2. Cartelera de Avisos
-Rotación: automática (ya implementado).
+TEMA: REDEFINICIÓN DE ESTRUCTURA, CONFIGURACIÓN INICIAL Y ASISTENTE IA
+DEFINICIONES CONSOLIDADAS
+1. ESTRUCTURA FIJA DE PANTALLA
+Zona	Elemento	Estado
+Superior Izquierda	Logo de Stratos + Slogan de la compañía usuaria	Cambio: Mover de centro a izquierda
+Superior Restante	Área de Mensajes (Cartelera)	Fijo
+Inferior Izquierda	Sello de agua y slogan de Stratos	Fijo
+Inferior Centro	Botón de IA	Nuevo: Con efectos visuales, sonido de micrófono e indicador de detección de voz
+Inferior Derecha	Botón "Libro" (Menú General)	Fijo
 
-Desaparición: al completar la tarea (ya implementado).
+2. COMPORTAMIENTO DE LA CARTELERA DE AVISOS
+Lo que ya existe:
+Rotación automática de avisos.
+Desaparición al completar la tarea asociada.
 
-Nuevo: duración por prioridad:
-
+Lo nuevo:
 Prioridad	Duración
-Alta	10 segundos
-Media	6 segundos
-Baja	4 segundos
-Anuncio Motivacional Diario: ya existe (cambia 1 vez al día). Nuevo: duración 6 segundos (media).
+Alta (crítico)	10 segundos
+Media (importante)	6 segundos
+Baja (informativo)	4 segundos
+Anuncio Motivacional Diario:
 
-1.3. Configuración de Vero (Flujo Inicial)
-Eliminar: Sonido, Vibración, Modo Nocturno.
+Ya existe (cambia 1 vez al día).
 
-Añadir: Configuración de IA.
+Nuevo: Duración de 6 segundos (prioridad media).
 
-Flujo:
+3. CONFIGURACIÓN DE LA ASISTENTE IA (VERO) – FLUJO INICIAL
+Cambios en Configuración:
 
-Datos Generales → "Grabar" → Configuración.
-Voz: Un botón alterna voz masculina/femenina (muestra en texto cuál está activa).
-Nombre: Campo de texto + "Confirmar nombre". La IA dice:
+Eliminar: Opciones de Sonido, Vibración, Modo Nocturno.
+
+Añadir: Configuración exclusiva de la IA.
+
+Flujo completo:
+
+Usuario completa Datos Generales.
+
+Presiona "Grabar" → redirige a Configuración (en lugar de Login).
+
+Configuración de voz:
+
+Un solo botón alterna entre voz masculina y femenina.
+
+Cada clic muestra en texto la opción activa.
+
+El usuario puede probar todas las veces que quiera.
+
+Configuración de nombre:
+
+Campo de texto (sugerencia: "Vero").
+
+Botón "Confirmar nombre".
+
+Al confirmar, la IA dice (texto + voz):
+
 "Ok, de ahora en adelante soy [nombre]. Estaré activa con que presiones el botón en cualquier pantalla y comiences con 'Hola [nombre]' tu oración."
-"Grabar Cambios": Guarda, reinicia, redirige a Login.
-1.4. Pantalla de Login
-Saludo: "Hola [Nombre]" (campo "Nombre" de Datos Generales).
 
-Redirección: a Pantalla de Comunicación (ya implementado, no se modifica).
+Botón "Grabar Cambios":
 
-1.5. Pantalla de Comunicación
+Guarda las preferencias.
+
+Reinicia el sistema.
+
+Redirige a la pantalla de Login.
+
+4. PANTALLA DE LOGIN Y SALUDO PERSONALIZADO
+Saludo:
+
+Al presionar "ENTRAR", muestra: "Hola [Nombre]".
+
+El nombre se toma del campo "Nombre" en Datos Generales (no el nombre completo).
+
+Redirección:
+
+Tras el saludo, lleva a la Pantalla de Comunicación (ya implementado).
+
+5. PANTALLA DE COMUNICACIÓN
 Botones grandes y claros:
 
 Correos
@@ -283,48 +96,66 @@ Alarmas
 
 Calendario
 
-1.6. La Asistente IA "Vero"
-Nombre conceptual: Vero (cambiable).
+6. LA ASISTENTE IA "VERO"
+Aspecto	Definición
+Nombre	Vero (cambiable por el usuario)
+Tipo	Asistente personal conversacional (no comandos rígidos)
+Interacción	Ventana emergente + voz en vivo
+Activación	Botón flotante o comando "Hola [nombre]"
+Principio	Debe ser más rápido y natural que hacerlo con clics
+Proactividad	Sugiere mejoras, explica su razonamiento
+Consentimiento	No actúa sin confirmación en acciones importantes
+PENDIENTES
+Pendientes de Definición (Discusión pendiente)
+Diseño específico de la Pantalla de Comunicación.
 
-Tipo: Asistente personal conversacional.
+Definición del módulo de Chats y rol de la IA.
 
-Interacción: Ventana emergente + voz.
+Definición de Tareas y Alarmas (integración con IA).
 
-Activación: Botón flotante o "Hola [nombre]".
+Definición de Calendario (integración con IA).
 
-Principio: Más rápido que hacerlo con clics.
+Límites legales y de privacidad de la IA (caso por caso).
 
-2. PENDIENTES
-2.1. Pendientes de Definición (Discusión)
-Pantalla de Comunicación (diseño específico).
+Rastro de auditoría (qué acciones registrar).
 
-Chats (definir módulo).
+Pendientes de Acción (Cambios al sistema actual)
+#	Acción
+1	Mover logo + slogan de la compañía a superior izquierda
+2	Implementar duración de avisos por prioridad (10, 6, 4 segundos)
+3	Asignar duración de 6 segundos al anuncio motivacional diario
+4	Eliminar Sonido, Vibración, Modo Nocturno de Configuración
+5	Implementar nuevo flujo de Configuración de IA
+6	Implementar saludo "Hola [Nombre]" en Login
+7	Crear botón de IA (efectos visuales + sonido + indicador de voz)
+8	Crear Pantalla de Comunicación con botones a Correos, Chats, Tareas, Alarmas, Calendario
+RESUMEN DE CAMBIOS
+Lo que es NUEVO (no estaba en minutas anteriores)
+Duración diferenciada de avisos según prioridad.
 
-Tareas y Alarmas (integración con IA).
+Anuncio motivacional diario con duración de 6 segundos.
 
-Calendario (integración con IA).
+Configuración de Voz (alternar masculino/femenino).
 
-Límites de IA (legales y privacidad, caso por caso).
+Configuración de Nombre de la asistente.
 
-Rastro de auditoría (qué registrar).
+Botón de IA (con efectos y sonido).
 
-2.2. Pendientes de Acción (Cambios al sistema)
-Mover logo + slogan a superior izquierda.
+Saludo personalizado en Login ("Hola [Nombre]").
 
-Implementar duración de avisos por prioridad (10, 6, 4 segundos).
+Pantalla de Comunicación (botones a Correos, Chats, Tareas, Alarmas, Calendario).
 
-Asignar duración de 6 segundos al anuncio motivacional diario.
+Concepto de Vero como asistente personal conversacional.
 
-Eliminar Sonido/Vibración/Nocturno de Configuración.
+Lo que es CORRECCIÓN (cambio a lo ya existente)
+Mover logo + slogan de la compañía de centro a superior izquierda.
 
-Implementar nuevo flujo de Configuración de IA.
+Eliminar Sonido, Vibración, Modo Nocturno de Configuración.
 
-Implementar saludo "Hola [Nombre]" en Login.
+Redirigir a Configuración después de "Grabar" (en lugar de Login).
 
-Crear botón de IA (efectos visuales + sonido + indicador de voz).
+Botón "Grabar Cambios" en Configuración (reinicia y redirige a Login).
 
-Botón "Libro" (menú general).
-
-Pantalla de Comunicación con botones a Correos, Chats, Tareas, Alarmas, Calendario.
+Fin de la minuta del 05/09/2026.
 
 
