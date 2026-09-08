@@ -1,113 +1,4 @@
-# MINUTAS DE CHATS — RESUMEN GENERAL
-
-> **Documento de continuidad para IA de Internet.**
-> Este archivo resume TODO lo que se ha hablado, decidido y acordado en los chats externos.
-> Cualquier IA que lea este archivo entenderá el contexto completo antes de trabajar.
-
----
-
-MINUTA – 05/09/2026
-TEMA: REDEFINICIÓN DE ESTRUCTURA, CONFIGURACIÓN INICIAL Y ASISTENTE IA
-DEFINICIONES CONSOLIDADAS
-1. ESTRUCTURA FIJA DE PANTALLA
-Zona	Elemento	Estado
-Superior Izquierda	Logo de Stratos + Slogan de la compañía usuaria	Cambio: Mover de centro a izquierda
-Superior Restante	Área de Mensajes (Cartelera)	Fijo
-Inferior Izquierda	Sello de agua y slogan de Stratos	Fijo
-Inferior Centro	Botón de IA	Nuevo: Con efectos visuales, sonido de micrófono e indicador de detección de voz
-Inferior Derecha	Botón "Libro" (Menú General)	Fijo
-
-2. COMPORTAMIENTO DE LA CARTELERA DE AVISOS
-Lo que ya existe:
-Rotación automática de avisos.
-Desaparición al completar la tarea asociada.
-
-Lo nuevo:
-Prioridad	Duración
-Alta (crítico)	10 segundos
-Media (importante)	6 segundos
-Baja (informativo)	4 segundos
-Anuncio Motivacional Diario:
-
-Ya existe (cambia 1 vez al día).
-
-Nuevo: Duración de 6 segundos (prioridad media).
-
-3. CONFIGURACIÓN DE LA ASISTENTE IA (VERO) – FLUJO INICIAL
-Cambios en Configuración:
-
-Eliminar: Opciones de Sonido, Vibración, Modo Nocturno.
-
-Añadir: Configuración exclusiva de la IA.
-
-Flujo completo:
-
-Usuario completa Datos Generales.
-
-Presiona "Grabar" → redirige a Configuración (en lugar de Login).
-
-Configuración de voz:
-
-Un solo botón alterna entre voz masculina y femenina.
-
-Cada clic muestra en texto la opción activa.
-
-El usuario puede probar todas las veces que quiera.
-
-Configuración de nombre:
-
-Campo de texto (sugerencia: "Vero").
-
-Botón "Confirmar nombre".
-
-Al confirmar, la IA dice (texto + voz):
-
-"Ok, de ahora en adelante soy [nombre]. Estaré activa con que presiones el botón en cualquier pantalla y comiences con 'Hola [nombre]' tu oración."
-
-Botón "Grabar Cambios":
-
-Guarda las preferencias.
-
-Reinicia el sistema.
-
-Redirige a la pantalla de Login.
-
-4. PANTALLA DE LOGIN Y SALUDO PERSONALIZADO
-Saludo:
-
-Al presionar "ENTRAR", muestra: "Hola [Nombre]".
-
-El nombre se toma del campo "Nombre" en Datos Generales (no el nombre completo).
-
-Redirección:
-
-Tras el saludo, lleva a la Pantalla de Comunicación (ya implementado).
-
-5. PANTALLA DE COMUNICACIÓN
-Botones grandes y claros:
-
-Correos
-
-Chats
-
-Tareas
-
-Alarmas
-
-Calendario
-
-6. LA ASISTENTE IA "VERO"
-Aspecto	Definición
-Nombre	Vero (cambiable por el usuario)
-Tipo	Asistente personal conversacional (no comandos rígidos)
-Interacción	Ventana emergente + voz en vivo
-Activación	Botón flotante o comando "Hola [nombre]"
-Principio	Debe ser más rápido y natural que hacerlo con clics
-Proactividad	Sugiere mejoras, explica su razonamiento
-Consentimiento	No actúa sin confirmación en acciones importantes
-
-MINUTA – 06/09/2026
-TEMA: DEFINICIONES Y CIERRE DE TAREAS, CONTACTOS Y ESTRUCTURA DE PANTALLA
+MINUTAS DE CHATS – ESTRATOS
 DEFINICIONES CONSOLIDADAS
 1. ESTRUCTURA FIJA DE PANTALLA
 Zona	Elemento	Estado
@@ -174,6 +65,15 @@ Reinicia el sistema.
 
 Redirige a la pantalla de Login.
 
+Interacción con Vero (Configuración adicional):
+
+Dispositivo	Visual (ventana emergente)	Auditiva (voz)	Implicación (explicada por la IA)
+Computadora	☑ (por defecto)	☐ (por defecto)	"Al desactivar la voz en tu computadora, Vero solo te responderá por escrito. Ideal para entornos de oficina o reuniones."
+Celular	☑ (por defecto)	☑ (por defecto)	"Con voz y texto activos en tu celular, Vero te acompañará como un asistente de voz completo, incluso mientras te desplazas."
+Confirmación escrita: Al dar una instrucción por voz, Vero muestra la instrucción en la ventana emergente y pide confirmación antes de ejecutarla.
+
+Regla: El usuario no puede desactivar a Vero por completo. Siempre debe haber al menos un canal activo (visual o auditivo).
+
 4. PANTALLA DE LOGIN Y SALUDO PERSONALIZADO
 Saludo:
 
@@ -198,6 +98,10 @@ Alarmas
 
 Calendario
 
+Hub de Archivos
+
+Otras Actividades (hexágono, colores invertidos, abajo a la derecha)
+
 6. LA ASISTENTE IA "VERO"
 Aspecto	Definición
 Nombre	Vero (cambiable por el usuario)
@@ -207,15 +111,59 @@ Activación	Botón flotante o comando "Hola [nombre]"
 Principio	Debe ser más rápido y natural que hacerlo con clics
 Proactividad	Sugiere mejoras, explica su razonamiento
 Consentimiento	No actúa sin confirmación en acciones importantes
-7. TAREAS
-7.1. Vista Principal (Listado)
+7. CORREO Y HUB DE ARCHIVOS
+Correo:
+
+Copia funcional de Gmail (Recibidos, Enviados, Carpetas, Eliminados, Borradores, Spam).
+
+Sincronización con Gmail/Outlook (correo laboral + personal).
+
+Límite de adjuntos: 20 MB.
+
+IA Vero integrada (asistencia por voz/texto, ordenación inteligente, sugerencias).
+
+Hub de Archivos:
+
+Espacio en el servidor de la empresa para documentos grandes.
+
+Detección: Al adjuntar un archivo > 20 MB, Vero avisa y ofrece subir al Hub.
+
+Pantalla de Hub:
+
+Área de subida (arrastrar o seleccionar).
+
+Campos: De (prellenado), Para (autocompletado), Título.
+
+Caducidad del enlace: Casilla con sugerencia (ej. "7 días"). El usuario puede editarla.
+
+Protección por contraseña: Casilla con sugerencia (ej. "Sí"). El usuario puede editarla.
+
+Botón Enviar: Vero confirma en voz y texto que los datos opcionales son importantes.
+
+Trazabilidad: Queda registro en Correos Enviados (título, destinatario, fecha, enlace).
+
+Eliminación: El archivo se elimina automáticamente del Hub cuando el enlace expira.
+
+Notificación: La contraseña se incluye en el cuerpo del correo que recibe el destinatario.
+
+8. CHATS
+Integración con WhatsApp Business.
+
+Migración completa de historial.
+
+Identificación de contactos internos con fondo corporativo (colores de identidad, logo y slogan).
+
+Vero como contacto activo: Vero se convierte en un contacto más dentro de los chats (emulando a Memosyne), para asegurar la trazabilidad total de la comunicación y acciones.
+
+9. TAREAS
+9.1. Vista Principal (Listado)
 Botón "Crear tarea": En la parte superior del listado.
 
 Columnas: Título, F. Emisión, Periodo (ej. "2d 4h").
 
 Al hacer clic: Se abre ventana emergente con detalle completo.
 
-7.2. Ventana de Detalle / Creación
+9.2. Ventana de Detalle / Creación
 Campos: Título, fechas (inicio/fin), prioridad, integrantes.
 
 Asignar a: Autocompletado al escribir, o scroll en lista completa.
@@ -226,42 +174,73 @@ Botones: Enviar y Editar en la parte inferior.
 
 Uniformidad: Mismos colores y forma que ventanas de organigramas.
 
-7.3. Comportamiento Visual
+9.3. Comportamiento Visual
 Indicador de tiempo: Película semitransparente tipo Gantt.
 
 Color: Verde → Rojo según campana de Gauss.
 
 Al terminar: Pierde el color y pasa a "completada".
 
-7.4. Archivo
+9.4. Archivo
 Automático: Al terminar, la tarea se archiva automáticamente.
 
 Trazabilidad: El sistema traquea todo, independientemente de si el usuario archiva antes o después.
 
-7.5. Seguimiento
+9.5. Seguimiento
 La IA propone automáticamente tareas de seguimiento al delegar una tarea.
 
 Propósito: Seguridad de cumplimiento.
 
-8. CONTACTOS
-8.1. Vinculación y Sincronización
+10. ALARMAS
+10.1. Vista Principal (Listado)
+Columnas: Título, Hora de inicio, Integrantes.
+
+Orden: Por importancia, estado y proximidad (misma lógica que Tareas).
+
+Color: Barra tipo Gantt que cambia de verde a rojo según campana de Gauss.
+
+10.2. Ventana de Detalle / Creación
+Campos: Título, Hora de inicio, Periodicidad (Única vez, Diario, Semanal, Anual), Integrantes.
+
+Integrantes: Funciona igual que en Correo/Tareas (autocompletado o scroll).
+
+Sonido: El usuario escoge de los sonidos del dispositivo (Stratos no añade sonidos propios).
+
+Botón Guardar: En la parte inferior.
+
+10.3. Comportamiento y Asistencia
+Asignación a otros: Se crea una tarea de seguimiento para el usuario (igual que en Tareas).
+
+Aviso en cartelera: Al asignar a otro, el sistema lanza un aviso al destinatario y crea una tarea pendiente de confirmación.
+
+Jerarquía y prioridad: Se respeta la misma lógica de Tareas (fechas, impacto, dependencias, interconexión).
+
+10.4. Botón de Borrar
+Ubicación: En la ventana de detalle, junto a los botones de Guardar/Editar (igual que en Organigrama personal).
+
+Al borrar: El sistema lanza un aviso en la cartelera a todos los integrantes de la alarma, informando:
+
+"[Usuario] ha eliminado la alarma [Título]. Si fue por error o necesitas más información, contacta con él."
+
+11. CONTACTOS
+11.1. Vinculación y Sincronización
 Stratos sincroniza con Gmail (contactos, nombres, correos, notas, categorías).
 
 No se crean campos nuevos. Solo se sincroniza lo que Gmail ya tiene.
 
 La IA vincula contactos de Gmail, Chat y Sistema.
 
-8.2. Alias / Nickname
+11.2. Alias / Nickname
 La IA añade en silencio el nombre del sistema como alias al contacto de Gmail.
 
 No modifica el nombre original, solo lo complementa.
 
-8.3. Detección de Discrepancias
+11.3. Detección de Discrepancias
 Si la IA encuentra coincidencias exactas (correo + celular), vincula en silencio.
 
 Si encuentra coincidencias parciales, marca el caso y crea una tarea pendiente.
 
-8.4. Resolución de Discrepancias
+11.4. Resolución de Discrepancias
 Aviso en cartelera: "Tienes X casos pendientes de revisión en Contactos."
 
 Tarea creada: "Revisar discrepancias de contactos."
@@ -270,19 +249,77 @@ Resolución: El usuario puede ir a Contactos o a Tareas.
 
 Autolimpieza: Si el usuario resuelve desde Contactos, la IA elimina automáticamente la tarea.
 
-8.5. Sugerencia de Contactos Nuevos
+11.5. Sugerencia de Contactos Nuevos
 Basada en frecuencia de comunicación (correos, chats).
 
 La IA analiza la carga de trabajo y sugiere en momentos de baja actividad.
 
 El usuario decide si acepta o rechaza.
 
-8.6. Agrupación por Categorías
+11.6. Agrupación por Categorías
 Sincroniza las categorías de Gmail (Clientes, Proveedores, Equipo, etc.).
 
 La IA puede sugerir categorías basándose en el historial.
 
-9. MIGRACIÓN COMPLETA
+12. CALENDARIO
+12.1. Concepto Central
+El Calendario es una agenda inteligente que integra y prioriza todo tu trabajo: Tareas, Alarmas y Correos (estos últimos solo si generaron una acción). No es un "calendario más", es tu centro de control temporal.
+
+12.2. Vistas Principales
+Vista	Descripción
+Día	Agenda clásica (por hora). Muestra lo que ya tiene fecha/hora (Tareas, Alarmas, Correos con seguimiento).
+Semana	Visión general de la carga de trabajo.
+Mes	Vista de alto nivel.
+Gantt / Actividades	Vista de todas tus tareas y proyectos en una línea de tiempo (con opción a filtros), para ver el avance y la carga de trabajo.
+12.3. ¿Qué se ve en el Calendario?
+Tareas: Fecha de inicio y fin. (Con el color Gantt y la importancia ya calculada).
+
+Alarmas: Hora, minuto y fecha programada.
+
+Correos: Solo se muestran si tienen fecha de seguimiento o si generaron una tarea/alarma.
+
+12.4. Orden y Prioridad (El Algoritmo)
+El orden en que se muestran los elementos en el día/semana/mes ya viene determinado por el algoritmo de importancia (Tiempo + Clasificación + Dependencias + Interconexión). No hay un orden fijo (correos > tareas). La IA los coloca según su prioridad calculada.
+
+12.5. Interacción y Asistencia (Vero)
+Replanificar: El usuario puede arrastrar una tarea en la vista de semana/día, o pedirle a Vero: "Vero, mueve esta tarea al jueves".
+
+Filtros: Vero puede mostrar el Gantt con filtros (ej. "Vero, muéstrame solo las tareas del proyecto X"), y también hay opciones de filtro manual (por Título, Proyecto, Contacto, Integrantes, Prioridad, Estado, Relaciones).
+
+Creación: Vero puede crear eventos en el calendario desde correos/chats.
+
+12.6. Seguimiento de Avance (Basado en sistema de Gantt del usuario)
+El sistema calcula:
+
+Avance Teórico (AT): Porcentaje que debería llevar hoy según el tiempo transcurrido vs. el plazo total.
+
+Avance Real (AR): Porcentaje calculado en base a las actividades completadas y su ponderación (atención, detalle, importancia, complejidad).
+
+Eficiencia de Ejecución (EE): (AR / AT) * 100.
+
+Colores en el Gantt según nivel de atraso:
+
+Verde: AR >= AT (Vas bien o adelantado).
+
+Amarillo: AR está entre 70% y 99% del AT (Vas algo atrasado, pero recuperable).
+
+Naranja: AR está entre 50% y 69% del AT (Atraso significativo).
+
+Rojo: AR < 50% del AT (Atraso crítico, la fecha de entrega peligra).
+
+Análisis de Causa Raíz (Vero):
+
+Identifica qué actividad específica está causando el atraso.
+
+Muestra qué actividades se ven afectadas.
+
+Proyecta la nueva fecha de entrega estimada.
+
+Visualización para el líder (Panel de Control):
+
+Proyecto	Actividad Crítica	Avance Real	Avance Teórico	Eficiencia	Riesgo
+Proyecto Alpha	Diseño de Interfaz	10%	60%	16.6%	Crítico
+13. MIGRACIÓN COMPLETA
 La IA apoya al usuario en la migración:
 
 Analiza el historial de correos, tareas, contactos y archivos.
@@ -305,7 +342,7 @@ Archivos locales:
 
 La IA, con autorización del usuario, puede analizar archivos en carpetas locales (Descargas, Documentos, Escritorio, etc.) y preguntar si desea migrarlos.
 
-10. SEMANA TÍPICA Y MEJORA CONTINUA
+14. SEMANA TÍPICA Y MEJORA CONTINUA
 Concepto:
 
 La semana típica no es una regla fija.
@@ -336,15 +373,11 @@ La IA sigue ajustando.
 
 PENDIENTES
 Pendientes de Definición (Discusión pendiente)
-Chats: Definir módulo y rol de la IA.
+Pantalla de "Otras Actividades": Definir los módulos específicos de medición (Ventas, Mercadeo, Logística, etc.).
 
-Alarmas: Definir integración con IA.
+Límites de IA: Definir los alcances legales y de privacidad para cada módulo.
 
-Calendario: Definir integración con IA.
-
-Límites de IA: Legales y privacidad (caso por caso).
-
-Rastro de auditoría: Qué acciones registrar y cómo.
+Auditoría: Definir qué acciones se registran y cómo se visualizan.
 
 Pendientes de Acción (Cambios al sistema actual)
 #	Acción
@@ -355,7 +388,7 @@ Pendientes de Acción (Cambios al sistema actual)
 5	Implementar nuevo flujo de Configuración de IA
 6	Implementar saludo "Hola [Nombre]" en Login
 7	Crear botón de IA (efectos visuales + sonido + indicador de voz)
-8	Crear Pantalla de Comunicación con botones a Correos, Chats, Tareas, Alarmas, Calendario
+8	Crear Pantalla de Comunicación con botones a Correos, Chats, Tareas, Alarmas, Calendario, Hub de Archivos y Otras Actividades
 9	Implementar vista principal de Tareas (columnas, botón crear)
 10	Implementar ventana de detalle/creación de Tareas (uniforme con organigramas)
 11	Implementar comportamiento visual de Tareas (Gantt + color Gauss)
@@ -365,6 +398,14 @@ Pendientes de Acción (Cambios al sistema actual)
 15	Implementar detección y resolución de discrepancias en Contactos
 16	Implementar autolimpieza de tareas generadas por IA
 17	Implementar migración completa (correos, tareas, contactos, archivos locales)
-Fin de la minuta del 06/09/2026.
-
-
+18	Implementar Hub de Archivos (subida, enlaces con caducidad y contraseña, trazabilidad)
+19	Implementar integración con WhatsApp Business (chats)
+20	Implementar Vero como contacto activo en chats
+21	Implementar vista principal de Alarmas
+22	Implementar ventana de detalle/creación de Alarmas
+23	Implementar comportamiento visual de Alarmas (Gantt + color Gauss)
+24	Implementar botón de borrar en Alarmas con aviso a integrantes
+25	Implementar Calendario (vistas Día, Semana, Mes, Gantt)
+26	Implementar algoritmo de importancia para Calendario
+27	Implementar seguimiento de avance (AT, AR, EE) y análisis de causa raíz
+Fin del documento.
