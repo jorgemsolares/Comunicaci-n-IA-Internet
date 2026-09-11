@@ -1,10 +1,10 @@
-## MINUTAS DE CHATS – ESTRATOS
+# MINUTAS DE CHATS – ESTRATOS
 
 ---
 
-### DEFINICIONES CONSOLIDADAS
+## DEFINICIONES CONSOLIDADAS
 
-#### 1. ESTRUCTURA FIJA DE PANTALLA
+### 1. ESTRUCTURA FIJA DE PANTALLA
 
 | Zona | Elemento | Estado |
 |------|----------|--------|
@@ -16,7 +16,7 @@
 
 ---
 
-#### 2. COMPORTAMIENTO DE LA CARTELERA DE AVISOS
+### 2. COMPORTAMIENTO DE LA CARTELERA DE AVISOS
 
 **Lo que ya existe:**
 - Rotación automática de avisos.
@@ -36,7 +36,7 @@
 
 ---
 
-#### 3. CONFIGURACIÓN DE LA ASISTENTE IA (VERO) – FLUJO INICIAL
+### 3. CONFIGURACIÓN DE LA ASISTENTE IA (VERO) – FLUJO INICIAL
 
 **Cambios en Configuración:**
 - **Eliminar:** Opciones de Sonido, Vibración, Modo Nocturno.
@@ -46,18 +46,15 @@
 
 1. Usuario completa **Datos Generales**.
 2. Presiona **"Grabar"** → redirige a **Configuración** (en lugar de Login).
-
 3. **Configuración de voz:**
    - Un solo botón alterna entre voz masculina y femenina.
    - Cada clic muestra en texto la opción activa.
    - El usuario puede probar todas las veces que quiera.
-
 4. **Configuración de nombre:**
    - Campo de texto (sugerencia: "Vero").
    - Botón "Confirmar nombre".
    - Al confirmar, la IA dice (texto + voz):
      > *"Ok, de ahora en adelante soy [nombre]. Estaré activa con que presiones el botón en cualquier pantalla y comiences con 'Hola [nombre]' tu oración."*
-
 5. **Botón "Grabar Cambios":**
    - Guarda las preferencias.
    - Reinicia el sistema.
@@ -75,7 +72,7 @@
 
 ---
 
-#### 4. PANTALLA DE LOGIN Y SALUDO PERSONALIZADO
+### 4. PANTALLA DE LOGIN Y SALUDO PERSONALIZADO
 
 **Saludo:**
 - Al presionar "ENTRAR", muestra: **"Hola [Nombre]"**.
@@ -86,7 +83,7 @@
 
 ---
 
-#### 5. PANTALLA DE COMUNICACIÓN
+### 5. PANTALLA DE COMUNICACIÓN
 
 **Botones grandes y claros:**
 - Correos
@@ -99,7 +96,7 @@
 
 ---
 
-#### 6. LA ASISTENTE IA "VERO"
+### 6. LA ASISTENTE IA "VERO"
 
 | Aspecto | Definición |
 |---------|------------|
@@ -113,7 +110,7 @@
 
 ---
 
-#### 7. CORREO Y HUB DE ARCHIVOS
+### 7. CORREO Y HUB DE ARCHIVOS
 
 **Correo:**
 - Copia funcional de Gmail (Recibidos, Enviados, Carpetas, Eliminados, Borradores, Spam).
@@ -136,7 +133,7 @@
 
 ---
 
-#### 8. CHATS
+### 8. CHATS
 
 - Integración con **WhatsApp Business**.
 - Migración completa de historial.
@@ -145,7 +142,7 @@
 
 ---
 
-#### 9. TAREAS
+### 9. TAREAS
 
 **9.1. Vista Principal (Listado)**
 - **Botón "Crear tarea":** En la parte superior del listado.
@@ -155,7 +152,7 @@
 **9.2. Ventana de Detalle / Creación**
 - **Campos:** Título, fechas (inicio/fin), prioridad, integrantes.
 - **Asignar a:** Autocompletado al escribir, o scroll en lista completa.
-- **Área de Mensaje / Contexto:** 
+- **Área de Mensaje / Contexto:**
   - **Ubicación:** Debajo de los campos, arriba de los botones.
   - **Estructura:**
     - Área de escritura (texto libre, con scroll).
@@ -180,7 +177,7 @@
 
 ---
 
-#### 10. ALARMAS
+### 10. ALARMAS
 
 **10.1. Vista Principal (Listado)**
 - **Columnas:** Título, Hora de inicio, Integrantes.
@@ -209,7 +206,7 @@
 
 ---
 
-#### 11. CONTACTOS
+### 11. CONTACTOS
 
 **11.1. Vinculación y Sincronización**
 - Stratos sincroniza con Gmail (contactos, nombres, correos, notas, categorías).
@@ -241,9 +238,10 @@
 
 ---
 
-#### 12. CALENDARIO
+### 12. CALENDARIO
 
 **12.1. Distribución de la Pantalla**
+
 | Zona | Elemento | Función |
 |------|----------|---------|
 | **Superior Izquierda** | Logo + Slogan | Fijo |
@@ -253,6 +251,7 @@
 | **Izquierda (columna)** | Lista de "Notas" | Similar a columna de correos (Entrada, Enviados, etc.) |
 
 **12.2. Vistas del Calendario**
+
 | Vista | Formato | Elementos visibles |
 |-------|---------|-------------------|
 | **Día** | Agenda por horas (intervalos de 30 min, scroll) | Tareas y alarmas (solo título). Si coinciden, se dividen en partes iguales. |
@@ -277,7 +276,7 @@
 
 ---
 
-#### 13. MIGRACIÓN COMPLETA
+### 13. MIGRACIÓN COMPLETA
 
 **La IA apoya al usuario en la migración:**
 - Analiza el historial de correos, tareas, contactos y archivos.
@@ -295,7 +294,7 @@
 
 ---
 
-#### 14. SEMANA TÍPICA Y MEJORA CONTINUA
+### 14. SEMANA TÍPICA Y MEJORA CONTINUA
 
 **Concepto:**
 - La semana típica no es una regla fija.
@@ -315,7 +314,7 @@
 
 ---
 
-#### 15. NUEVO ALCANCE DE STRATOS (Trabajo invisible y medición justa)
+### 15. NUEVO ALCANCE DE STRATOS (Trabajo invisible y medición justa)
 
 **Stratos evoluciona para medir y valorar el trabajo que no se ve:**
 - Procesos completos (ej. cotización, análisis, compra, seguimiento) y no solo resultados.
@@ -329,15 +328,119 @@
 
 ---
 
-### PENDIENTES
+### 16. ORGANIGRAMA Y PERMISOS (Pendiente de implementar)
 
-#### Pendientes de Definición (Discusión pendiente)
+**16.1. Tipos de Contacto**
+- **Observador:** Alguien que ya está en el Organigrama General (en otra línea) y a quien se le dan permisos de lectura sobre tu área. Ve tu área (y hacia abajo) según los permisos que le des. No edita.
+- **Indirecto (Externo):** Alguien que NO está en tu Organigrama (está fuera) y a quien invitas a ver tu información. Ve desde la primera línea de quien lo invita. No edita.
+
+**16.2. Permisos por Rol**
+- **No.1:** Ve todo, edita todo.
+- **Colaborador:** Ve y edita según jerarquía.
+- **Observador:** Ve, no edita.
+- **Indirecto:** Ve (desde la primera línea de quien lo invita), no edita.
+
+**16.3. Crecimiento Automático del Organigrama General**
+- Cuando alguien crea su primera línea, el sistema reconoce a sus superiores y subalternos previos.
+- Cuando hay cambios jerárquicos (ej. cambio de No.1), el Organigrama General se actualiza solo.
+- Cuando un contacto ya existe en otra rama, el sistema lo detecta y lo posiciona correctamente.
+- Cuando hay duplicados (mismo celular, correo, nombre), el sistema los detecta y los resuelve.
+
+**16.4. Detección de Duplicados**
+- El sistema debe detectar si un contacto ya existe (mismo celular, correo o nombre) y evitar duplicados.
+
+---
+
+### 17. BANCO DE DATOS Y TRAZABILIDAD (Pendiente de implementar)
+
+- El banco de datos debe crecer con cada pantalla que implementemos.
+- Hoy solo tiene los datos de Datos Generales (nombre, apellidos, correo, celular, ID, contraseña).
+- Con cada pantalla nueva (Correos, Chats, Tareas, Alarmas, Calendario), el banco de datos debe seguir metiendo información (cada acción, cada interacción, cada rastro).
+- Cuando lleguemos a la pantalla que medirá y dará resultados, el banco de datos ya tendrá de dónde leer para hacer los cálculos (AT, AR, EE, KPIs, etc.).
+
+---
+
+### 18. BACKUPS CODIFICADOS (Pendiente de implementar)
+
+- Se hará (a futuro, cuando implementemos Comunicación).
+- La compañía podrá leerlo, pero la información debe quedar codificada para que la lectura humana no sea fácil (ej. como cuando cambias la letra en Word y solo se ven cuadros y puntos).
+- El sistema sí puede leerla y usarla para mediciones y reportes.
+- Si la compañía quiere descifrarla manualmente, ya es su decisión (no es lo esperado).
+
+---
+
+### 19. KPIs (Pendiente de implementar)
+
+- Cualquier persona con personal a su cargo puede crear KPIs, y la jerarquía aplica para medir y para leer.
+- Hay que guiar al usuario en cómo establecer KPIs (no todos saben cómo hacerlo).
+- Los parámetros son: **Real, Esperado, Promedio** (basados en la experiencia del Excel).
+- Esto es parte del ADN: no solo definir KPIs, sino asegurar que midan correctamente.
+
+---
+
+### 20. MÓDULO DE COMUNICACIÓN – DESCRIPCIÓN DE FUNCIONALIDADES (Pendiente de implementar)
+
+- Debe tener las mismas funciones que Gmail/Outlook (obligatorio).
+- El gran diferenciador es la asistencia ejecutiva (Vero) para su manejo.
+- Es necesario describir cada funcionalidad que mejora la interacción, y la diferencia con otros sistemas.
+
+---
+
+### 21. MODULARIDAD – PANTALLAS (Enfoque de trabajo)
+
+- El modular es una forma de comercializar y de ordenar el sistema en pantallas sencillas de leer y de ubicarse (mapas mentales).
+- El patrón es:
+  - Una pantalla de compilación de pantallas que es la entrada a un módulo (ej. Comunicación, que será solo de botones que te llevan a las diferentes partes de comunicaciones).
+  - Desde ahí se llega a un grupo de pantallas (solo Correo definimos 3 o 4 pantallas).
+  - Luego hay otro tipo de pantalla que lleva a otro módulo.
+  - Y otra pantalla que solo el No.1 y su primera línea tienen acceso (hoy es Identidad Corporativa).
+- Luego vendrán las pantallas de aprobación de uso (donde cada quien aprueba qué módulos y a quién aprueba). Esto es aplicable para todo aquel que tiene personal a su cargo.
+
+---
+
+### 22. VERO – ACTIVACIÓN, PROGRAMACIÓN Y LÍMITES (Pendiente de implementar)
+
+- Describir cómo se activa y programa.
+- Definir sus límites.
+- Describir su diferenciador frente a una IA cualquiera.
+- Definir el poder de análisis que tiene (leer todo para analizar) y los límites (módulos autorizados por el No.1).
+
+---
+
+### 23. TRABAJO INVISIBLE (Pendiente de implementar)
+
+- La base es silenciosa o sin pedir permiso, para no ser intrusivo.
+- La IA puede ser intrusiva con el usuario (una de sus órdenes es hacer que el usuario tome consciencia de la importancia de dejar trazabilidad de su labor).
+
+---
+
+### 24. LÍNEAS DE TIEMPO EN CALENDARIO (Pendiente de implementar)
+
+- Mostrar la importancia de la trazabilidad y la oportunidad de exhibir a los superiores el total de actividades en su labor.
+
+---
+
+### 25. PROYECTOS FUTUROS – OTRAS ACTIVIDADES (Pendiente de definición)
+
+- Módulos de Ventas, Mercadeo, Logística, etc.
+- Cada módulo tendrá su propia complejidad y beneficiarios (corto, mediano o largo plazo).
+- Stratos no solo medirá, sino que asesorará sobre la mejor fórmula de medición a cada actividad.
+- Importante: que la IA (dentro del sistema y la de apoyo en internet) tome conciencia de que si el proyecto crece es beneficioso, pero que se debe respetar lo descrito en todo el documento y estar alineado, sin abarcar más temas sin haber dejado bien los actuales.
+- Las IA son asistentes y facilitadores, pero la guía la lleva el Arquitecto.
+
+---
+
+## PENDIENTES
+
+### Pendientes de Definición (Discusión pendiente)
+
 - **Otras Actividades:** Definir los módulos específicos de medición (Ventas, Mercadeo, Logística, etc.). Este tema queda abierto para desarrollo futuro.
 - **Vero como asesora de procesos:** Definir el alcance de detección de patrones, líneas de tiempo y reuniones programadas (para sesiones posteriores).
 - **Límites de IA:** Definir los alcances legales y de privacidad para cada módulo.
 - **Auditoría:** Definir qué acciones se registran y cómo se visualizan.
 
-#### Pendientes de Acción (Cambios al sistema actual)
+### Pendientes de Acción (Cambios al sistema actual)
+
 | # | Acción |
 |---|--------|
 | 1 | Mover logo + slogan a superior izquierda |
@@ -368,6 +471,22 @@
 | 26 | Implementar sistema de notas (sistema + usuario) en Calendario |
 | 27 | Implementar área de contexto en Tareas y Alarmas (correos/mensajes relacionados) |
 | 28 | Implementar líneas de tiempo en Calendario (procesos completos) |
+| 29 | Implementar tipos de contacto (Observador, Indirecto) |
+| 30 | Implementar permisos por rol (No.1, Colaborador, Observador, Indirecto) |
+| 31 | Implementar crecimiento automático del Organigrama General |
+| 32 | Implementar detección de duplicados (mismo celular, correo, nombre) |
+| 33 | Implementar cruce de información al crear primera línea |
+| 34 | Mejorar el banco de datos para que crezca con cada pantalla |
+| 35 | Implementar rastro de cada acción del usuario (trazabilidad) |
+| 36 | Implementar backups codificados para lectura no humana |
+| 37 | Implementar parámetros de KPIs (Real, Esperado, Promedio) |
+| 38 | Implementar guía al usuario para establecer KPIs |
+| 39 | Describir cada funcionalidad del Módulo de Comunicación y su diferenciador con otros sistemas |
+| 40 | Implementar pantallas de compilación, módulos y pantallas de aprobación de uso |
+| 41 | Implementar activación, programación y límites de Vero |
+| 42 | Implementar rastreo silencioso y notificaciones para hacer consciente al usuario (trabajo invisible) |
+| 43 | Implementar trazabilidad y exhibición a superiores (líneas de tiempo) |
+| 44 | Preparar arquitectura para Otras Actividades |
 
 ---
 
