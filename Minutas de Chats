@@ -331,20 +331,20 @@
 ### 16. ORGANIGRAMA Y PERMISOS (Pendiente de implementar)
 
 **16.1. Tipos de Contacto**
-- **Observador:** Alguien que ya está en el Organigrama General (en otra línea) y a quien se le dan permisos de lectura sobre tu área. Ve tu área (y hacia abajo) según los permisos que le des. No edita.
+- **Observador:** Alguien que ya está o no en el Organigrama General (en otra línea) pero es alguien a quien se le dan permisos de lectura sobre tu área. Ve tu área (y hacia abajo) según los permisos que le des. No edita.
 - **Indirecto (Externo):** Alguien que NO está en tu Organigrama (está fuera) y a quien invitas a ver tu información. Ve desde la primera línea de quien lo invita. No edita.
 
 **16.2. Permisos por Rol**
-- **No.1:** Ve todo, edita todo.
+- **No.1:** Ve todo, edita lo suyo.
 - **Colaborador:** Ve y edita según jerarquía.
 - **Observador:** Ve, no edita.
 - **Indirecto:** Ve (desde la primera línea de quien lo invita), no edita.
 
 **16.3. Crecimiento Automático del Organigrama General**
-- Cuando alguien crea su primera línea, el sistema reconoce a sus superiores y subalternos previos.
-- Cuando hay cambios jerárquicos (ej. cambio de No.1), el Organigrama General se actualiza solo.
+- Cuando alguien crea su primera línea, el sistema reconoce a sus superiores y subalternos previos, si así los tuviera.
+- Cuando hay cambios jerárquicos (ej. cambio de No.1), el Organigrama General se actualiza solo, esto se hace porque reconoce la jerarquía.
 - Cuando un contacto ya existe en otra rama, el sistema lo detecta y lo posiciona correctamente.
-- Cuando hay duplicados (mismo celular, correo, nombre), el sistema los detecta y los resuelve.
+- Cuando hay duplicados (mismo celular, correo, nombre), el sistema los detecta y comunica para encontrar la solución, ya sea editando o permitiendo la nueva invitación, esto porque desde la invitación se debe dar cuenta.
 
 **16.4. Detección de Duplicados**
 - El sistema debe detectar si un contacto ya existe (mismo celular, correo o nombre) y evitar duplicados.
@@ -372,7 +372,8 @@
 ### 19. KPIs (Pendiente de implementar)
 
 - Cualquier persona con personal a su cargo puede crear KPIs, y la jerarquía aplica para medir y para leer.
-- Hay que guiar al usuario en cómo establecer KPIs (no todos saben cómo hacerlo).
+- Hay que guiar al usuario en cómo establecer KPIs (no todos saben cómo hacerlo) y siempre respetando los establecidos por su superior.
+- Un subalterno no puede crear KPIs que sesguen la información o desalineen la estrategia del superior. Si necesita crear un KPI que altere en gran medida al del superior, debe estudiarse el porqué (puede ser que el subalterno sea más realista o que el jefe esté presionando sin lógica completa). En ese caso, se activa una revisión con el superior para estudiar el KPI propuesto y ajustar (o no) el original.
 - Los parámetros son: **Real, Esperado, Promedio** (basados en la experiencia del Excel).
 - Esto es parte del ADN: no solo definir KPIs, sino asegurar que midan correctamente.
 
@@ -487,6 +488,7 @@
 | 42 | Implementar rastreo silencioso y notificaciones para hacer consciente al usuario (trabajo invisible) |
 | 43 | Implementar trazabilidad y exhibición a superiores (líneas de tiempo) |
 | 44 | Preparar arquitectura para Otras Actividades |
+| 45 | **Próxima revisión de `A_DONDE_VA_STRATOS.md`:** Ajustar redacción y enriquecer el texto, especialmente el punto de Líneas de Tiempo en Calendario (visibilidad, trazabilidad, medición efectiva, ponderación frente a tareas paralelas, practicidad de supervisión, compilación y cruces de información). Revisar coherencia con la descripción del Calendario. |
 
 ---
 
