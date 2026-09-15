@@ -41,6 +41,9 @@
 **Cambios en Configuración:**
 - **Eliminar:** Opciones de Sonido, Vibración, Modo Nocturno.
 - **Añadir:** Configuración exclusiva de la IA.
+- **El sistema toma** los autorizados del dispositivo (no gestiona sonido, vibración ni modo nocturno).
+- **Botón de configuración de IA:** Ubicado en la misma área donde estaban las tres opciones eliminadas, con la indicación "Configuración de IA".
+- **Debe ser gratis y sin restricciones** (sin tokens diarios ni límites).
 
 **Flujo completo:**
 
@@ -59,6 +62,7 @@
    - Guarda las preferencias.
    - Reinicia el sistema.
    - Redirige a la pantalla de Login.
+6. **Si el usuario regresa a esta pantalla en el futuro:** Puede cambiar la configuración de los pasos 3 al 5 si así lo desea.
 
 **Interacción con Vero (Configuración adicional):**
 
@@ -68,7 +72,7 @@
 | **Celular** | ☑ (por defecto) | ☑ (por defecto) | *"Con voz y texto activos en tu celular, Vero te acompañará como un asistente de voz completo, incluso mientras te desplazas."* |
 
 - **Confirmación escrita:** Al dar una instrucción por voz, Vero muestra la instrucción en la ventana emergente y pide confirmación antes de ejecutarla.
-- **Regla:** El usuario no puede desactivar a Vero por completo. Siempre debe haber al menos un canal activo (visual o auditivo).
+- **Regla:** El usuario no puede desactivar a Vero por completo. Siempre debe haber al menos un canal activo (visual o auditivo). El usuario puede activar/desactivar con dos cuadros de cheque (visual y auditivo).
 
 ---
 
@@ -292,6 +296,14 @@
 **Archivos locales:**
 - La IA, con autorización del usuario, puede analizar archivos en carpetas locales (Descargas, Documentos, Escritorio, etc.) y preguntar si desea migrarlos.
 
+**Flujo post-configuración de Vero:**
+- Cuando el usuario vuelve a entrar (después de configurar Vero y reiniciar), Vero consulta:
+  > *"Este es tu correo y tu cel. Yo puedo sincronizar tu información. ¿Procedo?"*
+- Si el usuario acepta, Vero dice:
+  > *"Mientras hago los pasos, puedes crear tu organigrama personal de comunicación."*
+- Vero trabaja en silencio, avisando de los pasos.
+- Vero interrumpe solo si encuentra archivos que necesitan decisión del usuario o tiene dudas.
+
 ---
 
 ### 14. SEMANA TÍPICA Y MEJORA CONTINUA
@@ -349,14 +361,33 @@
 **16.4. Detección de Duplicados**
 - El sistema debe detectar si un contacto ya existe (mismo celular, correo o nombre) y evitar duplicados.
 
+**16.5. Mensaje de Entrada al Sistema**
+- Debe diferenciar si es **invitación** (genera inscripción) o **acceso** (Observador/Indirecto, no genera inscripción).
+
+**16.6. Lógica de Jerarquía (Nuevo - Pendiente de implementar)**
+- El sistema debe reconocer **quién te invita** (el que invita es tu jefe al crear su primera línea).
+- Cuando alguien de **mayor rango** se inscribe (ej. el GG que invitas a tu primera línea y luego crea la suya), el sistema debe:
+  - Reconocer que ya está en el sistema.
+  - Posicionarlo en una jerarquía superior.
+  - **Avisar a tu superior vigente (el No.1)** que ya se inscribió alguien arriba de él.
+  - Refrescar el Organigrama General, volviendo tu estructura una rama de su primera línea.
+- **Aviso al superior** cuando alguien de su **primera línea** se inscribe.
+
+**16.7. Cruce de Información al Grabar Inscripción (Nuevo - Pendiente de probar)**
+- **Siempre**, al querer grabar una inscripción, revisar si hay **1 o más datos repetidos** (porque el sistema ya los tiene en su banco de datos).
+- Si los hay, **avisar** ("hay 1 o más datos repetidos") y **marcarlos**.
+- El aviso debe tener **dos opciones:** Editar o Salvar.
+- Si el usuario elige **Salvar**, se concreta la inscripción.
+- **Pendiente:** Probar que estos cambios funcionen (no se puede enviar invitaciones hasta tener Comunicación implementada).
+
 ---
 
 ### 17. BANCO DE DATOS Y TRAZABILIDAD (Pendiente de implementar)
 
-- El banco de datos debe crecer con cada pantalla que implementemos.
-- Hoy solo tiene los datos de Datos Generales (nombre, apellidos, correo, celular, ID, contraseña).
-- Con cada pantalla nueva (Correos, Chats, Tareas, Alarmas, Calendario), el banco de datos debe seguir metiendo información (cada acción, cada interacción, cada rastro).
-- Cuando lleguemos a la pantalla que medirá y dará resultados, el banco de datos ya tendrá de dónde leer para hacer los cálculos (AT, AR, EE, KPIs, etc.).
+- El banco de datos debe tener la **capacidad de guardar todos los datos, horarios y todo lo posible**.
+- Que esa información se guarde **desde ahora**, aunque todavía no sepamos exactamente qué vamos a trackear.
+- Así, cuando definamos los trackings, **ya habrá información** disponible.
+- **Pendiente:** Definir exactamente qué trackings se harán, pero el banco de datos debe estar preparado.
 
 ---
 
@@ -401,17 +432,41 @@
 
 ### 22. VERO – ACTIVACIÓN, PROGRAMACIÓN Y LÍMITES (Pendiente de implementar)
 
-- Describir cómo se activa y programa.
-- Definir sus límites.
-- Describir su diferenciador frente a una IA cualquiera.
-- Definir el poder de análisis que tiene (leer todo para analizar) y los límites (módulos autorizados por el No.1).
+**Activación:**
+- Solo con **botón presionado**. No funciona en segundo plano.
+- **Razón:** Evitar que se piense que la IA hace intrusión o intromisión no autorizada en el día a día.
+- Comando de voz: "Hola [nombre]".
+
+**Programación:**
+- El usuario **sí puede** programar a Vero para que haga tareas en horarios específicos.
+- Pero se deben **recalcar los alcances y marcos referenciales** de Vero: que lo que pida **se pueda** y esté de acuerdo a su puesto, a lo legal, a lo ético, etc.
+
+**Límites:**
+- Solo accede a los módulos autorizados por el No.1 **para su usuario**.
+- No puede acceder a información de otros usuarios si no cuenta con la jerarquía, la comunicación directa (como un igual) o los accesos correspondientes.
+- Respeta la legalidad nacional e internacional, valores humanos, reglas de convivencia y ética laboral.
+- No actúa sin confirmación en acciones importantes.
+- Vero sugiere, no impone.
+- Se pueden revisar y redefinir conforme avancemos.
 
 ---
 
 ### 23. TRABAJO INVISIBLE (Pendiente de implementar)
 
-- La base es silenciosa o sin pedir permiso, para no ser intrusivo.
-- La IA puede ser intrusiva con el usuario (una de sus órdenes es hacer que el usuario tome consciencia de la importancia de dejar trazabilidad de su labor).
+**Lo que el sistema hace "de cajón" (sin preguntar):**
+- Registrar acciones en pantallas.
+- Registrar tiempos de entrada.
+- Registrar actividades que el usuario pida que sean de análisis.
+- Avisar cuando termina una solicitud (sin saltar pantallas ni interrumpir).
+
+**Lo que la IA solicita (pregunta al usuario):**
+- Cuando un trabajo es complejo, Vero **pide confirmación** de lo solicitado.
+- **Avisa** si se puede hacer o no como se pidió, explicando las razones (límites o información a su alcance).
+- **Pregunta para completar** instrucciones mal dadas o incompletas.
+  - Ejemplo: "Quiero una reunión el jueves con Juan" → Vero: "Tienes libre a las 3 PM. ¿Nivel de importancia? ¿Título o tema?"
+- Si la instrucción está incompleta y el usuario no responde, **lo deja como nota (pendiente)**. La próxima vez que hable con el usuario, **se lo recuerda**. Mientras tanto, queda pendiente y, si el usuario lee la nota, se dará cuenta de que no fue que no quiso, sino que no pudo.
+
+**Principio:** Que sea **natural y no intrusivo**. No saltar ventanas ni dejar instrucciones a medias.
 
 ---
 
@@ -431,65 +486,49 @@
 
 ---
 
+### 26. TEMAS FUTUROS (Nuevo)
+
+- **Google Maps dentro de Stratos:** Para medir el tiempo real de trabajo de los viajeros (vendedores, rutas), considerando desplazamientos entre ubicaciones. Si el usuario cierra en Antigua y abre en Coatepeque, el sistema calcula el tiempo de viaje y ajusta el inicio real de la jornada.
+
+---
+
 ## PENDIENTES
 
 ### Pendientes de Definición (Discusión pendiente)
 
-- **Otras Actividades:** Definir los módulos específicos de medición (Ventas, Mercadeo, Logística, etc.). Este tema queda abierto para desarrollo futuro.
-- **Vero como asesora de procesos:** Definir el alcance de detección de patrones, líneas de tiempo y reuniones programadas (para sesiones posteriores).
+- **Otras Actividades:** Definir los módulos específicos de medición (Ventas, Mercadeo, Logística, etc.).
+- **Vero como asesora de procesos:** Definir el alcance de detección de patrones, líneas de tiempo y reuniones programadas.
 - **Límites de IA:** Definir los alcances legales y de privacidad para cada módulo.
 - **Auditoría:** Definir qué acciones se registran y cómo se visualizan.
 
 ### Pendientes de Acción (Cambios al sistema actual)
 
-| # | Acción |
-|---|--------|
-| 1 | Mover logo + slogan a superior izquierda |
-| 2 | Implementar duración de avisos por prioridad |
-| 3 | Asignar duración de 6 segundos al anuncio motivacional diario |
-| 4 | Eliminar Sonido, Vibración, Modo Nocturno de Configuración |
-| 5 | Implementar nuevo flujo de Configuración de IA |
-| 6 | Implementar saludo `"Hola [Nombre]"` en Login |
-| 7 | Crear botón de IA (efectos visuales + sonido + indicador de voz) |
-| 8 | Crear Pantalla de Comunicación (Correos, Chats, Tareas, Alarmas, Calendario, Hub, Otras Actividades) |
-| 9 | Implementar vista principal de Tareas |
-| 10 | Implementar ventana de detalle/creación de Tareas (con área de contexto) |
-| 11 | Implementar comportamiento visual de Tareas (Gantt + color Gauss) |
-| 12 | Implementar archivo automático de Tareas |
-| 13 | Implementar vinculación de Contactos |
-| 14 | Implementar alias/nickname en Contactos |
-| 15 | Implementar detección y resolución de discrepancias en Contactos |
-| 16 | Implementar autolimpieza de tareas generadas por IA |
-| 17 | Implementar migración completa |
-| 18 | Implementar Hub de Archivos |
-| 19 | Implementar integración con WhatsApp Business |
-| 20 | Implementar Vero como contacto activo en chats |
-| 21 | Implementar vista principal de Alarmas |
-| 22 | Implementar ventana de detalle/creación de Alarmas (con área de contexto) |
-| 23 | Implementar comportamiento visual de Alarmas |
-| 24 | Implementar botón de borrar en Alarmas con aviso a integrantes |
-| 25 | Implementar Calendario (vistas, mini calendario, columna de notas) |
-| 26 | Implementar sistema de notas (sistema + usuario) en Calendario |
-| 27 | Implementar área de contexto en Tareas y Alarmas (correos/mensajes relacionados) |
-| 28 | Implementar líneas de tiempo en Calendario (procesos completos) |
-| 29 | Implementar tipos de contacto (Observador, Indirecto) |
-| 30 | Implementar permisos por rol (No.1, Colaborador, Observador, Indirecto) |
-| 31 | Implementar crecimiento automático del Organigrama General |
-| 32 | Implementar detección de duplicados (mismo celular, correo, nombre) |
-| 33 | Implementar cruce de información al crear primera línea |
-| 34 | Mejorar el banco de datos para que crezca con cada pantalla |
-| 35 | Implementar rastro de cada acción del usuario (trazabilidad) |
-| 36 | Implementar backups codificados para lectura no humana |
-| 37 | Implementar parámetros de KPIs (Real, Esperado, Promedio) |
-| 38 | Implementar guía al usuario para establecer KPIs |
-| 39 | Describir cada funcionalidad del Módulo de Comunicación y su diferenciador con otros sistemas |
-| 40 | Implementar pantallas de compilación, módulos y pantallas de aprobación de uso |
-| 41 | Implementar activación, programación y límites de Vero |
-| 42 | Implementar rastreo silencioso y notificaciones para hacer consciente al usuario (trabajo invisible) |
-| 43 | Implementar trazabilidad y exhibición a superiores (líneas de tiempo) |
-| 44 | Preparar arquitectura para Otras Actividades |
-| 45 | **Próxima revisión de `A_DONDE_VA_STRATOS.md`:** Ajustar redacción y enriquecer el texto, especialmente el punto de Líneas de Tiempo en Calendario (visibilidad, trazabilidad, medición efectiva, ponderación frente a tareas paralelas, practicidad de supervisión, compilación y cruces de información). Revisar coherencia con la descripción del Calendario. |
-
----
-
-**Fin del documento.**
+| # | Acción | Estado |
+|---|--------|--------|
+| 1 | Mover logo + slogan a superior izquierda (implica ajustar toda la parte superior, correr el logo y dividir en dos el espacio superior para que el resto lo ocupe la cartelera; el cuerpo de la pantalla crece) | Cerrado |
+| 2 | Implementar duración de avisos por prioridad | Pendiente |
+| 3 | Asignar duración de 6 segundos al anuncio motivacional diario | Pendiente |
+| 4 | Eliminar Sonido, Vibración, Modo Nocturno de Configuración (el sistema toma los autorizados del dispositivo) e implementar botón de configuración de IA en esa área | Cerrado |
+| 5 | Implementar nuevo flujo de Configuración de IA (gratis, sin restricciones; botón en la misma área donde estaban las tres opciones; el usuario puede regresar a cambiar la configuración de los pasos 3 al 5) | Cerrado |
+| 6 | Implementar saludo "Hola [Nombre]" en Login (cambia antes de presionar ENTRAR al seleccionar el nombre del desplegable; al entrar, saludo en Cartelera solo la primera vez del día para estadísticas de horario; reconocimiento facial/patrón/huella como opciones dentro del mismo Login según dispositivo) | Cerrado |
+| 7 | Crear botón de IA (efectos visuales + sonido + indicador de voz; en todas las pantallas; al presionar se activa micrófono con sonido; requiere comando "Hola [nombre]" para confirmar; ventana emergente aparece cuando la IA responde, se cierra sola después de 0.5 seg., ubicada en la parte inferior central, tamaño compacto, no se puede mover) | Cerrado |
+| 8 | Crear Pantalla de Comunicación (Correos, Chats, Tareas, Alarmas, Calendario, Hub, Otras Actividades) | Pendiente |
+| 9 | Implementar vista principal de Tareas | Pendiente |
+| 10 | Implementar ventana de detalle/creación de Tareas (con área de contexto) | Pendiente |
+| 11 | Implementar comportamiento visual de Tareas (Gantt + color Gauss) | Pendiente |
+| 12 | Implementar archivo automático de Tareas | Pendiente |
+| 13 | Implementar vinculación de Contactos | Pendiente |
+| 14 | Implementar alias/nickname en Contactos | Pendiente |
+| 15 | Implementar detección y resolución de discrepancias en Contactos | Pendiente |
+| 16 | Implementar autolimpieza de tareas generadas por IA | Pendiente |
+| 17a | Implementar migración de información (traer datos de Gmail/Outlook a Stratos) | Pendiente |
+| 17b | Implementar atribuciones y capacidades de Vero para apoyar la migración (flujo post-configuración: Vero consulta, trabaja en silencio, avisa pasos, interrumpe solo si hay dudas) | Cerrado |
+| 18 | Implementar Hub de Archivos | Pendiente |
+| 19 | Implementar integración con WhatsApp Business | Pendiente |
+| 20 | Implementar Vero como contacto activo en chats | Pendiente |
+| 21 | Implementar vista principal de Alarmas | Pendiente |
+| 22 | Implementar ventana de detalle/creación de Alarmas (con área de contexto) | Pendiente |
+| 23 | Implementar comportamiento visual de Alarmas | Pendiente |
+| 24 | Implementar botón de borrar en Alarmas con aviso a integrantes | Pendiente |
+| 25 | Implementar Calendario (vistas, mini calendario, columna de notas) | Pendiente |
+| 
