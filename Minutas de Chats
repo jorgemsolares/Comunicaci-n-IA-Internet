@@ -531,4 +531,27 @@
 | 23 | Implementar comportamiento visual de Alarmas | Pendiente |
 | 24 | Implementar botón de borrar en Alarmas con aviso a integrantes | Pendiente |
 | 25 | Implementar Calendario (vistas, mini calendario, columna de notas) | Pendiente |
-| 
+| 26 | Implementar sistema de notas (sistema + usuario) en Calendario | Pendiente |
+| 27 | Implementar área de contexto en Tareas y Alarmas (correos/mensajes relacionados) | Pendiente |
+| 28 | Implementar líneas de tiempo en Calendario (procesos completos) | Pendiente |
+| 29 | Implementar tipos de contacto (Observador, Indirecto) | Pendiente |
+| 30 | Implementar permisos por rol (No.1, Colaborador, Observador, Indirecto). Revisar cómo están actualmente en el sistema y definir cómo arreglarlo. | Pendiente |
+| 31 | Implementar crecimiento automático del Organigrama General (reconocer jerarquía, avisar al superior vigente cuando alguien de mayor rango se inscribe, refrescar el Organigrama General, avisar al superior cuando alguien de su primera línea se inscribe) | Cerrado (definición) / Pendiente de probar |
+| 32 | Implementar detección de duplicados (mismo celular, correo, nombre) | Pendiente |
+| 33 | Implementar cruce de información al crear primera línea (siempre revisar si hay 1 o más datos repetidos al grabar inscripción; avisar y marcar; opciones Editar o Salvar) | Cerrado (definición) / Pendiente de probar |
+| 34 | Mejorar el banco de datos para que crezca con cada pantalla (capacidad de guardar todos los datos, horarios y todo lo posible desde ahora) | Cerrado (definición) / Pendiente de definir trackings |
+| 35 | Implementar rastro de cada acción del usuario (trazabilidad) | Pendiente |
+| 36 | Implementar backups codificados para lectura no humana | Pendiente |
+| 37 | Implementar parámetros de KPIs (Real, Esperado, Promedio) | Pendiente |
+| 38 | Implementar guía al usuario para establecer KPIs | Pendiente |
+| 39 | Describir cada funcionalidad del Módulo de Comunicación y su diferenciador con otros sistemas | Pendiente |
+| 40 | Implementar pantallas de compilación, módulos y pantallas de aprobación de uso | Pendiente |
+| 41 | Implementar activación, programación y límites de Vero (activación solo con botón presionado; programación con alcances y marcos referenciales; límites definidos y redefinibles) | Cerrado |
+| 42 | Implementar rastreo silencioso y notificaciones (trabajo invisible: sistema registra de cajón, IA pregunta para completar, instrucciones incompletas quedan como nota pendiente) | Cerrado |
+| 43 | Implementar trazabilidad y exhibición a superiores (líneas de tiempo) | Pendiente |
+| 44 | Preparar arquitectura para Otras Actividades | Pendiente |
+| 45 | **Próxima revisión de `A_DONDE_VA_STRATOS.md`:** Ajustar redacción y enriquecer el texto, especialmente el punto de Líneas de Tiempo en Calendario (visibilidad, trazabilidad, medición efectiva, ponderación frente a tareas paralelas, practicidad de supervisión, compilación y cruces de información). Revisar coherencia con la descripción del Calendario. | Pendiente |
+
+---
+
+**Fin del documento.**
