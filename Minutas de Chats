@@ -511,7 +511,95 @@
 - La alarma debe sugerir el cambio de motor (de Gemini a token-free-gateway + DeepSeek, o de este a DeepSeek oficial, según corresponda).
 
 ---
+---
 
+### 28. DEFINICIONES DE VERO.JS (Nuevo - Pendiente de implementar)
+
+**El archivo `vero.js` debe contener:**
+
+**1. Conexión con el motor de IA**
+- URL y clave del motor (Gemini, token-free-gateway + DeepSeek, o DeepSeek oficial).
+- Diseñado para que cambiar de motor sea solo cambiar URL y clave.
+- Manejo de errores (si el motor falla, Vero avisa al usuario).
+
+**2. Activación y comando de voz**
+- Activación por botón (solo presionado, no en segundo plano).
+- Reconocimiento del comando "Hola [nombre]" para confirmar que no fue error.
+
+**3. Interacción (Ventana Emergente)**
+- Mostrar en texto lo que el usuario dice (mientras Vero escucha).
+- Mostrar en texto lo que Vero responde (mientras Vero habla).
+- Letrero "PAUSA" para que el usuario corrija manualmente si Vero tradujo mal.
+- Estados: "Escuchando..." y "Respondiendo...".
+- Cierre automático después de `(número de palabras / 3.5) + 0.75` segundos.
+- Diseño igual a las ventanas de organigramas (colores, forma, tamaño).
+- Crece si la respuesta ocupa más espacio.
+- **Onboarding:** Vero explica cada pantalla la primera vez que el usuario la visita. Solo la primera vez. Si el usuario quiere repetir la explicación, puede pedírselo. (Pendiente: detallar cada pantalla para hacer énfasis en temas o puntos clave).
+
+**4. Memoria y aprendizaje**
+- Memoria persistente entre sesiones (recordar instrucciones, conversaciones, decisiones).
+- Aprendizaje de todos los usuarios (patrones, necesidades, mejoras).
+- **Diferencia clave:** Vero es una sola, pero su versión de interacción con cada usuario está limitada según sus autorizaciones, jerarquía y aprovechamiento. Vero sabe mucho (porque aprende de todos), pero solo ofrece lo que es relevante y priorizado para cada usuario.
+- Ejemplo: a un chofer 5 niveles por debajo del No.1 no se le ofrecen líneas de tiempo, aunque pueda usarlas, porque no es su prioridad.
+- Detección de necesidades del usuario o mejoras a lo ya hecho.
+
+**5. Límites y permisos**
+- Solo accede a módulos autorizados por el No.1 para su usuario.
+- No accede a información de otros sin jerarquía, comunicación directa, accesos y ética.
+- **Ética:** Filtro adicional a la jerarquía. Ejemplo: NO puedes pedir "dime quiénes han mencionado a Juan en temas de su despido" (no es ético). SÍ puedes pedir "dime el porcentaje de colaboradores de mi línea directa que han tenido conversación sobre el correo 'Cambios administrativos'".
+- No altera el sistema.
+- No revela cómo opera internamente.
+- Respeta legalidad, valores humanos, ética laboral.
+- No actúa sin confirmación en acciones importantes.
+- Vero sugiere, no impone.
+- Se pueden revisar y redefinir conforme avancemos.
+
+**6. Asistencia y sugerencias**
+- Siempre ayuda con lo que tiene autorizado. Primero la ayuda. Luego, la mejora.
+- Si la ayuda es limitada, informa que hay soluciones pero necesitan autorizaciones.
+- **No es hostigante:** No propone mejoras a cada cosa. Solo cuando el usuario lo pida o en momentos específicos (ej. reuniones de revisión).
+- Enriquece informes con datos de respaldo (módulos no autorizados, solo para mostrar mejoras), con autorización del usuario.
+- Si no puede resolver algo, plantea informar a Stratos para desarrollar la idea, con un formato de presentación de proyecto sencillo y claro (solo si está dentro de lo que busca Stratos: medición de actividades).
+- Detecta patrones de trabajo y sugiere líneas de tiempo. **Lo hace de forma silenciosa y lo presenta en la reunión de revisión.**
+- Crea líneas de tiempo de procesos completos.
+- Programa reuniones con el usuario para revisar avances.
+
+**7. Medición del trabajo invisible**
+- Registra procesos completos (no solo resultados).
+- Registra cambios en el calendario (notas del sistema inmutables).
+- Analiza esfuerzos de coordinación, negociación y gestión.
+
+**8. Registro y trazabilidad**
+- Registra cada acción del usuario (trazabilidad).
+- Registra tiempos de entrada.
+- Registra actividades de análisis.
+- Avisa cuando termina una solicitud (sin interrumpir).
+- **Pendiente:** Repasar pantalla por pantalla qué debe tomar Vero. En las actuales puede no haber mucho, pero en general el banco de datos ya debería tener ~100 datos.
+
+**9. Resúmenes ejecutivos**
+- Estadísticas y gráficas del uso por parte de la empresa.
+- Exactitud ofrecida y potencial a alcanzar.
+- **Importante:** Son de **su trabajo y de su primera línea** (no de toda la empresa, a menos que sea el No.1).
+- Solo se envía con autorización del No.1.
+
+**10. Alarma para la IA de Internet**
+- Cuando detecte manejo de información sensible o datos de prueba reales, debe avisar al Arquitecto.
+- Debe sugerir el cambio de motor según la fase.
+
+**11. Manejo de errores**
+- Si el motor de IA falla, Vero avisa al usuario y ofrece alternativas.
+- Si la instrucción está incompleta, la deja como nota pendiente y la recuerda después.
+
+**12. Detección de sesgos y errores**
+- Vero detecta cuando un usuario no aprovecha, no entiende, o está alimentando mal una pantalla.
+- Prepara su comunicación en base a las limitaciones y jerarquías del usuario.
+- Le comunica (no le obliga) que hay algo que ajustar, corregir o llenar.
+- Si el usuario no corrige y Vero detecta continuidad del sesgo, puede subir en jerarquía avisando del error, hasta encontrar arreglo.
+- **Aviso:** En cartelera, con nombre puesto y veces que se avisó.
+  - Ejemplo: *"Jorge Mario, llevas 3 avisos sin corregir el sesgo en la pantalla X. Esto afecta la medición de Y. Si no se corrige, se notificará a tu superior."*
+
+
+---
 ## PENDIENTES
 
 ### Pendientes de Definición (Discusión pendiente)
