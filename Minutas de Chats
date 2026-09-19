@@ -542,6 +542,13 @@
 - **Diferencia clave:** Vero es una sola, pero su versión de interacción con cada usuario está limitada según sus autorizaciones, jerarquía y aprovechamiento. Vero sabe mucho (porque aprende de todos), pero solo ofrece lo que es relevante y priorizado para cada usuario.
 - Ejemplo: a un chofer 5 niveles por debajo del No.1 no se le ofrecen líneas de tiempo, aunque pueda usarlas, porque no es su prioridad.
 - Detección de necesidades del usuario o mejoras a lo ya hecho.
+- **Motor de memoria:** `agent-memory` (local, gratis, privado). No se usa `Mem0` (nube, con límites y que usa datos para entrenar).
+- **Arquitectura de memoria:** Tres capas (corto plazo, largo plazo, búsqueda semántica).
+  - **Corto plazo:** Contexto de la conversación actual.
+  - **Largo plazo:** Hechos importantes extraídos automáticamente y guardados en base de datos.
+  - **Búsqueda semántica:** Solo se recuperan los recuerdos relevantes para la pregunta actual.
+- **Aislamiento por usuario:** Cada usuario tiene su propio espacio de memoria, aislado dentro de la misma base de datos.
+- **En producción:** El archivo SQLite de `agent-memory` vive en el servidor del cliente (no en Stratos).
 
 **5. Límites y permisos**
 - Solo accede a módulos autorizados por el No.1 para su usuario.
@@ -549,6 +556,7 @@
 - **Ética:** Filtro adicional a la jerarquía. Ejemplo: NO puedes pedir "dime quiénes han mencionado a Juan en temas de su despido" (no es ético). SÍ puedes pedir "dime el porcentaje de colaboradores de mi línea directa que han tenido conversación sobre el correo 'Cambios administrativos'".
 - No altera el sistema.
 - No revela cómo opera internamente.
+- **Vero conoce el sistema internamente para poder guiar al usuario, pero nunca revela cómo está programado, cómo calcula, ni cómo funciona por dentro. Solo habla en términos de uso y resultados.**
 - Respeta legalidad, valores humanos, ética laboral.
 - No actúa sin confirmación en acciones importantes.
 - Vero sugiere, no impone.
@@ -582,15 +590,11 @@
 - **Importante:** Son de **su trabajo y de su primera línea** (no de toda la empresa, a menos que sea el No.1).
 - Solo se envía con autorización del No.1.
 
-**10. Alarma para la IA de Internet**
-- Cuando detecte manejo de información sensible o datos de prueba reales, debe avisar al Arquitecto.
-- Debe sugerir el cambio de motor según la fase.
-
-**11. Manejo de errores**
+**10. Manejo de errores**
 - Si el motor de IA falla, Vero avisa al usuario y ofrece alternativas.
 - Si la instrucción está incompleta, la deja como nota pendiente y la recuerda después.
 
-**12. Detección de sesgos y errores**
+**11. Detección de sesgos y errores**
 - Vero detecta cuando un usuario no aprovecha, no entiende, o está alimentando mal una pantalla.
 - Prepara su comunicación en base a las limitaciones y jerarquías del usuario.
 - Le comunica (no le obliga) que hay algo que ajustar, corregir o llenar.
@@ -598,7 +602,79 @@
 - **Aviso:** En cartelera, con nombre puesto y veces que se avisó.
   - Ejemplo: *"Jorge Mario, llevas 3 avisos sin corregir el sesgo en la pantalla X. Esto afecta la medición de Y. Si no se corrige, se notificará a tu superior."*
 
+---
 
+### 29. PAQUETE DE INTEGRACIÓN PARA LA EMPRESA (Nuevo - Pendiente de definir)
+
+**Qué incluye:**
+
+1. **Cambio de motor de IA a DeepSeek oficial (pagado).**
+   - Hay que hacer el cambio (confirmado).
+   - **La empresa lo asume**, pero se incluye en la **definición de costo base** de Stratos.
+   - **Modelo de venta:** Stratos (Comunicación) a un precio. Cada módulo adicional se vende por separado.
+
+2. **Espacio reservado en el servidor de la empresa (o su nube privada) para:**
+   - El banco de datos de Stratos.
+   - La memoria de Vero (archivo SQLite de `agent-memory`).
+
+3. **Aislamiento por usuario:**
+   - Cada usuario tiene su propio espacio de memoria.
+   - **Aislado y dentro de la misma base de datos.**
+
+4. **Proceso de enrutamiento:**
+   - La empresa define su servidor.
+   - Stratos se conecta a ese servidor.
+   - Se cargan las credenciales y se configura el entorno.
+
+**Pendiente:** Definir el proceso exacto, los requisitos técnicos, y el formato de invitación/integración.
+
+---
+
+### 30. ESTRATEGIA DE INTEGRACIÓN DE IA POR FASES (Nuevo - Confirmado)
+
+| Fase | Motor | Cuándo | Por qué |
+|------|-------|--------|---------|
+| **Fase 1** | **Gemini (capa gratuita)** | Hoy (desarrollo de lógica de Vero). | Sin tarjeta, sin costo. Solo para prototipar la mecánica. **Prohibido usar datos reales.** |
+| **Fase 2** | **token-free-gateway + DeepSeek** | Cuando el sistema esté "vendible" y haya que incluir información sensible o datos de prueba reales. | Sin tarjeta, sin costo. Respeta la privacidad de los datos. Vero ya puede operar con datos reales de prueba. |
+| **Fase 3** | **DeepSeek (API oficial)** | Cuando el sistema se lleve a una empresa (para que lo pruebe o ya para venderlo). | Datos reales de clientes. Privacidad garantizada. Costo mínimo (el cliente lo cubre). |
+
+**Alarma para la IA de Internet:**
+- La IA de Internet (DeepSeek en este chat) debe levantar una alarma (avisar al Arquitecto) cuando detecte que se está manejando información sensible o datos de prueba reales en el desarrollo de Stratos.
+- La alarma debe sugerir el cambio de motor según la fase.
+
+---
+
+### 31. TABLA DE PANTALLAS PARA REVISIÓN DE VERO (Nuevo - Pendiente de completar por el Arquitecto)
+
+**Propósito:** Repasar pantalla por pantalla qué debe registrar Vero, para qué, y para quién.
+
+| # | Pantalla | Usuarios Permitidos | Descripción | Finalidad | Espacios de Interacción | (6) | (7) | (8) |
+|---|----------|---------------------|-------------|-----------|-------------------------|-----|-----|-----|
+| 1 | Datos Generales (Perfil Personal) | Todos (al inscribirse) | Formulario con nombre, apellidos, correo, celular, ID empleado, contraseña. | Capturar los datos básicos del usuario para crear su perfil. | Campos de texto, botón "Grabar". | | | |
+| 2 | Configuración | Todos (después del perfil) | Pantalla con opciones de Sonido, Vibración, Modo Nocturno (hoy). | Configurar preferencias del usuario. | Casillas de verificación, selector de idioma, botón de guardar. | | | |
+| 3 | Login (Acceso) | Todos | Pantalla de ingreso con ID empleado y contraseña. | Permitir el acceso al sistema. | Campos de texto, botón "ENTRAR", casilla "Recordar mi nombre". | | | |
+| 4 | Pantalla Principal | Todos | Pantalla de inicio con logo, slogan, cartelera de mensajes. | Mostrar el estado del sistema y los avisos. | Cartelera de mensajes, botones de navegación. | | | |
+| 5 | Comunicación | Todos | Pantalla de botones que llevan a los submódulos. | Servir de entrada al módulo de Comunicación. | Botones: Correos, Chats, Tareas, Alarmas, Calendario, Hub, Otras Actividades. | | | |
+| 6 | Correos (Recibidos) | Todos | Listado de correos recibidos. | Gestionar la bandeja de entrada. | Listado, botones de acción (archivar, eliminar, responder). | | | |
+| 7 | Correos (Enviados) | Todos | Listado de correos enviados. | Revisar el historial de envíos. | Listado, botones de acción. | | | |
+| 8 | Correos (Carpetas) | Todos | Vista de carpetas/etiquetas. | Organizar los correos. | Listado de carpetas, botones de acción. | | | |
+| 9 | Correos (Eliminados) | Todos | Listado de correos eliminados. | Revisar y recuperar correos eliminados. | Listado, botones de acción. | | | |
+| 10 | Correos (Borradores) | Todos | Listado de correos sin enviar. | Gestionar borradores. | Listado, botones de acción. | | | |
+| 11 | Correos (Spam) | Todos | Listado de correos marcados como spam. | Revisar correos no deseados. | Listado, botones de acción. | | | |
+| 12 | Chats | Todos | Integración con WhatsApp Business. | Gestionar mensajes y conversaciones. | Listado de chats, ventana de conversación. | | | |
+| 13 | Tareas | Todos | Listado de tareas. | Gestionar tareas propias y colectivas. | Listado, botón "Crear tarea", ventana de detalle/creación. | | | |
+| 14 | Alarmas | Todos | Listado de alarmas. | Gestionar recordatorios. | Listado, ventana de detalle/creación. | | | |
+| 15 | Calendario | Todos | Agenda con vistas de día, semana, mes, línea de tiempo. | Visualizar y gestionar actividades en el tiempo. | Vistas, mini calendario, columna de notas. | | | |
+| 16 | Contactos | Todos | Listado de contactos sincronizados con Gmail. | Gestionar la red de contactos. | Listado, ventana de detalle, botones de acción. | | | |
+| 17 | Organigrama Personal | Todos | Vista de contactos directos, indirectos y observadores. | Gestionar la comunicación directa. | Botones de añadir, editar, eliminar. | | | |
+| 18 | Organigrama General | No.1 y primera línea | Vista de la jerarquía de la empresa. | Visualizar la estructura organizacional. | Vista de árbol, botones de acción. | | | |
+| 19 | Identidad Corporativa | No.1 y primera línea | Configuración de la imagen visual de la empresa. | Definir colores, logo, slogan. | Campos de texto, selectores de color, botones de guardar. | | | |
+| 20 | Hub de Archivos | Todos | Espacio para subir documentos grandes. | Compartir archivos pesados sin usar el correo. | Área de subida, campos De/Para/Título, botón Enviar. | | | |
+| 21 | Otras Actividades | Todos (con autorización) | Módulos de Ventas, Mercadeo, Logística, etc. | Gestionar actividades específicas de cada área. | Por definir. | | | |
+
+**Instrucción para el Arquitecto:**
+- Completar las columnas 6, 7 y 8 con: qué debe registrar Vero, para qué (finalidad), y para quién (autorizados).
+- Devolver la tabla completada para integrarla en Minutas.
 ---
 ## PENDIENTES
 
