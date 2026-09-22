@@ -676,6 +676,266 @@
 - Completar las columnas 6, 7 y 8 con: qué debe registrar Vero, para qué (finalidad), y para quién (autorizados).
 - Devolver la tabla completada para integrarla en Minutas.
 ---
+
+---
+
+### 32. VOZ DE VERO (Nuevo - Pendiente de implementar)
+
+**Proveedor de voz (TTS):**
+- Se usará Google Cloud TTS o Amazon Polly (el más adecuado para nuestra idea).
+- **Google Cloud TTS:** Mayor cobertura de idiomas (90+), voces WaveNet y Neural2 de alta calidad, con **1 millón de caracteres gratis al mes** para WaveNet.
+- **Amazon Polly:** Buen soporte para español latinoamericano (voces como Lupe, Penélope, Miguel), con **5 millones de caracteres gratis al mes** durante los primeros 12 meses.
+- **Decisión:** Se probará Google Cloud TTS primero (por la capa gratuita y calidad de voces latinas), y si no cumple, se usará Amazon Polly.
+
+**Acento latino:**
+- Sí es posible. Amazon Polly tiene voces específicas para español latinoamericano (Lupe, Penélope, Miguel).
+- Google Cloud TTS también tiene variantes regionales para español.
+
+**Idioma de Vero:**
+- Si el usuario escoge los títulos en inglés, Vero habla inglés.
+- Si no, Vero habla español.
+
+**Relación con lo ya definido (fases):**
+- **Fase 1 (desarrollo):** Voz del navegador (gratis, básica).
+- **Fase 2 (pruebas):** Google Cloud TTS o Amazon Polly (capa gratuita).
+- **Fase 3 (empresa):** Google Cloud TTS o Amazon Polly (pagado, lo cubre la empresa).
+
+---
+
+### 33. ACUERDOS POR PANTALLA (Nuevo - En revisión)
+
+> **Nota:** Esta sección se irá completando a medida que revisemos cada pantalla. Los acuerdos aquí registrados son los que ya cerramos. El resto queda en la tabla de pendientes al final.
+
+---
+
+#### Punto 1: Datos Generales (Perfil Personal)
+
+**Modificaciones al sistema actual:**
+1. **Registrar el tiempo** entre recibir la invitación y abrir la aplicación.
+2. **Comparar cambios** en una segunda visita y avisar que se modificó algo respecto al ingreso original.
+3. **Iniciar la sincronización** de correo y WhatsApp al presionar "SALVAR".
+
+**Creaciones nuevas (futuro):**
+1. Lógica para **sincronización continua** de correo y WhatsApp (en segundo plano).
+2. **Aviso al superior inmediato** cuando el usuario no usa Stratos por X tiempo (renuencia al cambio).
+
+**Intervención de Vero:**
+- Se activa al final de la configuración.
+- Explica al usuario que los cambios posteriores (excepto contraseña) alteran el banco de datos original, pero están permitidos.
+
+---
+
+#### Punto 2: Configuración
+
+**Lo que hay que arreglar:**
+1. Al grabar la configuración (o al registrarse): asignar el `superiorId` del nuevo usuario (ID de quien lo invitó).
+2. Al entrar al Organigrama General: que la función `renderizarOrganigramaGeneral()` incluya al nuevo usuario en la rama correcta.
+
+**Sugerencia de Vero en la primera visita:**
+
+| Usuario | Flujo que Vero sugiere |
+|---------|------------------------|
+| **Usuario normal** | Comunicación → Organigrama General → Organigrama Personal |
+| **No.1 (primera vez)** | Comunicación → Organigrama General → Organigrama Personal → **Luego Identidad Corporativa** (antes de cualquier otra cosa) |
+| **Primera Línea (primera vez)** | Comunicación → Organigrama General → Organigrama Personal → **Identidad Corporativa** (la sugerencia depende de si el No.1 ya la completó o no. Si no la completó, Vero les pide que la lean o la terminen). |
+
+**Sobre el idioma de Vero:**
+- Si el usuario escoge los títulos en inglés, Vero habla inglés.
+- Si no, Vero habla español.
+- **Acento latino:** Es posible (Google Cloud TTS o Amazon Polly).
+
+**Intervención de Vero:**
+- Guía al usuario por el flujo que corresponda según su rol.
+
+---
+
+#### Punto 3: Login (Acceso)
+
+**Pendientes:**
+
+1. **Registrar hora de entrada/salida:**
+   - Se registra la **primera entrada del día** y la **última salida del día**.
+   - Se calculan las **horas de uso del día** (no importa si entra y sale varias veces).
+   - Se compara con la sesión anterior para el cálculo diario.
+
+2. **Registrar errores de tipeo:**
+   - En **ID**, **contraseña** o **nombre completo**.
+   - El nombre completo es el que está en el perfil (no el que el usuario quiera o como lo llamen).
+
+3. **Vero sugiere cambio de contraseña** si hay más de 6 errores en una semana.
+
+4. **Aviso al jefe inmediato** cuando el usuario no puede entrar (por errores repetidos).
+
+5. **Aviso al jefe** cuando el usuario resuelve el problema (con ayuda de un compañero o con el correo del jefe). El jefe debe saber que el usuario ya entró de nuevo.
+
+6. **Corregir el nombre de Vero:** No debe ser fijo. Debe ser el nombre que el usuario elija.
+
+7. **Sello de agua en el campo de texto:** Debe decir **"Escribe aquí..."**
+
+8. **Mejorar los iconos biométricos** (se ven muy básicos).
+
+9. **Implementar la lógica de biometría** (`intentarBiometria()` no está implementada).
+
+10. **Implementar la lógica de respuesta de Vero** (conectar con DeepSeek/Gemini).
+
+11. **Activación de Vero:**
+    - **Por voz:** Se requiere "Hola [nombre]".
+    - **Por texto:** Basta con escribir el comando y presionar Enter.
+
+**Intervención de Vero:**
+- Saludo inicial en Login (ya implementado).
+- Sugerir cambio de contraseña si hay más de 6 errores en una semana.
+- Recordar al usuario si teclea algo diferente a lo ya grabado en nombre completo.
+- **Opciones biométricas:** El código ya tiene los botones, pero la lógica `intentarBiometria()` aún no está implementada.
+
+---
+
+#### Punto 4: Pantalla Principal
+
+**¿El sistema lo hace?**
+- **Sí.** La estructura de `index.html` ya define la `#zona-superior` con el branding y la cartelera, que se repite en todas las pantallas.
+- En `estilos.css` ya están las reglas para `#zona-superior` (flex row, 1/3 y 2/3).
+
+**¿Qué hay que modificar/crear?**
+- **Nada por ahora.** La estructura ya está.
+
+**Intervención de Vero:**
+- Su intervención depende de lo solicitado.
+
+---
+
+#### Punto 5: Comunicación
+
+**¿El sistema lo hace?**
+- **No.** La pantalla de Comunicación está vacía en `index.html` (solo tiene un mensaje de "en desarrollo"). No hay botones ni lógica de navegación.
+
+**¿Qué hay que modificar/crear?**
+- **Crear:** Toda la pantalla de Comunicación, con sus botones (Correos, Chats, Tareas, Alarmas, Calendario, Hub, Otras Actividades).
+- **Crear:** La lógica para registrar qué módulo se visita (estadística).
+
+**Intervención de Vero:**
+- Explica cada botón en la primera visita.
+
+---
+
+#### Punto 6: Correos (Recibidos)
+
+**Registrar:**
+- Ingreso a la página y momento de la última salida.
+- Número de correos diarios recibidos.
+- Cuántos contactos diferentes se relacionan al día (contactos únicos).
+
+**Para qué:**
+- Medir el tiempo de intervención.
+- Saber en qué parte del horario diario le llevan los correos.
+- Saber con cuántas personas diferentes se comunica al día (complejidad del trabajo).
+
+**Para quién:**
+- Para el registro estadístico del usuario.
+
+**Vero:**
+- Su intervención depende de lo solicitado por el usuario.
+
+---
+
+#### Punto 7: Correos (Enviados)
+
+**Registrar:**
+- Número de correos respondidos y tiempo.
+- Número y tiempo de correos sin correlación (que no son respuesta ni reenvío).
+- Ingreso a la página y momento de la última salida.
+
+**Para qué:**
+- Medir cuánto tiempo y qué tanto lleva responder, solucionar o informar.
+- Medir el tiempo invertido diario en correos.
+
+**Para quién:**
+- Para el registro estadístico del usuario.
+
+**Vero:**
+- Su intervención depende de lo solicitado por el usuario.
+- Ejemplo: cuando un correo es demasiado grande, sugerir usar el Hub.
+
+---
+
+#### Punto 8: Correos (Carpetas)
+
+**Registrar:**
+- Cada cuánto tiempo pasan los correos a las carpetas creadas.
+- Peso de los correos.
+
+**Para qué:**
+- Orden de información.
+- Ver el peso de información manejada por el usuario en el período estudiado.
+
+**Para quién:**
+- Solo para el peso de información (no es una estadística muy usada).
+
+**Vero:**
+- Sugerir el traslado para evitar correos pesados en carpetas de entrada y salida.
+
+---
+
+#### Punto 9: Correos (Eliminados)
+
+**Registrar:**
+- Tiempo, período a borrar, cantidad y peso borrado.
+- Si el usuario borra más de lo habitual (comportamiento inusual).
+
+**Para qué:**
+- Optimizar el espacio.
+- Detectar comportamientos inusuales (ej. un usuario que borra 5 veces más de lo habitual en un mes con conflictos).
+
+**Para quién:**
+- Para el usuario (optimización) y para la empresa (comportamientos inusuales, comparado con su jerarquía).
+
+**Vero:**
+- Asistir al usuario en sugerir cuándo borrar (optimizar memoria).
+- Guardar y avisar de comportamientos inusuales (comparando con su jerarquía).
+
+---
+
+#### Punto 10: Correos (Borradores)
+
+**Registrar:**
+- Los borradores.
+
+**Para qué:**
+- Optimización de espacio.
+- Evitar que el usuario pierda información que tenía en un borrador olvidado.
+
+**Para quién:**
+- Para el usuario.
+
+**Vero:**
+- Avisar al usuario si empezó un correo relacionado con algo que ya había empezado y olvidó (ej. "Ya habías hecho antes, ¿no será lo que tienes en borrador lo que estás haciendo?").
+- Avisar que cada 15 días los borradores se pasarán a Eliminados y realizar el traslado.
+
+---
+
+#### Punto 11: Correos (Spam)
+
+**Registrar:**
+- Tipos de spam y correos de usuarios desconocidos (que no sean publicidad o promociones).
+
+**Para qué:**
+- Mejorar la defensa de la empresa.
+- **Detección de correos legítimos en spam:** Como el ejemplo de un proveedor que envía cotización y el sistema lo marca como spam porque esa empresa envía promociones.
+
+**Para quién:**
+- Para el usuario y para los encargados de cómputo.
+
+**Vero:**
+- Avisar al usuario para su revisión de correos puntuales.
+- Avisar que 15 días después se trasladan a Eliminados y realizar el traslado.
+- **Aviso inteligente:** Si Vero detecta que el usuario está trabajando en algo (ej. cotizando llantas) y hay un correo en spam relacionado (ej. "Cotización"), avisar: *"Estás cotizando llantas, parece que un proveedor envió un correo que dice COTIZACIÓN y está en spam."*
+
+**¿Cómo se decide que algo va a spam?**
+- La decisión la toma el proveedor de correo (Gmail, Outlook, etc.), no la compañía ni el usuario.
+- **Stratos** puede tener su propio filtro de spam, independiente del proveedor. Si el usuario marca un correo como "No es spam", Stratos lo recuerda y lo muestra en Recibidos.
+
+---
+
 ## PENDIENTES
 
 ### Pendientes de Definición (Discusión pendiente)
@@ -736,6 +996,10 @@
 | 44 | Preparar arquitectura para Otras Actividades | Pendiente |
 | 45 | **Próxima revisión de `A_DONDE_VA_STRATOS.md`:** Ajustar redacción y enriquecer el texto, especialmente el punto de Líneas de Tiempo en Calendario (visibilidad, trazabilidad, medición efectiva, ponderación frente a tareas paralelas, practicidad de supervisión, compilación y cruces de información). Revisar coherencia con la descripción del Calendario. | Pendiente |
 | 46 | Integrar IA (Vero) en el sistema: crear archivo `vero.js` con lógica por fases (Gemini → token-free-gateway + DeepSeek → DeepSeek oficial), previendo el cambio de motor sin tocar la lógica de Stratos. Incluir alarma para la IA de Internet cuando se detecte manejo de información sensible. | Pendiente |
+| 47 | Voz de Vero: definir proveedor de texto-a-voz (Google Cloud TTS o Amazon Polly), configurar acento latino e idioma según preferencia del usuario. | Pendiente |
+| 48 | Login: registrar hora de entrada/salida, errores de tipeo (ID, contraseña, nombre completo), avisos al jefe inmediato, sugerencia de cambio de contraseña, corregir nombre de Vero (debe ser configurable), sello de agua "Escribe aquí...", mejorar iconos biométricos, implementar lógica de biometría, implementar lógica de respuesta de Vero (conectar con DeepSeek/Gemini), activación por voz ("Hola [nombre]") y por texto (comando directo). | Pendiente |
+| 49 | Correos: implementar todo el módulo (Recibidos, Enviados, Carpetas, Eliminados, Borradores, Spam) con los registros y la intervención de Vero definidos en los puntos 6 al 11. | Pendiente |
+| 50 | Correos (Spam): implementar filtro de spam propio de Stratos, independiente del proveedor de correo, para que el usuario pueda marcar "No es spam" y Stratos lo recuerde. | Pendiente |
 
 ---
 
