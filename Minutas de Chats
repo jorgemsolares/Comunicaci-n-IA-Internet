@@ -934,6 +934,75 @@
 - La decisión la toma el proveedor de correo (Gmail, Outlook, etc.), no la compañía ni el usuario.
 - **Stratos** puede tener su propio filtro de spam, independiente del proveedor. Si el usuario marca un correo como "No es spam", Stratos lo recuerda y lo muestra en Recibidos.
 
+
+---
+
+### 34. INVITACIONES Y PERMISOS (Nuevo - Acuerdo parcial)
+
+> **Nota:** Este tema sigue en revisión. Los acuerdos aquí registrados son los que ya cerramos. El resto queda en la tabla de pendientes al final.
+
+**1. Tipos de Contacto y sus Permisos:**
+
+| Tipo | Qué ve | Requiere invitación |
+|------|--------|---------------------|
+| **Directo** | Comunicación directa (primera línea). Ve todo lo que el invitador le autorice (que es lo mismo que el invitador tiene). | Sí |
+| **Observador** | De tu trabajo hacia abajo, en los módulos autorizados. Ve resúmenes y análisis. | Sí |
+| **Indirecto** | De tu primera línea hacia abajo, en los módulos que se le autoricen. Ve resúmenes y análisis. | Sí |
+
+**Nota:** Lo importante son los **análisis o resúmenes** de cada módulo, porque eso es lo que más verán los observadores e indirectos.
+
+**2. Quién puede invitar a quién:**
+- El usuario invita a **su primera línea** (comunicación directa).
+- No se cierra a "No.1 y primera línea". Cualquier usuario puede invitar a su propia primera línea.
+- Un usuario no puede recibir invitación de contacto directo de alguien que no sea su jefe.
+- Un usuario puede recibir invitaciones de Observador o Indirecto de otros usuarios (no de su jefe directo).
+
+**3. Ventana intermedia de selección de módulos:**
+- Es una **lista con un cuadro para marcar** los módulos autorizados.
+- Empieza con la opción **"Todos"** y luego se pueden marcar uno por uno.
+- Aplica para Indirectos (y Observadores, si se decide limitar).
+
+**4. Procedimiento de envío de invitación:**
+- Primero el sistema define si envía **correo o mensaje** (según cómo lo registre el usuario).
+- Si el usuario registra ambos, primero envía el **correo**; si es rechazado o no encuentra la dirección, envía el **mensaje**.
+- **Mensaje para Observador:** *"X te invitó a ser un observador de sus resúmenes y análisis Stratos de [lista de módulos]"*
+- **Mensaje para Indirecto:** *"X te invitó a ser un contacto Indirecto de comunicación de los resúmenes y análisis Stratos de su línea directa en [lista de módulos]"*
+
+**5. Visualización de invitaciones recibidas:**
+- La invitación aparece en la **cartelera** (no se borra hasta que se atienda).
+- El usuario puede **Aceptar o Rechazar**.
+- Aparece una señal en el recuadro de **Organigrama Personal**.
+- Debajo del nodo de contacto: lista de quién es Observador (con columna de Aceptado/No aceptado) y lista de quién es Indirecto.
+
+**6. Editar un contacto (cambio de opinión del invitador):**
+- El botón **Editar** permite cambiar los datos del contacto **y también los módulos autorizados**.
+- Los módulos autorizados aparecen debajo, como en el caso de las invitaciones aceptadas.
+
+**7. ¿Quién ve el rechazo de una invitación?**
+
+| Relación | ¿El emisor ve la respuesta? |
+|----------|----------------------------|
+| **El emisor es superior (jefe directo)** | **Sí.** Ve si aceptaste o no. |
+| **El emisor es subalterno, igual o de otra área (no es tu jefe directo)** | **No.** No ve si aceptaste o no. |
+
+**8. Módulo de Invitaciones (procedimiento, no pantalla separada):**
+- Incluye invitaciones de **Directos, Indirectos y Observadores**.
+- Incluye la invitación para **enrutar el banco de datos** (cuando la empresa define su servidor).
+- **Pendiente:** Verlo con detenimiento.
+
+**9. ¿Qué pasa si alguien ya está en el sistema?**
+- Ya está definido en Minutas (sección 16.6 y 16.7). No se repite aquí.
+
+**10. ¿Qué pasa si el invitador cambia de opinión?**
+- Ya está definido en el nodo/ventana del contacto (botones Editar y Eliminar).
+
+---
+
+**Pendientes de este tema (para próximas sesiones):**
+- Definir con detenimiento el Módulo de Invitaciones.
+- Definir si el Observador también puede tener módulos limitados o siempre ve todo.
+- Definir cómo se explica al usuario en la invitación la diferencia entre Observador e Indirecto.
+- Definir el formato exacto de la ventana intermedia de selección de módulos.
 ---
 
 ## PENDIENTES
@@ -1000,6 +1069,11 @@
 | 48 | Login: registrar hora de entrada/salida, errores de tipeo (ID, contraseña, nombre completo), avisos al jefe inmediato, sugerencia de cambio de contraseña, corregir nombre de Vero (debe ser configurable), sello de agua "Escribe aquí...", mejorar iconos biométricos, implementar lógica de biometría, implementar lógica de respuesta de Vero (conectar con DeepSeek/Gemini), activación por voz ("Hola [nombre]") y por texto (comando directo). | Pendiente |
 | 49 | Correos: implementar todo el módulo (Recibidos, Enviados, Carpetas, Eliminados, Borradores, Spam) con los registros y la intervención de Vero definidos en los puntos 6 al 11. | Pendiente |
 | 50 | Correos (Spam): implementar filtro de spam propio de Stratos, independiente del proveedor de correo, para que el usuario pueda marcar "No es spam" y Stratos lo recuerde. | Pendiente |
+| 51 | implementar el procedimiento de invitaciones y permisos (Directos, Indirectos, Observadores, enrutamiento del banco de datos) con la mecánica definida en la sección 34. |pendiente|
+| 52 | Implementar la ventana intermedia de selección de módulos (con opción "Todos" y checkboxes individuales). |pendiente|
+| 53 | Implementar la visualización de invitaciones recibidas (cartelera, señal en Organigrama Personal, lista debajo del nodo). |pendiente|
+| 54 | Implementar la lógica de visibilidad del rechazo según relación jerárquica (superior ve, subalterno no ve). |pendiente|
+
 
 ---
 
