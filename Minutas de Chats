@@ -8,7 +8,7 @@
 
 | Zona | Elemento | Estado |
 |------|----------|--------|
-| **Superior Izquierda** | Logo de Stratos + Slogan de la compañía usuaria | **Cambio:** Mover de centro a izquierda |
+| **Superior Izquierda** | Logo de Stratos + Slogan de la compañía usuaria | ✅ **Hecho:** Ya está a la izquierda. El sistema ajusta su tamaño (logo: 140px x 40px; slogan: centrado, máx. 140px) para no desconfigurar la estética. |
 | **Superior Restante** | Área de Mensajes (Cartelera) | Fijo |
 | **Inferior Izquierda** | Sello de agua y slogan de Stratos | Fijo |
 | **Inferior Centro** | Botón de IA | **Nuevo:** Con efectos visuales, sonido de micrófono e indicador de detección de voz |
@@ -22,57 +22,58 @@
 - Rotación automática de avisos.
 - Desaparición al completar la tarea asociada.
 
-**Lo nuevo:**
+**Lo nuevo (pendiente de implementar):**
 
 | Prioridad | Duración |
 |-----------|----------|
-| Alta (crítico) | 10 segundos |
-| Media (importante) | 6 segundos |
+| Alta (crítico, ej. avisos del jefe inmediato o superior) | 10 segundos |
+| Media (importante, ej. anuncio motivacional diario) | 6 segundos |
 | Baja (informativo) | 4 segundos |
 
 **Anuncio Motivacional Diario:**
 - Ya existe (cambia 1 vez al día).
 - **Nuevo:** Duración de 6 segundos (prioridad media).
+- **Bug detectado:** En la cartelera aparece solo un guion "-" en lugar del mensaje. Hay que corregir la lógica de segmentación.
+
+**Lógica de segmentación de textos (misión, visión, valores) - NUEVA:**
+- Segmento ideal: 51 a 200 caracteres.
+- Máximo: 250 caracteres.
+- Delimitadores: coma, punto, punto y coma.
+- Si un segmento tiene menos de 50 caracteres, se une al anterior o siguiente según el delimitador:
+  - **Coma:** se une al segmento anterior.
+  - **Punto:** se une al segmento siguiente.
+  - **Punto y coma:** se une al segmento siguiente (mismo trato que el punto).
+- Si no encuentra delimitador, corta a los 250 caracteres máximo.
+- No deben aparecer guiones ni números solos en la cartelera.
 
 ---
 
 ### 3. CONFIGURACIÓN DE LA ASISTENTE IA (VERO) – FLUJO INICIAL
 
 **Cambios en Configuración:**
-- **Eliminar:** Opciones de Sonido, Vibración, Modo Nocturno.
-- **Añadir:** Configuración exclusiva de la IA.
-- **El sistema toma** los autorizados del dispositivo (no gestiona sonido, vibración ni modo nocturno).
-- **Botón de configuración de IA:** Ubicado en la misma área donde estaban las tres opciones eliminadas, con la indicación "Configuración de IA".
+- ✅ **Hecho:** Se eliminaron las opciones de Sonido, Vibración, Modo Nocturno.
+- ✅ **Hecho:** Se implementó el botón de configuración de IA en esa área.
+- **Regla:** El sistema toma los autorizados del dispositivo (no gestiona sonido, vibración ni modo nocturno).
 - **Debe ser gratis y sin restricciones** (sin tokens diarios ni límites).
 
-**Flujo completo:**
+**Flujo completo (ya implementado):**
 
 1. Usuario completa **Datos Generales**.
-2. Presiona **"Grabar"** → redirige a **Configuración** (en lugar de Login).
-3. **Configuración de voz:**
-   - Un solo botón alterna entre voz masculina y femenina.
-   - Cada clic muestra en texto la opción activa.
-   - El usuario puede probar todas las veces que quiera.
-4. **Configuración de nombre:**
-   - Campo de texto (sugerencia: "Vero").
-   - Botón "Confirmar nombre".
-   - Al confirmar, la IA dice (texto + voz):
-     > *"Ok, de ahora en adelante soy [nombre]. Estaré activa con que presiones el botón en cualquier pantalla y comiences con 'Hola [nombre]' tu oración."*
-5. **Botón "Grabar Cambios":**
-   - Guarda las preferencias.
-   - Reinicia el sistema.
-   - Redirige a la pantalla de Login.
-6. **Si el usuario regresa a esta pantalla en el futuro:** Puede cambiar la configuración de los pasos 3 al 5 si así lo desea.
+2. Presiona **"Grabar"** → redirige a **Configuración**.
+3. **Configuración de voz:** Un solo botón alterna entre voz masculina y femenina.
+4. **Configuración de nombre:** Campo de texto + botón "Confirmar nombre".
+5. **Botón "Grabar Cambios":** Guarda, reinicia y redirige a Login.
+6. **Si el usuario regresa:** Puede cambiar la configuración.
 
 **Interacción con Vero (Configuración adicional):**
 
-| Dispositivo | Visual (ventana emergente) | Auditiva (voz) | Implicación (explicada por la IA) |
-|-------------|----------------------------|----------------|-----------------------------------|
-| **Computadora** | ☑ (por defecto) | ☐ (por defecto) | *"Al desactivar la voz en tu computadora, Vero solo te responderá por escrito. Ideal para entornos de oficina o reuniones."* |
-| **Celular** | ☑ (por defecto) | ☑ (por defecto) | *"Con voz y texto activos en tu celular, Vero te acompañará como un asistente de voz completo, incluso mientras te desplazas."* |
+| Dispositivo | Visual | Auditiva | Implicación |
+|-------------|--------|----------|-------------|
+| **Computadora** | ☑ | ☐ | *"Al desactivar la voz en tu computadora, Vero solo te responderá por escrito."* |
+| **Celular** | ☑ | ☑ | *"Con voz y texto activos en tu celular, Vero te acompañará como un asistente completo."* |
 
-- **Confirmación escrita:** Al dar una instrucción por voz, Vero muestra la instrucción en la ventana emergente y pide confirmación antes de ejecutarla.
-- **Regla:** El usuario no puede desactivar a Vero por completo. Siempre debe haber al menos un canal activo (visual o auditivo). El usuario puede activar/desactivar con dos cuadros de cheque (visual y auditivo).
+- **Regla:** El usuario no puede desactivar a Vero por completo. Siempre debe haber al menos un canal activo.
+- **Duración del aviso:** La ventana emergente se cierra sola después de `(número de palabras / 3.5) + 0.75` segundos.
 
 ---
 
@@ -83,13 +84,17 @@
 - El nombre se toma del campo **"Nombre"** en Datos Generales (no el nombre completo).
 
 **Redirección:**
-- Tras el saludo, lleva a la **Pantalla de Comunicación** (ya implementado).
+- Tras el saludo, lleva a la **Pantalla de Comunicación**.
+
+**Pendiente de ajuste (punto 6):**
+- El saludo debe cambiar **antes** de presionar "ENTRAR", al seleccionar el nombre del desplegable.
+- Al entrar, el saludo debe aparecer de nuevo en la Cartelera, **solo la primera vez del día**.
 
 ---
 
 ### 5. PANTALLA DE COMUNICACIÓN
 
-**Botones grandes y claros:**
+**Botones grandes y claros (pendiente de implementar):**
 - Correos
 - Chats
 - Tareas
@@ -104,7 +109,7 @@
 
 | Aspecto | Definición |
 |---------|------------|
-| **Nombre** | Vero (cambiable por el usuario) |
+| **Nombre** | Vero (nombre oficial interno; el usuario lo cambia en Configuración) |
 | **Tipo** | Asistente personal conversacional (no comandos rígidos) |
 | **Interacción** | Ventana emergente + voz en vivo |
 | **Activación** | Botón flotante o comando `"Hola [nombre]"` |
@@ -142,7 +147,8 @@
 - Integración con **WhatsApp Business**.
 - Migración completa de historial.
 - Identificación de contactos internos con fondo corporativo (colores de identidad, logo y slogan).
-- **Vero como contacto activo:** Vero se convierte en un contacto más dentro de los chats (emulando a Memosyne), para asegurar la trazabilidad total de la comunicación y acciones.
+- **Vero como contacto activo:** Vero se convierte en un contacto más dentro de los chats (emulando a Memosyne), para asegurar la trazabilidad total.
+- **Sincronización en segundo plano:** Aunque el usuario use WhatsApp Business App por fuera, Stratos sincroniza (vía Coexistencia) y guarda todo.
 
 ---
 
@@ -173,11 +179,10 @@
 
 **9.4. Archivo**
 - **Automático:** Al terminar, la tarea se archiva automáticamente.
-- **Trazabilidad:** El sistema traquea todo, independientemente de si el usuario archiva antes o después.
+- **Trazabilidad:** El sistema traquea todo.
 
 **9.5. Seguimiento**
 - **La IA propone automáticamente** tareas de seguimiento al delegar una tarea.
-- Propósito: Seguridad de cumplimiento.
 
 ---
 
@@ -185,28 +190,24 @@
 
 **10.1. Vista Principal (Listado)**
 - **Columnas:** Título, Hora de inicio, Integrantes.
-- **Orden:** Por importancia, estado y proximidad (misma lógica que Tareas).
+- **Orden:** Por importancia, estado y proximidad.
 - **Color:** Barra tipo Gantt que cambia de verde a rojo según campana de Gauss.
 
 **10.2. Ventana de Detalle / Creación**
 - **Campos:** Título, Hora de inicio, Periodicidad (Única vez, Diario, Semanal, Anual), Integrantes.
 - **Integrantes:** Funciona igual que en Correo/Tareas (autocompletado o scroll).
 - **Sonido:** El usuario escoge de los sonidos del dispositivo (Stratos no añade sonidos propios).
-- **Área de Mensaje / Contexto:** (Igual que en Tareas)
-  - Ubicación: Debajo de los campos, arriba de los botones.
-  - Estructura: Área de escritura + lista de correos/mensajes relacionados.
-  - Comportamiento: Vero añade automáticamente. El usuario puede editar.
+- **Área de Mensaje / Contexto:** (Igual que en Tareas).
 - **Botón Guardar:** En la parte inferior.
 
 **10.3. Comportamiento y Asistencia**
-- **Asignación a otros:** Se crea una tarea de seguimiento para el usuario (igual que en Tareas).
-- **Aviso en cartelera:** Al asignar a otro, el sistema lanza un aviso al destinatario y crea una tarea pendiente de confirmación.
-- **Jerarquía y prioridad:** Se respeta la misma lógica de Tareas (fechas, impacto, dependencias, interconexión).
+- **Asignación a otros:** Se crea una tarea de seguimiento para el usuario.
+- **Aviso en cartelera:** Al asignar a otro, el sistema lanza un aviso al destinatario.
+- **Jerarquía y prioridad:** Se respeta la misma lógica de Tareas.
 
 **10.4. Botón de Borrar**
-- **Ubicación:** En la ventana de detalle, junto a los botones de Guardar/Editar (igual que en Organigrama personal).
-- **Al borrar:** El sistema lanza un aviso en la cartelera a todos los integrantes de la alarma, informando:
-  > *"[Usuario] ha eliminado la alarma [Título]. Si fue por error o necesitas más información, contacta con él."*
+- **Ubicación:** En la ventana de detalle, junto a los botones de Guardar/Editar.
+- **Al borrar:** El sistema lanza un aviso en la cartelera a todos los integrantes.
 
 ---
 
@@ -219,7 +220,6 @@
 
 **11.2. Alias / Nickname**
 - La IA añade en silencio el nombre del sistema como alias al contacto de Gmail.
-- No modifica el nombre original, solo lo complementa.
 
 **11.3. Detección de Discrepancias**
 - Si la IA encuentra coincidencias exactas (correo + celular), vincula en silencio.
@@ -228,17 +228,14 @@
 **11.4. Resolución de Discrepancias**
 - **Aviso en cartelera:** "Tienes X casos pendientes de revisión en Contactos."
 - **Tarea creada:** "Revisar discrepancias de contactos."
-- **Resolución:** El usuario puede ir a Contactos o a Tareas.
-- **Autolimpieza:** Si el usuario resuelve desde Contactos, la IA elimina automáticamente la tarea.
+- **Autolimpieza:** Si el usuario resuelve desde Contactos, la IA elimina la tarea.
 
 **11.5. Sugerencia de Contactos Nuevos**
-- Basada en frecuencia de comunicación (correos, chats).
-- La IA **analiza la carga de trabajo** y sugiere en momentos de baja actividad.
-- El usuario decide si acepta o rechaza.
+- Basada en frecuencia de comunicación.
+- La IA sugiere en momentos de baja actividad.
 
 **11.6. Agrupación por Categorías**
 - Sincroniza las categorías de Gmail (Clientes, Proveedores, Equipo, etc.).
-- La IA puede sugerir categorías basándose en el historial.
 
 ---
 
@@ -250,33 +247,31 @@
 |------|----------|---------|
 | **Superior Izquierda** | Logo + Slogan | Fijo |
 | **Superior Central** | Cartelera de mensajes | Fijo |
-| **Superior Derecha** | Mini calendario del mes | Resalta el día actual (número más grande y en negrita) |
+| **Superior Derecha** | Mini calendario del mes | Resalta el día actual |
 | **Centro** | Vista de día/semana/mes/línea de tiempo | Principal |
-| **Izquierda (columna)** | Lista de "Notas" | Similar a columna de correos (Entrada, Enviados, etc.) |
+| **Izquierda (columna)** | Lista de "Notas" | Similar a columna de correos |
 
 **12.2. Vistas del Calendario**
 
 | Vista | Formato | Elementos visibles |
 |-------|---------|-------------------|
-| **Día** | Agenda por horas (intervalos de 30 min, scroll) | Tareas y alarmas (solo título). Si coinciden, se dividen en partes iguales. |
+| **Día** | Agenda por horas (intervalos de 30 min, scroll) | Tareas y alarmas (solo título). |
 | **Semana** | 7 columnas con franjas de 30 min | Tareas y alarmas (solo título). Arrastrar para mover. |
-| **Mes** | Cuadrícula de días | Puntos indicadores de actividades. Al hacer clic en un día, lista de elementos. |
+| **Mes** | Cuadrícula de días | Puntos indicadores de actividades. |
 | **Línea de Tiempo** | Línea horizontal (antes Gantt) | Procesos completos y tareas individuales. Se activa por solicitud a Vero. |
 
 **12.3. Notas en el Calendario**
-- **Notas del sistema (automáticas):** Vero registra todos los cambios (fechas, títulos, participantes, etc.). Son inmutables y no se pueden eliminar.
-- **Notas del usuario (manuales):** El usuario puede añadir comentarios a las notas o crear notas propias. Son editables y eliminables.
-- **Formato:** Chat de notas, donde se mezclan registros automáticos y comentarios del usuario.
+- **Notas del sistema (automáticas):** Vero registra todos los cambios. Inmutables.
+- **Notas del usuario (manuales):** El usuario puede añadir comentarios. Editables.
 
 **12.4. Asistencia de Vero en Calendario**
 - **Registro silencioso:** Vero registra todos los cambios sin preguntar.
 - **Sugerencia de nota:** Tras un cambio, Vero puede sugerir dejar una nota de respaldo.
-- **Consulta:** El usuario o líder pueden preguntar a Vero sobre cambios específicos (ej. "¿Cuántas veces se cambió esta reunión?").
+- **Consulta:** El usuario o líder pueden preguntar a Vero sobre cambios específicos.
 
 **12.5. Correos en el Calendario**
 - Los correos **no se muestran directamente** en el calendario.
-- Aparecen en el **área de contexto** de la tarea o alarma que generaron (dentro de la lista de correos relacionados).
-- Si el usuario ha definido una **línea de tiempo** (como el ejemplo de llantas), los correos relacionados aparecen en esa vista.
+- Aparecen en el **área de contexto** de la tarea o alarma que generaron.
 
 ---
 
@@ -286,31 +281,18 @@
 - Analiza el historial de correos, tareas, contactos y archivos.
 - Detecta datos incompletos, duplicados o inconsistentes.
 - Pregunta sobre lo que detecta y sugiere acciones.
-- No inventa datos ni asume que todo es correcto.
-
-**Al migrar, la IA:**
-- Vincula contactos de Gmail, Chat y Sistema.
-- Extrae contactos automáticamente del historial.
-- Detecta duplicados y los fusiona en silencio o los marca para revisión.
-
-**Archivos locales:**
-- La IA, con autorización del usuario, puede analizar archivos en carpetas locales (Descargas, Documentos, Escritorio, etc.) y preguntar si desea migrarlos.
 
 **Flujo post-configuración de Vero:**
-- Cuando el usuario vuelve a entrar (después de configurar Vero y reiniciar), Vero consulta:
-  > *"Este es tu correo y tu cel. Yo puedo sincronizar tu información. ¿Procedo?"*
-- Si el usuario acepta, Vero dice:
-  > *"Mientras hago los pasos, puedes crear tu organigrama personal de comunicación."*
+- Cuando el usuario vuelve a entrar, Vero consulta: *"Este es tu correo y tu cel. Yo puedo sincronizar tu información. ¿Procedo?"*
+- Si el usuario acepta, Vero dice: *"Mientras hago los pasos, puedes crear tu organigrama personal de comunicación."*
 - Vero trabaja en silencio, avisando de los pasos.
-- Vero interrumpe solo si encuentra archivos que necesitan decisión del usuario o tiene dudas.
 
 ---
 
 ### 14. SEMANA TÍPICA Y MEJORA CONTINUA
 
 **Concepto:**
-- La semana típica no es una regla fija.
-- Es un marco de orden y rendimiento que se adapta a imprevistos.
+- La semana típica no es una regla fija. Es un marco de orden y rendimiento que se adapta a imprevistos.
 - La IA analiza cargas, tiempos, prioridades y sugiere ajustes.
 - Con el tiempo, crea rutinas y hábitos que mejoran la productividad.
 
@@ -343,8 +325,8 @@
 ### 16. ORGANIGRAMA Y PERMISOS (Pendiente de implementar)
 
 **16.1. Tipos de Contacto**
-- **Observador:** Alguien que ya está o no en el Organigrama General (en otra línea) pero es alguien a quien se le dan permisos de lectura sobre tu área. Ve tu área (y hacia abajo) según los permisos que le des. No edita.
-- **Indirecto (Externo):** Alguien que NO está en tu Organigrama (está fuera) y a quien invitas a ver tu información. Ve desde la primera línea de quien lo invita. No edita.
+- **Observador:** Ve tu área (y hacia abajo) según los permisos que le des. No edita. **Requiere invitación.**
+- **Indirecto:** Ve desde la primera línea de quien lo invita. No edita. **Requiere invitación.**
 
 **16.2. Permisos por Rol**
 - **No.1:** Ve todo, edita lo suyo.
@@ -353,32 +335,29 @@
 - **Indirecto:** Ve (desde la primera línea de quien lo invita), no edita.
 
 **16.3. Crecimiento Automático del Organigrama General**
-- Cuando alguien crea su primera línea, el sistema reconoce a sus superiores y subalternos previos, si así los tuviera.
-- Cuando hay cambios jerárquicos (ej. cambio de No.1), el Organigrama General se actualiza solo, esto se hace porque reconoce la jerarquía.
-- Cuando un contacto ya existe en otra rama, el sistema lo detecta y lo posiciona correctamente.
-- Cuando hay duplicados (mismo celular, correo, nombre), el sistema los detecta y comunica para encontrar la solución, ya sea editando o permitiendo la nueva invitación, esto porque desde la invitación se debe dar cuenta.
+- Cuando alguien crea su primera línea, el sistema reconoce a sus superiores y subalternos previos.
+- Cuando hay cambios jerárquicos, el Organigrama General se actualiza solo.
+- Cuando un contacto ya existe en otra rama, el sistema **avisa del error de doble registro:** *"Este usuario ya está registrado en otra rama, debajo de [Nombre del superior]. No se puede registrar en dos posiciones ni ser contacto directo de dos superiores."*
 
 **16.4. Detección de Duplicados**
-- El sistema debe detectar si un contacto ya existe (mismo celular, correo o nombre) y evitar duplicados.
+- El sistema debe detectar si un contacto ya existe (mismo celular, correo o nombre) y avisar.
 
 **16.5. Mensaje de Entrada al Sistema**
 - Debe diferenciar si es **invitación** (genera inscripción) o **acceso** (Observador/Indirecto, no genera inscripción).
 
-**16.6. Lógica de Jerarquía (Nuevo - Pendiente de implementar)**
-- El sistema debe reconocer **quién te invita** (el que invita es tu jefe al crear su primera línea).
-- Cuando alguien de **mayor rango** se inscribe (ej. el GG que invitas a tu primera línea y luego crea la suya), el sistema debe:
+**16.6. Lógica de Jerarquía (Pendiente de implementar)**
+- El sistema debe reconocer **quién te invita**.
+- Cuando alguien de **mayor rango** se inscribe, el sistema debe:
   - Reconocer que ya está en el sistema.
   - Posicionarlo en una jerarquía superior.
   - **Avisar a tu superior vigente (el No.1)** que ya se inscribió alguien arriba de él.
-  - Refrescar el Organigrama General, volviendo tu estructura una rama de su primera línea.
-- **Aviso al superior** cuando alguien de su **primera línea** se inscribe.
+  - Refrescar el Organigrama General.
 
-**16.7. Cruce de Información al Grabar Inscripción (Nuevo - Pendiente de probar)**
-- **Siempre**, al querer grabar una inscripción, revisar si hay **1 o más datos repetidos** (porque el sistema ya los tiene en su banco de datos).
-- Si los hay, **avisar** ("hay 1 o más datos repetidos") y **marcarlos**.
-- El aviso debe tener **dos opciones:** Editar o Salvar.
-- Si el usuario elige **Salvar**, se concreta la inscripción.
-- **Pendiente:** Probar que estos cambios funcionen (no se puede enviar invitaciones hasta tener Comunicación implementada).
+**16.7. Cruce de Información al Grabar Inscripción (Pendiente de probar)**
+- Siempre, al querer grabar una inscripción, revisar si hay 1 o más datos repetidos.
+- Si los hay, avisar y marcarlos.
+- El aviso debe tener dos opciones: Editar o Salvar.
+- Si el usuario elige Salvar, se concreta la inscripción.
 
 ---
 
@@ -387,26 +366,22 @@
 - El banco de datos debe tener la **capacidad de guardar todos los datos, horarios y todo lo posible**.
 - Que esa información se guarde **desde ahora**, aunque todavía no sepamos exactamente qué vamos a trackear.
 - Así, cuando definamos los trackings, **ya habrá información** disponible.
-- **Pendiente:** Definir exactamente qué trackings se harán, pero el banco de datos debe estar preparado.
 
 ---
 
 ### 18. BACKUPS CODIFICADOS (Pendiente de implementar)
 
-- Se hará (a futuro, cuando implementemos Comunicación).
-- La compañía podrá leerlo, pero la información debe quedar codificada para que la lectura humana no sea fácil (ej. como cuando cambias la letra en Word y solo se ven cuadros y puntos).
+- La compañía podrá leerlo, pero la información debe quedar codificada para que la lectura humana no sea fácil.
 - El sistema sí puede leerla y usarla para mediciones y reportes.
-- Si la compañía quiere descifrarla manualmente, ya es su decisión (no es lo esperado).
 
 ---
 
 ### 19. KPIs (Pendiente de implementar)
 
-- Cualquier persona con personal a su cargo puede crear KPIs, y la jerarquía aplica para medir y para leer.
-- Hay que guiar al usuario en cómo establecer KPIs (no todos saben cómo hacerlo) y siempre respetando los establecidos por su superior.
-- Un subalterno no puede crear KPIs que sesguen la información o desalineen la estrategia del superior. Si necesita crear un KPI que altere en gran medida al del superior, debe estudiarse el porqué (puede ser que el subalterno sea más realista o que el jefe esté presionando sin lógica completa). En ese caso, se activa una revisión con el superior para estudiar el KPI propuesto y ajustar (o no) el original.
+- Cualquier persona con personal a su cargo puede crear KPIs, y la jerarquía aplica.
+- Hay que guiar al usuario en cómo establecer KPIs y siempre respetando los establecidos por su superior.
+- Un subalterno no puede crear KPIs que sesguen la información o desalineen la estrategia del superior. Si necesita crear un KPI que altere en gran medida al del superior, debe estudiarse el porqué y activar una revisión con el superior.
 - Los parámetros son: **Real, Esperado, Promedio** (basados en la experiencia del Excel).
-- Esto es parte del ADN: no solo definir KPIs, sino asegurar que midan correctamente.
 
 ---
 
@@ -420,13 +395,13 @@
 
 ### 21. MODULARIDAD – PANTALLAS (Enfoque de trabajo)
 
-- El modular es una forma de comercializar y de ordenar el sistema en pantallas sencillas de leer y de ubicarse (mapas mentales).
+- El modular es una forma de comercializar y de ordenar el sistema en pantallas sencillas.
 - El patrón es:
-  - Una pantalla de compilación de pantallas que es la entrada a un módulo (ej. Comunicación, que será solo de botones que te llevan a las diferentes partes de comunicaciones).
-  - Desde ahí se llega a un grupo de pantallas (solo Correo definimos 3 o 4 pantallas).
+  - Una pantalla de compilación de pantallas que es la entrada a un módulo.
+  - Desde ahí se llega a un grupo de pantallas.
   - Luego hay otro tipo de pantalla que lleva a otro módulo.
-  - Y otra pantalla que solo el No.1 y su primera línea tienen acceso (hoy es Identidad Corporativa).
-- Luego vendrán las pantallas de aprobación de uso (donde cada quien aprueba qué módulos y a quién aprueba). Esto es aplicable para todo aquel que tiene personal a su cargo.
+  - Y otra pantalla que solo el No.1 y su primera línea tienen acceso.
+- Luego vendrán las pantallas de aprobación de uso.
 
 ---
 
@@ -434,20 +409,18 @@
 
 **Activación:**
 - Solo con **botón presionado**. No funciona en segundo plano.
-- **Razón:** Evitar que se piense que la IA hace intrusión o intromisión no autorizada en el día a día.
 - Comando de voz: "Hola [nombre]".
 
 **Programación:**
 - El usuario **sí puede** programar a Vero para que haga tareas en horarios específicos.
-- Pero se deben **recalcar los alcances y marcos referenciales** de Vero: que lo que pida **se pueda** y esté de acuerdo a su puesto, a lo legal, a lo ético, etc.
+- Pero se deben recalcar los alcances y marcos referenciales de Vero.
 
 **Límites:**
-- Solo accede a los módulos autorizados por el No.1 **para su usuario**.
-- No puede acceder a información de otros usuarios si no cuenta con la jerarquía, la comunicación directa (como un igual) o los accesos correspondientes.
+- Solo accede a los módulos autorizados por el No.1 para su usuario.
+- No puede acceder a información de otros usuarios si no cuenta con la jerarquía, la comunicación directa o los accesos correspondientes.
 - Respeta la legalidad nacional e internacional, valores humanos, reglas de convivencia y ética laboral.
 - No actúa sin confirmación en acciones importantes.
 - Vero sugiere, no impone.
-- Se pueden revisar y redefinir conforme avancemos.
 
 ---
 
@@ -457,16 +430,15 @@
 - Registrar acciones en pantallas.
 - Registrar tiempos de entrada.
 - Registrar actividades que el usuario pida que sean de análisis.
-- Avisar cuando termina una solicitud (sin saltar pantallas ni interrumpir).
+- Avisar cuando termina una solicitud.
 
 **Lo que la IA solicita (pregunta al usuario):**
-- Cuando un trabajo es complejo, Vero **pide confirmación** de lo solicitado.
-- **Avisa** si se puede hacer o no como se pidió, explicando las razones (límites o información a su alcance).
-- **Pregunta para completar** instrucciones mal dadas o incompletas.
-  - Ejemplo: "Quiero una reunión el jueves con Juan" → Vero: "Tienes libre a las 3 PM. ¿Nivel de importancia? ¿Título o tema?"
-- Si la instrucción está incompleta y el usuario no responde, **lo deja como nota (pendiente)**. La próxima vez que hable con el usuario, **se lo recuerda**. Mientras tanto, queda pendiente y, si el usuario lee la nota, se dará cuenta de que no fue que no quiso, sino que no pudo.
+- Cuando un trabajo es complejo, Vero pide confirmación de lo solicitado.
+- Avisa si se puede hacer o no como se pidió, explicando las razones.
+- Pregunta para completar instrucciones mal dadas o incompletas.
+- Si la instrucción está incompleta y el usuario no responde, lo deja como nota pendiente.
 
-**Principio:** Que sea **natural y no intrusivo**. No saltar ventanas ni dejar instrucciones a medias.
+**Principio:** Que sea natural y no intrusivo.
 
 ---
 
@@ -479,38 +451,31 @@
 ### 25. PROYECTOS FUTUROS – OTRAS ACTIVIDADES (Pendiente de definición)
 
 - Módulos de Ventas, Mercadeo, Logística, etc.
-- Cada módulo tendrá su propia complejidad y beneficiarios (corto, mediano o largo plazo).
+- Cada módulo tendrá su propia complejidad y beneficiarios.
 - Stratos no solo medirá, sino que asesorará sobre la mejor fórmula de medición a cada actividad.
-- Importante: que la IA (dentro del sistema y la de apoyo en internet) tome conciencia de que si el proyecto crece es beneficioso, pero que se debe respetar lo descrito en todo el documento y estar alineado, sin abarcar más temas sin haber dejado bien los actuales.
-- Las IA son asistentes y facilitadores, pero la guía la lleva el Arquitecto.
 
 ---
 
 ### 26. TEMAS FUTUROS (Nuevo)
 
-- **Google Maps dentro de Stratos:** Para medir el tiempo real de trabajo de los viajeros (vendedores, rutas), considerando desplazamientos entre ubicaciones. Si el usuario cierra en Antigua y abre en Coatepeque, el sistema calcula el tiempo de viaje y ajusta el inicio real de la jornada.
+- **Google Maps dentro de Stratos:** Para medir el tiempo real de trabajo de los viajeros, considerando desplazamientos entre ubicaciones.
+- **Celular y Llamadas:** Considerar la integración del celular y las llamadas como actividades diarias (similar a "Enlace Móvil" de Windows). Pendiente después de Contactos.
 
 ---
 
 ### 27. ESTRATEGIA DE INTEGRACIÓN DE IA (Nuevo)
 
-**La integración de la IA (Vero) se hará por fases, según el nivel de sensibilidad de los datos:**
+**La integración de la IA (Vero) se hará por fases:**
 
 | Fase | Motor | Cuándo | Por qué |
 |------|-------|--------|---------|
-| **Fase 1** | **Gemini (capa gratuita)** | Hoy (desarrollo de lógica de Vero). | Sin tarjeta, sin costo. Solo para prototipar la mecánica (botón, ventana, voz). **Prohibido usar datos reales.** |
-| **Fase 2** | **token-free-gateway + DeepSeek** | Cuando el sistema esté "vendible" y haya que incluir información sensible o datos de prueba reales. | Sin tarjeta, sin costo. Respeta la privacidad de los datos. Vero ya puede operar con datos reales de prueba. |
-| **Fase 3** | **DeepSeek (API oficial)** | Cuando el sistema se lleve a una empresa (para que lo pruebe o ya para venderlo). | Datos reales de clientes. Privacidad garantizada. Costo mínimo (el cliente lo cubre). |
-
-**Archivo `vero.js`:**
-- Debe prever estos cambios (cambiar de motor = cambiar URL y clave).
-- Debe estar diseñado para que el paso de Gemini → token-free-gateway → DeepSeek oficial se haga **sin tocar la lógica de Stratos**.
+| **Fase 1** | **Gemini (capa gratuita)** | Hoy (desarrollo de lógica de Vero). | Sin tarjeta, sin costo. Solo para prototipar la mecánica. **Prohibido usar datos reales.** |
+| **Fase 2** | **token-free-gateway + DeepSeek** | Cuando el sistema esté "vendible" y haya que incluir información sensible o datos de prueba reales. | Sin tarjeta, sin costo. Respeta la privacidad de los datos. |
+| **Fase 3** | **DeepSeek (API oficial)** | Cuando el sistema se lleve a una empresa. | Datos reales de clientes. Privacidad garantizada. |
 
 **Alarma para la IA de Internet:**
-- La IA de Internet (DeepSeek en este chat) debe levantar una alarma (avisar al Arquitecto) cuando detecte que se está manejando información sensible o datos de prueba reales en el desarrollo de Stratos.
-- La alarma debe sugerir el cambio de motor (de Gemini a token-free-gateway + DeepSeek, o de este a DeepSeek oficial, según corresponda).
+- La IA de Internet debe levantar una alarma cuando detecte que se está manejando información sensible o datos de prueba reales.
 
----
 ---
 
 ### 28. DEFINICIONES DE VERO.JS (Nuevo - Pendiente de implementar)
@@ -520,87 +485,67 @@
 **1. Conexión con el motor de IA**
 - URL y clave del motor (Gemini, token-free-gateway + DeepSeek, o DeepSeek oficial).
 - Diseñado para que cambiar de motor sea solo cambiar URL y clave.
-- Manejo de errores (si el motor falla, Vero avisa al usuario).
+- Manejo de errores.
 
 **2. Activación y comando de voz**
 - Activación por botón (solo presionado, no en segundo plano).
-- Reconocimiento del comando "Hola [nombre]" para confirmar que no fue error.
+- Reconocimiento del comando "Hola [nombre]".
 
 **3. Interacción (Ventana Emergente)**
-- Mostrar en texto lo que el usuario dice (mientras Vero escucha).
-- Mostrar en texto lo que Vero responde (mientras Vero habla).
-- Letrero "PAUSA" para que el usuario corrija manualmente si Vero tradujo mal.
+- Mostrar en texto lo que el usuario dice y lo que Vero responde.
+- Letrero "PAUSA" para corregir manualmente.
 - Estados: "Escuchando..." y "Respondiendo...".
 - Cierre automático después de `(número de palabras / 3.5) + 0.75` segundos.
-- Diseño igual a las ventanas de organigramas (colores, forma, tamaño).
-- Crece si la respuesta ocupa más espacio.
-- **Onboarding:** Vero explica cada pantalla la primera vez que el usuario la visita. Solo la primera vez. Si el usuario quiere repetir la explicación, puede pedírselo. (Pendiente: detallar cada pantalla para hacer énfasis en temas o puntos clave).
+- Diseño igual a las ventanas de organigramas.
+- **Onboarding:** Vero explica cada pantalla la primera vez.
 
 **4. Memoria y aprendizaje**
-- Memoria persistente entre sesiones (recordar instrucciones, conversaciones, decisiones).
-- Aprendizaje de todos los usuarios (patrones, necesidades, mejoras).
-- **Diferencia clave:** Vero es una sola, pero su versión de interacción con cada usuario está limitada según sus autorizaciones, jerarquía y aprovechamiento. Vero sabe mucho (porque aprende de todos), pero solo ofrece lo que es relevante y priorizado para cada usuario.
-- Ejemplo: a un chofer 5 niveles por debajo del No.1 no se le ofrecen líneas de tiempo, aunque pueda usarlas, porque no es su prioridad.
-- Detección de necesidades del usuario o mejoras a lo ya hecho.
-- **Motor de memoria:** `agent-memory` (local, gratis, privado). No se usa `Mem0` (nube, con límites y que usa datos para entrenar).
+- Memoria persistente entre sesiones.
+- **Motor de memoria:** `agent-memory` (local, gratis, privado).
 - **Arquitectura de memoria:** Tres capas (corto plazo, largo plazo, búsqueda semántica).
-  - **Corto plazo:** Contexto de la conversación actual.
-  - **Largo plazo:** Hechos importantes extraídos automáticamente y guardados en base de datos.
-  - **Búsqueda semántica:** Solo se recuperan los recuerdos relevantes para la pregunta actual.
-- **Aislamiento por usuario:** Cada usuario tiene su propio espacio de memoria, aislado dentro de la misma base de datos.
-- **En producción:** El archivo SQLite de `agent-memory` vive en el servidor del cliente (no en Stratos).
+- **Aislamiento por usuario:** Cada usuario tiene su propio espacio de memoria.
+- **En producción:** El archivo SQLite de `agent-memory` vive en el servidor del cliente.
 
 **5. Límites y permisos**
 - Solo accede a módulos autorizados por el No.1 para su usuario.
 - No accede a información de otros sin jerarquía, comunicación directa, accesos y ética.
-- **Ética:** Filtro adicional a la jerarquía. Ejemplo: NO puedes pedir "dime quiénes han mencionado a Juan en temas de su despido" (no es ético). SÍ puedes pedir "dime el porcentaje de colaboradores de mi línea directa que han tenido conversación sobre el correo 'Cambios administrativos'".
 - No altera el sistema.
 - No revela cómo opera internamente.
-- **Vero conoce el sistema internamente para poder guiar al usuario, pero nunca revela cómo está programado, cómo calcula, ni cómo funciona por dentro. Solo habla en términos de uso y resultados.**
-- Respeta legalidad, valores humanos, ética laboral.
-- No actúa sin confirmación en acciones importantes.
-- Vero sugiere, no impone.
-- Se pueden revisar y redefinir conforme avancemos.
+- **Vero conoce el sistema internamente para poder guiar al usuario, pero nunca revela cómo está programado.**
 
 **6. Asistencia y sugerencias**
 - Siempre ayuda con lo que tiene autorizado. Primero la ayuda. Luego, la mejora.
 - Si la ayuda es limitada, informa que hay soluciones pero necesitan autorizaciones.
-- **No es hostigante:** No propone mejoras a cada cosa. Solo cuando el usuario lo pida o en momentos específicos (ej. reuniones de revisión).
-- Enriquece informes con datos de respaldo (módulos no autorizados, solo para mostrar mejoras), con autorización del usuario.
-- Si no puede resolver algo, plantea informar a Stratos para desarrollar la idea, con un formato de presentación de proyecto sencillo y claro (solo si está dentro de lo que busca Stratos: medición de actividades).
-- Detecta patrones de trabajo y sugiere líneas de tiempo. **Lo hace de forma silenciosa y lo presenta en la reunión de revisión.**
-- Crea líneas de tiempo de procesos completos.
-- Programa reuniones con el usuario para revisar avances.
+- **No es hostigante.**
+- Enriquece informes con datos de respaldo, con autorización del usuario.
+- Si no puede resolver algo, plantea informar a Stratos para desarrollar la idea.
 
 **7. Medición del trabajo invisible**
-- Registra procesos completos (no solo resultados).
+- Registra procesos completos.
 - Registra cambios en el calendario (notas del sistema inmutables).
-- Analiza esfuerzos de coordinación, negociación y gestión.
 
 **8. Registro y trazabilidad**
-- Registra cada acción del usuario (trazabilidad).
+- Registra cada acción del usuario.
 - Registra tiempos de entrada.
-- Registra actividades de análisis.
-- Avisa cuando termina una solicitud (sin interrumpir).
-- **Pendiente:** Repasar pantalla por pantalla qué debe tomar Vero. En las actuales puede no haber mucho, pero en general el banco de datos ya debería tener ~100 datos.
+- Avisa cuando termina una solicitud.
 
 **9. Resúmenes ejecutivos**
-- Estadísticas y gráficas del uso por parte de la empresa.
-- Exactitud ofrecida y potencial a alcanzar.
-- **Importante:** Son de **su trabajo y de su primera línea** (no de toda la empresa, a menos que sea el No.1).
+- Estadísticas y gráficas del uso.
+- Son de su trabajo y de su primera línea.
 - Solo se envía con autorización del No.1.
 
 **10. Manejo de errores**
-- Si el motor de IA falla, Vero avisa al usuario y ofrece alternativas.
-- Si la instrucción está incompleta, la deja como nota pendiente y la recuerda después.
+- Si el motor de IA falla, Vero avisa al usuario.
+- Si la instrucción está incompleta, la deja como nota pendiente.
 
 **11. Detección de sesgos y errores**
 - Vero detecta cuando un usuario no aprovecha, no entiende, o está alimentando mal una pantalla.
-- Prepara su comunicación en base a las limitaciones y jerarquías del usuario.
-- Le comunica (no le obliga) que hay algo que ajustar, corregir o llenar.
-- Si el usuario no corrige y Vero detecta continuidad del sesgo, puede subir en jerarquía avisando del error, hasta encontrar arreglo.
-- **Aviso:** En cartelera, con nombre puesto y veces que se avisó.
-  - Ejemplo: *"Jorge Mario, llevas 3 avisos sin corregir el sesgo en la pantalla X. Esto afecta la medición de Y. Si no se corrige, se notificará a tu superior."*
+- Le comunica (no le obliga) que hay algo que ajustar.
+- Si el usuario no corrige, Vero puede subir en jerarquía avisando del error.
+
+**12. Reuniones de revisión con Vero**
+- No son solo para ver pendientes.
+- Son para relacionar correos y actividades, arreglar el archivo del usuario, arreglar sus diagramas de tiempo, afinar sus estimaciones promedio, y hacerle conciencia de su labor diaria.
 
 ---
 
@@ -609,73 +554,59 @@
 **Qué incluye:**
 
 1. **Cambio de motor de IA a DeepSeek oficial (pagado).**
-   - Hay que hacer el cambio (confirmado).
-   - **La empresa lo asume**, pero se incluye en la **definición de costo base** de Stratos.
-   - **Modelo de venta:** Stratos (Comunicación) a un precio. Cada módulo adicional se vende por separado.
+   - La empresa lo asume, pero se incluye en la definición de costo base de Stratos.
+   - Modelo de venta: Stratos (Comunicación) a un precio. Cada módulo adicional por separado.
 
-2. **Espacio reservado en el servidor de la empresa (o su nube privada) para:**
+2. **Espacio reservado en el servidor de la empresa para:**
    - El banco de datos de Stratos.
    - La memoria de Vero (archivo SQLite de `agent-memory`).
 
 3. **Aislamiento por usuario:**
-   - Cada usuario tiene su propio espacio de memoria.
-   - **Aislado y dentro de la misma base de datos.**
+   - Cada usuario tiene su propio espacio de memoria, aislado dentro de la misma base de datos.
 
 4. **Proceso de enrutamiento:**
    - La empresa define su servidor.
    - Stratos se conecta a ese servidor.
-   - Se cargan las credenciales y se configura el entorno.
-
-**Pendiente:** Definir el proceso exacto, los requisitos técnicos, y el formato de invitación/integración.
 
 ---
 
-### 30. ESTRATEGIA DE INTEGRACIÓN DE IA POR FASES (Nuevo - Confirmado)
+### 30. ESTRATEGIA DE INTEGRACIÓN DE IA POR FASES (Confirmado)
 
 | Fase | Motor | Cuándo | Por qué |
 |------|-------|--------|---------|
 | **Fase 1** | **Gemini (capa gratuita)** | Hoy (desarrollo de lógica de Vero). | Sin tarjeta, sin costo. Solo para prototipar la mecánica. **Prohibido usar datos reales.** |
-| **Fase 2** | **token-free-gateway + DeepSeek** | Cuando el sistema esté "vendible" y haya que incluir información sensible o datos de prueba reales. | Sin tarjeta, sin costo. Respeta la privacidad de los datos. Vero ya puede operar con datos reales de prueba. |
-| **Fase 3** | **DeepSeek (API oficial)** | Cuando el sistema se lleve a una empresa (para que lo pruebe o ya para venderlo). | Datos reales de clientes. Privacidad garantizada. Costo mínimo (el cliente lo cubre). |
-
-**Alarma para la IA de Internet:**
-- La IA de Internet (DeepSeek en este chat) debe levantar una alarma (avisar al Arquitecto) cuando detecte que se está manejando información sensible o datos de prueba reales en el desarrollo de Stratos.
-- La alarma debe sugerir el cambio de motor según la fase.
+| **Fase 2** | **token-free-gateway + DeepSeek** | Cuando el sistema esté "vendible" y haya que incluir información sensible o datos de prueba reales. | Sin tarjeta, sin costo. Respeta la privacidad de los datos. |
+| **Fase 3** | **DeepSeek (API oficial)** | Cuando el sistema se lleve a una empresa. | Datos reales de clientes. Privacidad garantizada. |
 
 ---
 
-### 31. TABLA DE PANTALLAS PARA REVISIÓN DE VERO (Nuevo - Pendiente de completar por el Arquitecto)
+### 31. TABLA DE PANTALLAS PARA REVISIÓN DE VERO (En revisión)
 
 **Propósito:** Repasar pantalla por pantalla qué debe registrar Vero, para qué, y para quién.
 
-| # | Pantalla | Usuarios Permitidos | Descripción | Finalidad | Espacios de Interacción | (6) | (7) | (8) |
-|---|----------|---------------------|-------------|-----------|-------------------------|-----|-----|-----|
-| 1 | Datos Generales (Perfil Personal) | Todos (al inscribirse) | Formulario con nombre, apellidos, correo, celular, ID empleado, contraseña. | Capturar los datos básicos del usuario para crear su perfil. | Campos de texto, botón "Grabar". | | | |
-| 2 | Configuración | Todos (después del perfil) | Pantalla con opciones de Sonido, Vibración, Modo Nocturno (hoy). | Configurar preferencias del usuario. | Casillas de verificación, selector de idioma, botón de guardar. | | | |
-| 3 | Login (Acceso) | Todos | Pantalla de ingreso con ID empleado y contraseña. | Permitir el acceso al sistema. | Campos de texto, botón "ENTRAR", casilla "Recordar mi nombre". | | | |
-| 4 | Pantalla Principal | Todos | Pantalla de inicio con logo, slogan, cartelera de mensajes. | Mostrar el estado del sistema y los avisos. | Cartelera de mensajes, botones de navegación. | | | |
-| 5 | Comunicación | Todos | Pantalla de botones que llevan a los submódulos. | Servir de entrada al módulo de Comunicación. | Botones: Correos, Chats, Tareas, Alarmas, Calendario, Hub, Otras Actividades. | | | |
-| 6 | Correos (Recibidos) | Todos | Listado de correos recibidos. | Gestionar la bandeja de entrada. | Listado, botones de acción (archivar, eliminar, responder). | | | |
-| 7 | Correos (Enviados) | Todos | Listado de correos enviados. | Revisar el historial de envíos. | Listado, botones de acción. | | | |
-| 8 | Correos (Carpetas) | Todos | Vista de carpetas/etiquetas. | Organizar los correos. | Listado de carpetas, botones de acción. | | | |
-| 9 | Correos (Eliminados) | Todos | Listado de correos eliminados. | Revisar y recuperar correos eliminados. | Listado, botones de acción. | | | |
-| 10 | Correos (Borradores) | Todos | Listado de correos sin enviar. | Gestionar borradores. | Listado, botones de acción. | | | |
-| 11 | Correos (Spam) | Todos | Listado de correos marcados como spam. | Revisar correos no deseados. | Listado, botones de acción. | | | |
-| 12 | Chats | Todos | Integración con WhatsApp Business. | Gestionar mensajes y conversaciones. | Listado de chats, ventana de conversación. | | | |
-| 13 | Tareas | Todos | Listado de tareas. | Gestionar tareas propias y colectivas. | Listado, botón "Crear tarea", ventana de detalle/creación. | | | |
-| 14 | Alarmas | Todos | Listado de alarmas. | Gestionar recordatorios. | Listado, ventana de detalle/creación. | | | |
-| 15 | Calendario | Todos | Agenda con vistas de día, semana, mes, línea de tiempo. | Visualizar y gestionar actividades en el tiempo. | Vistas, mini calendario, columna de notas. | | | |
-| 16 | Contactos | Todos | Listado de contactos sincronizados con Gmail. | Gestionar la red de contactos. | Listado, ventana de detalle, botones de acción. | | | |
-| 17 | Organigrama Personal | Todos | Vista de contactos directos, indirectos y observadores. | Gestionar la comunicación directa. | Botones de añadir, editar, eliminar. | | | |
-| 18 | Organigrama General | No.1 y primera línea | Vista de la jerarquía de la empresa. | Visualizar la estructura organizacional. | Vista de árbol, botones de acción. | | | |
-| 19 | Identidad Corporativa | No.1 y primera línea | Configuración de la imagen visual de la empresa. | Definir colores, logo, slogan. | Campos de texto, selectores de color, botones de guardar. | | | |
-| 20 | Hub de Archivos | Todos | Espacio para subir documentos grandes. | Compartir archivos pesados sin usar el correo. | Área de subida, campos De/Para/Título, botón Enviar. | | | |
-| 21 | Otras Actividades | Todos (con autorización) | Módulos de Ventas, Mercadeo, Logística, etc. | Gestionar actividades específicas de cada área. | Por definir. | | | |
-
-**Instrucción para el Arquitecto:**
-- Completar las columnas 6, 7 y 8 con: qué debe registrar Vero, para qué (finalidad), y para quién (autorizados).
-- Devolver la tabla completada para integrarla en Minutas.
----
+| # | Pantalla | Usuarios Permitidos | Descripción | Finalidad | Espacios de Interacción | Que Registra | Para qué | Para quien | Como interviene Vero |
+|---|----------|---------------------|-------------|-----------|-------------------------|--------------|----------|------------|----------------------|
+| 1 | Datos Generales (Perfil Personal) | Todos (al inscribirse) | Formulario con nombre, apellidos, correo, celular, ID empleado, contraseña. | Capturar los datos básicos del usuario para crear su perfil. | Campos de texto, botón "Grabar". | El tiempo entre recibir la invitación y abrir la aplicación. Cualquier cambio en una segunda visita. Al presionar GRABAR, debe comenzar a sincronizar correo y WhatsApp. | Medir su nivel de urgencia y compromiso en su primer ingreso. En los cambios posteriores, su nivel de efectividad. | Avisa a quien lo invitó cuando termina su ingreso y configuración. | Vero se activa al final de su configuración. Su participación en esta pantalla es cuando el usuario la visite después de su ingreso inicial, para explicarle que si hace cambios fuera de su contraseña, altera el banco de datos original pero que sí es permitido. |
+| 2 | Configuración | Todos (después del perfil) | Pantalla con opciones de configuración. | Configurar preferencias del usuario. | Casillas de verificación, selector de idioma, Configuración de IA, botón de guardar. | Al grabar, refrescar y actualizar el Organigrama General en todos los usuarios. | Que al ver el Organigrama General, el usuario encuentre su nivel jerárquico. | Para todos, mantener la comunicación al día. | Si el usuario escoge Inglés, Vero hablará en Inglés. |
+| 3 | Login (Acceso) | Todos | Pantalla de ingreso con ID empleado y contraseña. | Permitir el acceso al sistema. | Campos de texto, botón "ENTRAR", casilla "Recordar mi nombre". | Hora exacta de entrada y salida (para calcular tiempo de trabajo diario). Veces que se equivoca en sus entradas. | Mantener estadística de horas laborales diarias y de errores de entrada. | Las horas laborales para mediciones de desempeño. Las equivocaciones para la empresa y para Stratos. | Saludo inicial (primera vez del día). Sugerir cambio de contraseña si se equivoca más de 6 veces en una semana. Recordar al usuario si teclea algo diferente a lo ya grabado en nombre completo. |
+| 4 | Pantalla Principal | Todos | Pantalla de inicio con logo, slogan, cartelera de mensajes. | Mostrar el estado del sistema y los avisos. | Cartelera de mensajes, botones de navegación. | Depende de lo que se tenga en ella. | Uniformidad en lo básico de una pantalla Stratos. | Para todos, mostrando identidad uniforme. | Su función depende de lo solicitado. |
+| 5 | Comunicación | Todos | Pantalla de botones que llevan a los submódulos. | Servir de entrada al módulo de Comunicación. | Botones: Correos, Chats, Tareas, Alarmas, Calendario, Hub, Otras Actividades. | Las entradas de cada módulo (estadística de áreas más visitadas). | Conocer el aprovechamiento de la herramienta. | Para entender su comprensión al sistema. | En su primera vez, explicando lo que permite cada botón. |
+| 6 | Correos (Recibidos) | Todos | Listado de correos recibidos. | Gestionar la bandeja de entrada. | Listado, botones de acción. | Ingreso a la página y momento de la última salida. Número de correos diarios recibidos. Cuántos contactos diferentes se relacionan al día. | Medir el tiempo de intervención. Saber con cuántas personas diferentes se comunica al día. | Para su registro estadístico. | Depende de lo solicitado por el usuario. |
+| 7 | Correos (Enviados) | Todos | Listado de correos enviados. | Revisar el historial de envíos. | Listado, botones de acción. | Número de correos respondidos y tiempo. Número y tiempo de correos sin correlación. | Medir cuánto tiempo lleva responder, solucionar o informar. | Para su registro estadístico. | Sugerir usar el Hub cuando un correo es demasiado grande. |
+| 8 | Correos (Carpetas) | Todos | Vista de carpetas/etiquetas. | Organizar los correos. | Listado de carpetas, botones de acción. | Cada cuánto tiempo pasan los correos a las carpetas creadas. Peso de los correos. | Orden de información. Ver el peso de información manejada. | Solo para el peso de información. | Sugerir el traslado para evitar correos pesados en carpetas de entrada y salida. |
+| 9 | Correos (Eliminados) | Todos | Listado de correos eliminados. | Revisar y recuperar correos eliminados. | Listado, botones de acción. | Tiempo, período a borrar, cantidad y peso borrado. Si el usuario borra más de lo habitual. | Optimizar el espacio. Detectar comportamientos inusuales. | Para el usuario (optimización) y para la empresa (comportamientos inusuales). | Asistir al usuario en sugerir cuándo borrar. Guardar y avisar de comportamientos inusuales. |
+| 10 | Correos (Borradores) | Todos | Listado de correos sin enviar. | Gestionar borradores. | Listado, botones de acción. | Los borradores. | Optimización de espacio. Evitar que el usuario pierda información. | Para el usuario. | Avisar si empezó un correo relacionado con algo que ya había empezado. Avisar que cada 15 días los borradores se pasarán a Eliminados. |
+| 11 | Correos (Spam) | Todos | Listado de correos marcados como spam. | Revisar correos no deseados. | Listado, botones de acción. | Tipos de spam y correos de usuarios desconocidos. | Mejorar la defensa de la empresa. Detección de correos legítimos en spam. | Para el usuario y para los encargados de cómputo. | Avisar al usuario para su revisión de correos puntuales. Aviso inteligente si detecta que el usuario está trabajando en algo y hay un correo en spam relacionado. Stratos tiene su propio filtro de spam, independiente del proveedor. |
+| 12 | Chats | Todos | Integración con WhatsApp Business. | Gestionar mensajes y conversaciones. | Listado de chats, ventana de conversación. | Tiempo en chats relacionados al trabajo y contactos involucrados. | Medir junto a correo cuánto tiempo le invierte a correos y chats. | Para su medición en tiempo laboral. | Depende de las necesidades del usuario. |
+| 13 | Tareas | Todos | Listado de tareas. | Gestionar tareas propias y colectivas. | Listado, botón "Crear tarea", ventana de detalle/creación. | Número de tareas asignadas, tiempo de duración de cada una, variabilidad de tiempo estimado y real. | Muchas de las estimaciones estadísticas de la operación quedan registradas. | Para mejora de su medición laboral. | Depende de las necesidades del usuario y atención de sugerencias de Vero. |
+| 14 | Alarmas | Todos | Listado de alarmas. | Gestionar recordatorios. | Listado, ventana de detalle/creación. | Número de alarmas, razones (título), tiempos entre programación y fecha/hora de asignación. | Mejores estimaciones o afinamiento de la estadística de cumplimiento. Clasificar tipos de alarmas y su incidencia en el desempeño. | Para su medición en tiempo laboral. | Sugiere títulos para las alarmas. Depende de las necesidades del usuario. |
+| 15 | Calendario | Todos | Agenda con vistas de día, semana, mes, línea de tiempo. | Visualizar y gestionar actividades en el tiempo. | Vistas, mini calendario, columna de notas. | Toda actividad de cada tarea y tiempo laboral. El historial completo de pasos laborales diarios. Los puntos de control que, unidos por Vero, reconstruyen el proceso real de cada actividad. | Desarrollo de la semana típica. Dejar constancia laboral. Afinamiento de estadísticas que derivan en KPIs. Convertir la medición de "sensación" en medición de "realidad". Ofrecer un diagrama de tiempo. | Para su medición en tiempo laboral. Para el propio usuario (como espejo de su desempeño). Para el líder (para que vea la realidad, no la sensación). | Depende de lo solicitado por el usuario. Con el historial y los puntos de control, Vero reconstruye el proceso real y ofrece un diagrama de tiempo. Con el tiempo, Vero puede ofrecer planes de profesionalización y mejora continua. |
+| 16 | Contactos | Todos | Listado de contactos sincronizados con Gmail. | Gestionar la red de contactos. | Listado, ventana de detalle, botones de acción. | Mantiene el registro sincronizado y al día. Medición de cuántas personas se relacionan laboralmente con su trabajo. | Mostrar la complejidad del trabajo y de su interacción diaria. | Para su medición en tiempo laboral. | Ayudar a mejorar la información grabada en los contactos. Mostrar que tener los contactos bien catalogados incide en su actividad diaria. |
+| 17 | Organigrama Personal | Todos | Vista de contactos directos, indirectos y observadores. | Gestionar la comunicación directa. | Botones de añadir, editar, eliminar. | Todo usuario al cual invita y su tipo de comunicación. Las invitaciones recibidas. | Para que el usuario de forma visual mire quiénes son sus contactos cercanos. Para que gestione las invitaciones que recibe. | Para su medición en tiempo laboral. | En la primera entrada, explicar cómo colocar y a quién invitar. Explicar la diferencia entre primera línea, externos y observadores. |
+| 18 | Organigrama General | Todos | Vista de la jerarquía de la empresa. | Visualizar la estructura organizacional. | Vista de árbol, botones de acción. | Es una pantalla visual de la jerarquía completa. Muestra solo datos básicos (nombre, puesto, acrónimo, teléfono, email, ID empleado). Permite copiar manualmente. Aviso al copiado cuando se graba el nuevo contacto (dura unos minutos). | Visualizar la jerarquía. Copiar datos básicos si se necesita. | Para todos los usuarios. | En la primera entrada, guía al usuario a ver la pantalla y le explica su posición y uso básico. |
+| 19 | Identidad Corporativa | No.1 y primera línea | Configuración de la imagen visual de la empresa. | Definir colores, logo, slogan. | Campos de texto, selectores de color, botones de guardar. | Si está completa o no. Aviso al No.1 y primera línea si no está completa. | Para mantener al día a los administradores generales. Para informar a todos los que intervienen cuando hay cambios. | No.1 y primera línea. | Recuerda la importancia del llenado (se usará diariamente). Recuerda que los objetivos también pueden ser estrategias, y que ambos tienen tiempos. Informa que No.1 y primera línea pueden modificarlos periódicamente. Aviso de cambios: cuando alguien presiona Grabar, todos los que intervienen reciben un aviso (dura un día). Sugerencia al subir foto: informar tamaño y peso actual, y que el sistema soporta mejor resolución. Formato del logo: limitar el tamaño en que aparece. Formato del slogan: debajo y centrado, sin exceder X tamaño. |
+| 20 | Hub de Archivos | Todos | Espacio para subir documentos grandes. | Compartir archivos pesados sin usar el correo. | Área de subida, campos De/Para/Título, botón Enviar. | Número de usuarios (y quiénes) que usan el Hub. Tamaños de cada traslado de información. | Llevar estadística de cuán útil y aprovechado está ese espacio. Posibilidad de evaluar por departamentos o similar. | Para la estadística, si se necesita rastrear algo específico. | Ofrece la información si se necesita en caso necesario. No es parte de la estadística laboral, pero sí de rastreo de casos específicos. |
+| 21 | Otras Actividades | Todos (con autorización) | Módulos de Ventas, Mercadeo, Logística, etc. | Gestionar actividades específicas de cada área. | Por definir. | Queda pendiente. Este ejercicio se hará en cada pantalla que realicemos en cualquier módulo. | | | |
 
 ---
 
@@ -702,7 +633,7 @@
 
 ---
 
-### 33. ACUERDOS POR PANTALLA (Nuevo - En revisión)
+### 33. ACUERDOS POR PANTALLA (En revisión)
 
 > **Nota:** Esta sección se irá completando a medida que revisemos cada pantalla. Los acuerdos aquí registrados son los que ya cerramos. El resto queda en la tabla de pendientes al final.
 
@@ -737,7 +668,7 @@
 |---------|------------------------|
 | **Usuario normal** | Comunicación → Organigrama General → Organigrama Personal |
 | **No.1 (primera vez)** | Comunicación → Organigrama General → Organigrama Personal → **Luego Identidad Corporativa** (antes de cualquier otra cosa) |
-| **Primera Línea (primera vez)** | Comunicación → Organigrama General → Organigrama Personal → **Identidad Corporativa** (la sugerencia depende de si el No.1 ya la completó o no. Si no la completó, Vero les pide que la lean o la terminen). |
+| **Primera Línea (primera vez)** | Comunicación → Organigrama General → Organigrama Personal → **Identidad Corporativa** (la sugerencia depende de si el No.1 ya la completó o no). |
 
 **Sobre el idioma de Vero:**
 - Si el usuario escoge los títulos en inglés, Vero habla inglés.
@@ -755,24 +686,24 @@
 
 1. **Registrar hora de entrada/salida:**
    - Se registra la **primera entrada del día** y la **última salida del día**.
-   - Se calculan las **horas de uso del día** (no importa si entra y sale varias veces).
+   - Se calculan las **horas de uso del día**.
    - Se compara con la sesión anterior para el cálculo diario.
 
 2. **Registrar errores de tipeo:**
    - En **ID**, **contraseña** o **nombre completo**.
-   - El nombre completo es el que está en el perfil (no el que el usuario quiera o como lo llamen).
+   - El nombre completo es el que está en el perfil.
 
 3. **Vero sugiere cambio de contraseña** si hay más de 6 errores en una semana.
 
-4. **Aviso al jefe inmediato** cuando el usuario no puede entrar (por errores repetidos).
+4. **Aviso al jefe inmediato** cuando el usuario **agota sus 7 intentos**.
 
-5. **Aviso al jefe** cuando el usuario resuelve el problema (con ayuda de un compañero o con el correo del jefe). El jefe debe saber que el usuario ya entró de nuevo.
+5. **Aviso al jefe** cuando el usuario resuelve el problema.
 
 6. **Corregir el nombre de Vero:** No debe ser fijo. Debe ser el nombre que el usuario elija.
 
 7. **Sello de agua en el campo de texto:** Debe decir **"Escribe aquí..."**
 
-8. **Mejorar los iconos biométricos** (se ven muy básicos).
+8. **Mejorar los iconos biométricos** (más serios, menos ordinarios). **Solo cambiar el icono, no moverlos.**
 
 9. **Implementar la lógica de biometría** (`intentarBiometria()` no está implementada).
 
@@ -783,10 +714,9 @@
     - **Por texto:** Basta con escribir el comando y presionar Enter.
 
 **Intervención de Vero:**
-- Saludo inicial en Login (ya implementado).
+- Saludo inicial en Login.
 - Sugerir cambio de contraseña si hay más de 6 errores en una semana.
 - Recordar al usuario si teclea algo diferente a lo ya grabado en nombre completo.
-- **Opciones biométricas:** El código ya tiene los botones, pero la lógica `intentarBiometria()` aún no está implementada.
 
 ---
 
@@ -807,11 +737,11 @@
 #### Punto 5: Comunicación
 
 **¿El sistema lo hace?**
-- **No.** La pantalla de Comunicación está vacía en `index.html` (solo tiene un mensaje de "en desarrollo"). No hay botones ni lógica de navegación.
+- **No.** La pantalla de Comunicación está vacía en `index.html`.
 
 **¿Qué hay que modificar/crear?**
-- **Crear:** Toda la pantalla de Comunicación, con sus botones (Correos, Chats, Tareas, Alarmas, Calendario, Hub, Otras Actividades).
-- **Crear:** La lógica para registrar qué módulo se visita (estadística).
+- **Crear:** Toda la pantalla de Comunicación, con sus botones.
+- **Crear:** La lógica para registrar qué módulo se visita.
 
 **Intervención de Vero:**
 - Explica cada botón en la primera visita.
@@ -823,12 +753,11 @@
 **Registrar:**
 - Ingreso a la página y momento de la última salida.
 - Número de correos diarios recibidos.
-- Cuántos contactos diferentes se relacionan al día (contactos únicos).
+- Cuántos contactos diferentes se relacionan al día.
 
 **Para qué:**
 - Medir el tiempo de intervención.
-- Saber en qué parte del horario diario le llevan los correos.
-- Saber con cuántas personas diferentes se comunica al día (complejidad del trabajo).
+- Saber con cuántas personas diferentes se comunica al día.
 
 **Para quién:**
 - Para el registro estadístico del usuario.
@@ -842,19 +771,17 @@
 
 **Registrar:**
 - Número de correos respondidos y tiempo.
-- Número y tiempo de correos sin correlación (que no son respuesta ni reenvío).
+- Número y tiempo de correos sin correlación.
 - Ingreso a la página y momento de la última salida.
 
 **Para qué:**
-- Medir cuánto tiempo y qué tanto lleva responder, solucionar o informar.
-- Medir el tiempo invertido diario en correos.
+- Medir cuánto tiempo lleva responder, solucionar o informar.
 
 **Para quién:**
 - Para el registro estadístico del usuario.
 
 **Vero:**
-- Su intervención depende de lo solicitado por el usuario.
-- Ejemplo: cuando un correo es demasiado grande, sugerir usar el Hub.
+- Sugerir usar el Hub cuando un correo es demasiado grande.
 
 ---
 
@@ -866,10 +793,10 @@
 
 **Para qué:**
 - Orden de información.
-- Ver el peso de información manejada por el usuario en el período estudiado.
+- Ver el peso de información manejada.
 
 **Para quién:**
-- Solo para el peso de información (no es una estadística muy usada).
+- Solo para el peso de información.
 
 **Vero:**
 - Sugerir el traslado para evitar correos pesados en carpetas de entrada y salida.
@@ -880,18 +807,18 @@
 
 **Registrar:**
 - Tiempo, período a borrar, cantidad y peso borrado.
-- Si el usuario borra más de lo habitual (comportamiento inusual).
+- Si el usuario borra más de lo habitual.
 
 **Para qué:**
 - Optimizar el espacio.
-- Detectar comportamientos inusuales (ej. un usuario que borra 5 veces más de lo habitual en un mes con conflictos).
+- Detectar comportamientos inusuales.
 
 **Para quién:**
-- Para el usuario (optimización) y para la empresa (comportamientos inusuales, comparado con su jerarquía).
+- Para el usuario (optimización) y para la empresa (comportamientos inusuales).
 
 **Vero:**
-- Asistir al usuario en sugerir cuándo borrar (optimizar memoria).
-- Guardar y avisar de comportamientos inusuales (comparando con su jerarquía).
+- Asistir al usuario en sugerir cuándo borrar.
+- Guardar y avisar de comportamientos inusuales.
 
 ---
 
@@ -902,107 +829,290 @@
 
 **Para qué:**
 - Optimización de espacio.
-- Evitar que el usuario pierda información que tenía en un borrador olvidado.
+- Evitar que el usuario pierda información.
 
 **Para quién:**
 - Para el usuario.
 
 **Vero:**
-- Avisar al usuario si empezó un correo relacionado con algo que ya había empezado y olvidó (ej. "Ya habías hecho antes, ¿no será lo que tienes en borrador lo que estás haciendo?").
-- Avisar que cada 15 días los borradores se pasarán a Eliminados y realizar el traslado.
+- Avisar si empezó un correo relacionado con algo que ya había empezado.
+- Avisar que cada 15 días los borradores se pasarán a Eliminados.
 
 ---
 
 #### Punto 11: Correos (Spam)
 
 **Registrar:**
-- Tipos de spam y correos de usuarios desconocidos (que no sean publicidad o promociones).
+- Tipos de spam y correos de usuarios desconocidos.
 
 **Para qué:**
 - Mejorar la defensa de la empresa.
-- **Detección de correos legítimos en spam:** Como el ejemplo de un proveedor que envía cotización y el sistema lo marca como spam porque esa empresa envía promociones.
+- Detección de correos legítimos en spam.
 
 **Para quién:**
 - Para el usuario y para los encargados de cómputo.
 
 **Vero:**
 - Avisar al usuario para su revisión de correos puntuales.
-- Avisar que 15 días después se trasladan a Eliminados y realizar el traslado.
-- **Aviso inteligente:** Si Vero detecta que el usuario está trabajando en algo (ej. cotizando llantas) y hay un correo en spam relacionado (ej. "Cotización"), avisar: *"Estás cotizando llantas, parece que un proveedor envió un correo que dice COTIZACIÓN y está en spam."*
-
-**¿Cómo se decide que algo va a spam?**
-- La decisión la toma el proveedor de correo (Gmail, Outlook, etc.), no la compañía ni el usuario.
-- **Stratos** puede tener su propio filtro de spam, independiente del proveedor. Si el usuario marca un correo como "No es spam", Stratos lo recuerda y lo muestra en Recibidos.
-
+- Aviso inteligente si detecta que el usuario está trabajando en algo y hay un correo en spam relacionado.
+- Stratos tiene su propio filtro de spam, independiente del proveedor.
 
 ---
 
-### 34. INVITACIONES Y PERMISOS (Nuevo - Acuerdo parcial)
+#### Punto 12: Chats
 
-> **Nota:** Este tema sigue en revisión. Los acuerdos aquí registrados son los que ya cerramos. El resto queda en la tabla de pendientes al final.
+**Registrar:**
+- Tiempo en chats relacionados al trabajo y contactos involucrados.
 
-**1. Tipos de Contacto y sus Permisos:**
+**Para qué:**
+- Medir junto a correo cuánto tiempo le invierte a correos y chats.
 
-| Tipo | Qué ve | Requiere invitación |
-|------|--------|---------------------|
-| **Directo** | Comunicación directa (primera línea). Ve todo lo que el invitador le autorice (que es lo mismo que el invitador tiene). | Sí |
-| **Observador** | De tu trabajo hacia abajo, en los módulos autorizados. Ve resúmenes y análisis. | Sí |
-| **Indirecto** | De tu primera línea hacia abajo, en los módulos que se le autoricen. Ve resúmenes y análisis. | Sí |
+**Para quién:**
+- Para su medición en tiempo laboral.
 
-**Nota:** Lo importante son los **análisis o resúmenes** de cada módulo, porque eso es lo que más verán los observadores e indirectos.
+**Vero:**
+- Depende de las necesidades del usuario.
 
-**2. Quién puede invitar a quién:**
-- El usuario invita a **su primera línea** (comunicación directa).
-- No se cierra a "No.1 y primera línea". Cualquier usuario puede invitar a su propia primera línea.
-- Un usuario no puede recibir invitación de contacto directo de alguien que no sea su jefe.
-- Un usuario puede recibir invitaciones de Observador o Indirecto de otros usuarios (no de su jefe directo).
+---
 
-**3. Ventana intermedia de selección de módulos:**
-- Es una **lista con un cuadro para marcar** los módulos autorizados.
-- Empieza con la opción **"Todos"** y luego se pueden marcar uno por uno.
-- Aplica para Indirectos (y Observadores, si se decide limitar).
+#### Punto 13: Tareas
 
-**4. Procedimiento de envío de invitación:**
-- Primero el sistema define si envía **correo o mensaje** (según cómo lo registre el usuario).
-- Si el usuario registra ambos, primero envía el **correo**; si es rechazado o no encuentra la dirección, envía el **mensaje**.
-- **Mensaje para Observador:** *"X te invitó a ser un observador de sus resúmenes y análisis Stratos de [lista de módulos]"*
-- **Mensaje para Indirecto:** *"X te invitó a ser un contacto Indirecto de comunicación de los resúmenes y análisis Stratos de su línea directa en [lista de módulos]"*
+**Registrar:**
+- Número de tareas asignadas, tiempo de duración de cada una, variabilidad de tiempo estimado y real.
 
-**5. Visualización de invitaciones recibidas:**
-- La invitación aparece en la **cartelera** (no se borra hasta que se atienda).
-- El usuario puede **Aceptar o Rechazar**.
-- Aparece una señal en el recuadro de **Organigrama Personal**.
-- Debajo del nodo de contacto: lista de quién es Observador (con columna de Aceptado/No aceptado) y lista de quién es Indirecto.
+**Para qué:**
+- Muchas de las estimaciones estadísticas de la operación quedan registradas.
 
-**6. Editar un contacto (cambio de opinión del invitador):**
-- El botón **Editar** permite cambiar los datos del contacto **y también los módulos autorizados**.
-- Los módulos autorizados aparecen debajo, como en el caso de las invitaciones aceptadas.
+**Para quién:**
+- Para mejora de su medición laboral.
+
+**Vero:**
+- Depende de las necesidades del usuario y atención de sugerencias de Vero.
+
+---
+
+#### Punto 14: Alarmas
+
+**Registrar:**
+- Número de alarmas, razones (título), tiempos entre programación y fecha/hora de asignación.
+
+**Para qué:**
+- Mejores estimaciones o afinamiento de la estadística de cumplimiento.
+- Clasificar tipos de alarmas y su incidencia en el desempeño.
+
+**Para quién:**
+- Para su medición en tiempo laboral.
+
+**Vero:**
+- Sugiere títulos para las alarmas.
+- Depende de las necesidades del usuario.
+
+---
+
+#### Punto 15: Calendario
+
+**Registrar:**
+- Toda actividad de cada tarea y tiempo laboral.
+- El historial completo de pasos laborales diarios.
+- Los puntos de control que, unidos por Vero, reconstruyen el proceso real de cada actividad.
+
+**Para qué:**
+- Desarrollo de la semana típica.
+- Dejar constancia laboral.
+- Afinamiento de estadísticas que derivan en KPIs.
+- Convertir la medición de "sensación" en medición de "realidad".
+- Ofrecer un diagrama de tiempo.
+
+**Para quién:**
+- Para su medición en tiempo laboral.
+- Para el propio usuario (como espejo de su desempeño).
+- Para el líder (para que vea la realidad, no la sensación).
+
+**Vero:**
+- Depende de lo solicitado por el usuario.
+- Con el historial y los puntos de control, Vero reconstruye el proceso real y ofrece un diagrama de tiempo.
+- Con el tiempo, Vero puede ofrecer planes de profesionalización y mejora continua.
+
+---
+
+#### Punto 16: Contactos
+
+**Registrar:**
+- Mantiene el registro sincronizado y al día.
+- Medición de cuántas personas se relacionan laboralmente con su trabajo.
+
+**Para qué:**
+- Mostrar la complejidad del trabajo y de su interacción diaria.
+
+**Para quién:**
+- Para su medición en tiempo laboral.
+
+**Vero:**
+- Ayudar a mejorar la información grabada en los contactos.
+- Mostrar que tener los contactos bien catalogados incide en su actividad diaria.
+- Mostrar que no le implica más tiempo (solo dar parámetros de trabajo u órdenes directas).
+
+---
+
+#### Punto 17: Organigrama Personal
+
+**Registrar:**
+- Todo usuario al cual invita y su tipo de comunicación.
+- Las invitaciones recibidas.
+
+**Para qué:**
+- Para que el usuario de forma visual mire quiénes son sus contactos cercanos.
+- Para que gestione las invitaciones que recibe.
+
+**Para quién:**
+- Para su medición en tiempo laboral.
+
+**Vero:**
+- En la primera entrada, explicar cómo colocar y a quién invitar.
+- Explicar la diferencia entre primera línea, externos y observadores.
+
+---
+
+#### Punto 18: Organigrama General
+
+**Registrar:**
+- Es una pantalla visual de la jerarquía completa.
+- Muestra solo datos básicos (nombre, puesto, acrónimo, teléfono, email, ID empleado).
+- Permite copiar manualmente.
+- Aviso al copiado cuando se graba el nuevo contacto (dura unos minutos).
+
+**Para qué:**
+- Visualizar la jerarquía.
+- Copiar datos básicos si se necesita.
+
+**Para quién:**
+- Para todos los usuarios.
+
+**Vero:**
+- En la primera entrada, guía al usuario a ver la pantalla y le explica su posición y uso básico.
+
+---
+
+#### Punto 19: Identidad Corporativa
+
+**Registrar:**
+- Si está completa o no.
+- Aviso al No.1 y primera línea si no está completa.
+
+**Para qué:**
+- Para mantener al día a los administradores generales.
+- Para informar a todos los que intervienen cuando hay cambios.
+
+**Para quién:**
+- No.1 y primera línea.
+
+**Vero:**
+- Recuerda la importancia del llenado (se usará diariamente).
+- Recuerda que los objetivos también pueden ser estrategias, y que ambos tienen tiempos.
+- Informa que No.1 y primera línea pueden modificarlos periódicamente.
+- Aviso de cambios: cuando alguien presiona Grabar, todos los que intervienen reciben un aviso (dura un día).
+- Sugerencia al subir foto: informar tamaño y peso actual, y que el sistema soporta mejor resolución.
+- Formato del logo: limitar el tamaño en que aparece.
+- Formato del slogan: debajo y centrado, sin exceder X tamaño.
+- **Peso máximo del logo:** 2 MB. Si supera, Vero avisa.
+
+---
+
+#### Punto 20: Hub de Archivos
+
+**Registrar:**
+- Número de usuarios (y quiénes) que usan el Hub.
+- Tamaños de cada traslado de información.
+
+**Para qué:**
+- Llevar estadística de cuán útil y aprovechado está ese espacio.
+- Posibilidad de evaluar por departamentos o similar.
+
+**Para quién:**
+- Para la estadística, si se necesita rastrear algo específico.
+
+**Vero:**
+- Ofrece la información si se necesita en caso necesario.
+- No es parte de la estadística laboral, pero sí de rastreo de casos específicos.
+
+---
+
+#### Punto 21: Otras Actividades
+
+**Registrar:**
+- Queda pendiente. Este ejercicio se hará en cada pantalla que realicemos en cualquier módulo.
+
+**Para qué:** (vacío)
+**Para quién:** (vacío)
+**Vero:** (vacío)
+
+---
+
+### 34. INVITACIONES Y PERMISOS (Acuerdo cerrado)
+
+**1. Procedimiento completo de invitación:**
+
+1. El usuario crea un contacto nuevo (Directo, Indirecto u Observador).
+2. Al presionar **Grabar**, salta la pantalla de **envío de invitación** (mismo formato que la creación de contacto).
+3. En esa pantalla:
+   - Se confirman los **datos del invitado**.
+   - Debajo, se define **qué autoriza** (lista de módulos).
+   - **Importante:** El usuario solo ve los módulos que **a él le fueron autorizados**, no el listado completo. Esto es para mantener la jerarquía: yo no puedo autorizar más de lo que tengo autorizado, pero sí puedo limitar o focalizar a mis invitados a módulos específicos.
+   - Si es el **No.1**, ve todos los módulos.
+4. Debajo de la lista de módulos, los botones de **Enviar** o **Editar**.
+   - **Editar:** Regresa a la ventana de edición de contacto.
+5. Al presionar **Enviar**, el sistema envía el correo o mensaje según el proceso definido.
+
+**2. ¿Qué ve cada tipo de contacto?**
+
+| Tipo | Qué ve |
+|------|--------|
+| **Directo (primera línea)** | Ve lo que le autorizan. El que autoriza ve el resumen junto de su primera línea, individual o en los conjuntos que quiera. |
+| **Observador** | Ve los mismos resúmenes del invitador, pero limitado a los módulos que le autorice. |
+| **Indirecto** | Ve lo mismo que la primera línea del invitador, en los módulos que le autorice. |
+
+**Nadie puede editar la información de otro. Solo ver.**
+
+**3. Observador y módulos limitados:**
+- El Observador **también puede tener módulos limitados**.
+- Pero siempre verá desde la misma aprobación que tiene el invitador.
+
+**4. Diferencia entre Observador e Indirecto:**
+- **Observador:** Es para usuarios que invitas a ver desde **tu perspectiva** de información.
+- **Indirecto:** Es para usuarios que conocen tu información desde la **perspectiva de un colaborador directo**, siempre limitado por lo aprobado a ver por parte de quien invita.
+
+**5. Textos de invitación:**
+
+| Tipo | Texto |
+|------|-------|
+| **Directo** | *"[Nombre del invitador] te invitó como contacto directo de comunicación de los resúmenes y análisis Stratos de su línea directa en [lista de módulos]"* |
+| **Observador** | *"[Nombre del invitador] te invitó a ser un observador de sus resúmenes y análisis Stratos de [lista de módulos]"* |
+| **Indirecto** | *"[Nombre del invitador] te invitó a ser un contacto Indirecto de comunicación de los resúmenes y análisis Stratos de su línea directa en [lista de módulos]"* |
+
+**6. Formato de la ventana intermedia de selección de módulos:**
+- Mismos colores y diseño.
+- Mismo tamaño que la ventana de creación de contacto.
+- Si el listado de módulos sobrepasa el espacio, incluir **scroll a la derecha**.
+- **Importante:** El usuario solo ve los módulos que **a él le fueron autorizados**, no el listado completo.
 
 **7. ¿Quién ve el rechazo de una invitación?**
 
 | Relación | ¿El emisor ve la respuesta? |
 |----------|----------------------------|
 | **El emisor es superior (jefe directo)** | **Sí.** Ve si aceptaste o no. |
-| **El emisor es subalterno, igual o de otra área (no es tu jefe directo)** | **No.** No ve si aceptaste o no. |
+| **El emisor es subalterno, igual o de otra área** | **No.** No ve si aceptaste o no. |
 
-**8. Módulo de Invitaciones (procedimiento, no pantalla separada):**
-- Incluye invitaciones de **Directos, Indirectos y Observadores**.
-- Incluye la invitación para **enrutar el banco de datos** (cuando la empresa define su servidor).
-- **Pendiente:** Verlo con detenimiento.
+**8. Manejo de invitaciones a usuarios que ya existen:**
+- Si el invitador intenta invitar a alguien que ya está en la línea directa de otro, el sistema avisa: *"Este usuario ya está registrado en otra rama, debajo de [Nombre del superior]. No se puede registrar en dos posiciones ni ser contacto directo de dos superiores."*
+- No lo vincula automáticamente.
+- No permite la invitación hasta que se aclare la relación.
 
-**9. ¿Qué pasa si alguien ya está en el sistema?**
-- Ya está definido en Minutas (sección 16.6 y 16.7). No se repite aquí.
+**9. Nota importante:**
+- Los **Directos** se guardan en `baseDatosUsuarios` (se inscriben).
+- Los **Indirectos y Observadores** se guardan en listas aparte (`contactosIndirectos` y `observadores`), porque **no se inscriben**. Un usuario puede ser Indirecto y Observador de muchos.
 
-**10. ¿Qué pasa si el invitador cambia de opinión?**
-- Ya está definido en el nodo/ventana del contacto (botones Editar y Eliminar).
+**Pendiente:** La ventana intermedia de selección de módulos queda pendiente hasta que Comunicación esté implementado.
 
----
-
-**Pendientes de este tema (para próximas sesiones):**
-- Definir con detenimiento el Módulo de Invitaciones.
-- Definir si el Observador también puede tener módulos limitados o siempre ve todo.
-- Definir cómo se explica al usuario en la invitación la diferencia entre Observador e Indirecto.
-- Definir el formato exacto de la ventana intermedia de selección de módulos.
 ---
 
 ## PENDIENTES
@@ -1018,62 +1128,60 @@
 
 | # | Acción | Estado |
 |---|--------|--------|
-| 1 | Mover logo + slogan a superior izquierda (implica ajustar toda la parte superior, correr el logo y dividir en dos el espacio superior para que el resto lo ocupe la cartelera; el cuerpo de la pantalla crece) | Cerrado |
-| 2 | Implementar duración de avisos por prioridad | Pendiente |
-| 3 | Asignar duración de 6 segundos al anuncio motivacional diario | Pendiente |
-| 4 | Eliminar Sonido, Vibración, Modo Nocturno de Configuración (el sistema toma los autorizados del dispositivo) e implementar botón de configuración de IA en esa área | Cerrado |
-| 5 | Implementar nuevo flujo de Configuración de IA (gratis, sin restricciones; botón en la misma área donde estaban las tres opciones; el usuario puede regresar a cambiar la configuración de los pasos 3 al 5) | Cerrado |
-| 6 | Implementar saludo "Hola [Nombre]" en Login (cambia antes de presionar ENTRAR al seleccionar el nombre del desplegable; al entrar, saludo en Cartelera solo la primera vez del día para estadísticas de horario; reconocimiento facial/patrón/huella como opciones dentro del mismo Login según dispositivo) | Cerrado |
-| 7 | Crear botón de IA (efectos visuales + sonido + indicador de voz; en todas las pantallas; al presionar se activa micrófono con sonido; requiere comando "Hola [nombre]" para confirmar; ventana emergente aparece cuando la IA responde, se cierra sola después de 0.5 seg., ubicada en la parte inferior central, tamaño compacto, no se puede mover) | Cerrado |
-| 8 | Crear Pantalla de Comunicación (Correos, Chats, Tareas, Alarmas, Calendario, Hub, Otras Actividades) | Pendiente |
-| 9 | Implementar vista principal de Tareas | Pendiente |
-| 10 | Implementar ventana de detalle/creación de Tareas (con área de contexto) | Pendiente |
-| 11 | Implementar comportamiento visual de Tareas (Gantt + color Gauss) | Pendiente |
+| 1 | Mover logo + slogan a superior izquierda | ✅ Hecho |
+| 2 | Implementar duración de avisos por prioridad (10, 6, 4 seg) | Pendiente |
+| 3 | Asignar duración de 6 seg al anuncio motivacional diario y corregir bug del guion "-" | Pendiente |
+| 4 | Eliminar Sonido, Vibración, Modo Nocturno de Configuración | ✅ Hecho |
+| 5 | Implementar nuevo flujo de Configuración de IA | ✅ Hecho |
+| 6 | Implementar saludo "Hola [Nombre]" en Login (cambiar antes de ENTRAR; saludo en Cartelera solo primera vez del día; solo cambiar iconos biométricos, no moverlos) | Pendiente |
+| 7 | Crear botón de IA (efectos visuales + sonido + indicador de voz) | Pendiente (depende de vero.js) |
+| 8 | Crear Pantalla de Comunicación | Pendiente (depende de Comunicación) |
+| 9-10-11 | Biometría: mejorar iconos (más serios) e implementar lógica | Pendiente |
 | 12 | Implementar archivo automático de Tareas | Pendiente |
 | 13 | Implementar vinculación de Contactos | Pendiente |
 | 14 | Implementar alias/nickname en Contactos | Pendiente |
 | 15 | Implementar detección y resolución de discrepancias en Contactos | Pendiente |
 | 16 | Implementar autolimpieza de tareas generadas por IA | Pendiente |
-| 17a | Implementar migración de información (traer datos de Gmail/Outlook a Stratos) | Pendiente |
-| 17b | Implementar atribuciones y capacidades de Vero para apoyar la migración (flujo post-configuración: Vero consulta, trabaja en silencio, avisa pasos, interrumpe solo si hay dudas) | Cerrado |
+| 17a | Implementar migración de información | Pendiente |
+| 17b | Implementar atribuciones y capacidades de Vero para apoyar la migración | Cerrado |
 | 18 | Implementar Hub de Archivos | Pendiente |
 | 19 | Implementar integración con WhatsApp Business | Pendiente |
 | 20 | Implementar Vero como contacto activo en chats | Pendiente |
 | 21 | Implementar vista principal de Alarmas | Pendiente |
-| 22 | Implementar ventana de detalle/creación de Alarmas (con área de contexto) | Pendiente |
+| 22 | Implementar ventana de detalle/creación de Alarmas | Pendiente |
 | 23 | Implementar comportamiento visual de Alarmas | Pendiente |
 | 24 | Implementar botón de borrar en Alarmas con aviso a integrantes | Pendiente |
-| 25 | Implementar Calendario (vistas, mini calendario, columna de notas) | Pendiente |
-| 26 | Implementar sistema de notas (sistema + usuario) en Calendario | Pendiente |
-| 27 | Implementar área de contexto en Tareas y Alarmas (correos/mensajes relacionados) | Pendiente |
-| 28 | Implementar líneas de tiempo en Calendario (procesos completos) | Pendiente |
+| 25 | Implementar Calendario | Pendiente |
+| 26 | Implementar sistema de notas en Calendario | Pendiente |
+| 27 | Implementar área de contexto en Tareas y Alarmas | Pendiente |
+| 28 | Implementar líneas de tiempo en Calendario | Pendiente |
 | 29 | Implementar tipos de contacto (Observador, Indirecto) | Pendiente |
-| 30 | Implementar permisos por rol (No.1, Colaborador, Observador, Indirecto). Revisar cómo están actualmente en el sistema y definir cómo arreglarlo. | Pendiente |
-| 31 | Implementar crecimiento automático del Organigrama General (reconocer jerarquía, avisar al superior vigente cuando alguien de mayor rango se inscribe, refrescar el Organigrama General, avisar al superior cuando alguien de su primera línea se inscribe) | Cerrado (definición) / Pendiente de probar |
-| 32 | Implementar detección de duplicados (mismo celular, correo, nombre) | Pendiente |
-| 33 | Implementar cruce de información al crear primera línea (siempre revisar si hay 1 o más datos repetidos al grabar inscripción; avisar y marcar; opciones Editar o Salvar) | Cerrado (definición) / Pendiente de probar |
-| 34 | Mejorar el banco de datos para que crezca con cada pantalla (capacidad de guardar todos los datos, horarios y todo lo posible desde ahora) | Cerrado (definición) / Pendiente de definir trackings |
-| 35 | Implementar rastro de cada acción del usuario (trazabilidad) | Pendiente |
-| 36 | Implementar backups codificados para lectura no humana | Pendiente |
-| 37 | Implementar parámetros de KPIs (Real, Esperado, Promedio) | Pendiente |
+| 30 | Implementar permisos por rol | Pendiente |
+| 31 | Implementar crecimiento automático del Organigrama General (avisar del error de doble registro) | Pendiente (definición) / Pendiente de probar |
+| 32 | Implementar detección de duplicados | Pendiente |
+| 33 | Implementar cruce de información al crear primera línea (el aviso de duplicados ya tiene Editar/Salvar) | Pendiente (definición) / Pendiente de probar |
+| 34 | Mejorar el banco de datos | Pendiente (definición) |
+| 35 | Implementar rastro de cada acción del usuario | Pendiente |
+| 36 | Implementar backups codificados | Pendiente |
+| 37 | Implementar parámetros de KPIs | Pendiente |
 | 38 | Implementar guía al usuario para establecer KPIs | Pendiente |
-| 39 | Describir cada funcionalidad del Módulo de Comunicación y su diferenciador con otros sistemas | Pendiente |
+| 39 | Describir cada funcionalidad del Módulo de Comunicación | Pendiente |
 | 40 | Implementar pantallas de compilación, módulos y pantallas de aprobación de uso | Pendiente |
-| 41 | Implementar activación, programación y límites de Vero (activación solo con botón presionado; programación con alcances y marcos referenciales; límites definidos y redefinibles) | Cerrado |
-| 42 | Implementar rastreo silencioso y notificaciones (trabajo invisible: sistema registra de cajón, IA pregunta para completar, instrucciones incompletas quedan como nota pendiente) | Cerrado |
-| 43 | Implementar trazabilidad y exhibición a superiores (líneas de tiempo) | Pendiente |
+| 41 | Implementar activación, programación y límites de Vero | Pendiente (depende de vero.js) |
+| 42 | Implementar rastreo silencioso y notificaciones | Pendiente (depende de vero.js) |
+| 43 | Implementar trazabilidad y exhibición a superiores | Pendiente |
 | 44 | Preparar arquitectura para Otras Actividades | Pendiente |
-| 45 | **Próxima revisión de `A_DONDE_VA_STRATOS.md`:** Ajustar redacción y enriquecer el texto, especialmente el punto de Líneas de Tiempo en Calendario (visibilidad, trazabilidad, medición efectiva, ponderación frente a tareas paralelas, practicidad de supervisión, compilación y cruces de información). Revisar coherencia con la descripción del Calendario. | Pendiente |
-| 46 | Integrar IA (Vero) en el sistema: crear archivo `vero.js` con lógica por fases (Gemini → token-free-gateway + DeepSeek → DeepSeek oficial), previendo el cambio de motor sin tocar la lógica de Stratos. Incluir alarma para la IA de Internet cuando se detecte manejo de información sensible. | Pendiente |
-| 47 | Voz de Vero: definir proveedor de texto-a-voz (Google Cloud TTS o Amazon Polly), configurar acento latino e idioma según preferencia del usuario. | Pendiente |
-| 48 | Login: registrar hora de entrada/salida, errores de tipeo (ID, contraseña, nombre completo), avisos al jefe inmediato, sugerencia de cambio de contraseña, corregir nombre de Vero (debe ser configurable), sello de agua "Escribe aquí...", mejorar iconos biométricos, implementar lógica de biometría, implementar lógica de respuesta de Vero (conectar con DeepSeek/Gemini), activación por voz ("Hola [nombre]") y por texto (comando directo). | Pendiente |
-| 49 | Correos: implementar todo el módulo (Recibidos, Enviados, Carpetas, Eliminados, Borradores, Spam) con los registros y la intervención de Vero definidos en los puntos 6 al 11. | Pendiente |
-| 50 | Correos (Spam): implementar filtro de spam propio de Stratos, independiente del proveedor de correo, para que el usuario pueda marcar "No es spam" y Stratos lo recuerde. | Pendiente |
-| 51 | implementar el procedimiento de invitaciones y permisos (Directos, Indirectos, Observadores, enrutamiento del banco de datos) con la mecánica definida en la sección 34. |pendiente|
-| 52 | Implementar la ventana intermedia de selección de módulos (con opción "Todos" y checkboxes individuales). |pendiente|
-| 53 | Implementar la visualización de invitaciones recibidas (cartelera, señal en Organigrama Personal, lista debajo del nodo). |pendiente|
-| 54 | Implementar la lógica de visibilidad del rechazo según relación jerárquica (superior ve, subalterno no ve). |pendiente|
+| 45 | Próxima revisión de `A_DONDE_VA_STRATOS.md` | Pendiente |
+| 46 | Integrar IA (Vero) en el sistema (crear `vero.js`) | Pendiente |
+| 47 | Voz de Vero (Google Cloud TTS o Amazon Polly) | Pendiente |
+| 48 | Login: registrar hora entrada/salida, errores de tipeo, aviso al jefe **solo al agotar intentos**, sugerir cambio de contraseña, corregir nombre de Vero, sello de agua "Escribe aquí..." | Pendiente |
+| 49 | Correos: implementar todo el módulo | Pendiente |
+| 50 | Correos (Spam): implementar filtro de spam propio de Stratos | Pendiente |
+| 51-54 | Invitaciones y permisos (ventana intermedia de selección de módulos) | Pendiente (hasta que Comunicación esté implementado) |
 
+---
+
+**Nota final:** Cuando se solicite el texto para `instrucciones.md`, debe ser **muy claro y bien detallado**. El texto anterior fue demasiado escueto y mezclaba puntos. Para la próxima entrega, cada punto debe incluir: **qué cambiar**, **dónde**, **cómo debe quedar**, sin mezclas ni ambigüedades.
 
 ---
 
