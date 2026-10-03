@@ -731,7 +731,7 @@
    - El nombre completo es el que está en el perfil.
    - **`intentosLogin` es por usuario** (no global).
 
-3. **Vero sugiere cambio de contraseña** si hay más de 6 errores en una semana (7 en 7 días).
+3. **La IA sugiere cambio de contraseña** si hay más de 6 errores en una semana (7 en 7 días).
 
 4. **Aviso al jefe inmediato** cuando el usuario **agota sus 7 intentos**:
    - Se registra en `solicitudesRecuperacion` (ya existe, con `solicitadoA = superiorId`).
@@ -814,7 +814,7 @@
 **Para quién:**
 - Para el registro estadístico del usuario.
 
-**Vero:**
+**IA:**
 - Su intervención depende de lo solicitado por el usuario.
 
 ---
@@ -832,7 +832,7 @@
 **Para quién:**
 - Para el registro estadístico del usuario.
 
-**Vero:**
+**IA:**
 - Sugerir usar el Hub cuando un correo es demasiado grande.
 
 ---
@@ -850,7 +850,7 @@
 **Para quién:**
 - Solo para el peso de información.
 
-**Vero:**
+**IA:**
 - Sugerir el traslado para evitar correos pesados en carpetas de entrada y salida.
 
 ---
@@ -868,7 +868,7 @@
 **Para quién:**
 - Para el usuario (optimización) y para la empresa (comportamientos inusuales).
 
-**Vero:**
+**IA:**
 - Asistir al usuario en sugerir cuándo borrar.
 - Guardar y avisar de comportamientos inusuales.
 
@@ -886,7 +886,7 @@
 **Para quién:**
 - Para el usuario.
 
-**Vero:**
+**IA:**
 - Avisar si empezó un correo relacionado con algo que ya había empezado.
 - Avisar que cada 15 días los borradores se pasarán a Eliminados.
 
@@ -904,7 +904,7 @@
 **Para quién:**
 - Para el usuario y para los encargados de cómputo.
 
-**Vero:**
+**IA:**
 - Avisar al usuario para su revisión de correos puntuales.
 - Aviso inteligente si detecta que el usuario está trabajando en algo y hay un correo en spam relacionado.
 - Stratos tiene su propio filtro de spam, independiente del proveedor.
@@ -922,7 +922,7 @@
 **Para quién:**
 - Para su medición en tiempo laboral.
 
-**Vero:**
+**IA:**
 - Depende de las necesidades del usuario.
 
 ---
@@ -938,7 +938,7 @@
 **Para quién:**
 - Para mejora de su medición laboral.
 
-**Vero:**
+**IA:**
 - Depende de las necesidades del usuario y atención de sugerencias de la IA.
 
 ---
@@ -955,7 +955,7 @@
 **Para quién:**
 - Para su medición en tiempo laboral.
 
-**Vero:**
+**IA:**
 - Sugiere títulos para las alarmas.
 - Depende de las necesidades del usuario.
 
@@ -980,7 +980,7 @@
 - Para el propio usuario (como espejo de su desempeño).
 - Para el líder (para que vea la realidad, no la sensación).
 
-**Vero:**
+**IA:**
 - Depende de lo solicitado por el usuario.
 - Con el historial y los puntos de control, la IA reconstruye el proceso real y ofrece un diagrama de tiempo.
 - Con el tiempo, la IA puede ofrecer planes de profesionalización y mejora continua.
@@ -999,7 +999,7 @@
 **Para quién:**
 - Para su medición en tiempo laboral.
 
-**Vero:**
+**IA:**
 - Ayudar a mejorar la información grabada en los contactos.
 - Mostrar que tener los contactos bien catalogados incide en su actividad diaria.
 - Mostrar que no le implica más tiempo (solo dar parámetros de trabajo u órdenes directas).
@@ -1019,7 +1019,7 @@
 **Para quién:**
 - Para su medición en tiempo laboral.
 
-**Vero:**
+**IA:**
 - En la primera entrada, explicar cómo colocar y a quién invitar.
 - Explicar la diferencia entre primera línea, externos y observadores.
 
@@ -1040,7 +1040,7 @@
 **Para quién:**
 - Para todos los usuarios.
 
-**Vero:**
+**IA:**
 - En la primera entrada, guía al usuario a ver la pantalla y le explica su posición y uso básico.
 
 ---
@@ -1058,7 +1058,7 @@
 **Para quién:**
 - No.1 y primera línea.
 
-**Vero:**
+**IA:**
 - Recuerda la importancia del llenado (se usará diariamente).
 - Recuerda que los objetivos también pueden ser estrategias, y que ambos tienen tiempos.
 - Informa que No.1 y primera línea pueden modificarlos periódicamente.
@@ -1083,7 +1083,7 @@
 **Para quién:**
 - Para la estadística, si se necesita rastrear algo específico.
 
-**Vero:**
+**IA:**
 - Ofrece la información si se necesita en caso necesario.
 - No es parte de la estadística laboral, pero sí de rastreo de casos específicos.
 
@@ -1096,7 +1096,7 @@
 
 **Para qué:** (vacío)
 **Para quién:** (vacío)
-**Vero:** (vacío)
+**IA:** (vacío)
 
 ---
 
@@ -1205,7 +1205,7 @@
 | 6 | Implementar saludo "Hola [Nombre]" en Login (cambiar antes de ENTRAR; saludo en Cartelera solo primera vez del día; solo cambiar iconos biométricos, no moverlos) | ✅ Cerrado (definición) |
 | 7 | Crear botón de IA (efectos visuales + sonido + indicador de voz) | Pendiente (depende de vero.js) |
 | 8 | Crear Pantalla de Comunicación | Pendiente (depende de Comunicación) |
-| 9-10-11 | Biometría: mejorar iconos (más serios) e implementar lógica | Pendiente |
+| 9-10-11 | Biometría: mejorar iconos (más serios) e implementar lógica | ✅ Cerrado (definición) |
 | 12 | Implementar archivo automático de Tareas | Pendiente |
 | 13 | Implementar vinculación de Contactos | Pendiente |
 | 14 | Implementar alias/nickname en Contactos | Pendiente |
