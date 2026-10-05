@@ -1167,7 +1167,7 @@
 
 ---
 
-### 35. REGLAS PARA LOS TEXTOS DE `instrucciones.md` (Nuevo)
+### 35. REGLAS PARA LOS TEXTOS DE `instrucciones.md` (Actualizado)
 
 **Encabezado obligatorio para `instrucciones.md`:**
 
@@ -1176,11 +1176,19 @@
 > 2. **Lee todo lo pertinente antes de trabajar:** `MEMORIA.md`, `A_DONDE_VA_STRATOS.md`, los 4 archivos del sistema y el repositorio en GitHub.
 > 3. **Solo después de leer todo, empieza a trabajar.**
 > 4. **Cuando en este documento se mencione "la IA" o "Vero", se refiere a la IA del sistema que se implementará después. Hoy solo hay que dejar la estructura preparada.**
+> 5. **Este texto es muy detallado a propósito.** No lo resumas ni lo interpretes. Ejecuta exactamente lo que dice.
 
 **Reglas:**
 - Los textos para la IA de VS Code **no deben ser escuetos**. Deben ser muy detallados.
 - **No mencionar a "Vero" directamente** en el texto. Poner "el sistema" o "la IA (cuando esté implementada)".
 - Cada punto debe incluir: **qué cambiar**, **dónde**, **cómo debe quedar**.
+
+**Indicación al final de `instrucciones.md` (NUEVO):**
+
+> **Al terminar:**
+> - Deja todo lo realizado anotado en la Minuta (en el archivo `Minutas de Chats` en GitHub).
+> - Anota también los pendientes que quedaron (si los hay).
+> - Actualiza `MEMORIA.md` con la bitácora de lo hecho.
 
 ---
 
@@ -1247,6 +1255,24 @@
 | 49 | Correos: implementar todo el módulo | Pendiente |
 | 50 | Correos (Spam): implementar filtro de spam propio de Stratos | Pendiente |
 | 51-54 | Invitaciones y permisos (ventana intermedia de selección de módulos) | Pendiente (hasta que Comunicación esté implementado) |
+
+---
+
+### 36. TEMAS QUE DEBEN AÑADIRSE A `A_DONDE_VA_STRATOS.md` (Nuevo)
+
+> **Nota:** Esta sección es para que la IA del sistema sepa qué temas de los definidos en Minutas deben pasar a `A_DONDE_VA_STRATOS.md` (porque son "ley" o "esencia" de Stratos).
+> Cuando se actualice `A_DONDE_VA_STRATOS.md`, esta sección se vacía o se marca como "aplicado".
+
+**Temas pendientes de añadir a `A_DONDE_VA_STRATOS.md`:**
+
+1. **Distinción entre barra de notificaciones y cartelera** (ley de diseño: qué va en cada una).
+   - **Barra de notificaciones:** Avisos inmediatos de confirmación/error/advertencia. Dura 3 segundos.
+   - **Cartelera:** Avisos de prioridad, saludos, mensajes motivacionales. Dura según prioridad (10s, 6s, 4s).
+
+2. **Lógica de horario (primera entrada del día, última salida, cruce de medianoche)** como ley de medición.
+   - Se registra la primera entrada del día y la última salida del día.
+   - Si el usuario entra a las 11 PM y sale a las 12:30 AM, el cierre pertenece al día anterior.
+   - **Lo que se mide:** Cuánto tiempo trabaja al día. Esto visibiliza que los puestos altos (que se rigen por resultados, no por horario) muchas veces trabajan más de 8 horas.
 
 ---
 
