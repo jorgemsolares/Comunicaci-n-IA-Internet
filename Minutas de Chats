@@ -9,10 +9,12 @@
 | Zona | Elemento | Estado |
 |------|----------|--------|
 | **Superior Izquierda** | Logo de Stratos + Slogan de la compañía usuaria | ✅ **Hecho:** Ya está a la izquierda. El sistema ajusta su tamaño (logo: 140px x 40px; slogan: centrado, máx. 140px) para no desconfigurar la estética. |
-| **Superior Restante** | Área de Mensajes (Cartelera) | Fijo |
+| **Superior Restante** | Área de Mensajes (Cartelera) | Fijo (excepto en Login, que no debe tener cartelera). |
 | **Inferior Izquierda** | Sello de agua y slogan de Stratos | Fijo |
 | **Inferior Centro** | Botón de IA | **Nuevo:** Con efectos visuales, sonido de micrófono e indicador de detección de voz |
 | **Inferior Derecha** | Botón "Libro" (Menú General) | Fijo |
+
+**Nota:** La pantalla de Login **NO debe tener cartelera** (para obligar al usuario a entrar).
 
 ---
 
@@ -57,6 +59,21 @@
 - **La IA devuelve los fragmentos** al sistema para que los muestre en la cartelera.
 - **Mientras la IA no esté implementada:** El sistema sigue usando la lógica actual (cortar por comas/puntos), pero **con un filtro** que descarte fragmentos que no sean oraciones completas (guiones, números solos, espacios vacíos).
 
+**Reglas de segmentación (mientras la IA no esté implementada):**
+- Segmento ideal: 51 a 200 caracteres.
+- Máximo: 250 caracteres.
+- **Delimitadores:**
+  - **Coma:** solo es delimitador si el fragmento resultante tiene **al menos 50 caracteres**. Si no, el fragmento se une al anterior o siguiente según la lógica.
+  - **Punto:** siempre es delimitador.
+  - **Punto y coma:** siempre es delimitador (mismo trato que el punto).
+- Si un segmento tiene menos de 50 caracteres, se une al anterior o siguiente según el delimitador:
+  - **Coma (si el fragmento tiene al menos 50 caracteres):** se une al segmento anterior.
+  - **Punto:** se une al segmento siguiente.
+  - **Punto y coma:** se une al segmento siguiente.
+- Si no encuentra delimitador, corta a los 250 caracteres máximo.
+- **Filtro:** Descartar fragmentos que no sean oraciones completas (guiones, números solos, espacios vacíos).
+- **No deben aparecer guiones ni números solos en la cartelera.**
+
 ---
 
 ### 3. CONFIGURACIÓN DE LA ASISTENTE IA – FLUJO INICIAL
@@ -66,13 +83,15 @@
 - ✅ **Hecho:** Se implementó el botón de configuración de IA en esa área.
 - **Regla:** El sistema toma los autorizados del dispositivo (no gestiona sonido, vibración ni modo nocturno).
 - **Debe ser gratis y sin restricciones** (sin tokens diarios ni límites).
+- **Pendiente:** Quitar el campo de texto "Nombre de tu asistente" de Configuración (el nombre se graba en la primera interacción con la IA).
+- **Pendiente:** Quitar el checkbox "Habilitar autenticación biométrica" de Configuración (el enrolamiento va en Perfil).
 
 **Flujo completo (ya implementado):**
 
 1. Usuario completa **Datos Generales**.
 2. Presiona **"Grabar"** → redirige a **Configuración**.
 3. **Configuración de voz:** Un solo botón alterna entre voz masculina y femenina.
-4. **Configuración de nombre:** Campo de texto + botón "Confirmar nombre".
+4. **Configuración de nombre:** (Pendiente de quitar; el nombre lo pregunta la IA).
 5. **Botón "Grabar Cambios":** Guarda, reinicia y redirige a Login.
 6. **Si el usuario regresa:** Puede cambiar la configuración.
 
@@ -91,7 +110,7 @@
 ### 4. PANTALLA DE LOGIN Y SALUDO PERSONALIZADO
 
 **Saludo:**
-- Al presionar "ENTRAR", muestra: **"Hola [Nombre]"**.
+- Al presionar "ENTRAR", muestra: **"Hola [Nombre]"** (el campo "Nombre" del perfil, completo).
 - El nombre se toma del campo **"Nombre"** en Datos Generales (no el nombre completo).
 
 **Redirección:**
@@ -102,7 +121,10 @@
 - Al entrar, el saludo debe aparecer de nuevo en la Cartelera.
 - **Lógica de horario:** El sistema debe marcar **solo la primera entrada del día** y **la última salida del día** (para estadísticas de horario).
 - **Cruce de medianoche:** Si el usuario entra a las 11 PM y sale a las 12:30 AM, el cierre pertenece al día anterior.
-- **Iconos biométricos:** Cambiar por SVG de trazo fino (Opción A: silueta de rostro, cuadrícula de puntos, huella estilizada), en verde Stratos, 44px, sin moverlos de lugar.
+- **Iconos biométricos:** Cambiar por los SVG que están en `Colores-y-Estetica/iconos/` (rostro, patrón, huella), en verde Stratos, 44px, sin moverlos de lugar.
+- **Saludo:** Debe leer el campo "Nombre" del perfil completo (ej. "Jorge Mario"), no cortar en el primer espacio. Si el nombre es largo, el tamaño de letra se ajusta para mantener una línea.
+- **Cartelera en Login:** Quitar la cartelera de Login.
+- **Saludo en Cartelera:** Asegurar que aparezca solo la primera vez del día.
 
 ---
 
@@ -123,7 +145,7 @@
 
 | Aspecto | Definición |
 |---------|------------|
-| **Nombre** | Vero (nombre oficial interno; el usuario lo cambia en Configuración) |
+| **Nombre** | Vero (nombre oficial interno; el usuario lo cambia en su primera interacción con la IA) |
 | **Tipo** | Asistente personal conversacional (no comandos rígidos) |
 | **Interacción** | Ventana emergente + voz en vivo |
 | **Activación** | Botón flotante o comando `"Hola [nombre]"` |
@@ -696,6 +718,8 @@
 **Lo que hay que arreglar:**
 1. Al grabar la configuración (o al registrarse): asignar el `superiorId` del nuevo usuario (ID de quien lo invitó).
 2. Al entrar al Organigrama General: que la función `renderizarOrganigramaGeneral()` incluya al nuevo usuario en la rama correcta.
+3. Quitar el campo de texto "Nombre de tu asistente" (la IA lo pregunta en su primera interacción).
+4. Quitar el checkbox "Habilitar autenticación biométrica" (el enrolamiento va en Perfil).
 
 **Sugerencia de la IA en la primera visita:**
 
@@ -1210,10 +1234,10 @@
 | 3 | Asignar duración de 6 seg al anuncio motivacional diario y corregir bug del guion "-" | En revisión (filtro ahora, fragmentación con IA después) |
 | 4 | Eliminar Sonido, Vibración, Modo Nocturno de Configuración | ✅ Hecho |
 | 5 | Implementar nuevo flujo de Configuración de IA | ✅ Hecho |
-| 6 | Implementar saludo "Hola [Nombre]" en Login (cambiar antes de ENTRAR; saludo en Cartelera solo primera vez del día; solo cambiar iconos biométricos, no moverlos) | ✅ Cerrado (definición) |
+| 6 | Implementar saludo "Hola [Nombre]" en Login (cambiar antes de ENTRAR; saludo en Cartelera solo primera vez del día; cambiar iconos biométricos por los SVG nuevos; saludo debe leer el campo "Nombre" completo) | ✅ Cerrado (definición) / Pendiente de probar |
 | 7 | Crear botón de IA (efectos visuales + sonido + indicador de voz) | Pendiente (depende de vero.js) |
 | 8 | Crear Pantalla de Comunicación | Pendiente (depende de Comunicación) |
-| 9-10-11 | Biometría: mejorar iconos (más serios) e implementar lógica | ✅ Cerrado (definición) |
+| 9-10-11 | Biometría: mejorar iconos (SVG nuevos) e implementar lógica | ✅ Cerrado (definición) / Pendiente de probar |
 | 12 | Implementar archivo automático de Tareas | Pendiente |
 | 13 | Implementar vinculación de Contactos | Pendiente |
 | 14 | Implementar alias/nickname en Contactos | Pendiente |
@@ -1255,6 +1279,13 @@
 | 49 | Correos: implementar todo el módulo | Pendiente |
 | 50 | Correos (Spam): implementar filtro de spam propio de Stratos | Pendiente |
 | 51-54 | Invitaciones y permisos (ventana intermedia de selección de módulos) | Pendiente (hasta que Comunicación esté implementado) |
+| 55 | Cambiar iconos biométricos en Login por los SVG de `Colores-y-Estetica/iconos/` | Pendiente |
+| 56 | Agregar enrolamiento biométrico en Perfil (con los SVG nuevos) | Pendiente |
+| 57 | Quitar cartelera de Login | Pendiente |
+| 58 | Corregir saludo en Login (leer campo "Nombre" completo) | Pendiente |
+| 59 | Quitar campo "Nombre de tu asistente" de Configuración | Pendiente |
+| 60 | Quitar checkbox "Habilitar autenticación biométrica" de Configuración | Pendiente |
+| 61 | Filtrar la cartelera (no mostrar texto completo de Misión, Visión o Valores) | Pendiente |
 
 ---
 
