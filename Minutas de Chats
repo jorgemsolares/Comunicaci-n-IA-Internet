@@ -118,7 +118,7 @@
 **Pendiente de ajuste (punto 6):**
 - El saludo debe cambiar **antes** de presionar "ENTRAR", al seleccionar el nombre del desplegable.
 - Al entrar, el saludo debe aparecer de nuevo en la Cartelera.
-- **Lógica de horario:** El sistema debe marcar **solo la primera entrada del día** y **la última salida del día**.
+- **Lógica de horario:** El sistema debe marcar **solo la primera entrada del día** y **la última salida del día** (con hora y minutos).
 - **Cruce de medianoche:** Si el usuario entra a las 11 PM y sale a las 12:30 AM, el cierre pertenece al día anterior.
 - **Iconos biométricos:** Cambiar por los SVG que están en `Colores-y-Estetica/iconos/` (rostro, patrón, huella), en verde Stratos, 44px, sin moverlos de lugar.
 - **Saludo:** Debe leer el campo "Nombre" del perfil completo (ej. "Jorge Mario"), no el nombre completo del Login. **(Punto 3 de Instrucciones: hecho).**
@@ -164,6 +164,14 @@
 - Sincronización con Gmail/Outlook (correo laboral + personal).
 - Límite de adjuntos: **20 MB**.
 - IA integrada (asistencia por voz/texto, ordenación inteligente, sugerencias).
+
+**Registro de correos (NUEVO - para visibilizar el trabajo invisible):**
+- **Tiempo invertido en cada correo:** desde que se abre hasta que se responde o se archiva.
+- **Personas involucradas:** a quién consultó, a quién copió, a quién respondió.
+- **Acciones generadas:** si el correo derivó en tarea, alarma, llamada, reunión, etc.
+- **Procesos activados:** si derivó en compra, pago, cotización, etc.
+- **Tiempo total del proceso:** no solo el tiempo de respuesta, sino todo lo que implicó resolverlo.
+- **Razón:** Visibilizar que responder un correo no es solo "escribir y enviar". Implica leer, analizar, consultar, coordinar, decidir. Y todo eso es trabajo real que hoy no se mide.
 
 **Hub de Archivos:**
 - Espacio en el servidor de la empresa para documentos grandes.
@@ -419,6 +427,7 @@
   - **Invitaciones:** A quién invitó, quién lo invitó.
   - **Actividad:** Qué hizo (correos, chats, tareas, etc.).
   - **Llamadas y SMS:** Registro del Enlace Móvil.
+  - **Procesos completos:** Para correos, los procesos que activó (personas, acciones, tiempos).
 - Además, **campos libres** para lo que definamos después.
 
 **Migración al cargar:**
@@ -444,6 +453,15 @@
 - Hay que guiar al usuario en cómo establecer KPIs y siempre respetando los establecidos por su superior.
 - Un subalterno no puede crear KPIs que sesguen la información o desalineen la estrategia del superior. Si necesita crear un KPI que altere en gran medida al del superior, debe estudiarse el porqué y activar una revisión con el superior.
 - Los parámetros son: **Real, Esperado, Promedio** (basados en la experiencia del Excel).
+
+**Reflexión (07/10/2026):**
+- Los KPIs actuales suelen medir solo resultados (ej. ventas), no el proceso completo.
+- Ejemplo: un KPI de "visitar 3 tiendas diarias + responder 50 correos" puede ser imposible de cumplir en un horario normal si se suman:
+  - 50 correos × 8 minutos = 6.6 horas.
+  - 3 horas de traslado.
+  - 3 tiendas × 50 minutos = 2.5 horas.
+  - **Total: 12.16 horas.**
+- **Lo que Stratos busca:** Visibilizar ese trabajo invisible (el tiempo real que implica cada actividad) para que los KPIs sean realistas y justos.
 
 ---
 
@@ -654,11 +672,11 @@
 |---|----------|---------------------|-------------|-----------|-------------------------|--------------|----------|------------|----------------------|
 | 1 | Datos Generales (Perfil Personal) | Todos (al inscribirse) | Formulario con nombre, apellidos, correo, celular, ID empleado, contraseña. | Capturar los datos básicos del usuario para crear su perfil. | Campos de texto, botón "Grabar". | El tiempo entre recibir la invitación y abrir la aplicación. Cualquier cambio en una segunda visita. Al presionar GRABAR, debe comenzar a sincronizar correo y WhatsApp. | Medir su nivel de urgencia y compromiso en su primer ingreso. En los cambios posteriores, su nivel de efectividad. | Avisa a quien lo invitó cuando termina su ingreso y configuración. | La IA se activa al final de su configuración. Su participación en esta pantalla es cuando el usuario la visite después de su ingreso inicial, para explicarle que si hace cambios fuera de su contraseña, altera el banco de datos original pero que sí es permitido. |
 | 2 | Configuración | Todos (después del perfil) | Pantalla con opciones de configuración. | Configurar preferencias del usuario. | Casillas de verificación, selector de idioma, Configuración de IA, botón de guardar. | Al grabar, refrescar y actualizar el Organigrama General en todos los usuarios. | Que al ver el Organigrama General, el usuario encuentre su nivel jerárquico. | Para todos, mantener la comunicación al día. | Si el usuario escoge Inglés, la IA hablará en Inglés. |
-| 3 | Login (Acceso) | Todos | Pantalla de ingreso con ID empleado y contraseña. | Permitir el acceso al sistema. | Campos de texto, botón "ENTRAR", casilla "Recordar mi nombre". | Hora exacta de entrada y salida (para calcular tiempo de trabajo diario). Veces que se equivoca en sus entradas. | Mantener estadística de horas laborales diarias y de errores de entrada. | Las horas laborales para mediciones de desempeño. Las equivocaciones para la empresa y para Stratos. | Saludo inicial (primera vez del día). Sugerir cambio de contraseña si se equivoca más de 6 veces en una semana. Recordar al usuario si teclea algo diferente a lo ya grabado en nombre completo. |
+| 3 | Login (Acceso) | Todos | Pantalla de ingreso con ID empleado y contraseña. | Permitir el acceso al sistema. | Campos de texto, botón "ENTRAR", casilla "Recordar mi nombre". | Hora exacta de entrada y salida (con hora y minutos). Veces que se equivoca en sus entradas. | Mantener estadística de horas laborales diarias y de errores de entrada. | Las horas laborales para mediciones de desempeño. Las equivocaciones para la empresa y para Stratos. | Saludo inicial (primera vez del día). Sugerir cambio de contraseña si se equivoca más de 6 veces en una semana. Recordar al usuario si teclea algo diferente a lo ya grabado en nombre completo. |
 | 4 | Pantalla Principal | Todos | Pantalla de inicio con logo, slogan, cartelera de mensajes. | Mostrar el estado del sistema y los avisos. | Cartelera de mensajes, botones de navegación. | Depende de lo que se tenga en ella. | Uniformidad en lo básico de una pantalla Stratos. | Para todos, mostrando identidad uniforme. | Su función depende de lo solicitado. |
 | 5 | Comunicación | Todos | Pantalla de botones que llevan a los submódulos. | Servir de entrada al módulo de Comunicación. | Botones: Correos, Chats, Tareas, Alarmas, Calendario, Hub, Enlace Móvil, Otras Actividades. | Las entradas de cada módulo (estadística de áreas más visitadas). | Conocer el aprovechamiento de la herramienta. | Para entender su comprensión al sistema. | En su primera vez, explicando lo que permite cada botón. |
-| 6 | Correos (Recibidos) | Todos | Listado de correos recibidos. | Gestionar la bandeja de entrada. | Listado, botones de acción. | Ingreso a la página y momento de la última salida. Número de correos diarios recibidos. Cuántos contactos diferentes se relacionan al día. | Medir el tiempo de intervención. Saber con cuántas personas diferentes se comunica al día. | Para su registro estadístico. | Depende de lo solicitado por el usuario. |
-| 7 | Correos (Enviados) | Todos | Listado de correos enviados. | Revisar el historial de envíos. | Listado, botones de acción. | Número de correos respondidos y tiempo. Número y tiempo de correos sin correlación. | Medir cuánto tiempo lleva responder, solucionar o informar. | Para su registro estadístico. | Sugerir usar el Hub cuando un correo es demasiado grande. |
+| 6 | Correos (Recibidos) | Todos | Listado de correos recibidos. | Gestionar la bandeja de entrada. | Listado, botones de acción. | Ingreso a la página y momento de la última salida (con hora y minutos). Número de correos diarios recibidos. Cuántos contactos diferentes se relacionan al día. | Medir el tiempo de intervención. Saber con cuántas personas diferentes se comunica al día. | Para su registro estadístico. | Depende de lo solicitado por el usuario. |
+| 7 | Correos (Enviados) | Todos | Listado de correos enviados. | Revisar el historial de envíos. | Listado, botones de acción. | Número de correos respondidos y tiempo. **Tiempo invertido en cada respuesta o redacción.** Personas involucradas (a quién consultó, copió, respondió). Acciones generadas (tareas, alarmas, llamadas, reuniones). Procesos activados (compra, pago, cotización). | Medir cuánto tiempo lleva responder, solucionar o informar. **Visibilizar todo lo que implicó cada respuesta** (no solo "escribir y enviar"). | Para su registro estadístico. | Sugerir usar el Hub cuando un correo es demasiado grande. |
 | 8 | Correos (Carpetas) | Todos | Vista de carpetas/etiquetas. | Organizar los correos. | Listado de carpetas, botones de acción. | Cada cuánto tiempo pasan los correos a las carpetas creadas. Peso de los correos. | Orden de información. Ver el peso de información manejada. | Solo para el peso de información. | Sugerir el traslado para evitar correos pesados en carpetas de entrada y salida. |
 | 9 | Correos (Eliminados) | Todos | Listado de correos eliminados. | Revisar y recuperar correos eliminados. | Listado, botones de acción. | Tiempo, período a borrar, cantidad y peso borrado. Si el usuario borra más de lo habitual. | Optimizar el espacio. Detectar comportamientos inusuales. | Para el usuario (optimización) y para la empresa (comportamientos inusuales). | Asistir al usuario en sugerir cuándo borrar. Guardar y avisar de comportamientos inusuales. |
 | 10 | Correos (Borradores) | Todos | Listado de correos sin enviar. | Gestionar borradores. | Listado, botones de acción. | Los borradores. | Optimización de espacio. Evitar que el usuario pierda información. | Para el usuario. | Avisar si empezó un correo relacionado con algo que ya había empezado. Avisar que cada 15 días los borradores se pasarán a Eliminados. |
@@ -740,9 +758,9 @@
 **Pendientes:**
 
 1. **Registrar hora de entrada/salida:**
-   - Se registra la **primera entrada del día** y la **última salida del día**.
+   - Se registra la **primera entrada del día** y la **última salida del día** (con hora y minutos).
    - **Cruce de medianoche:** Si el usuario entra a las 11 PM y sale a las 12:30 AM, el cierre pertenece al día anterior.
-   - **Histórico:** 5 años. Guardar hora y minutos.
+   - **Histórico:** 5 años.
 
 2. **Registrar errores de tipeo:**
    - En **ID**, **contraseña** o **nombre completo**.
@@ -918,7 +936,12 @@
 
 > **Antes de empezar:**
 > 1. **Ignora las instrucciones anteriores.**
-> 2. **Lee todo lo pertinente antes de trabajar:** `MEMORIA.md`, `A_DONDE_VA_STRATOS.md`, los 4 archivos del sistema y el repositorio en GitHub.
+> 2. **Lee todo lo pertinente antes de trabajar:**
+>    - `MEMORIA.md` (estado actual del proyecto).
+>    - `A_DONDE_VA_STRATOS.md` (visión completa de Stratos y de la IA).
+>    - Los 4 archivos del sistema: `index.html`, `estilos.css`, `datos.js`, `logica.js`.
+>    - El repositorio del código en GitHub (`Proyecto-Stratos`).
+>    - El repositorio de las Minutas (`Comunicaci-n-IA-Internet`).
 > 3. **Solo después de leer todo, empieza a trabajar.**
 > 4. **Cuando en este documento se mencione "la IA" o "Vero", se refiere a la IA del sistema que se implementará después.**
 > 5. **Este texto es muy detallado a propósito.** No lo resumas ni lo interpretes. Ejecuta exactamente lo que dice.
@@ -926,7 +949,7 @@
 > 7. **PERMISO EXPLÍCITO:** El hecho de que este documento te sea entregado constituye el permiso explícito del Arquitecto para ejecutar los cambios aquí descritos. No necesitas pedir permiso punto por punto. Pero sí debes verificar cada punto antes de pasar al siguiente y reportar "Punto X: hecho" o "Punto X: no se pudo porque [razón]".
 > 8. **Al terminar todo:**
 >    - Guarda en `MEMORIA.md` (bitácora) un resumen de lo solicitado en este documento y de lo que realizaste.
->    - Sincroniza con GitHub (sube los cambios).
+>    - Sincroniza con GitHub (**sube todos los archivos**).
 
 **Reglas:**
 - Los textos para la IA de VS Code **no deben ser escuetos**. Deben ser muy detallados.
@@ -1010,6 +1033,7 @@
 | 61 | Filtrar la cartelera (no mostrar texto completo de Misión, Visión o Valores) | ✅ Hecho |
 | 62 | Centrar el nodo del No.1 en el Organigrama General (horizontalmente y en la parte superior) | ⏳ Pendiente (Punto 1 del nuevo texto). |
 | 63 | Implementar Enlace Móvil (pantalla, proceso de enlace, registro de llamadas y SMS) | Pendiente |
+| 64 | Registrar en correos: tiempo invertido, personas involucradas, acciones generadas, procesos activados (para visibilizar el trabajo invisible) | Pendiente |
 
 ---
 
