@@ -82,8 +82,8 @@
 - ✅ **Hecho:** Se implementó el botón de configuración de IA en esa área.
 - **Regla:** El sistema toma los autorizados del dispositivo (no gestiona sonido, vibración ni modo nocturno).
 - **Debe ser gratis y sin restricciones** (sin tokens diarios ni límites).
-- **Pendiente:** Quitar el campo de texto "Nombre de tu asistente" de Configuración (el nombre se graba en la primera interacción con la IA).
-- **Pendiente:** Quitar el checkbox "Habilitar autenticación biométrica" de Configuración (el enrolamiento va en Perfil).
+- **Pendiente:** Quitar el campo de texto "Nombre de tu asistente" de Configuración (el nombre se graba en la primera interacción con la IA). **(Punto 6 de Instrucciones: hecho).**
+- **Pendiente:** Quitar el checkbox "Habilitar autenticación biométrica" de Configuración (el enrolamiento va en Perfil). **(Punto 7 de Instrucciones: hecho).**
 
 **Flujo completo (ya implementado):**
 
@@ -121,9 +121,9 @@
 - **Lógica de horario:** El sistema debe marcar **solo la primera entrada del día** y **la última salida del día**.
 - **Cruce de medianoche:** Si el usuario entra a las 11 PM y sale a las 12:30 AM, el cierre pertenece al día anterior.
 - **Iconos biométricos:** Cambiar por los SVG que están en `Colores-y-Estetica/iconos/` (rostro, patrón, huella), en verde Stratos, 44px, sin moverlos de lugar.
-- **Saludo:** Debe leer el campo "Nombre" del perfil completo (ej. "Jorge Mario"), no el nombre completo del Login.
-- **Cartelera en Login:** Quitar la cartelera de Login.
-- **Saludo en Cartelera:** Asegurar que aparezca solo la primera vez del día.
+- **Saludo:** Debe leer el campo "Nombre" del perfil completo (ej. "Jorge Mario"), no el nombre completo del Login. **(Punto 3 de Instrucciones: hecho).**
+- **Cartelera en Login:** Quitar la cartelera de Login. **(Punto 4 de Instrucciones: hecho).**
+- **Saludo en Cartelera:** Asegurar que aparezca solo la primera vez del día. **(Punto 5 de Instrucciones: hecho).**
 
 ---
 
@@ -136,7 +136,10 @@
 - Alarmas
 - Calendario
 - Hub de Archivos
+- **Enlace Móvil**
 - **Otras Actividades** (hexágono, colores invertidos, abajo a la derecha)
+
+**Nota:** La pantalla de Comunicación es la entrada al módulo. Cada botón lleva a su pantalla correspondiente.
 
 ---
 
@@ -415,6 +418,7 @@
   - **Permisos:** Qué módulos puede ver.
   - **Invitaciones:** A quién invitó, quién lo invitó.
   - **Actividad:** Qué hizo (correos, chats, tareas, etc.).
+  - **Llamadas y SMS:** Registro del Enlace Móvil.
 - Además, **campos libres** para lo que definamos después.
 
 **Migración al cargar:**
@@ -511,7 +515,7 @@
 - Módulos de Ventas, Mercadeo, Logística, etc.
 - Cada módulo tendrá su propia complejidad y beneficiarios.
 - Stratos no solo medirá, sino que asesorará sobre la mejor fórmula de medición a cada actividad.
-- **Módulo de RH (idea futura):** Vero puede apoyar a RH en la descripción de puestos basada en el historial real de actividades (no en el ideal). Con el historial de quien ocupó el puesto, Vero puede describir: porcentaje de tiempo en cada actividad, contactos críticos, nivel de complejidad, carga de trabajo, etc.
+- **Módulo de RH (idea futura):** La IA puede apoyar a RH en la descripción de puestos basada en el historial real de actividades (no en el ideal). Con el historial de quien ocupó el puesto, la IA puede describir: porcentaje de tiempo en cada actividad, contactos críticos, nivel de complejidad, carga de trabajo, etc.
 
 ---
 
@@ -652,7 +656,7 @@
 | 2 | Configuración | Todos (después del perfil) | Pantalla con opciones de configuración. | Configurar preferencias del usuario. | Casillas de verificación, selector de idioma, Configuración de IA, botón de guardar. | Al grabar, refrescar y actualizar el Organigrama General en todos los usuarios. | Que al ver el Organigrama General, el usuario encuentre su nivel jerárquico. | Para todos, mantener la comunicación al día. | Si el usuario escoge Inglés, la IA hablará en Inglés. |
 | 3 | Login (Acceso) | Todos | Pantalla de ingreso con ID empleado y contraseña. | Permitir el acceso al sistema. | Campos de texto, botón "ENTRAR", casilla "Recordar mi nombre". | Hora exacta de entrada y salida (para calcular tiempo de trabajo diario). Veces que se equivoca en sus entradas. | Mantener estadística de horas laborales diarias y de errores de entrada. | Las horas laborales para mediciones de desempeño. Las equivocaciones para la empresa y para Stratos. | Saludo inicial (primera vez del día). Sugerir cambio de contraseña si se equivoca más de 6 veces en una semana. Recordar al usuario si teclea algo diferente a lo ya grabado en nombre completo. |
 | 4 | Pantalla Principal | Todos | Pantalla de inicio con logo, slogan, cartelera de mensajes. | Mostrar el estado del sistema y los avisos. | Cartelera de mensajes, botones de navegación. | Depende de lo que se tenga en ella. | Uniformidad en lo básico de una pantalla Stratos. | Para todos, mostrando identidad uniforme. | Su función depende de lo solicitado. |
-| 5 | Comunicación | Todos | Pantalla de botones que llevan a los submódulos. | Servir de entrada al módulo de Comunicación. | Botones: Correos, Chats, Tareas, Alarmas, Calendario, Hub, Otras Actividades. | Las entradas de cada módulo (estadística de áreas más visitadas). | Conocer el aprovechamiento de la herramienta. | Para entender su comprensión al sistema. | En su primera vez, explicando lo que permite cada botón. |
+| 5 | Comunicación | Todos | Pantalla de botones que llevan a los submódulos. | Servir de entrada al módulo de Comunicación. | Botones: Correos, Chats, Tareas, Alarmas, Calendario, Hub, Enlace Móvil, Otras Actividades. | Las entradas de cada módulo (estadística de áreas más visitadas). | Conocer el aprovechamiento de la herramienta. | Para entender su comprensión al sistema. | En su primera vez, explicando lo que permite cada botón. |
 | 6 | Correos (Recibidos) | Todos | Listado de correos recibidos. | Gestionar la bandeja de entrada. | Listado, botones de acción. | Ingreso a la página y momento de la última salida. Número de correos diarios recibidos. Cuántos contactos diferentes se relacionan al día. | Medir el tiempo de intervención. Saber con cuántas personas diferentes se comunica al día. | Para su registro estadístico. | Depende de lo solicitado por el usuario. |
 | 7 | Correos (Enviados) | Todos | Listado de correos enviados. | Revisar el historial de envíos. | Listado, botones de acción. | Número de correos respondidos y tiempo. Número y tiempo de correos sin correlación. | Medir cuánto tiempo lleva responder, solucionar o informar. | Para su registro estadístico. | Sugerir usar el Hub cuando un correo es demasiado grande. |
 | 8 | Correos (Carpetas) | Todos | Vista de carpetas/etiquetas. | Organizar los correos. | Listado de carpetas, botones de acción. | Cada cuánto tiempo pasan los correos a las carpetas creadas. Peso de los correos. | Orden de información. Ver el peso de información manejada. | Solo para el peso de información. | Sugerir el traslado para evitar correos pesados en carpetas de entrada y salida. |
@@ -668,7 +672,8 @@
 | 18 | Organigrama General | Todos | Vista de la jerarquía de la empresa. | Visualizar la estructura organizacional. | Vista de árbol, botones de acción. | Es una pantalla visual de la jerarquía completa. Muestra solo datos básicos (nombre, puesto, acrónimo, teléfono, email, ID empleado). Permite copiar manualmente. Aviso al copiado cuando se graba el nuevo contacto (dura unos minutos). | Visualizar la jerarquía. Copiar datos básicos si se necesita. | Para todos los usuarios. | En la primera entrada, guía al usuario a ver la pantalla y le explica su posición y uso básico. |
 | 19 | Identidad Corporativa | No.1 y primera línea | Configuración de la imagen visual de la empresa. | Definir colores, logo, slogan. | Campos de texto, selectores de color, botones de guardar. | Si está completa o no. Aviso al No.1 y primera línea si no está completa. | Para mantener al día a los administradores generales. Para informar a todos los que intervienen cuando hay cambios. | No.1 y primera línea. | Recuerda la importancia del llenado (se usará diariamente). Recuerda que los objetivos también pueden ser estrategias, y que ambos tienen tiempos. Informa que No.1 y primera línea pueden modificarlos periódicamente. Aviso de cambios: cuando alguien presiona Grabar, todos los que intervienen reciben un aviso (dura un día). Sugerencia al subir foto: informar tamaño y peso actual, y que el sistema soporta mejor resolución. Formato del logo: limitar el tamaño en que aparece. Formato del slogan: debajo y centrado, sin exceder X tamaño. Peso máximo del logo: 2 MB. Si supera, la IA avisa. |
 | 20 | Hub de Archivos | Todos | Espacio para subir documentos grandes. | Compartir archivos pesados sin usar el correo. | Área de subida, campos De/Para/Título, botón Enviar. | Número de usuarios (y quiénes) que usan el Hub. Tamaños de cada traslado de información. | Llevar estadística de cuán útil y aprovechado está ese espacio. Posibilidad de evaluar por departamentos o similar. | Para la estadística, si se necesita rastrear algo específico. | Ofrece la información si se necesita en caso necesario. No es parte de la estadística laboral, pero sí de rastreo de casos específicos. |
-| 21 | Otras Actividades | Todos (con autorización) | Módulos de Ventas, Mercadeo, Logística, etc. | Gestionar actividades específicas de cada área. | Por definir. | Queda pendiente. Este ejercicio se hará en cada pantalla que realicemos en cualquier módulo. | | | |
+| 21 | Enlace Móvil | Todos | Registro de llamadas y SMS del celular del usuario. | Medir el tiempo dedicado a llamadas y mensajes. | Barra de búsqueda de contactos, listado de últimas 10 llamadas (4 columnas: Contacto, Hora y día, Tiempo, Botón de llamar), listado de últimos 10 mensajes (3 columnas: Contacto, Hora y día, Descripción 200 caracteres). | Todas las llamadas (entrantes y salientes), incluso a números no registrados. Todos los SMS. | Medir el tiempo por llamada. El resto del análisis viene con la IA. | Para su medición en tiempo laboral. | Por el momento, solo se registra el tiempo por llamada. Hasta que la IA esté implementada, no se pondera ni se analiza. |
+| 22 | Otras Actividades | Todos (con autorización) | Módulos de Ventas, Mercadeo, Logística, etc. | Gestionar actividades específicas de cada área. | Por definir. | Queda pendiente. Este ejercicio se hará en cada pantalla que realicemos en cualquier módulo. | | | |
 
 ---
 
@@ -717,8 +722,8 @@
 **Lo que hay que arreglar:**
 1. Al grabar la configuración (o al registrarse): asignar el `superiorId` del nuevo usuario (ID de quien lo invitó).
 2. Al entrar al Organigrama General: que la función `renderizarOrganigramaGeneral()` incluya al nuevo usuario en la rama correcta.
-3. Quitar el campo de texto "Nombre de tu asistente" (la IA lo pregunta en su primera interacción).
-4. Quitar el checkbox "Habilitar autenticación biométrica" (el enrolamiento va en Perfil).
+3. Quitar el campo de texto "Nombre de tu asistente" (la IA lo pregunta en su primera interacción). **(Punto 6 de Instrucciones: hecho).**
+4. Quitar el checkbox "Habilitar autenticación biométrica" (el enrolamiento va en Perfil). **(Punto 7 de Instrucciones: hecho).**
 
 **Sugerencia de la IA en la primera visita:**
 
@@ -752,21 +757,21 @@
 5. **Contraseña temporal:**
    - **Cualquiera puede generar la contraseña temporal** (el jefe, un compañero, un superior).
    - El aviso **solo le llega al jefe inmediato** de la solicitud.
-   - El usuario la recibe **en correo y en mensaje de texto (SMS)**.
-   - Validez: **un par de horas** (máximo).
+   - El usuario la recibe **en correo y en mensaje de texto (SMS)**. **(Pendiente: envío real, depende de Comunicación).**
+   - Validez: **un par de horas** (máximo). **(Pendiente: caducidad, no existe en el código).**
    - Al entrar, el usuario debe **obligatoriamente cambiar su contraseña**.
 
-6. **Saludo en Login:** Debe leer el campo "Nombre" del perfil completo (no el nombre completo del Login).
+6. **Saludo en Login:** Debe leer el campo "Nombre" del perfil completo (no el nombre completo del Login). **(Punto 3 de Instrucciones: hecho).**
 
-7. **Cartelera en Login:** Quitar la cartelera de Login.
+7. **Cartelera en Login:** Quitar la cartelera de Login. **(Punto 4 de Instrucciones: hecho).**
 
-8. **Saludo en Cartelera:** Asegurar que aparezca solo la primera vez del día.
+8. **Saludo en Cartelera:** Asegurar que aparezca solo la primera vez del día. **(Punto 5 de Instrucciones: hecho).**
 
-9. **Iconos biométricos:** Cambiar por los SVG de `Colores-y-Estetica/iconos/` (rostro, patrón, huella), en verde Stratos, 44px.
+9. **Iconos biométricos:** Cambiar por los SVG de `Colores-y-Estetica/iconos/` (rostro, patrón, huella), en verde Stratos, 44px. **(Puntos 1 y 2 de Instrucciones: hechos).**
 
-10. **Nombre de la IA:** Debe ser configurable (no fijo).
+10. **Nombre de la IA:** Debe ser configurable (no fijo). **(Pendiente: depende de que la IA esté implementada para preguntarlo).**
 
-11. **Sello de agua:** "Escribe aquí...". En inglés: "Type here...".
+11. **Sello de agua:** "Escribe aquí...". En inglés: "Type here...". **(Punto 11 de Instrucciones: hecho).**
 
 ---
 
@@ -786,13 +791,64 @@
 - **No.** La pantalla de Comunicación está vacía en `index.html`.
 
 **¿Qué hay que modificar/crear?**
-- **Crear:** Toda la pantalla de Comunicación, con sus botones.
+- **Crear:** Toda la pantalla de Comunicación, con sus 8 botones (Correos, Chats, Tareas, Alarmas, Calendario, Hub, Enlace Móvil, Otras Actividades).
 
 ---
 
-#### Punto 6-21: Correos, Chats, Tareas, Alarmas, Calendario, Contactos, Hub, Otras Actividades
+#### Punto 6-21: Correos, Chats, Tareas, Alarmas, Calendario, Contactos, Hub, Enlace Móvil, Otras Actividades
 
 **Todos pendientes de implementar.** Los detalles están en la Tabla de Pantallas (sección 31).
+
+---
+
+#### Punto 22: Enlace Móvil (Nuevo)
+
+**¿El sistema lo hace?**
+- **No.** La pantalla de Enlace Móvil no existe.
+
+**¿Qué hay que modificar/crear?**
+- **Crear:** Toda la pantalla de Enlace Móvil.
+
+**Cómo debe quedar:**
+
+1. **Botón en la Pantalla de Comunicación:** "Enlace Móvil" (rectangular).
+
+2. **Al presionar "Enlace Móvil":**
+   - Si el usuario no tiene celular registrado: Le avisa en el letrero *"No tienes registrado un celular. Ve a tu Perfil y complétalo."* Y lo lleva a Perfil.
+   - Si ya tiene celular registrado: Le muestra la pantalla de Enlace Móvil.
+
+3. **Pantalla de Enlace Móvil:**
+   - **Parte superior (mitad de pantalla):**
+     - Barra de búsqueda de contactos.
+     - Listado de **últimas 10 llamadas**, con 4 columnas: Contacto, Hora y día, Tiempo de llamada, Botón de llamar (verde Stratos, icono `llamar.svg`).
+   - **Parte inferior (mitad de pantalla):**
+     - Barra de búsqueda de contactos.
+     - Listado de **últimos 10 mensajes**, con 3 columnas: Contacto, Hora y día, Descripción (200 caracteres).
+   - **Al presionar un contacto (en llamadas):** Lleva al contacto en Contactos. Y hay otro botón aparte para llamar.
+   - **Al presionar un mensaje:** Lleva al mensaje completo.
+   - **Al presionar un contacto (en mensajes):** Lleva al contacto en Contactos.
+   - **Historial:** 3 meses. Después, se traslada a carpetas de historial (como en correos). También se guarda copia de WhatsApp (espejo de la app).
+
+4. **Proceso de enlace:**
+   - **Si la compu tiene Bluetooth:** Enlace por Bluetooth.
+   - **Si la compu no tiene Bluetooth:** El sistema genera un QR. El usuario lo escanea con la cámara del celular, y eso da la autorización para hacer el enlace (sin Bluetooth, en línea).
+
+5. **Qué registra:**
+   - **Todas las llamadas** (entrantes y salientes), incluso a números no registrados.
+   - **Todos los SMS** (no WhatsApp; WhatsApp ya está cubierto por Chats).
+
+6. **Varias líneas telefónicas:**
+   - El sistema está diseñado para **una línea** por usuario. (Si se necesita más, se define después.)
+   - Si el usuario no reporta ni celular ni correo: Le llega un mensaje al jefe inmediato. Pero **tiene que tener al menos uno**, porque en algún lugar recibió la invitación.
+
+7. **Medición:**
+   - **Por el momento, solo se registra el tiempo por llamada.**
+   - **La IA (cuando esté implementada) hará el análisis:** relacionará las llamadas con los correos/mensajes para estimar el tiempo de cada cotización.
+
+**Qué NO hacer:**
+- **NO** implementar la sincronización real con el celular todavía.
+- **NO** implementar la IA todavía.
+- **NO** agregar funciones que no estén en la lista.
 
 ---
 
@@ -877,6 +933,9 @@
 - **No mencionar a "Vero" directamente** en el texto. Poner "el sistema" o "la IA (cuando esté implementada)".
 - Cada punto debe incluir: **qué cambiar**, **dónde**, **cómo debe quedar**, y **qué NO hacer**.
 
+**Registro de respuestas de Cline:**
+- Cuando el Arquitecto copie en el chat de internet las respuestas de Cline, esas respuestas deben quedar registradas en Minutas (para trazabilidad).
+
 ---
 
 ## PENDIENTES
@@ -893,14 +952,14 @@
 | # | Acción | Estado |
 |---|--------|--------|
 | 1 | Mover logo + slogan a superior izquierda | ✅ Hecho |
-| 2 | Implementar duración de avisos por prioridad (10, 6, 4 seg) | ✅ Cerrado (definición) |
-| 3 | Asignar duración de 6 seg al anuncio motivacional diario | En revisión |
+| 2 | Implementar duración de avisos por prioridad (10, 6, 4 seg) | ✅ Hecho (Punto 2 de Instrucciones). |
+| 3 | Asignar duración de 6 seg al anuncio motivacional diario | ✅ Hecho (Punto 8 de Instrucciones). |
 | 4 | Eliminar Sonido, Vibración, Modo Nocturno de Configuración | ✅ Hecho |
 | 5 | Implementar nuevo flujo de Configuración de IA | ✅ Hecho |
-| 6 | Implementar saludo "Hola [Nombre]" en Login | ✅ Cerrado (definición) / Pendiente de probar |
+| 6 | Implementar saludo "Hola [Nombre]" en Login | ✅ Hecho (Punto 3 de Instrucciones). |
 | 7 | Crear botón de IA (efectos visuales + sonido + indicador de voz) | Pendiente (depende de vero.js) |
-| 8 | Crear Pantalla de Comunicación | Pendiente (depende de Comunicación) |
-| 9-10-11 | Biometría: mejorar iconos (SVG nuevos) e implementar lógica | ✅ Cerrado (definición) / Pendiente de probar |
+| 8 | Crear Pantalla de Comunicación (con los 8 botones) | ⏳ Pendiente (Punto 2 del nuevo texto). |
+| 9-10-11 | Biometría: mejorar iconos (SVG nuevos) e implementar lógica | ✅ Hecho (Puntos 1 y 2 de Instrucciones). |
 | 12 | Implementar archivo automático de Tareas | Pendiente |
 | 13 | Implementar vinculación de Contactos | Pendiente |
 | 14 | Implementar alias/nickname en Contactos | Pendiente |
@@ -921,10 +980,10 @@
 | 28 | Implementar líneas de tiempo en Calendario | Pendiente |
 | 29 | Implementar tipos de contacto (Observador, Indirecto) | Pendiente |
 | 30 | Implementar permisos por rol | Pendiente |
-| 31 | Implementar crecimiento automático del Organigrama General | ✅ Cerrado (definición) / Pendiente de probar |
+| 31 | Implementar crecimiento automático del Organigrama General | ✅ Hecho (Punto 31 de Instrucciones anteriores). |
 | 32 | Implementar detección de duplicados | Pendiente |
-| 33 | Implementar cruce de información al crear primera línea | ✅ Cerrado (definición) / Pendiente de probar |
-| 34 | Mejorar el banco de datos | ✅ Cerrado (definición) |
+| 33 | Implementar cruce de información al crear primera línea | ✅ Cerrado (definición) / Pendiente de probar. |
+| 34 | Mejorar el banco de datos | ✅ Hecho (Punto 10 de Instrucciones). |
 | 35 | Implementar rastro de cada acción del usuario | Pendiente |
 | 36 | Implementar backups codificados | Pendiente |
 | 37 | Implementar parámetros de KPIs | Pendiente |
@@ -935,22 +994,22 @@
 | 42 | Implementar rastreo silencioso y notificaciones | Pendiente (depende de vero.js) |
 | 43 | Implementar trazabilidad y exhibición a superiores | Pendiente |
 | 44 | Preparar arquitectura para Otras Actividades | Pendiente |
-| 45 | Próxima revisión de `A_DONDE_VA_STRATOS.md` | Pendiente |
+| 45 | Próxima revisión de `A_DONDE_VA_STRATOS.md` | ✅ Hecho (los dos temas nuevos ya están). |
 | 46 | Integrar IA (Vero) en el sistema (crear `vero.js`) | Pendiente |
 | 47 | Voz de la IA (Google Cloud TTS o Amazon Polly) | Pendiente |
-| 48 | Login: registrar hora entrada/salida, errores de tipeo, aviso al jefe, sugerir cambio de contraseña | ✅ Cerrado (definición) |
-| 49 | Correos: implementar todo el módulo | Pendiente |
+| 48 | Login: registrar hora entrada/salida, errores de tipeo, aviso al jefe, sugerir cambio de contraseña | ✅ Hecho (Punto 11 de Instrucciones, parcial). |
+| 49 | Correos: implementar todo el módulo | ⏳ Pendiente (Punto 3 del nuevo texto). |
 | 50 | Correos (Spam): implementar filtro de spam propio de Stratos | Pendiente |
 | 51-54 | Invitaciones y permisos (ventana intermedia de selección de módulos) | Pendiente (hasta que Comunicación esté implementado) |
-| 55 | Cambiar iconos biométricos en Login por los SVG de `Colores-y-Estetica/iconos/` | ✅ Hecho (Punto 1 del último texto) |
-| 56 | Agregar enrolamiento biométrico en Perfil (con los SVG nuevos) | ✅ Hecho (Punto 2 del último texto) |
-| 57 | Quitar cartelera de Login | ✅ Hecho (Punto 4 del último texto) |
-| 58 | Corregir saludo en Login (leer campo "Nombre" completo) | ✅ Hecho (Punto 3 del último texto) |
-| 59 | Quitar campo "Nombre de tu asistente" de Configuración | ✅ Hecho (Punto 6 del último texto) |
-| 60 | Quitar checkbox "Habilitar autenticación biométrica" de Configuración | ✅ Hecho (Punto 7 del último texto) |
-| 61 | Filtrar la cartelera (no mostrar texto completo de Misión, Visión o Valores) | ✅ Hecho (Punto 8 del último texto) |
-| 62 | Centrar el nodo del No.1 en el Organigrama General (horizontalmente y en la parte superior) | Pendiente |
-| 63 | Actualizar `A_DONDE_VA_STRATOS.md` con los dos temas nuevos (barra de notificaciones vs. cartelera, y lógica de horario) | Pendiente |
+| 55 | Cambiar iconos biométricos en Login por los SVG de `Colores-y-Estetica/iconos/` | ✅ Hecho |
+| 56 | Agregar enrolamiento biométrico en Perfil (con los SVG nuevos) | ✅ Hecho |
+| 57 | Quitar cartelera de Login | ✅ Hecho |
+| 58 | Corregir saludo en Login (leer campo "Nombre" completo) | ✅ Hecho |
+| 59 | Quitar campo "Nombre de tu asistente" de Configuración | ✅ Hecho |
+| 60 | Quitar checkbox "Habilitar autenticación biométrica" de Configuración | ✅ Hecho |
+| 61 | Filtrar la cartelera (no mostrar texto completo de Misión, Visión o Valores) | ✅ Hecho |
+| 62 | Centrar el nodo del No.1 en el Organigrama General (horizontalmente y en la parte superior) | ⏳ Pendiente (Punto 1 del nuevo texto). |
+| 63 | Implementar Enlace Móvil (pantalla, proceso de enlace, registro de llamadas y SMS) | Pendiente |
 
 ---
 
@@ -961,14 +1020,8 @@
 
 **Temas pendientes de añadir a `A_DONDE_VA_STRATOS.md`:**
 
-1. **Distinción entre barra de notificaciones y cartelera** (ley de diseño: qué va en cada una).
-   - **Barra de notificaciones:** Avisos inmediatos de confirmación/error/advertencia. Dura 3 segundos.
-   - **Cartelera:** Avisos de prioridad, saludos, mensajes motivacionales. Dura según prioridad (10s, 6s, 4s).
-
-2. **Lógica de horario (primera entrada del día, última salida, cruce de medianoche)** como ley de medición.
-   - Se registra la primera entrada del día y la última salida del día.
-   - Si el usuario entra a las 11 PM y sale a las 12:30 AM, el cierre pertenece al día anterior.
-   - **Lo que se mide:** Cuánto tiempo trabaja al día. Esto visibiliza que los puestos altos (que se rigen por resultados, no por horario) muchas veces trabajan más de 8 horas.
+1. **Distinción entre barra de notificaciones y cartelera** (ley de diseño: qué va en cada una). ✅ **Aplicado.**
+2. **Lógica de horario (primera entrada del día, última salida, cruce de medianoche)** como ley de medición. ✅ **Aplicado.**
 
 ---
 
