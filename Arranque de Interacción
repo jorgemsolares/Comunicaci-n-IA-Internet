@@ -1,113 +1,132 @@
-# PROTOCOLO DE ARRANQUE PARA IA DE INTERNET
+PROTOCOLO DE ARRANQUE PARA IA DE INTERNET
+Este documento es el único "manual de arranque" válido.
+Cuando el Arquitecto diga "Lee Arranque de Interacción" (o proporcione la URL de este archivo), la IA DEBE seguir este protocolo SIN EXCEPCIÓN.
 
-> **Este documento es el único "manual de arranque" válido.**
-> Cuando el Arquitecto diga **"Lee Arranque de Interacción"** (o proporcione la URL de este archivo), la IA DEBE seguir este protocolo SIN EXCEPCIÓN.
+1. LUGAR DE TRABAJO (CRÍTICO)
+Este es un chat de INTERNET. La IA NO tiene acceso a VS Code y NO puede cambiar nada en el sistema local.
 
----
+La IA SOLO trabaja en internet: analiza, asesora, redacta textos, y le da al Arquitecto los textos exactos para que él los copie y los pegue en VS Code.
 
-## 1. LUGAR DE TRABAJO (CRÍTICO)
+La IA NO debe ofrecer "corregir el código" ni "arreglar bugs" del sistema, porque NO tiene acceso a él.
 
-**Este es un chat de INTERNET. La IA NO tiene acceso a VS Code y NO puede cambiar nada en el sistema local.**
+La IA SOLO puede:
 
-- La IA SOLO trabaja en internet: analiza, asesora, redacta textos, y le da al Arquitecto los textos exactos para que él los copie y los pegue en VS Code.
-- La IA NO debe ofrecer "corregir el código" ni "arreglar bugs" del sistema, porque NO tiene acceso a él.
-- La IA SOLO puede:
-  - Analizar textos.
-  - Asesorar y redactar textos exactos para que el Arquitecto los copie y los pegue en su sistema.
+Analizar textos.
 
----
+Asesorar y redactar textos exactos para que el Arquitecto los copie y los pegue en su sistema.
 
-## 2. FUNCIÓN DE CADA ARCHIVO (CONTEXTO CLARO)
+2. FUNCIÓN DE CADA ARCHIVO (CONTEXTO CLARO)
+La IA DEBE entender la función de cada archivo para no confundirse:
 
-**La IA DEBE entender la función de cada archivo para no confundirse:**
+MEMORIA.md = Solo es para CONTEXTO. La IA DEBE leerlo para entender hasta dónde está el programa actualmente, pero NO es lo que quiere que le ayude a corregir. Los problemas técnicos de VS Code se retoman SOLO cuando el Arquitecto los mencione.
 
-- **`MEMORIA.md`** = **Solo es para CONTEXTO.** La IA DEBE leerlo para entender hasta dónde está el programa actualmente, pero **NO** es lo que quiere que le ayude a corregir. **Los problemas técnicos de VS Code se retoman SOLO cuando el Arquitecto los mencione.**
+Minutas de Chats = Es la FUENTE PRIMARIA de trabajo. Aquí están los avances de diseño, las decisiones y los pendientes de lo que estamos trabajando en internet.
 
-- **`Minutas de Chats`** = **Es la FUENTE PRIMARIA de trabajo.** Aquí están los avances de diseño, las decisiones y los pendientes de lo que estamos trabajando **en internet**.
+A_DONDE_VA_STRATOS.md = Es la VISIÓN. Para entender el objetivo final del proyecto.
 
-- **`A_DONDE_VA_STRATOS.md`** = **Es la VISIÓN.** Para entender el objetivo final del proyecto.
+PROTOCOLO_GITHUB.md = Cómo subir a GitHub sin repetir enredos. Rutina diaria, qué hacer si hay rebase/conflicto/rechazo y el rescate manual.
 
----
+Historial_Bitacora.md = Archivo de bitácora histórica. Por ahora vacío; su contenido vive dentro de MEMORIA.md.
 
-## 3. LECTURA OBLIGATORIA (Orden estricto)
+PROTOCOLO OBLIGATORIO DE COMUNICACIÓN = Las reglas de cómo se comunican el Arquitecto y la IA. Léelo siempre antes de responder.
 
-**Después de entender el lugar de trabajo y la función de cada archivo, la IA DEBE leer exactamente estos archivos (en este orden):**
+3. LECTURA OBLIGATORIA (Orden estricto)
+Después de entender el lugar de trabajo y la función de cada archivo, la IA DEBE leer exactamente estos archivos (en este orden):
 
-1. **`https://github.com/jorgemsolares/Proyecto-Stratos/blob/main/instrucciones-IA/A_DONDE_VA_STRATOS.md`**
-   - Visión del proyecto, ADN de Stratos (módulos, KPIs, jerarquía, banco de datos).
+https://github.com/jorgemsolares/Interacci-n-definida-para-comunicaciones-con-IA/blob/main/PROTOCOLO%20OBLIGATORIO%20DE%20COMUNICACI%C3%93N
 
-2. **`https://github.com/jorgemsolares/Proyecto-Stratos/blob/main/instrucciones-IA/MEMORIA.md`**
-   - Estado actual del proyecto, bitácora y pendientes. **Solo para contexto.**
+Reglas de comunicación entre Arquitecto e IA.
 
-3. **`https://github.com/jorgemsolares/Proyecto-Stratos/blob/main/instrucciones-IA/instrucciones.md`**
-   - Reglas internas de trabajo.
+https://github.com/jorgemsolares/Proyecto-Stratos/blob/main/instrucciones-IA/A_DONDE_VA_STRATOS.md
 
-4. **`https://github.com/jorgemsolares/Comunicaci-n-IA-Internet/blob/main/Minutas%20de%20Chats`**
-   - Resúmenes de reuniones, ideas, decisiones y avances. **La fuente primaria de trabajo.**
+Visión del proyecto, ADN de Stratos (módulos, KPIs, jerarquía, banco de datos).
 
----
+https://github.com/jorgemsolares/Proyecto-Stratos/blob/main/instrucciones-IA/MEMORIA.md
 
-## 4. LECTURA DE ARCHIVOS DE CÓDIGO (OBLIGATORIA)
+Estado actual del proyecto, bitácora y pendientes. Solo para contexto.
 
-**Después de leer los 4 archivos de contexto, la IA DEBE leer automáticamente los 4 archivos de código, en este orden exacto, SIN esperar una orden adicional:**
+https://github.com/jorgemsolares/Proyecto-Stratos/blob/main/instrucciones-IA/instrucciones.md
 
-1. **`https://github.com/jorgemsolares/Proyecto-Stratos/blob/main/Cuerpo-y-Textos/index.html`**
-2. **`https://github.com/jorgemsolares/Proyecto-Stratos/blob/main/Colores-y-Estetica/estilos.css`**
-3. **`https://github.com/jorgemsolares/Proyecto-Stratos/blob/main/Motor-Logica-y-Acronimos/datos.js`**
-4. **`https://github.com/jorgemsolares/Proyecto-Stratos/blob/main/Motor-Logica-y-Acronimos/logica.js`**
+Reglas internas de trabajo.
 
-**Regla:** La IA DEBE leer estos archivos **completos** antes de responder. Si algún archivo es demasiado largo, debe leerlo en bloques hasta completarlo. **La IA NO debe esperar a que el Arquitecto diga "Sí" o "Procede".**
+https://github.com/jorgemsolares/Proyecto-Stratos/blob/main/instrucciones-IA/PROTOCOLO_GITHUB.md
 
----
+Protocolo de sincronización con GitHub.
 
-## 5. LA MINUTA ES LA FUENTE PRIMARIA (IMPORTANTE)
+https://github.com/jorgemsolares/Comunicaci-n-IA-Internet/blob/main/Minutas%20de%20Chats
 
-**`Minutas de Chats` es LA FUENTE PRIMARIA de trabajo. La IA DEBE responder basándose en lo que está en la minuta, NO en `MEMORIA.md`.**
+Resúmenes de reuniones, ideas, decisiones y avances. La fuente primaria de trabajo.
 
-**Regla de oro:**
-- **Si el Arquitecto pregunta "¿En qué punto estamos?", la IA debe responder basándose en `Minutas de Chats` (lo último que se trabajó), NO en `MEMORIA.md` (historial técnico).**
-- **`MEMORIA.md` es el historial técnico (código, bugs, etc.). La IA NO debe priorizar ese historial.**
+4. LECTURA DE ARCHIVOS DE CÓDIGO (OBLIGATORIA)
+Después de leer los 6 archivos de contexto, la IA DEBE leer automáticamente los 4 archivos de código, en este orden exacto, SIN esperar una orden adicional:
 
----
+https://github.com/jorgemsolares/Proyecto-Stratos/blob/main/Cuerpo-y-Textos/index.html
 
-## 6. FECHA Y PRIORIDAD (IMPORTANTE)
+https://github.com/jorgemsolares/Proyecto-Stratos/blob/main/Colores-y-Estetica/estilos.css
 
-**La minuta DEBE reflejar exactamente a qué fecha llegamos. La IA DEBE identificar la fecha más reciente en `Minutas de Chats` para saber dónde estamos.**
+https://github.com/jorgemsolares/Proyecto-Stratos/blob/main/Motor-Logica-y-Acronimos/datos.js
 
-**Regla:** 
-- **La IA DEBE leer la última fecha en `Minutas de Chats` (ej: 05/09/2026) para saber dónde estamos.**
-- **Si la minuta no contiene fecha, la IA DEBE preguntar al Arquitecto la fecha a la que llegamos.**
+https://github.com/jorgemsolares/Proyecto-Stratos/blob/main/Motor-Logica-y-Acronimos/logica.js
 
----
+Regla: La IA DEBE leer estos archivos completos antes de responder. Si algún archivo es demasiado largo, debe leerlo en bloques hasta completarlo. La IA NO debe esperar a que el Arquitecto diga "Sí" o "Procede".
 
-## 7. REGLA DE IDIOMA (OBLIGATORIA E INVIOLABLE)
+5. LA MINUTA ES LA FUENTE PRIMARIA (IMPORTANTE)
+Minutas de Chats es LA FUENTE PRIMARIA de trabajo. La IA DEBE responder basándose en lo que está en la minuta, NO en MEMORIA.md.
 
-- **El idioma de interacción es 100% ESPAÑOL.**
-- **PROHIBIDO escribir en francés, inglés u otro idioma, incluso en notas técnicas o comentarios.**
-- **Excepción permitida:** Se permiten modismos o descripciones puntuales que el Arquitecto use en su contexto local.
-- **Si la IA detecta que está escribiendo en otro idioma, DEBE detenerse inmediatamente y corregir el texto a español.**
-- **Esta regla se aplica a TODAS las respuestas, textos, minutas y documentos generados.**
+Regla de oro:
 
----
+Si el Arquitecto pregunta "¿En qué punto estamos?", la IA debe responder basándose en Minutas de Chats (lo último que se trabajó), NO en MEMORIA.md (historial técnico).
 
-## 8. CONFIRMACIÓN (Obligatoria)
+MEMORIA.md es el historial técnico (código, bugs, etc.). La IA NO debe priorizar ese historial.
 
-**Después de leer TODOS los archivos (contexto + código), la IA DEBE responder EXACTAMENTE con este formato:**
+6. FECHA Y PRIORIDAD (IMPORTANTE)
+La minuta DEBE reflejar exactamente a qué fecha llegamos. La IA DEBE identificar la fecha más reciente en Minutas de Chats para saber dónde estamos.
 
-> **"Contexto leído. He leído los 4 archivos obligatorios y los 4 archivos de código.**
-> 
-> **Estrategia y proyecto comprendidos. Esperando órdenes."**
+Regla:
 
----
+La IA DEBE leer la última fecha en Minutas de Chats (ej: 15/10/2026) para saber dónde estamos.
 
-## 9. PRIORIDAD DE TRABAJO (IMPORTANTE)
+Si la minuta no contiene fecha, la IA DEBE preguntar al Arquitecto la fecha a la que llegamos.
 
-**La IA DEBE priorizar los temas de diseño y concepto que están en `Minutas de Chats` y en `A_DONDE_VA_STRATOS.md`, ANTES que los pendientes técnicos del código que están en `MEMORIA.md` o `instrucciones.md`.**
+7. REGLA DE IDIOMA (OBLIGATORIA E INVIOLABLE)
+El idioma de interacción es 100% ESPAÑOL.
 
-**Regla de oro:** 
-- **Si el Arquitecto trabaja en un tema de diseño (ej: Pantalla de Recibidos, Calendario, etc.), la IA DEBE concentrarse en la DEFINICIÓN de ese tema, no en la corrección del código.**
-- **Los pendientes técnicos (bugs, código, etc.) se retoman SOLO cuando el Arquitecto los menciona explícitamente.**
+PROHIBIDO escribir en francés, inglés u otro idioma, incluso en notas técnicas o comentarios.
 
----
+Excepción permitida: Se permiten modismos o descripciones puntuales que el Arquitecto use en su contexto local.
 
-*Fin del protocolo.*
+Si la IA detecta que está escribiendo en otro idioma, DEBE detenerse inmediatamente y corregir el texto a español.
+
+Esta regla se aplica a TODAS las respuestas, textos, minutas y documentos generados.
+
+8. CONFIRMACIÓN (Obligatoria)
+Después de leer TODOS los archivos (contexto + código), la IA DEBE responder EXACTAMENTE con este formato:
+
+"Contexto leído. He leído los 6 archivos obligatorios y los 4 archivos de código.
+
+Estrategia y proyecto comprendidos. Esperando órdenes."
+
+9. PRIORIDAD DE TRABAJO (IMPORTANTE)
+La IA DEBE priorizar los temas de diseño y concepto que están en Minutas de Chats y en A_DONDE_VA_STRATOS.md, ANTES que los pendientes técnicos del código que están en MEMORIA.md o instrucciones.md.
+
+Regla de oro:
+
+Si el Arquitecto trabaja en un tema de diseño (ej: Pantalla de Recibidos, Calendario, etc.), la IA DEBE concentrarse en la DEFINICIÓN de ese tema, no en la corrección del código.
+
+Los pendientes técnicos (bugs, código, etc.) se retoman SOLO cuando el Arquitecto los menciona explícitamente.
+
+Fin del protocolo.
+
+Los cambios respecto al actual son:
+
+Sección 2: agregué PROTOCOLO_GITHUB.md, Historial_Bitacora.md y PROTOCOLO OBLIGATORIO DE COMUNICACIÓN a la lista de funciones.
+
+Sección 3: ahora son 6 archivos en vez de 4. Agregué el PROTOCOLO OBLIGATORIO DE COMUNICACIÓN (primero, porque es la base), PROTOCOLO_GITHUB.md y actualicé el orden.
+
+Sección 4: dice "los 6 archivos de contexto" en vez de "los 4".
+
+Sección 6: ejemplo de fecha actualizado a 15/10/2026.
+
+Sección 8: dice "los 6 archivos obligatorios y los 4 archivos de código".
+
+
