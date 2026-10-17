@@ -1,766 +1,743 @@
-MINUTAS DE CHATS – ESTRATOS
-DEFINICIONES CONSOLIDADAS
-1. ESTRUCTURA FIJA DE PANTALLA
-Zona	Elemento	Estado
-Superior Izquierda	Logo de Stratos + Slogan de la compañía usuaria	✅ Hecho: logo 140x40px; slogan centrado, máx. 140px.
-Superior Restante	Área de Mensajes (Cartelera)	Fijo (excepto en Login, que no debe tener cartelera).
-Inferior Izquierda	Sello de agua y slogan de Stratos	Fijo
-Inferior Centro	Botón de IA (Vero)	✅ Hecho: efectos visuales, sonido de micrófono e indicador de detección de voz.
-Inferior Derecha	Botón "Libro" (Menú General)	Fijo (excepto en Login).
-Reglas de aparición:
+# MINUTAS DE CHATS – ESTRATOS
 
-Login: NO tiene cartelera, NO tiene botón de IA (Vero), NO tiene botón "Libro". Solo la barra de notificaciones, el formulario de acceso y los 3 iconos biométricos.
+---
 
-Resto de pantallas: cartelera + botón IA + botón Libro, todos visibles.
+## DEFINICIONES CONSOLIDADAS
 
-2. COMPORTAMIENTO DE LA CARTELERA DE AVISOS
-Lo que ya existe:
+### 1. ESTRUCTURA FIJA DE PANTALLA
 
-Rotación automática de avisos.
+| Zona | Elemento | Estado |
+|------|----------|--------|
+| **Superior Izquierda** | Logo de Stratos + Slogan de la compañía usuaria | ✅ **Hecho:** logo 140x40px; slogan centrado, máx. 140px. |
+| **Superior Restante** | Área de Mensajes (Cartelera) | Fijo (excepto en Login, que no debe tener cartelera). |
+| **Inferior Izquierda** | Sello de agua y slogan de Stratos | Fijo |
+| **Inferior Centro** | Botón de IA (Vero) | ✅ **Hecho:** efectos visuales, sonido de micrófono e indicador de detección de voz. |
+| **Inferior Derecha** | Botón "Libro" (Menú General) | Fijo (excepto en Login). |
 
-Desaparición al completar la tarea asociada.
+**Reglas de aparición:**
+- **Login:** NO tiene cartelera, NO tiene botón de IA (Vero), NO tiene botón "Libro". Solo la barra de notificaciones, el formulario de acceso y los 3 iconos biométricos.
+- **Resto de pantallas:** cartelera + botón IA + botón Libro, todos visibles.
 
-Cada mensaje va acompañado de su icono correspondiente.
+---
 
-Duración por prioridad:
+### 2. COMPORTAMIENTO DE LA CARTELERA DE AVISOS
 
-Prioridad	Tipo de aviso	Duración
-Alta	Mensaje de un superior. Aviso de atención inmediata (acciones en menos de 1 hora, correos prioritarios).	10 seg
-Media	Acciones programadas entre 1 hora y 1 día. Mensajes de colegas o subalternos. Anuncio motivacional diario.	6 seg
-Baja	Acciones a más de 1 día. Informativos. Saludo inicial. Avisos de acciones realizadas en silencio.	4 seg
-Separación de elementos:
+**Lo que ya existe:**
+- Rotación automática de avisos.
+- Desaparición al completar la tarea asociada.
+- Cada mensaje va acompañado de su icono correspondiente.
 
-Elemento	Qué es	Duración	Quién lo usa
-Barra de notificaciones (#barra-notificaciones)	Franja superior que se sobrepone. Avisos inmediatos (éxito/advertencia/error). Contraste fijo.	3 seg	El sistema
-Cartelera de mensajes (#zona-cartelera)	Área superior derecha. Fondo translúcido (respeta Identidad Corporativa). Texto con --color-texto. Rota avisos y mensajes motivacionales.	10s / 6s / 4s	El sistema y la IA
-Anuncio Motivacional Diario:
+**Duración por prioridad:**
 
-Cambia 1 vez al día.
+| Prioridad | Tipo de aviso | Duración |
+|-----------|---------------|----------|
+| **Alta** | Mensaje de un superior. Aviso de atención inmediata (acciones en menos de 1 hora, correos prioritarios). | 10 seg |
+| **Media** | Acciones programadas entre 1 hora y 1 día. Mensajes de colegas o subalternos. Anuncio motivacional diario. | 6 seg |
+| **Baja** | Acciones a más de 1 día. Informativos. Saludo inicial. Avisos de acciones realizadas en silencio. | 4 seg |
 
-Duración: 6 seg (prioridad media).
+**Separación de elementos:**
 
-Lógica de segmentación de textos (misión, visión, valores):
+| Elemento | Qué es | Duración | Quién lo usa |
+|----------|--------|----------|--------------|
+| **Barra de notificaciones** (`#barra-notificaciones`) | Franja superior que se sobrepone. Avisos inmediatos (éxito/advertencia/error). Contraste fijo. | 3 seg | El sistema |
+| **Cartelera de mensajes** (`#zona-cartelera`) | Área superior derecha. Fondo translúcido (respeta Identidad Corporativa). Texto con `--color-texto`. Rota avisos y mensajes motivacionales. | 10s / 6s / 4s | El sistema y la IA |
 
-El sistema NO fragmenta el texto. Se lo pasa a la IA completa cuando esté implementada.
+**Anuncio Motivacional Diario:**
+- Cambia 1 vez al día.
+- Duración: 6 seg (prioridad media).
 
-Mientras la IA no esté: el sistema filtra fragmentos que no sean oraciones completas.
+**Lógica de segmentación de textos (misión, visión, valores):**
+- El sistema NO fragmenta el texto. Se lo pasa a la IA completa cuando esté implementada.
+- Mientras la IA no esté: el sistema filtra fragmentos que no sean oraciones completas.
+- Reglas: segmento ideal 51-200 caracteres, máximo 250. Delimitadores: coma (solo si el fragmento tiene ≥50 caracteres), punto y punto y coma (siempre). Sin guiones ni números solos.
 
-Reglas: segmento ideal 51-200 caracteres, máximo 250. Delimitadores: coma (solo si el fragmento tiene ≥50 caracteres), punto y punto y coma (siempre). Sin guiones ni números solos.
+**Estado:** ✅ Hecho.
 
-Estado: ✅ Hecho.
+---
 
-3. CONFIGURACIÓN DE LA ASISTENTE IA – FLUJO INICIAL
-Cambios en Configuración:
+### 3. CONFIGURACIÓN DE LA ASISTENTE IA – FLUJO INICIAL
 
-✅ Se eliminaron Sonido, Vibración, Modo Nocturno.
+**Cambios en Configuración:**
+- ✅ Se eliminaron Sonido, Vibración, Modo Nocturno.
+- ✅ Se implementó el botón de configuración de IA.
+- ✅ Se quitó el campo "Nombre de tu asistente".
+- ✅ Se quitó el checkbox "Habilitar autenticación biométrica".
 
-✅ Se implementó el botón de configuración de IA.
+**Flujo completo:**
+1. Usuario completa Datos Generales.
+2. Presiona "Grabar" → redirige a Configuración.
+3. Configuración de voz: un botón alterna entre voz masculina y femenina.
+4. Botón "Grabar Cambios": guarda, reinicia y redirige a Login.
 
-✅ Se quitó el campo "Nombre de tu asistente".
+**Interacción con la IA:**
 
-✅ Se quitó el checkbox "Habilitar autenticación biométrica".
+| Dispositivo | Visual | Auditiva | Implicación |
+|-------------|--------|----------|-------------|
+| **Computadora** | ☑ | ☐ | "Al desactivar la voz en tu computadora, la IA solo te responderá por escrito." |
+| **Celular** | ☑ | ☑ | "Con voz y texto activos en tu celular, la IA te acompañará como un asistente completo." |
 
-Flujo completo:
+- El usuario no puede desactivar a la IA por completo. Siempre debe haber al menos un canal activo.
+- Duración del aviso: `(número de palabras / 3.5) + 0.75` segundos.
 
-Usuario completa Datos Generales.
+**Estado:** ✅ Hecho.
 
-Presiona "Grabar" → redirige a Configuración.
+---
 
-Configuración de voz: un botón alterna entre voz masculina y femenina.
+### 4. PANTALLA DE LOGIN Y SALUDO PERSONALIZADO
 
-Botón "Grabar Cambios": guarda, reinicia y redirige a Login.
+**Saludo:**
+- Al presionar "ENTRAR" muestra "Hola [Nombre]" (campo "Nombre" del perfil).
+- Tras el saludo, lleva a la Pantalla de Comunicación (o a Identidad si es la primera vez).
 
-Interacción con la IA:
+**Reglas del Login:**
+- NO tiene cartelera.
+- NO tiene botón de IA (Vero).
+- NO tiene botón "Libro" (menú general).
+- Solo tiene: barra de notificaciones, formulario de acceso y los 3 iconos biométricos.
 
-Dispositivo	Visual	Auditiva	Implicación
-Computadora	☑	☐	"Al desactivar la voz en tu computadora, la IA solo te responderá por escrito."
-Celular	☑	☑	"Con voz y texto activos en tu celular, la IA te acompañará como un asistente completo."
-El usuario no puede desactivar a la IA por completo. Siempre debe haber al menos un canal activo.
+**Coincidencia de login:**
+- El login busca coincidencia EXACTA en `nombreCompleto + idEmpleado + contrasena`.
+- Si el usuario edita su perfil, el `nombreCompleto` cambia. El autocompletado (`stratos_recordar` y `usuarios_del_dispositivo`) NO se actualizaba solo. **Corregido el 16/10/2026:** al guardar cambios en el perfil, se actualizan esas dos claves con el nuevo `nombreCompleto` (reemplaza el viejo, no agrega).
 
-Duración del aviso: (número de palabras / 3.5) + 0.75 segundos.
+**Estado:** ✅ Hecho (incluida la sincronización del autocompletado).
 
-Estado: ✅ Hecho.
+---
 
-4. PANTALLA DE LOGIN Y SALUDO PERSONALIZADO
-Saludo:
+### 5. PANTALLA DE COMUNICACIÓN
 
-Al presionar "ENTRAR" muestra "Hola [Nombre]" (campo "Nombre" del perfil).
+**Botones (9):**
+- Correos, Chats, Tareas, Alarmas, Calendario, Hub de Archivos, Enlace Móvil, Reuniones
+- **Otras Actividades** (forma de píldora, abajo a la derecha).
 
-Tras el saludo, lleva a la Pantalla de Comunicación (o a Identidad si es la primera vez).
+**Regla de los 9 botones:**
+- Fondo: `--color-botones` (por defecto `#0b0f19`).
+- Letras: `--color-letras`.
+- Halo/contorno: verde `#00ff88` (principal), naranja `#ff8c00` (secundaria), rojo `#e53935` (irreversible).
+- Efecto unificado: normal con sombra suave; hover con borde iluminado + sombra intensificada + escala 1.08; active con halo intenso + inset.
 
-Reglas del Login:
+**Estado:** ✅ Hecho.
 
-NO tiene cartelera.
+---
 
-NO tiene botón de IA (Vero).
+### 6. LA ASISTENTE IA (NOMBRE OFICIAL INTERNO: VERO)
 
-NO tiene botón "Libro" (menú general).
+| Aspecto | Definición |
+|---------|------------|
+| **Nombre** | Vero (oficial interno; cada usuario la nombra y adecúa a su nivel) |
+| **Tipo** | Asistente personal conversacional |
+| **Interacción** | Ventana emergente + voz en vivo |
+| **Activación** | Botón flotante o comando "Hola [nombre]" |
+| **Principio** | Más rápido y natural que hacerlo con clics |
+| **Proactividad** | Sugiere mejoras, explica su razonamiento. NO da soluciones no pedidas. |
+| **Consentimiento** | No actúa sin confirmación en acciones importantes |
 
-Solo tiene: barra de notificaciones, formulario de acceso y los 3 iconos biométricos.
+**Aclaraciones:**
+- Vero aprende de todos los usuarios.
+- A cada usuario le da información de su persona o de su nivel (si es jefe).
+- Cada quien la adecúa a su nivel (le saca ventaja según su capacidad).
+- Puede aportar soluciones o ventajas aprendidas de otros, sin revelar de dónde.
+- NUNCA datos concretos de otro usuario, salvo que sea de su primera línea o propios.
+- No está obligada a dar soluciones no pedidas; sí puede aportar si el usuario pregunta.
 
-Coincidencia de login:
+---
 
-El login busca coincidencia EXACTA en nombreCompleto + idEmpleado + contrasena.
+### 7. CORREO Y HUB DE ARCHIVOS
 
-Si el usuario edita su perfil, el nombreCompleto cambia. El autocompletado (stratos_recordar y usuarios_del_dispositivo) NO se actualizaba solo. Corregido el 16/10/2026: al guardar cambios en el perfil, se actualizan esas dos claves con el nuevo nombreCompleto (reemplaza el viejo, no agrega).
+**Correo:**
+- Copia funcional de Gmail (Recibidos, Enviados, Carpetas, Eliminados, Borradores, Spam).
+- Sincronización con cualquier proveedor (IMAP/SMTP).
+- Límite de adjuntos: 20 MB.
+- IA integrada.
 
-Estado: ✅ Hecho (incluida la sincronización del autocompletado).
+**Registro de correos:**
+- Tiempo invertido en cada correo.
+- Personas involucradas.
+- Acciones generadas (tareas, alarmas, llamadas, reuniones).
+- Procesos activados.
+- Correos sin correlación (solo copia).
 
-5. PANTALLA DE COMUNICACIÓN
-Botones (9):
+**Hub de Archivos:**
+- Espacio en el servidor de la empresa para documentos grandes.
+- Detección: al adjuntar > 20 MB, la IA avisa y ofrece subir al Hub.
+- Pantalla: subida, campos De/Para/Título, caducidad, contraseña, botón Enviar.
+- Trazabilidad: registro en Correos Enviados.
+- Eliminación automática al expirar el enlace.
 
-Correos, Chats, Tareas, Alarmas, Calendario, Hub de Archivos, Enlace Móvil, Reuniones
+**Estado:** ✅ Hecho (pantalla local).
 
-Otras Actividades (hexágono, abajo a la derecha)
+---
 
-Regla de los 9 botones:
+### 8. CHATS
 
-Fondo: --color-botones (por defecto #0b0f19).
+- Integración con WhatsApp Business.
+- Migración completa de historial.
+- Identificación de contactos internos con fondo corporativo.
+- La IA como contacto activo.
+- Sincronización en segundo plano (vía Coexistencia).
 
-Letras: --color-letras.
+**Estado:** ⏳ Pendiente.
 
-Halo/contorno: verde #00ff88 (principal), naranja #ff8c00 (secundaria), rojo #e53935 (irreversible).
+---
 
-Efecto unificado: normal con sombra suave; hover con borde iluminado + sombra intensificada + escala 1.08; active con halo intenso + inset.
+### 9. TAREAS
 
-Estado: ✅ Hecho.
+**9.1. Vista Principal:** botón "Crear tarea", columnas Título / F. Emisión / Periodo.
+**9.2. Ventana de Detalle:** título, fechas, prioridad, integrantes, área de mensaje/contexto, botones Enviar/Editar.
+**9.3. Comportamiento Visual:** película semitransparente tipo Gantt, verde → rojo según campana de Gauss.
+**9.4. Archivo:** automático al terminar.
+**9.5. Seguimiento:** la IA propone tareas de seguimiento al delegar.
 
-6. LA ASISTENTE IA (NOMBRE OFICIAL INTERNO: VERO)
-Aspecto	Definición
-Nombre	Vero (oficial interno; cada usuario la nombra y adecúa a su nivel)
-Tipo	Asistente personal conversacional
-Interacción	Ventana emergente + voz en vivo
-Activación	Botón flotante o comando "Hola [nombre]"
-Principio	Más rápido y natural que hacerlo con clics
-Proactividad	Sugiere mejoras, explica su razonamiento. NO da soluciones no pedidas.
-Consentimiento	No actúa sin confirmación en acciones importantes
-Aclaraciones:
+**Estado:** ⏳ Pendiente.
 
-Vero aprende de todos los usuarios.
+---
 
-A cada usuario le da información de su persona o de su nivel (si es jefe).
+### 10. ALARMAS
 
-Cada quien la adecúa a su nivel (le saca ventaja según su capacidad).
+**10.1. Vista Principal:** Título, Hora de inicio, Integrantes. Orden por importancia/estado/proximidad.
+**10.2. Ventana de Detalle:** título, hora, periodicidad (única/diaria/semanal/anual), integrantes, sonido del dispositivo.
+**10.3. Comportamiento:** asignación a otros crea tarea de seguimiento; aviso en cartelera; jerarquía y prioridad igual que Tareas.
+**10.4. Botón de Borrar:** en ventana de detalle; al borrar avisa en cartelera a todos los integrantes.
 
-Puede aportar soluciones o ventajas aprendidas de otros, sin revelar de dónde.
+**Estado:** ⏳ Pendiente.
 
-NUNCA datos concretos de otro usuario, salvo que sea de su primera línea o propios.
+---
 
-No está obligada a dar soluciones no pedidas; sí puede aportar si el usuario pregunta.
+### 11. CONTACTOS
 
-7. CORREO Y HUB DE ARCHIVOS
-Correo:
+- Vinculación con Gmail (contactos, nombres, correos, notas, categorías).
+- Alias/nickname en silencio.
+- Detección y resolución de discrepancias.
+- Sugerencia de contactos nuevos por frecuencia.
+- Agrupación por categorías de Gmail.
 
-Copia funcional de Gmail (Recibidos, Enviados, Carpetas, Eliminados, Borradores, Spam).
+**Estado:** ⏳ Pendiente.
 
-Sincronización con cualquier proveedor (IMAP/SMTP).
+---
 
-Límite de adjuntos: 20 MB.
+### 12. CALENDARIO
 
-IA integrada.
+**Distribución:** Logo+Slogan (sup. izq.), Cartelera (sup. centro), Mini calendario (sup. der.), Vista principal (centro), Notas (columna izquierda).
 
-Registro de correos:
+**Vistas:** Día, Semana, Mes, Línea de Tiempo.
 
-Tiempo invertido en cada correo.
+**Notas:** del sistema (inmutables) y del usuario (editables).
 
-Personas involucradas.
+**Asistencia de la IA:** registro silencioso, sugerencias, consultas.
 
-Acciones generadas (tareas, alarmas, llamadas, reuniones).
+**Correos:** no se muestran directamente; van al área de contexto de tareas/alarmas.
 
-Procesos activados.
+**Estado:** ⏳ Pendiente.
 
-Correos sin correlación (solo copia).
+---
 
-Hub de Archivos:
+### 13. MIGRACIÓN COMPLETA
 
-Espacio en el servidor de la empresa para documentos grandes.
+- La IA analiza historial de correos, tareas, contactos y archivos.
+- Detecta datos incompletos, duplicados o inconsistentes.
+- Flujo: consulta al usuario → acepta → IA trabaja en silencio avisando pasos.
 
-Detección: al adjuntar > 20 MB, la IA avisa y ofrece subir al Hub.
+**Estado:** ⏳ Pendiente.
 
-Pantalla: subida, campos De/Para/Título, caducidad, contraseña, botón Enviar.
+---
 
-Trazabilidad: registro en Correos Enviados.
+### 14. SEMANA TÍPICA Y MEJORA CONTINUA
 
-Eliminación automática al expirar el enlace.
+- Marco de orden y rendimiento que se adapta a imprevistos.
+- La IA analiza cargas, tiempos, prioridades y sugiere ajustes.
+- Ciclo: uso → análisis → sugerencia → aceptación → rutinas → hábitos → productividad.
 
-Estado: ✅ Hecho (pantalla local).
+**Estado:** ⏳ Pendiente.
 
-8. CHATS
-Integración con WhatsApp Business.
+---
 
-Migración completa de historial.
+### 15. NUEVO ALCANCE DE STRATOS (Trabajo invisible y medición justa)
 
-Identificación de contactos internos con fondo corporativo.
+- Medir procesos completos, no solo resultados.
+- Valorar esfuerzo de coordinación, negociación y gestión.
+- Considerar cambios de líderes que afectan plazos.
+- Se logra con: líneas de tiempo, notas del sistema y consulta a la IA.
 
-La IA como contacto activo.
+**Estado:** ⏳ Pendiente.
 
-Sincronización en segundo plano (vía Coexistencia).
+---
 
-Estado: ⏳ Pendiente.
+### 16. ORGANIGRAMA Y PERMISOS
 
-9. TAREAS
-9.1. Vista Principal: botón "Crear tarea", columnas Título / F. Emisión / Periodo.
-9.2. Ventana de Detalle: título, fechas, prioridad, integrantes, área de mensaje/contexto, botones Enviar/Editar.
-9.3. Comportamiento Visual: película semitransparente tipo Gantt, verde → rojo según campana de Gauss.
-9.4. Archivo: automático al terminar.
-9.5. Seguimiento: la IA propone tareas de seguimiento al delegar.
+**16.1. Tipos de Contacto:** Observador (ve tu área, no edita, requiere invitación), Indirecto (ve desde la primera línea de quien lo invita, no edita, requiere invitación).
+**16.2. Permisos por Rol:** No.1 (ve todo, edita lo suyo), Colaborador (según jerarquía), Observador (ve, no edita), Indirecto (ve, no edita).
+**16.3. Crecimiento Automático:** al crear primera línea, el sistema reconoce superiores y subalternos previos. Se actualiza solo con cambios jerárquicos. Avisa si hay doble registro.
+**16.4. Detección de Duplicados:** mismo celular, correo o nombre. Nombres con tildes/apóstrofes respetados; solo mayúsculas ignoradas.
+**16.8. Centrado del Nodo No.1:** corregido el 11/10/2026. Causa: orden de reglas CSS + caché. Solución: mover `.org-general-rama-nivel-0` después de `.org-general-rama` y agregar `?v=3` al link del CSS.
 
-Estado: ⏳ Pendiente.
+**Estado:** ✅ Hecho.
 
-10. ALARMAS
-10.1. Vista Principal: Título, Hora de inicio, Integrantes. Orden por importancia/estado/proximidad.
-10.2. Ventana de Detalle: título, hora, periodicidad (única/diaria/semanal/anual), integrantes, sonido del dispositivo.
-10.3. Comportamiento: asignación a otros crea tarea de seguimiento; aviso en cartelera; jerarquía y prioridad igual que Tareas.
-10.4. Botón de Borrar: en ventana de detalle; al borrar avisa en cartelera a todos los integrantes.
+---
 
-Estado: ⏳ Pendiente.
+### 17. BANCO DE DATOS Y TRAZABILIDAD
 
-11. CONTACTOS
-Vinculación con Gmail (contactos, nombres, correos, notas, categorías).
+**Ficha `bancoDatos` por usuario:**
+- Días/Sesiones, Errores, Permisos, Invitaciones, Actividad, Llamadas y SMS, Procesos completos, Campos libres.
+- Histórico: 5 años, con hora y minutos.
 
-Alias/nickname en silencio.
+**Migración al cargar:** respaldo previo, rellenar campos nuevos sin borrar nada.
 
-Detección y resolución de discrepancias.
+**El banco de datos registra también las ediciones de Identidad Corporativa** (quién, cuándo, qué cambió: misión, visión, valores, colores, logo, slogan, tipografía, estilo).
 
-Sugerencia de contactos nuevos por frecuencia.
+**Estado:** ✅ Hecho.
 
-Agrupación por categorías de Gmail.
+---
 
-Estado: ⏳ Pendiente.
+### 18. BACKUPS CODIFICADOS
 
-12. CALENDARIO
-Distribución: Logo+Slogan (sup. izq.), Cartelera (sup. centro), Mini calendario (sup. der.), Vista principal (centro), Notas (columna izquierda).
+- La compañía puede leerlos, pero la información queda codificada para lectura humana difícil.
+- El sistema sí puede leerla y usarla para mediciones y reportes.
 
-Vistas: Día, Semana, Mes, Línea de Tiempo.
+**Estado:** ⏳ Pendiente.
 
-Notas: del sistema (inmutables) y del usuario (editables).
+---
 
-Asistencia de la IA: registro silencioso, sugerencias, consultas.
+### 19. KPIs
 
-Correos: no se muestran directamente; van al área de contexto de tareas/alarmas.
+- Cualquier persona con personal a cargo puede crear KPIs.
+- La IA asesora al líder mostrando módulos y actividades que pueden alimentarlos, y sugiere ponderaciones realistas.
+- Parámetros: Real, Esperado, Promedio.
+- Un subalterno no puede crear KPIs que sesguen al superior.
 
-Estado: ⏳ Pendiente.
+**Reflexión 07/10/2026:** los KPIs actuales miden solo resultados. Ejemplo: 50 correos × 8 min = 6.6h + 3h traslado + 3 tiendas × 50 min = 2.5h → total 12.16h. Stratos busca visibilizar ese trabajo invisible.
 
-13. MIGRACIÓN COMPLETA
-La IA analiza historial de correos, tareas, contactos y archivos.
+**Estado:** ⏳ Pendiente.
 
-Detecta datos incompletos, duplicados o inconsistentes.
+---
 
-Flujo: consulta al usuario → acepta → IA trabaja en silencio avisando pasos.
+### 20. MÓDULO DE COMUNICACIÓN – DESCRIPCIÓN DE FUNCIONALIDADES
 
-Estado: ⏳ Pendiente.
+- Debe tener las funciones de Gmail/Outlook (obligatorio).
+- Diferenciador: la asistencia ejecutiva (IA).
+- Describir cada funcionalidad que mejora la interacción vs otros sistemas.
 
-14. SEMANA TÍPICA Y MEJORA CONTINUA
-Marco de orden y rendimiento que se adapta a imprevistos.
+**Estado:** ⏳ Pendiente.
 
-La IA analiza cargas, tiempos, prioridades y sugiere ajustes.
+---
 
-Ciclo: uso → análisis → sugerencia → aceptación → rutinas → hábitos → productividad.
+### 21. MODULARIDAD – PANTALLAS
 
-Estado: ⏳ Pendiente.
+- El modular es forma de comercializar y ordenar el sistema en pantallas sencillas.
+- Patrón: pantalla de compilación (entrada al módulo) → grupo de pantallas → pantalla que lleva a otro módulo → pantalla solo No.1 y primera línea.
+- Luego vendrán pantallas de aprobación de uso.
 
-15. NUEVO ALCANCE DE STRATOS (Trabajo invisible y medición justa)
-Medir procesos completos, no solo resultados.
+**Estado:** ✅ Hecho.
 
-Valorar esfuerzo de coordinación, negociación y gestión.
+---
 
-Considerar cambios de líderes que afectan plazos.
+### 22. LA IA – ACTIVACIÓN, PROGRAMACIÓN Y LÍMITES
 
-Se logra con: líneas de tiempo, notas del sistema y consulta a la IA.
+**Activación:** solo con botón presionado. No funciona en segundo plano. Comando de voz: "Hola [nombre]".
+**Programación:** el usuario puede programar a la IA para tareas en horarios específicos.
+**Límites:** solo accede a módulos autorizados por el No.1; no accede a información de otros sin jerarquía; respeta legalidad y ética; no actúa sin confirmación; sugiere, no impone.
 
-Estado: ⏳ Pendiente.
+**Estado:** ⏳ Pendiente.
 
-16. ORGANIGRAMA Y PERMISOS
-16.1. Tipos de Contacto: Observador (ve tu área, no edita, requiere invitación), Indirecto (ve desde la primera línea de quien lo invita, no edita, requiere invitación).
-16.2. Permisos por Rol: No.1 (ve todo, edita lo suyo), Colaborador (según jerarquía), Observador (ve, no edita), Indirecto (ve, no edita).
-16.3. Crecimiento Automático: al crear primera línea, el sistema reconoce superiores y subalternos previos. Se actualiza solo con cambios jerárquicos. Avisa si hay doble registro.
-16.4. Detección de Duplicados: mismo celular, correo o nombre. Nombres con tildes/apóstrofes respetados; solo mayúsculas ignoradas.
-16.8. Centrado del Nodo No.1: corregido el 11/10/2026. Causa: orden de reglas CSS + caché. Solución: mover .org-general-rama-nivel-0 después de .org-general-rama y agregar ?v=3 al link del CSS.
+---
 
-Estado: ✅ Hecho.
+### 23. TRABAJO INVISIBLE
 
-17. BANCO DE DATOS Y TRAZABILIDAD
-Ficha bancoDatos por usuario:
+**El sistema hace de cajón:** registrar acciones en pantallas, tiempos de entrada, actividades de análisis, avisos de término.
+**La IA pregunta:** confirmación de solicitudes complejas, si puede hacer algo, completar instrucciones mal dadas.
+**Principio:** natural y no intrusivo.
 
-Días/Sesiones, Errores, Permisos, Invitaciones, Actividad, Llamadas y SMS, Procesos completos, Campos libres.
+**Estado:** ⏳ Pendiente.
 
-Histórico: 5 años, con hora y minutos.
+---
 
-Migración al cargar: respaldo previo, rellenar campos nuevos sin borrar nada.
+### 24. LÍNEAS DE TIEMPO EN CALENDARIO
 
-El banco de datos registra también las ediciones de Identidad Corporativa (quién, cuándo, qué cambió: misión, visión, valores, colores, logo, slogan, tipografía, estilo).
+- Importancia de la trazabilidad y exhibición a superiores del total de actividades.
 
-Estado: ✅ Hecho.
+**Estado:** ⏳ Pendiente.
 
-18. BACKUPS CODIFICADOS
-La compañía puede leerlos, pero la información queda codificada para lectura humana difícil.
+---
 
-El sistema sí puede leerla y usarla para mediciones y reportes.
+### 25. PROYECTOS FUTUROS – OTRAS ACTIVIDADES
 
-Estado: ⏳ Pendiente.
+- Módulos de Ventas, Mercadeo, Logística, etc.
+- Stratos asesorará sobre la mejor fórmula de medición a cada actividad.
+- Módulo RH (idea futura): la IA apoya descripción de puestos con historial real.
 
-19. KPIs
-Cualquier persona con personal a cargo puede crear KPIs.
+**Estado:** ⏳ Pendiente.
 
-La IA asesora al líder mostrando módulos y actividades que pueden alimentarlos, y sugiere ponderaciones realistas.
+---
 
-Parámetros: Real, Esperado, Promedio.
+### 26. TEMAS FUTUROS
 
-Un subalterno no puede crear KPIs que sesguen al superior.
+- Google Maps / Waze dentro de Stratos (tiempo real de viajeros).
+- Enlace del Teléfono (Llamadas y SMS), tipo "Enlace Móvil" de Windows.
+- Prioridad de próximos módulos: 1) Enlace de teléfono; 2) Mapas.
 
-Reflexión 07/10/2026: los KPIs actuales miden solo resultados. Ejemplo: 50 correos × 8 min = 6.6h + 3h traslado + 3 tiendas × 50 min = 2.5h → total 12.16h. Stratos busca visibilizar ese trabajo invisible.
+**Estado:** ⏳ Pendiente.
 
-Estado: ⏳ Pendiente.
+---
 
-20. MÓDULO DE COMUNICACIÓN – DESCRIPCIÓN DE FUNCIONALIDADES
-Debe tener las funciones de Gmail/Outlook (obligatorio).
+### 27. ESTRATEGIA DE INTEGRACIÓN DE IA (Confirmado)
 
-Diferenciador: la asistencia ejecutiva (IA).
+| Fase | Motor | Cuándo | Por qué |
+|------|-------|--------|---------|
+| 1 | Gemini (capa gratuita) | Hoy | Sin tarjeta ni costo. Prototipar. Prohibido usar datos reales. |
+| 2 | token-free-gateway + DeepSeek | Cuando el sistema esté "vendible" | Sin tarjeta ni costo. Respeta privacidad. |
+| 3 | DeepSeek (API oficial) | Cuando se lleve a una empresa | Datos reales. Privacidad garantizada. |
 
-Describir cada funcionalidad que mejora la interacción vs otros sistemas.
+**Alarma:** la IA de internet debe avisar cuando detecte datos reales o sensibles.
 
-Estado: ⏳ Pendiente.
+**Estado:** ✅ Confirmado.
 
-21. MODULARIDAD – PANTALLAS
-El modular es forma de comercializar y ordenar el sistema en pantallas sencillas.
+---
 
-Patrón: pantalla de compilación (entrada al módulo) → grupo de pantallas → pantalla que lleva a otro módulo → pantalla solo No.1 y primera línea.
+### 28. DEFINICIONES DE VERO.JS
 
-Luego vendrán pantallas de aprobación de uso.
+1. Conexión con motor de IA (URL y clave).
+2. Activación y comando de voz.
+3. Interacción (ventana emergente, estados, cierre automático, onboarding).
+4. Memoria y aprendizaje (`agent-memory`).
+5. Límites y permisos.
+6. Asistencia y sugerencias.
+7. Medición del trabajo invisible.
+8. Registro y trazabilidad.
+9. Resúmenes ejecutivos.
+10. Manejo de errores.
+11. Detección de sesgos y errores.
+12. Reuniones de revisión con la IA.
 
-Estado: ✅ Hecho.
+**Estado:** ⏳ Pendiente.
 
-22. LA IA – ACTIVACIÓN, PROGRAMACIÓN Y LÍMITES
-Activación: solo con botón presionado. No funciona en segundo plano. Comando de voz: "Hola [nombre]".
-Programación: el usuario puede programar a la IA para tareas en horarios específicos.
-Límites: solo accede a módulos autorizados por el No.1; no accede a información de otros sin jerarquía; respeta legalidad y ética; no actúa sin confirmación; sugiere, no impone.
+---
 
-Estado: ⏳ Pendiente.
+### 29. PAQUETE DE INTEGRACIÓN PARA LA EMPRESA
 
-23. TRABAJO INVISIBLE
-El sistema hace de cajón: registrar acciones en pantallas, tiempos de entrada, actividades de análisis, avisos de término.
-La IA pregunta: confirmación de solicitudes complejas, si puede hacer algo, completar instrucciones mal dadas.
-Principio: natural y no intrusivo.
+1. Cambio a DeepSeek oficial (pagado).
+2. Espacio reservado en servidor para banco de datos y memoria de la IA.
+3. Aislamiento por usuario.
+4. Proceso de enrutamiento.
 
-Estado: ⏳ Pendiente.
+**Estado:** ⏳ Pendiente.
 
-24. LÍNEAS DE TIEMPO EN CALENDARIO
-Importancia de la trazabilidad y exhibición a superiores del total de actividades.
+---
 
-Estado: ⏳ Pendiente.
+### 30. TABLA DE PANTALLAS PARA REVISIÓN DE LA IA
 
-25. PROYECTOS FUTUROS – OTRAS ACTIVIDADES
-Módulos de Ventas, Mercadeo, Logística, etc.
+*(Se mantiene igual.)*
 
-Stratos asesorará sobre la mejor fórmula de medición a cada actividad.
+---
 
-Módulo RH (idea futura): la IA apoya descripción de puestos con historial real.
+### 31. VOZ DE LA IA
 
-Estado: ⏳ Pendiente.
+- Proveedor: Google Cloud TTS (se prueba primero) o Amazon Polly.
+- Acento latino: sí.
+- Idioma: si el usuario escoge inglés, la IA habla inglés; si no, español.
 
-26. TEMAS FUTUROS
-Google Maps / Waze dentro de Stratos (tiempo real de viajeros).
+**Estado:** ⏳ Pendiente.
 
-Enlace del Teléfono (Llamadas y SMS), tipo "Enlace Móvil" de Windows.
+---
 
-Prioridad de próximos módulos: 1) Enlace de teléfono; 2) Mapas.
+### 32. ACUERDOS POR PANTALLA
 
-Estado: ⏳ Pendiente.
+*(Se mantiene igual.)*
 
-27. ESTRATEGIA DE INTEGRACIÓN DE IA (Confirmado)
-Fase	Motor	Cuándo	Por qué
-1	Gemini (capa gratuita)	Hoy	Sin tarjeta ni costo. Prototipar. Prohibido usar datos reales.
-2	token-free-gateway + DeepSeek	Cuando el sistema esté "vendible"	Sin tarjeta ni costo. Respeta privacidad.
-3	DeepSeek (API oficial)	Cuando se lleve a una empresa	Datos reales. Privacidad garantizada.
-Alarma: la IA de internet debe avisar cuando detecte datos reales o sensibles.
+---
 
-Estado: ✅ Confirmado.
+### 33. INVITACIONES Y PERMISOS
 
-28. DEFINICIONES DE VERO.JS
-Conexión con motor de IA (URL y clave).
+**Procedimiento:** crear contacto → presionar Grabar → pantalla de invitación (confirmar datos + lista de módulos autorizados) → botones Enviar/Editar.
 
-Activación y comando de voz.
+**Qué ve cada tipo:**
+- Directo: lo que le autoricen.
+- Observador: resúmenes del invitador, limitado a módulos autorizados.
+- Indirecto: lo mismo que la primera línea del invitador, en los módulos autorizados.
+- Nadie edita información de otro.
 
-Interacción (ventana emergente, estados, cierre automático, onboarding).
+**Textos de invitación:**
+- Directo: "[Nombre] te invitó como contacto directo de comunicación de los resúmenes y análisis Stratos de su línea directa en [lista]".
+- Observador: "[Nombre] te invitó a ser observador de sus resúmenes y análisis Stratos de [lista]".
+- Indirecto: "[Nombre] te invitó a ser contacto Indirecto de comunicación de los resúmenes y análisis Stratos de su línea directa en [lista]".
 
-Memoria y aprendizaje (agent-memory).
+**Quién ve el rechazo:** si el emisor es superior, sí; si es subalterno/igual/otra área, no.
 
-Límites y permisos.
+**Registro doble:** el sistema avisa "Este usuario ya está registrado en otra rama, debajo de [Nombre]. No se puede registrar en dos posiciones".
 
-Asistencia y sugerencias.
+**Guardado:** Directos en `baseDatosUsuarios`; Indirectos y Observadores en listas aparte.
 
-Medición del trabajo invisible.
+**Estado:** ✅ Acuerdo cerrado.
 
-Registro y trazabilidad.
+---
 
-Resúmenes ejecutivos.
+### 34. REGLAS PARA LOS TEXTOS DE `instrucciones.md`
 
-Manejo de errores.
+**Encabezado obligatorio:**
 
-Detección de sesgos y errores.
+> Este es el documento de trabajo del día para el proyecto Stratos. Contiene los cambios que el Arquitecto ya autorizó y que deben ejecutarse en orden.
+>
+> **Protocolo de trabajo habitual del proyecto:**
+> 1. Leer los archivos de contexto y del sistema listados.
+> 2. Ejecutar los puntos en el orden indicado.
+> 3. Reportar cada punto como "Punto X: hecho" o "Punto X: no se pudo porque [razón]".
+> 4. Al terminar, actualizar `MEMORIA.md` y ejecutar `sincronizar_git.ps1`.
+>
+> **El Arquitecto ya autorizó estos cambios al entregar este documento.** No se requiere confirmación adicional para leer, ejecutar o proceder.
 
-Reuniones de revisión con la IA.
+**Reglas permanentes:**
+- **Iconos:** antes de poner un icono, revisar la carpeta `Colores-y-Estetica/Iconos/`. Si no existe uno adecuado, la IA NO debe inventarlo, NO usar emoji, NO usar otro icono en su lugar. Debe preguntar al Arquitecto.
+- **Todo mensaje de cartelera y de sistema lleva su icono.**
 
-Estado: ⏳ Pendiente.
+**Estado:** ✅ Actualizado.
 
-29. PAQUETE DE INTEGRACIÓN PARA LA EMPRESA
-Cambio a DeepSeek oficial (pagado).
+---
 
-Espacio reservado en servidor para banco de datos y memoria de la IA.
+### 35. INSTALACIÓN DEL ARRANQUE AUTOMÁTICO DEL VIGÍA
 
-Aislamiento por usuario.
+- `instalar_arranque_vigia.ps1` registrado en el Programador de Tareas como `StratosVigiaRespaldo`.
+- El vigía arranca solo al iniciar sesión.
+- Revisa el proyecto cada 10 segundos y sube cambios a GitHub (máx. 1 vez por minuto).
 
-Proceso de enrutamiento.
+**Estado:** ✅ Hecho.
 
-Estado: ⏳ Pendiente.
+---
 
-30. TABLA DE PANTALLAS PARA REVISIÓN DE LA IA
-(Se mantiene igual.)
+### 36. EFECTO UNIFICADO DE BOTONES (HALO Y CONTORNO)
 
-31. VOZ DE LA IA
-Proveedor: Google Cloud TTS (se prueba primero) o Amazon Polly.
+**Reglas para todos los botones:**
 
-Acento latino: sí.
+| Estado | Efecto |
+|--------|--------|
+| **Normal** | Sombra suave en el color de su clasificación. Borde transparente 2px. |
+| **Hover** | Borde iluminado en el color de su clasificación + sombra intensificada + escala 1.08. |
+| **Active** | Halo intenso + inset en el color de su clasificación. |
 
-Idioma: si el usuario escoge inglés, la IA habla inglés; si no, español.
+**Botones circulares (Libro y Vero):** igual, pero con rotación 90° en hover y active.
 
-Estado: ⏳ Pendiente.
+**Colores de clasificación:** verde `#00ff88` (principal), naranja `#ff8c00` (secundaria), rojo `#e53935` (irreversible).
 
-32. ACUERDOS POR PANTALLA
-(Se mantiene igual.)
+**Estado:** ✅ Hecho.
 
-33. INVITACIONES Y PERMISOS
-Procedimiento: crear contacto → presionar Grabar → pantalla de invitación (confirmar datos + lista de módulos autorizados) → botones Enviar/Editar.
+---
 
-Qué ve cada tipo:
+### 37. COLOR DE LETRAS EN TODO EL SISTEMA
 
-Directo: lo que le autoricen.
+**Lo que SÍ está amarrado a `--color-letras`:** `p`, `span`, `h2`, `h3`, `label`, `input`, `textarea`, `.descripcion-app`, títulos de modal, textos generados por JS, botones, badges y avisos.
 
-Observador: resúmenes del invitador, limitado a módulos autorizados.
+**Lo que NO está amarrado (y así debe quedar):** textos sobre fondos semánticos fijos (barra de notificaciones), badge de acrónimo sobre `--color-primario`, marca de agua `.watermark-stratos`.
 
-Indirecto: lo mismo que la primera línea del invitador, en los módulos autorizados.
+**Estado:** ✅ Hecho.
 
-Nadie edita información de otro.
+---
 
-Textos de invitación:
+### 38. COLOR BASE DE BOTONES
 
-Directo: "[Nombre] te invitó como contacto directo de comunicación de los resúmenes y análisis Stratos de su línea directa en [lista]".
+**Definición:**
+- El valor por defecto de `--color-botones` es `#0b0f19` (oscuro, igual al fondo base de la app).
+- El halo/contorno de cada botón va en el color de su función: verde `#00ff88` (principal), naranja `#ff8c00` (secundaria), rojo `#e53935` (irreversible).
+- Si el usuario define color de Botones en Identidad Corporativa, ese color manda.
 
-Observador: "[Nombre] te invitó a ser observador de sus resúmenes y análisis Stratos de [lista]".
+**Estado:** ✅ Hecho (16/10/2026). Corregido en `datos.js`, `.tuerca-navegacion` y `validarEntrada`/`cerrarSesion`.
 
-Indirecto: "[Nombre] te invitó a ser contacto Indirecto de comunicación de los resúmenes y análisis Stratos de su línea directa en [lista]".
+---
 
-Quién ve el rechazo: si el emisor es superior, sí; si es subalterno/igual/otra área, no.
+### 39. LIBRO EN LOGIN
 
-Registro doble: el sistema avisa "Este usuario ya está registrado en otra rama, debajo de [Nombre]. No se puede registrar en dos posiciones".
+**Definición:**
+- El botón "Libro" (menú general, `.tuerca-navegacion`) NO debe aparecer en Login.
+- Aplica la misma regla que el botón de la IA (Vero).
+- En el resto de pantallas, se muestra igual que hoy.
 
-Guardado: Directos en baseDatosUsuarios; Indirectos y Observadores en listas aparte.
+**Estado:** ✅ Hecho (16/10/2026).
 
-Estado: ✅ Acuerdo cerrado.
+---
 
-34. REGLAS PARA LOS TEXTOS DE instrucciones.md
-Encabezado obligatorio:
+### 40. BOTÓN "COLOR" PARA EL SLOGAN
 
-Este es el documento de trabajo del día para el proyecto Stratos. Contiene los cambios que el Arquitecto ya autorizó y que deben ejecutarse en orden.
+- Agregar un tercer selector en el bloque del Slogan de Identidad Corporativa: **Color**.
+- Junto a Tipografía y Estilo.
+- Debe desplegar los **mismos 8 colores** de la paleta superior (la que se genera a partir del logo).
+- Al elegir un color, el Slogan cambia a ese color.
+- Se guarda en la configuración de la empresa.
+- El tamaño y la distribución de los 3 selectores se pueden ajustar para que quepan en el espacio actual.
 
-Protocolo de trabajo habitual del proyecto:
+**Estado:** ⏳ Pendiente (incluido en el texto entregado a Cline el 17/10/2026).
 
-Leer los archivos de contexto y del sistema listados.
+---
 
-Ejecutar los puntos en el orden indicado.
+### 41. REGISTRO DE ACTIVIDAD EN IDENTIDAD CORPORATIVA
 
-Reportar cada punto como "Punto X: hecho" o "Punto X: no se pudo porque [razón]".
+- Cada edición de Identidad Corporativa (misión, visión, valores, colores, logo, slogan, tipografía, estilo) queda registrada en el banco de datos del usuario que la hizo.
+- Registra: quién, cuándo, qué cambió.
 
-Al terminar, actualizar MEMORIA.md y ejecutar sincronizar_git.ps1.
+**Motivo:** es actividad laboral real y vale la pena el historial de cómo evolucionó la identidad de la empresa.
 
-El Arquitecto ya autorizó estos cambios al entregar este documento. No se requiere confirmación adicional para leer, ejecutar o proceder.
+**Estado:** ⏳ Pendiente (incluido en el texto entregado a Cline el 17/10/2026).
 
-Reglas permanentes:
+---
 
-Iconos: antes de poner un icono, revisar la carpeta Colores-y-Estetica/Iconos/. Si no existe uno adecuado, la IA NO debe inventarlo, NO usar emoji, NO usar otro icono en su lugar. Debe preguntar al Arquitecto.
+### 42. ICONOS DE CARTELERA Y SISTEMA
 
-Todo mensaje de cartelera y de sistema lleva su icono.
+**Reglas:**
+- Todo mensaje de cartelera y todo aviso del sistema va acompañado de su icono.
+- Los iconos se guardan en `Colores-y-Estetica/Iconos/` y se usan en verde brillante (`#00ff88`).
+- **Regla nueva (16/10/2026):** de ahora en adelante, antes de poner un icono, revisar la carpeta `Iconos/`. Si no existe uno adecuado, la IA NO debe inventarlo, NO usar emoji, NO usar otro icono en su lugar. Debe preguntar al Arquitecto.
 
-Estado: ✅ Actualizado.
+**Iconos ya existentes en la carpeta (16/10/2026):**
 
-35. INSTALACIÓN DEL ARRANQUE AUTOMÁTICO DEL VIGÍA
-instalar_arranque_vigia.ps1 registrado en el Programador de Tareas como StratosVigiaRespaldo.
+*De sistema (nuevos):* Advertencia, Saludos, Contraseña, Cambiar contraseña, Exito, Motivación, Rango superior, Error.
 
-El vigía arranca solo al iniciar sesión.
+*De módulos:* correos, chats, tareas, alarmas, calendario, hub, enlace movil, Reuniones, otras actividades, llamar.
 
-Revisa el proyecto cada 10 segundos y sube cambios a GitHub (máx. 1 vez por minuto).
+*Biométricos:* rostro, patron, huella.
 
-Estado: ✅ Hecho.
+**Emojis pendientes de reemplazar por SVG:**
+🚪 (cerrar sesión), 👤 (Mi Perfil), 🏢 (Identidad), 📊 (Mi Organigrama), 🌐 (Organigrama General), ⚙️ (Configuración), 🔗 (nodo indirecto), ✏️ (Editar), 🗑️ (Eliminar), 💾 (Salvar e Invitar), 📤 (Cargar Logo).
 
-36. EFECTO UNIFICADO DE BOTONES (HALO Y CONTORNO)
-Reglas para todos los botones:
+**Estado:** ⏳ Pendiente (incluido en el texto entregado a Cline el 17/10/2026).
 
-Estado	Efecto
-Normal	Sombra suave en el color de su clasificación. Borde transparente 2px.
-Hover	Borde iluminado en el color de su clasificación + sombra intensificada + escala 1.08.
-Active	Halo intenso + inset en el color de su clasificación.
-Botones circulares (Libro y Vero): igual, pero con rotación 90° en hover y active.
+---
 
-Colores de clasificación: verde #00ff88 (principal), naranja #ff8c00 (secundaria), rojo #e53935 (irreversible).
+### 43. BOTÓN "OTRAS ACTIVIDADES" (FORMA DE PÍLDORA)
 
-Estado: ✅ Hecho.
+- Se cambió el diseño del hexágono a una forma de píldora (cápsula alargada con los extremos redondeados).
+- Motivo: el uso de `clip-path` para el hexágono cortaba el halo y el contorno. Con la píldora, el botón brilla igual que los demás.
+- Se eliminó `clip-path` y `drop-shadow`; se aplicó `border-radius: 999px` y los efectos de hover/active normales.
 
-37. COLOR DE LETRAS EN TODO EL SISTEMA
-Lo que SÍ está amarrado a --color-letras: p, span, h2, h3, label, input, textarea, .descripcion-app, títulos de modal, textos generados por JS, botones, badges y avisos.
+**Estado:** ⏳ Pendiente (incluido en el texto entregado a Cline el 17/10/2026).
 
-Lo que NO está amarrado (y así debe quedar): textos sobre fondos semánticos fijos (barra de notificaciones), badge de acrónimo sobre --color-primario, marca de agua .watermark-stratos.
+---
 
-Estado: ✅ Hecho.
+### 44. DISEÑO DEL LOGO
 
-38. COLOR BASE DE BOTONES
-Definición:
+- Se utilizó la IA **Ideogram** (y alternativa DeeVid AI) para generar propuestas visuales del logo de Stratos.
+- **Concepto definido:** Fondo oscuro `#0b0f19`, acentos en verde neón `#00ff88`, tipografía ancha y tecnológica.
+- **Elementos visuales aprobados:**
+  - Tres bloques (cubos) en ascenso diagonal, que representan los módulos de actividades y el crecimiento constante.
+  - La letra "A" con un triángulo verde interior que simula una flecha hacia arriba (crecimiento).
+  - Elementos gráficos de medición (regla a la izquierda, barras de gráfico a la derecha).
+- El Slogan "HERRAMIENTA MULTIFUNCIONAL" se integra debajo de la palabra "STRATOS".
 
-El valor por defecto de --color-botones es #0b0f19 (oscuro, igual al fondo base de la app).
+**Estado:** ✅ Concepto aprobado por el Arquitecto.
 
-El halo/contorno de cada botón va en el color de su función: verde #00ff88 (principal), naranja #ff8c00 (secundaria), rojo #e53935 (irreversible).
+---
 
-Si el usuario define color de Botones en Identidad Corporativa, ese color manda.
+### 45. AJUSTES AL TEXTO `A_DONDE_VA_STRATOS.md`
 
-Estado: ⏳ En proceso (texto entregado a Cline el 16/10/2026). Pendiente de verificar los 4 puntos.
+**Comentarios del Arquitecto aplicados en la versión final:**
+1. **Medio:** separación explícita entre Organigrama Personal (comunicación) y Organigrama General (jerarquía).
+2. **Posibilidades de análisis:** orden reestructurado, iniciando con "Contar con información de principio a fin".
+3. **Objetivo 4:** se agregaron las llamadas telefónicas y los Correos.
+4. **Objetivos:** se incluyó el Objetivo 5 sobre la unificación de pantallas, botones, cartelera, avisos y sello de agua.
+5. **FODA:** debilidades y amenazas redactadas con tono objetivo, sin ser hirientes. Dependencia de WhatsApp reubicada como fortaleza (IMAP/SMTP).
+6. **Banco de datos:** distinción clara entre el banco de actividad y el archivo de comunicaciones (correos, chats, llamadas) codificado.
+7. **Rango de uso:** se restauró la primera línea sobre el registro de entrada/salida y se destacó la diferencia entre tiempo total y tiempo por módulo.
+8. **Símbolos:** se añadió la sección de Pantalla y botones (sección H) antes de Símbolos (sección I).
+9. **Módulos:** movidos a la sección 10.
+10. **Vero:** se especificó su rol, aprendizaje global sin filtración de datos de terceros, y adaptación al nivel del usuario.
+11. **Cierre:** se estableció la premisa de que todo debe generar datos de medición.
+12. **Redacción:** en tercera persona formal y tono positivo.
 
-Problema detectado el 16/10/2026: al refrescar, el botón ENTRAR cambiaba a oscuro pero el resto volvía al verde. Al cerrar sesión, ENTRAR volvía al verde. Causa:
+**Estado:** ✅ Texto entregado al Arquitecto para su validación final.
 
-datos.js seguía con colorBotones: "#00ff88" en identidadCorporativa y configuracionEstetica. aplicarCambiosVisuales() sobreescribía la variable CSS con ese valor.
+---
 
-.tuerca-navegacion (Libro) usaba var(--color-primario) como fondo, no var(--color-botones).
+## PENDIENTES
 
-validarEntrada forzaba el Libro a display:flex antes del setTimeout, apareciendo un momento en Login.
+### Pendientes de Definición
 
-Al cerrar sesión, no se limpiaban las variables CSS inline que aplicarCambiosVisuales dejó en <html>.
+- **Otras Actividades:** definir los módulos específicos de medición (Ventas, Mercadeo, Logística, etc.).
+- **La IA como asesora de procesos:** definir el alcance de detección de patrones, líneas de tiempo y reuniones programadas.
+- **Límites de IA:** definir los alcances legales y de privacidad para cada módulo.
+- **Auditoría:** definir qué acciones se registran y cómo se visualizan.
 
-Solución entregada a Cline (4 puntos):
+### Pendientes de Acción (Cambios al sistema actual)
 
-Actualizar colorBotones a #0b0f19 en identidadCorporativa y configuracionEstetica de datos.js.
+| # | Acción | Estado |
+|---|--------|--------|
+| 1 | Mover logo + slogan a superior izquierda | ✅ Hecho |
+| 2 | Implementar duración de avisos por prioridad (10, 6, 4 seg) | ✅ Hecho |
+| 3 | Asignar duración de 6 seg al anuncio motivacional diario | ✅ Hecho |
+| 4 | Eliminar Sonido, Vibración, Modo Nocturno de Configuración | ✅ Hecho |
+| 5 | Implementar nuevo flujo de Configuración de IA | ✅ Hecho |
+| 6 | Implementar saludo "Hola [Nombre]" en Login | ✅ Hecho |
+| 7 | Crear botón de IA (efectos visuales + sonido + indicador de voz) | Pendiente (depende de vero.js) |
+| 8 | Crear Pantalla de Comunicación (9 botones + Reuniones) | ✅ Hecho |
+| 9-10-11 | Biometría: mejorar iconos (SVG nuevos) e implementar lógica | ✅ Hecho |
+| 12 | Implementar archivo automático de Tareas | Pendiente |
+| 13 | Implementar vinculación de Contactos | Pendiente |
+| 14 | Implementar alias/nickname en Contactos | Pendiente |
+| 15 | Implementar detección y resolución de discrepancias en Contactos | Pendiente |
+| 16 | Implementar autolimpieza de tareas generadas por IA | Pendiente |
+| 17a | Implementar migración de información | Pendiente |
+| 17b | Implementar atribuciones y capacidades de la IA para apoyar la migración | Cerrado |
+| 18 | Implementar Hub de Archivos | Pendiente |
+| 19 | Implementar integración con WhatsApp Business | Pendiente |
+| 20 | Implementar la IA como contacto activo en chats | Pendiente |
+| 21 | Implementar vista principal de Alarmas | Pendiente |
+| 22 | Implementar ventana de detalle/creación de Alarmas | Pendiente |
+| 23 | Implementar comportamiento visual de Alarmas | Pendiente |
+| 24 | Implementar botón de borrar en Alarmas con aviso a integrantes | Pendiente |
+| 25 | Implementar Calendario | Pendiente |
+| 26 | Implementar sistema de notas en Calendario | Pendiente |
+| 27 | Implementar área de contexto en Tareas y Alarmas | Pendiente |
+| 28 | Implementar líneas de tiempo en Calendario | Pendiente |
+| 29 | Implementar tipos de contacto (Observador, Indirecto) | Pendiente |
+| 30 | Implementar permisos por rol | Pendiente |
+| 31 | Implementar crecimiento automático del Organigrama General | ✅ Hecho |
+| 32 | Implementar detección de duplicados | Pendiente |
+| 33 | Implementar cruce de información al crear primera línea | ✅ Cerrado (definición) |
+| 34 | Mejorar el banco de datos | ✅ Hecho |
+| 35 | Implementar rastro de cada acción del usuario | Pendiente |
+| 36 | Implementar backups codificados | Pendiente |
+| 37 | Implementar parámetros de KPIs | Pendiente |
+| 38 | Implementar guía al usuario para establecer KPIs | Pendiente |
+| 39 | Describir cada funcionalidad del Módulo de Comunicación | Pendiente |
+| 40 | Implementar pantallas de compilación, módulos y aprobación de uso | Pendiente |
+| 41 | Implementar activación, programación y límites de la IA | Pendiente (depende de vero.js) |
+| 42 | Implementar rastreo silencioso y notificaciones | Pendiente (depende de vero.js) |
+| 43 | Implementar trazabilidad y exhibición a superiores | Pendiente |
+| 44 | Preparar arquitectura para Otras Actividades | Pendiente |
+| 45 | Próxima revisión de `A_DONDE_VA_STRATOS.md` | ✅ Hecho |
+| 46 | Integrar IA (Vero) en el sistema (crear `vero.js`) | Pendiente |
+| 47 | Voz de la IA (Google Cloud TTS o Amazon Polly) | Pendiente |
+| 48 | Login: registrar hora entrada/salida, errores de tipeo, aviso al jefe, sugerir cambio de contraseña | ✅ Hecho (parcial) |
+| 49 | Correos: implementar todo el módulo | ✅ Hecho (pantalla local) |
+| 50 | Correos (Spam): implementar filtro de spam propio de Stratos | Pendiente |
+| 51-54 | Invitaciones y permisos (ventana intermedia de selección de módulos) | Pendiente (hasta que Comunicación esté implementado) |
+| 55 | Cambiar iconos biométricos en Login por los SVG de `Colores-y-Estetica/iconos/` | ✅ Hecho |
+| 56 | Agregar enrolamiento biométrico en Perfil (con los SVG nuevos) | ✅ Hecho |
+| 57 | Quitar cartelera de Login | ✅ Hecho |
+| 58 | Corregir saludo en Login (leer campo "Nombre" completo) | ✅ Hecho |
+| 59 | Quitar campo "Nombre de tu asistente" de Configuración | ✅ Hecho |
+| 60 | Quitar checkbox "Habilitar autenticación biométrica" de Configuración | ✅ Hecho |
+| 61 | Filtrar la cartelera (no mostrar texto completo de Misión, Visión o Valores) | ✅ Hecho |
+| 62 | Centrar el nodo del No.1 en el Organigrama General | ✅ Hecho |
+| 63 | Implementar Enlace Móvil (pantalla, proceso de enlace, registro de llamadas y SMS) | Pendiente |
+| 64 | Registrar en correos: tiempo invertido, personas involucradas, acciones generadas, procesos activados | Pendiente |
+| 65 | Instalar arranque automático del vigía en Windows (tarea programada) | ✅ Hecho |
+| 66 | Efecto unificado de botones (halo y contorno) | ✅ Hecho |
+| 67 | Color de letras en todo el sistema | ✅ Hecho |
+| 68 | Ajustes al texto `A_DONDE_VA_STRATOS.md` (comentarios del Arquitecto) | ✅ Hecho |
+| 69 | Corrección del sistema de subida a GitHub (Background Exec) | ✅ Hecho |
+| 70 | Corrección del color base de botones (4 puntos) | ✅ Hecho (16/10/2026) |
+| 71 | Botón "Color" para el Slogan | ⏳ En proceso (texto entregado 17/10/2026) |
+| 72 | Registro de actividad en Identidad Corporativa | ⏳ En proceso (texto entregado 17/10/2026) |
+| 73 | Cambio de iconos actuales (emoji → SVG de la carpeta) | ⏳ En proceso (texto entregado 17/10/2026) |
+| 74 | Regla nueva: antes de poner icono, revisar carpeta; si no hay, preguntar | ✅ Definida (va en reglas de `instrucciones.md`) |
+| 75 | Sincronización del autocompletado con el perfil editado | ✅ Hecho |
+| 76 | Cambio de forma del botón "Otras Actividades" (Píldora) | ⏳ En proceso (texto entregado 17/10/2026) |
 
-.tuerca-navegacion usa var(--color-botones, var(--color-primario)) como fondo.
+---
 
-Quitar de validarEntrada la línea que fuerza el Libro a display:flex antes del setTimeout.
+## NOTAS DEL DÍA 17/10/2026
 
-En cerrarSesion, limpiar las variables CSS inline de <html> (--color-fondo, --color-texto, --color-letras, --color-primario, --color-botones).
+- **Texto de `A_DONDE_VA_STRATOS.md` validado:** El Arquitecto revisó y aprobó la nueva redacción, incluyendo la diferenciación de los organigramas y la restauración de la sección G (Rango de uso).
+- **Parte 2 para Cline:** Se preparó y entregó el texto con 4 puntos clave: (1) Botón Color del Slogan, (2) Registro de actividad en Identidad, (3) Reemplazo de emojis por SVGs, y (4) Cambio de hexágono a píldora en "Otras Actividades".
+- **Diseño del Logo:** Se generaron propuestas con Ideogram/DeeVid AI. El concepto de los cubos ascendentes, las líneas de medición y la "A" con flecha verde fue aprobado por el Arquitecto. Se descartó la idea de cambiar la tipografía.
 
-39. LIBRO EN LOGIN
-Definición:
+---
 
-El botón "Libro" (menú general, .tuerca-navegacion) NO debe aparecer en Login.
+**Nota final:** Cuando se solicite el texto para `instrucciones.md`, debe ser muy claro y bien detallado. Cada punto debe incluir: qué cambiar, dónde, cómo debe quedar, y qué NO hacer, sin mezclas ni ambigüedades.
 
-Aplica la misma regla que el botón de la IA (Vero).
+---
 
-En el resto de pantallas, se muestra igual que hoy.
-
-Estado: ⏳ En proceso (incluido en el texto entregado a Cline el 16/10/2026, Punto 3).
-
-40. BOTÓN "COLOR" PARA EL SLOGAN (Pendiente de aplicar)
-Agregar un tercer selector en el bloque del Slogan de Identidad Corporativa: Color.
-
-Junto a Tipografía y Estilo.
-
-Debe desplegar los mismos 8 colores de la paleta superior (la que se genera a partir del logo).
-
-Al elegir un color, el Slogan cambia a ese color.
-
-Se guarda en la configuración de la empresa.
-
-El tamaño y la distribución de los 3 selectores se pueden ajustar para que quepan en el espacio actual.
-
-Estado: ⏳ Pendiente (va en la Parte 2 para Cline).
-
-41. REGISTRO DE ACTIVIDAD EN IDENTIDAD CORPORATIVA (Pendiente de aplicar)
-Cada edición de Identidad Corporativa (misión, visión, valores, colores, logo, slogan, tipografía, estilo) queda registrada en el banco de datos del usuario que la hizo.
-
-Registra: quién, cuándo, qué cambió.
-
-Motivo: es actividad laboral real y vale la pena el historial de cómo evolucionó la identidad de la empresa.
-
-Estado: ⏳ Pendiente (va en la Parte 2 para Cline).
-
-42. ICONOS DE CARTELERA Y SISTEMA
-Reglas:
-
-Todo mensaje de cartelera y todo aviso del sistema va acompañado de su icono.
-
-Los iconos se guardan en Colores-y-Estetica/Iconos/ y se usan en verde brillante (#00ff88).
-
-Regla nueva (16/10/2026): de ahora en adelante, antes de poner un icono, revisar la carpeta Iconos/. Si no existe uno adecuado, la IA NO debe inventarlo, NO usar emoji, NO usar otro icono en su lugar. Debe preguntar al Arquitecto.
-
-Iconos ya existentes en la carpeta (16/10/2026):
-
-De sistema (nuevos): Advertencia, Saludos, Contraseña, Cambiar contraseña, Exito, Motivación, Rango superior, Error.
-
-De módulos: correos, chats, tareas, alarmas, calendario, hub, enlace movil, Reuniones, otras actividades, llamar.
-
-Biométricos: rostro, patron, huella.
-
-Iconos que el sistema usa hoy con emoji y deben cambiarse a SVG:
-
-Emoji actual	Dónde está	SVG que le toca
-👋	Cartelera: saludo	Saludos.svg
-⚠️	Cartelera: aviso de identidad pendiente	Advertencia.svg
-🔑	Cartelera: solicitud de contraseña	Contraseña.svg
-🔐	Cartelera: sugerencia de cambio de contraseña	Cambiar contraseña.svg
-📧	Menú + Correos	correos.svg
-💬	Menú + Chats	chats.svg
-✅	Menú + Tareas	tareas.svg
-⏰	Menú + Alarmas	alarmas.svg
-📅	Menú + Calendario	calendario.svg
-📁	Menú + Hub	hub.svg
-📱	Menú + Enlace Móvil	enlace movil.svg
-📹	Menú + Reuniones	Reuniones.svg
-⬡	Menú + Otras Actividades	otras actividades.svg
-Emojis sin SVG todavía (pendiente): 🚪 (cerrar sesión), 👤 (Mi Perfil), 🏢 (Identidad), 📊 (Mi Organigrama), 🌐 (Organigrama General), ⚙️ (Configuración), 🔗 (nodo indirecto), ✏️ (Editar), 🗑️ (Eliminar), 💾 (Salvar e Invitar), 📤 (Cargar Logo).
-
-Estado: ⏳ En proceso. El cambio de iconos va en la Parte 2 para Cline.
-
-43. AJUSTES AL TEXTO A_DONDE_VA_STRATOS.md
-Comentarios del Arquitecto (acumulados):
-
-Medio: hablar de Organigrama Personal + General. Cambiar párrafo que lista módulos por uno más explicativo (sin detallar pantallas).
-
-Posibilidades de análisis: primero "Contar con información de principio a fin". Orden lógico del resto.
-
-Objetivo 4: agregar llamadas (se registran vía Enlace Móvil). Mejorar redacción.
-
-Objetivos: incluir pantalla promedio, botones, clasificación de botones, cartelera, pantalla de avisos del sistema y sello de agua.
-
-FODA - Debilidades: reubicar Dependencia de WhatsApp. La fortaleza es IMAP/SMTP. Las Debilidades y Amenazas se escriben francas, reales, sin ser hirientes.
-
-Banco de datos: distinguir dos cosas: (a) banco de datos de actividad (una fila por usuario), (b) archivo de comunicaciones (correos, chats, llamadas), codificado, disponible para extraer info laboral con jerarquía y ética.
-
-Rango de uso y tiempo en pantalla: destacar que no es lo mismo tiempo trabajado que tiempo por módulo/pantalla. Importante para Vero: analizar carga real, complejidad, si se paga bien la hora.
-
-Antes de Símbolos: va la parte de Pantalla y botones en cuanto a sus descripciones.
-
-Módulos (sección 8): mover al final como sección 10. Los módulos son descripción de pantalla por pantalla, cambian seguido, no van en el norte. Del 1 al 9 es base y cambia poco.
-
-LA IA (Vero): añadir que Vero es la que se implantará; aprende de todos pero da info de su persona/nivel; cada quien la nombra y adecúa; aporta soluciones comunes sin revelar origen; nunca datos concretos de otro.
-
-Cierre: todo lo que se desarrolle (incluso lo ya hecho) debe cumplir la premisa de medir. Todo debe generar datos relevantes. Si hay dudas, preguntar al Arquitecto.
-
-Redacción positiva en todo el texto nuevo.
-
-Numeración final: 8 = LA IA (Vero), 9 = CIERRE, 10 = LOS MÓDULOS.
-
-Tono: tercera persona formal. Sin tuteo.
-
-Referencias técnicas: se quedan (#zona-cartelera, #00ff88, logica.js, etc.).
-
-Longitud: la necesaria para ser descriptivo y concreto, ni breve ni extenso.
-
-FODA: se mantienen las cuatro letras.
-
-Estado: ⏳ Texto nuevo en manos del Arquitecto para revisión. Pendiente de entregar con los cambios.
-
-PENDIENTES
-Pendientes de Definición
-Otras Actividades: definir los módulos específicos de medición (Ventas, Mercadeo, Logística, etc.).
-
-La IA como asesora de procesos: definir el alcance de detección de patrones, líneas de tiempo y reuniones programadas.
-
-Límites de IA: definir los alcances legales y de privacidad para cada módulo.
-
-Auditoría: definir qué acciones se registran y cómo se visualizan.
-
-Ajustes al texto A_DONDE_VA_STRATOS.md: pendiente de entregar con los cambios.
-
-Pendientes de Acción (Cambios al sistema actual)
-#	Acción	Estado
-1	Mover logo + slogan a superior izquierda	✅ Hecho
-2	Implementar duración de avisos por prioridad (10, 6, 4 seg)	✅ Hecho
-3	Asignar duración de 6 seg al anuncio motivacional diario	✅ Hecho
-4	Eliminar Sonido, Vibración, Modo Nocturno de Configuración	✅ Hecho
-5	Implementar nuevo flujo de Configuración de IA	✅ Hecho
-6	Implementar saludo "Hola [Nombre]" en Login	✅ Hecho
-7	Crear botón de IA (efectos visuales + sonido + indicador de voz)	Pendiente (depende de vero.js)
-8	Crear Pantalla de Comunicación (9 botones + Reuniones)	✅ Hecho
-9-10-11	Biometría: mejorar iconos (SVG nuevos) e implementar lógica	✅ Hecho
-12	Implementar archivo automático de Tareas	Pendiente
-13	Implementar vinculación de Contactos	Pendiente
-14	Implementar alias/nickname en Contactos	Pendiente
-15	Implementar detección y resolución de discrepancias en Contactos	Pendiente
-16	Implementar autolimpieza de tareas generadas por IA	Pendiente
-17a	Implementar migración de información	Pendiente
-17b	Implementar atribuciones y capacidades de la IA para apoyar la migración	Cerrado
-18	Implementar Hub de Archivos	Pendiente
-19	Implementar integración con WhatsApp Business	Pendiente
-20	Implementar la IA como contacto activo en chats	Pendiente
-21	Implementar vista principal de Alarmas	Pendiente
-22	Implementar ventana de detalle/creación de Alarmas	Pendiente
-23	Implementar comportamiento visual de Alarmas	Pendiente
-24	Implementar botón de borrar en Alarmas con aviso a integrantes	Pendiente
-25	Implementar Calendario	Pendiente
-26	Implementar sistema de notas en Calendario	Pendiente
-27	Implementar área de contexto en Tareas y Alarmas	Pendiente
-28	Implementar líneas de tiempo en Calendario	Pendiente
-29	Implementar tipos de contacto (Observador, Indirecto)	Pendiente
-30	Implementar permisos por rol	Pendiente
-31	Implementar crecimiento automático del Organigrama General	✅ Hecho
-32	Implementar detección de duplicados	Pendiente
-33	Implementar cruce de información al crear primera línea	✅ Cerrado (definición)
-34	Mejorar el banco de datos	✅ Hecho
-35	Implementar rastro de cada acción del usuario	Pendiente
-36	Implementar backups codificados	Pendiente
-37	Implementar parámetros de KPIs	Pendiente
-38	Implementar guía al usuario para establecer KPIs	Pendiente
-39	Describir cada funcionalidad del Módulo de Comunicación	Pendiente
-40	Implementar pantallas de compilación, módulos y aprobación de uso	Pendiente
-41	Implementar activación, programación y límites de la IA	Pendiente (depende de vero.js)
-42	Implementar rastreo silencioso y notificaciones	Pendiente (depende de vero.js)
-43	Implementar trazabilidad y exhibición a superiores	Pendiente
-44	Preparar arquitectura para Otras Actividades	Pendiente
-45	Próxima revisión de A_DONDE_VA_STRATOS.md	✅ Hecho
-46	Integrar IA (Vero) en el sistema (crear vero.js)	Pendiente
-47	Voz de la IA (Google Cloud TTS o Amazon Polly)	Pendiente
-48	Login: registrar hora entrada/salida, errores de tipeo, aviso al jefe, sugerir cambio de contraseña	✅ Hecho (parcial)
-49	Correos: implementar todo el módulo	✅ Hecho (pantalla local)
-50	Correos (Spam): implementar filtro de spam propio de Stratos	Pendiente
-51-54	Invitaciones y permisos (ventana intermedia de selección de módulos)	Pendiente (hasta que Comunicación esté implementado)
-55	Cambiar iconos biométricos en Login por los SVG de Colores-y-Estetica/iconos/	✅ Hecho
-56	Agregar enrolamiento biométrico en Perfil (con los SVG nuevos)	✅ Hecho
-57	Quitar cartelera de Login	✅ Hecho
-58	Corregir saludo en Login (leer campo "Nombre" completo)	✅ Hecho
-59	Quitar campo "Nombre de tu asistente" de Configuración	✅ Hecho
-60	Quitar checkbox "Habilitar autenticación biométrica" de Configuración	✅ Hecho
-61	Filtrar la cartelera (no mostrar texto completo de Misión, Visión o Valores)	✅ Hecho
-62	Centrar el nodo del No.1 en el Organigrama General	✅ Hecho
-63	Implementar Enlace Móvil (pantalla, proceso de enlace, registro de llamadas y SMS)	Pendiente
-64	Registrar en correos: tiempo invertido, personas involucradas, acciones generadas, procesos activados	Pendiente
-65	Instalar arranque automático del vigía en Windows (tarea programada)	✅ Hecho
-66	Efecto unificado de botones (halo y contorno)	✅ Hecho
-67	Color de letras en todo el sistema	✅ Hecho
-68	Ajustes al texto A_DONDE_VA_STRATOS.md (comentarios del Arquitecto)	⏳ Pendiente
-69	Corrección del sistema de subida a GitHub (Background Exec)	✅ Hecho
-70	Corrección del color base de botones (4 puntos)	⏳ En proceso (texto entregado a Cline 16/10/2026)
-71	Botón "Color" para el Slogan	⏳ Pendiente (Parte 2)
-72	Registro de actividad en Identidad Corporativa	⏳ Pendiente (Parte 2)
-73	Cambio de iconos actuales (emoji → SVG de la carpeta)	⏳ Pendiente (Parte 2)
-74	Regla nueva: antes de poner icono, revisar carpeta; si no hay, preguntar	✅ Definida (va en reglas de instrucciones.md)
-75	Sincronización del autocompletado con el perfil editado	✅ Hecho
-TEMAS QUE DEBEN AÑADIRSE A A_DONDE_VA_STRATOS.md
-Distinción entre barra de notificaciones y cartelera. ✅ Aplicado.
-
-Lógica de horario (primera entrada, última salida, cruce de medianoche). ✅ Aplicado.
-
-Los símbolos y sus porqués. ⏳ Pendiente de aplicar en el nuevo texto.
-
-Ajustes al texto (comentarios del Arquitecto - sección 43). ⏳ Pendiente.
-
-NOTAS DEL DÍA 16/10/2026
-Autocompletado: confirmado que la sincronización con el perfil editado se hizo correctamente en logica.js.
-
-Color base de botones: aplicado parcialmente en estilos.css pero no en datos.js, y con 3 bugs adicionales. Se entregó a Cline un texto con 4 puntos para corregirlo.
-
-Libro en Login: aplicado en irAPantalla pero validarEntrada fuerza su aparición antes del setTimeout. Pendiente de corregir.
-
-Iconos nuevos en la carpeta: el Arquitecto subió 8 iconos de sistema (Advertencia, Saludos, Contraseña, Cambiar contraseña, Exito, Motivación, Rango superior, Error) más los 9 de módulos y 3 biométricos.
-
-Regla nueva de iconos: antes de poner un icono, revisar la carpeta. Si no hay uno adecuado, preguntar al Arquitecto.
-
-A_DONDE_VA_STRATOS: el Arquitecto tiene el texto nuevo en sus manos para revisión. Pendiente de entregar con los cambios.
-
-Nota final: Cuando se solicite el texto para instrucciones.md, debe ser muy claro y bien detallado. Cada punto debe incluir: qué cambiar, dónde, cómo debe quedar, y qué NO hacer, sin mezclas ni ambigüedades.
-
-Fin del documento.
+**Fin del documento.**
