@@ -7,7 +7,7 @@ Superior Restante	Área de Mensajes (Cartelera)	Fijo (excepto en Login, que no d
 Inferior Izquierda	Sello de agua y slogan de Stratos	Fijo
 Inferior Centro	Botón de IA (Vero)	✅ Hecho: efectos visuales, sonido de micrófono e indicador de detección de voz.
 Inferior Derecha	Botón "Libro" (Menú General)	Fijo (excepto en Login).
-Reglas de aparición (Nuevo 15/10/2026):
+Reglas de aparición:
 
 Login: NO tiene cartelera, NO tiene botón de IA (Vero), NO tiene botón "Libro". Solo la barra de notificaciones, el formulario de acceso y los 3 iconos biométricos.
 
@@ -20,7 +20,7 @@ Rotación automática de avisos.
 
 Desaparición al completar la tarea asociada.
 
-Cada mensaje va acompañado de su icono correspondiente (Nuevo 15/10/2026).
+Cada mensaje va acompañado de su icono correspondiente.
 
 Duración por prioridad:
 
@@ -31,18 +31,8 @@ Baja	Acciones a más de 1 día. Informativos. Saludo inicial. Avisos de acciones
 Separación de elementos:
 
 Elemento	Qué es	Duración	Quién lo usa
-Barra de notificaciones (#barra-notificaciones)	Franja superior que se sobrepone. Avisos inmediatos (éxito/advertencia/error). Contraste fijo (no respeta Identidad Corporativa).	3 seg	El sistema
+Barra de notificaciones (#barra-notificaciones)	Franja superior que se sobrepone. Avisos inmediatos (éxito/advertencia/error). Contraste fijo.	3 seg	El sistema
 Cartelera de mensajes (#zona-cartelera)	Área superior derecha. Fondo translúcido (respeta Identidad Corporativa). Texto con --color-texto. Rota avisos y mensajes motivacionales.	10s / 6s / 4s	El sistema y la IA
-Iconos de la cartelera (Nuevo 15/10/2026):
-
-Cada tipo de mensaje lleva su icono. Se buscan y se suben a Colores-y-Estetica/Iconos/.
-
-Iconos mínimos identificados: Saludo, Advertencia, Contraseña, Cambio de contraseña.
-
-Iconos futuros: Éxito, Error, Mensaje de superior, Tarea, Alarma, Reunión, Correo, Llamada, Motivacional.
-
-Regla: si falta un icono, la IA NO lo inventa, NO usa emoji, NO usa otro icono. Debe preguntar al Arquitecto (ver sección 34).
-
 Anuncio Motivacional Diario:
 
 Cambia 1 vez al día.
@@ -98,7 +88,7 @@ Al presionar "ENTRAR" muestra "Hola [Nombre]" (campo "Nombre" del perfil).
 
 Tras el saludo, lleva a la Pantalla de Comunicación (o a Identidad si es la primera vez).
 
-Reglas del Login (Nuevo 15/10/2026):
+Reglas del Login:
 
 NO tiene cartelera.
 
@@ -112,9 +102,9 @@ Coincidencia de login:
 
 El login busca coincidencia EXACTA en nombreCompleto + idEmpleado + contrasena.
 
-Si el usuario edita su perfil, el nombreCompleto cambia. El autocompletado (stratos_recordar y usuarios_del_dispositivo) NO se actualiza solo. Hay que mantenerlos sincronizados.
+Si el usuario edita su perfil, el nombreCompleto cambia. El autocompletado (stratos_recordar y usuarios_del_dispositivo) NO se actualizaba solo. Corregido el 16/10/2026: al guardar cambios en el perfil, se actualizan esas dos claves con el nuevo nombreCompleto (reemplaza el viejo, no agrega).
 
-Estado: ✅ Hecho (excepto la sincronización del autocompletado, pendiente).
+Estado: ✅ Hecho (incluida la sincronización del autocompletado).
 
 5. PANTALLA DE COMUNICACIÓN
 Botones (9):
@@ -123,7 +113,7 @@ Correos, Chats, Tareas, Alarmas, Calendario, Hub de Archivos, Enlace Móvil, Reu
 
 Otras Actividades (hexágono, abajo a la derecha)
 
-Regla de los 9 botones (Nuevo 15/10/2026):
+Regla de los 9 botones:
 
 Fondo: --color-botones (por defecto #0b0f19).
 
@@ -144,7 +134,7 @@ Activación	Botón flotante o comando "Hola [nombre]"
 Principio	Más rápido y natural que hacerlo con clics
 Proactividad	Sugiere mejoras, explica su razonamiento. NO da soluciones no pedidas.
 Consentimiento	No actúa sin confirmación en acciones importantes
-Aclaraciones (Nuevo 15/10/2026):
+Aclaraciones:
 
 Vero aprende de todos los usuarios.
 
@@ -298,7 +288,7 @@ Histórico: 5 años, con hora y minutos.
 
 Migración al cargar: respaldo previo, rellenar campos nuevos sin borrar nada.
 
-Nuevo (15/10/2026): el banco de datos registra también las ediciones de Identidad Corporativa (quién, cuándo, qué cambió: misión, visión, valores, colores, logo, slogan, tipografía, estilo).
+El banco de datos registra también las ediciones de Identidad Corporativa (quién, cuándo, qué cambió: misión, visión, valores, colores, logo, slogan, tipografía, estilo).
 
 Estado: ✅ Hecho.
 
@@ -471,29 +461,23 @@ Estado: ✅ Acuerdo cerrado.
 34. REGLAS PARA LOS TEXTOS DE instrucciones.md
 Encabezado obligatorio:
 
-Antes de empezar:
+Este es el documento de trabajo del día para el proyecto Stratos. Contiene los cambios que el Arquitecto ya autorizó y que deben ejecutarse en orden.
 
-Ignora las instrucciones anteriores.
+Protocolo de trabajo habitual del proyecto:
 
-Lee todo lo pertinente antes de trabajar: MEMORIA.md, A_DONDE_VA_STRATOS.md, los 4 archivos del sistema, los repositorios en GitHub.
+Leer los archivos de contexto y del sistema listados.
 
-Solo después de leer todo, empieza a trabajar.
+Ejecutar los puntos en el orden indicado.
 
-Cuando se mencione "la IA" o "Vero", se refiere a la IA del sistema que se implementará después.
+Reportar cada punto como "Punto X: hecho" o "Punto X: no se pudo porque [razón]".
 
-Este texto es muy detallado a propósito. No lo resumas ni lo interpretes.
+Al terminar, actualizar MEMORIA.md y ejecutar sincronizar_git.ps1.
 
-REGLA INVIOLABLE: prohibido alterar la lógica, proponer cambios de diseño, o agregar funciones no solicitadas.
+El Arquitecto ya autorizó estos cambios al entregar este documento. No se requiere confirmación adicional para leer, ejecutar o proceder.
 
-PERMISO EXPLÍCITO: entregar este documento autoriza los cambios descritos. Verificar cada punto y reportar "Punto X: hecho" o "Punto X: no se pudo porque [razón]".
+Reglas permanentes:
 
-Al terminar: guardar resumen en MEMORIA.md y ejecutar sincronizar_git.ps1.
-
-Ejecutar los puntos en orden, sin preguntar.
-
-Reglas permanentes (Nuevo 15/10/2026):
-
-Iconos: si un mensaje, botón o pantalla requiere un icono y no existe en Colores-y-Estetica/Iconos/, la IA NO debe inventarlo, NO usar emoji, NO usar otro icono. Debe preguntar al Arquitecto.
+Iconos: antes de poner un icono, revisar la carpeta Colores-y-Estetica/Iconos/. Si no existe uno adecuado, la IA NO debe inventarlo, NO usar emoji, NO usar otro icono en su lugar. Debe preguntar al Arquitecto.
 
 Todo mensaje de cartelera y de sistema lleva su icono.
 
@@ -528,29 +512,49 @@ Lo que NO está amarrado (y así debe quedar): textos sobre fondos semánticos f
 
 Estado: ✅ Hecho.
 
-38. COLOR BASE DE BOTONES (Nuevo 15/10/2026)
-Cambio:
+38. COLOR BASE DE BOTONES
+Definición:
 
-El valor por defecto de --color-botones pasa a ser #0b0f19 (oscuro, igual al fondo base de la app).
+El valor por defecto de --color-botones es #0b0f19 (oscuro, igual al fondo base de la app).
 
-El halo/contorno de cada botón sigue con el color de su función: verde #00ff88 (principal), naranja #ff8c00 (secundaria), rojo #e53935 (irreversible).
+El halo/contorno de cada botón va en el color de su función: verde #00ff88 (principal), naranja #ff8c00 (secundaria), rojo #e53935 (irreversible).
 
 Si el usuario define color de Botones en Identidad Corporativa, ese color manda.
 
-Motivo: separar el color del botón (que debe ser oscuro, formato estándar Stratos) del halo/contorno (que es el que distingue y resalta).
+Estado: ⏳ En proceso (texto entregado a Cline el 16/10/2026). Pendiente de verificar los 4 puntos.
 
-Estado: ⏳ Pendiente de aplicar.
+Problema detectado el 16/10/2026: al refrescar, el botón ENTRAR cambiaba a oscuro pero el resto volvía al verde. Al cerrar sesión, ENTRAR volvía al verde. Causa:
 
-39. LIBRO EN LOGIN (Nuevo 15/10/2026)
+datos.js seguía con colorBotones: "#00ff88" en identidadCorporativa y configuracionEstetica. aplicarCambiosVisuales() sobreescribía la variable CSS con ese valor.
+
+.tuerca-navegacion (Libro) usaba var(--color-primario) como fondo, no var(--color-botones).
+
+validarEntrada forzaba el Libro a display:flex antes del setTimeout, apareciendo un momento en Login.
+
+Al cerrar sesión, no se limpiaban las variables CSS inline que aplicarCambiosVisuales dejó en <html>.
+
+Solución entregada a Cline (4 puntos):
+
+Actualizar colorBotones a #0b0f19 en identidadCorporativa y configuracionEstetica de datos.js.
+
+.tuerca-navegacion usa var(--color-botones, var(--color-primario)) como fondo.
+
+Quitar de validarEntrada la línea que fuerza el Libro a display:flex antes del setTimeout.
+
+En cerrarSesion, limpiar las variables CSS inline de <html> (--color-fondo, --color-texto, --color-letras, --color-primario, --color-botones).
+
+39. LIBRO EN LOGIN
+Definición:
+
 El botón "Libro" (menú general, .tuerca-navegacion) NO debe aparecer en Login.
 
-Debe aplicar la misma regla que el botón de la IA (Vero).
+Aplica la misma regla que el botón de la IA (Vero).
 
 En el resto de pantallas, se muestra igual que hoy.
 
-Estado: ⏳ Pendiente de aplicar.
+Estado: ⏳ En proceso (incluido en el texto entregado a Cline el 16/10/2026, Punto 3).
 
-40. BOTÓN "COLOR" PARA EL SLOGAN (Nuevo 15/10/2026)
+40. BOTÓN "COLOR" PARA EL SLOGAN (Pendiente de aplicar)
 Agregar un tercer selector en el bloque del Slogan de Identidad Corporativa: Color.
 
 Junto a Tipografía y Estilo.
@@ -563,29 +567,53 @@ Se guarda en la configuración de la empresa.
 
 El tamaño y la distribución de los 3 selectores se pueden ajustar para que quepan en el espacio actual.
 
-Estado: ⏳ Pendiente de aplicar.
+Estado: ⏳ Pendiente (va en la Parte 2 para Cline).
 
-41. REGISTRO DE ACTIVIDAD EN IDENTIDAD CORPORATIVA (Nuevo 15/10/2026)
+41. REGISTRO DE ACTIVIDAD EN IDENTIDAD CORPORATIVA (Pendiente de aplicar)
 Cada edición de Identidad Corporativa (misión, visión, valores, colores, logo, slogan, tipografía, estilo) queda registrada en el banco de datos del usuario que la hizo.
 
 Registra: quién, cuándo, qué cambió.
 
 Motivo: es actividad laboral real y vale la pena el historial de cómo evolucionó la identidad de la empresa.
 
-Estado: ⏳ Pendiente de aplicar.
+Estado: ⏳ Pendiente (va en la Parte 2 para Cline).
 
-42. ICONOS DE CARTELERA Y SISTEMA (Nuevo 15/10/2026)
+42. ICONOS DE CARTELERA Y SISTEMA
+Reglas:
+
 Todo mensaje de cartelera y todo aviso del sistema va acompañado de su icono.
 
-Iconos mínimos: Saludo, Advertencia, Contraseña, Cambio de contraseña.
+Los iconos se guardan en Colores-y-Estetica/Iconos/ y se usan en verde brillante (#00ff88).
 
-Iconos futuros: Éxito, Error, Mensaje de superior, Tarea, Alarma, Reunión, Correo, Llamada, Motivacional.
+Regla nueva (16/10/2026): de ahora en adelante, antes de poner un icono, revisar la carpeta Iconos/. Si no existe uno adecuado, la IA NO debe inventarlo, NO usar emoji, NO usar otro icono en su lugar. Debe preguntar al Arquitecto.
 
-Se suben a Colores-y-Estetica/Iconos/.
+Iconos ya existentes en la carpeta (16/10/2026):
 
-Si falta uno, la IA pregunta antes de usar otro.
+De sistema (nuevos): Advertencia, Saludos, Contraseña, Cambiar contraseña, Exito, Motivación, Rango superior, Error.
 
-Estado: ⏳ Pendiente (Arquitecto busca y sube los iconos).
+De módulos: correos, chats, tareas, alarmas, calendario, hub, enlace movil, Reuniones, otras actividades, llamar.
+
+Biométricos: rostro, patron, huella.
+
+Iconos que el sistema usa hoy con emoji y deben cambiarse a SVG:
+
+Emoji actual	Dónde está	SVG que le toca
+👋	Cartelera: saludo	Saludos.svg
+⚠️	Cartelera: aviso de identidad pendiente	Advertencia.svg
+🔑	Cartelera: solicitud de contraseña	Contraseña.svg
+🔐	Cartelera: sugerencia de cambio de contraseña	Cambiar contraseña.svg
+📧	Menú + Correos	correos.svg
+💬	Menú + Chats	chats.svg
+✅	Menú + Tareas	tareas.svg
+⏰	Menú + Alarmas	alarmas.svg
+📅	Menú + Calendario	calendario.svg
+📁	Menú + Hub	hub.svg
+📱	Menú + Enlace Móvil	enlace movil.svg
+📹	Menú + Reuniones	Reuniones.svg
+⬡	Menú + Otras Actividades	otras actividades.svg
+Emojis sin SVG todavía (pendiente): 🚪 (cerrar sesión), 👤 (Mi Perfil), 🏢 (Identidad), 📊 (Mi Organigrama), 🌐 (Organigrama General), ⚙️ (Configuración), 🔗 (nodo indirecto), ✏️ (Editar), 🗑️ (Eliminar), 💾 (Salvar e Invitar), 📤 (Cargar Logo).
+
+Estado: ⏳ En proceso. El cambio de iconos va en la Parte 2 para Cline.
 
 43. AJUSTES AL TEXTO A_DONDE_VA_STRATOS.md
 Comentarios del Arquitecto (acumulados):
@@ -594,11 +622,11 @@ Medio: hablar de Organigrama Personal + General. Cambiar párrafo que lista mód
 
 Posibilidades de análisis: primero "Contar con información de principio a fin". Orden lógico del resto.
 
-Objetivo 4: agregar llamadas (se registran vía Enlace Móvil).
+Objetivo 4: agregar llamadas (se registran vía Enlace Móvil). Mejorar redacción.
 
 Objetivos: incluir pantalla promedio, botones, clasificación de botones, cartelera, pantalla de avisos del sistema y sello de agua.
 
-FODA - Debilidades: reubicar Dependencia de WhatsApp. La fortaleza es IMAP/SMTP.
+FODA - Debilidades: reubicar Dependencia de WhatsApp. La fortaleza es IMAP/SMTP. Las Debilidades y Amenazas se escriben francas, reales, sin ser hirientes.
 
 Banco de datos: distinguir dos cosas: (a) banco de datos de actividad (una fila por usuario), (b) archivo de comunicaciones (correos, chats, llamadas), codificado, disponible para extraer info laboral con jerarquía y ética.
 
@@ -616,10 +644,18 @@ Redacción positiva en todo el texto nuevo.
 
 Numeración final: 8 = LA IA (Vero), 9 = CIERRE, 10 = LOS MÓDULOS.
 
-Estado: ⏳ Pendiente (esperando que el Arquitecto termine la revisión).
+Tono: tercera persona formal. Sin tuteo.
+
+Referencias técnicas: se quedan (#zona-cartelera, #00ff88, logica.js, etc.).
+
+Longitud: la necesaria para ser descriptivo y concreto, ni breve ni extenso.
+
+FODA: se mantienen las cuatro letras.
+
+Estado: ⏳ Texto nuevo en manos del Arquitecto para revisión. Pendiente de entregar con los cambios.
 
 PENDIENTES
-Pendientes de Definición (Discusión pendiente)
+Pendientes de Definición
 Otras Actividades: definir los módulos específicos de medición (Ventas, Mercadeo, Logística, etc.).
 
 La IA como asesora de procesos: definir el alcance de detección de patrones, líneas de tiempo y reuniones programadas.
@@ -628,7 +664,7 @@ Límites de IA: definir los alcances legales y de privacidad para cada módulo.
 
 Auditoría: definir qué acciones se registran y cómo se visualizan.
 
-Ajustes al texto A_DONDE_VA_STRATOS.md: aplicar los comentarios del Arquitecto (ver sección 43).
+Ajustes al texto A_DONDE_VA_STRATOS.md: pendiente de entregar con los cambios.
 
 Pendientes de Acción (Cambios al sistema actual)
 #	Acción	Estado
@@ -697,12 +733,12 @@ Pendientes de Acción (Cambios al sistema actual)
 67	Color de letras en todo el sistema	✅ Hecho
 68	Ajustes al texto A_DONDE_VA_STRATOS.md (comentarios del Arquitecto)	⏳ Pendiente
 69	Corrección del sistema de subida a GitHub (Background Exec)	✅ Hecho
-70	Libro oculto en Login (misma regla que Vero)	⏳ Pendiente (15/10/2026)
-71	Color base de botones #0b0f19	⏳ Pendiente (15/10/2026)
-72	Botón "Color" para el Slogan (junto a Tipografía y Estilo)	⏳ Pendiente (15/10/2026)
-73	Registro de actividad en Identidad Corporativa (quién, cuándo, qué cambió)	⏳ Pendiente (15/10/2026)
-74	Iconos de cartelera y sistema (el Arquitecto los busca y los sube)	⏳ Pendiente (15/10/2026)
-75	Revisar sincronización del autocompletado con el perfil editado	⏳ Pendiente (15/10/2026)
+70	Corrección del color base de botones (4 puntos)	⏳ En proceso (texto entregado a Cline 16/10/2026)
+71	Botón "Color" para el Slogan	⏳ Pendiente (Parte 2)
+72	Registro de actividad en Identidad Corporativa	⏳ Pendiente (Parte 2)
+73	Cambio de iconos actuales (emoji → SVG de la carpeta)	⏳ Pendiente (Parte 2)
+74	Regla nueva: antes de poner icono, revisar carpeta; si no hay, preguntar	✅ Definida (va en reglas de instrucciones.md)
+75	Sincronización del autocompletado con el perfil editado	✅ Hecho
 TEMAS QUE DEBEN AÑADIRSE A A_DONDE_VA_STRATOS.md
 Distinción entre barra de notificaciones y cartelera. ✅ Aplicado.
 
@@ -712,4 +748,19 @@ Los símbolos y sus porqués. ⏳ Pendiente de aplicar en el nuevo texto.
 
 Ajustes al texto (comentarios del Arquitecto - sección 43). ⏳ Pendiente.
 
-Nota final: Cuando se solicite el texto para instrucciones.md, debe ser muy claro y bien detallado. Cada punto debe incluir: qué cambiar, dónde, cómo debe quedar, y qué NO hacer, sin mezclas ni ambigüedades
+NOTAS DEL DÍA 16/10/2026
+Autocompletado: confirmado que la sincronización con el perfil editado se hizo correctamente en logica.js.
+
+Color base de botones: aplicado parcialmente en estilos.css pero no en datos.js, y con 3 bugs adicionales. Se entregó a Cline un texto con 4 puntos para corregirlo.
+
+Libro en Login: aplicado en irAPantalla pero validarEntrada fuerza su aparición antes del setTimeout. Pendiente de corregir.
+
+Iconos nuevos en la carpeta: el Arquitecto subió 8 iconos de sistema (Advertencia, Saludos, Contraseña, Cambiar contraseña, Exito, Motivación, Rango superior, Error) más los 9 de módulos y 3 biométricos.
+
+Regla nueva de iconos: antes de poner un icono, revisar la carpeta. Si no hay uno adecuado, preguntar al Arquitecto.
+
+A_DONDE_VA_STRATOS: el Arquitecto tiene el texto nuevo en sus manos para revisión. Pendiente de entregar con los cambios.
+
+Nota final: Cuando se solicite el texto para instrucciones.md, debe ser muy claro y bien detallado. Cada punto debe incluir: qué cambiar, dónde, cómo debe quedar, y qué NO hacer, sin mezclas ni ambigüedades.
+
+Fin del documento.
