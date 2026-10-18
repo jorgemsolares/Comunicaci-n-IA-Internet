@@ -40,7 +40,7 @@
 | Elemento | Qué es | Duración | Quién lo usa |
 |----------|--------|----------|--------------|
 | **Barra de notificaciones** (`#barra-notificaciones`) | Franja superior que se sobrepone. Avisos inmediatos (éxito/advertencia/error). Contraste fijo. | 3 seg | El sistema |
-| **Cartelera de mensajes** (`#zona-cartelera`) | Área superior derecha. Fondo translúcido (respeta Identidad Corporativa). Texto con `--color-texto`. Rota avisos y mensajes motivacionales. | 10s / 6s / 4s | El sistema y la IA |
+| **Cartelera de mensajes** (`#zona-cartelera`) | Área superior derecha. Fondo translúcido. Texto con `--color-texto`. | 10s / 6s / 4s | El sistema y la IA |
 
 **Anuncio Motivacional Diario:**
 - Cambia 1 vez al día.
@@ -51,7 +51,7 @@
 - Mientras la IA no esté: el sistema filtra fragmentos que no sean oraciones completas.
 - Reglas: segmento ideal 51-200 caracteres, máximo 250. Delimitadores: coma (solo si el fragmento tiene ≥50 caracteres), punto y punto y coma (siempre). Sin guiones ni números solos.
 
-**Estado:** ✅ Hecho.
+**Estado:** ✅ Hecho (con reparación de HTML pendiente el día de hoy por error en la inyección de iconos).
 
 ---
 
@@ -490,10 +490,11 @@
 
 ---
 
-### 35. INSTALACIÓN DEL ARRANQUE AUTOMÁTICO DEL VIGÍA
+### 35. INSTALACIÓN DEL ARRANQUE AUTOMÁTICO DEL VIGÍA (ACTUALIZADO)
 
-- `instalar_arranque_vigia.ps1` registrado en el Programador de Tareas como `StratosVigiaRespaldo`.
-- El vigía arranca solo al iniciar sesión.
+- Se implementó el script `lanzar_vigia_oculto.vbs` para ejecutar el vigía en segundo plano sin abrir la ventana de PowerShell.
+- El instalador `instalar_arranque_vigia.ps1` se actualizó para llamar al `.vbs` y usar `-RunLevel Highest` (permisos de administrador).
+- Registrado en el Programador de Tareas como `StratosVigiaRespaldo`.
 - Revisa el proyecto cada 10 segundos y sube cambios a GitHub (máx. 1 vez por minuto).
 
 **Estado:** ✅ Hecho.
@@ -581,18 +582,10 @@
 - Los iconos se guardan en `Colores-y-Estetica/Iconos/` y se usan en verde brillante (`#00ff88`).
 - **Regla nueva (16/10/2026):** de ahora en adelante, antes de poner un icono, revisar la carpeta `Iconos/`. Si no existe uno adecuado, la IA NO debe inventarlo, NO usar emoji, NO usar otro icono en su lugar. Debe preguntar al Arquitecto.
 
-**Iconos ya existentes en la carpeta (16/10/2026):**
+**Emojis pendientes de reemplazar por SVG (en proceso de corrección por error de visualización):**
+🚪 (cerrar sesión), 👤 (Mi Perfil), 🏢 (Identidad), 📊 (Mi Organigrama), 🌐 (Organigrama General), ⚙️ (Configuración), 🔗 (nodo indirecto), ✏️ (Editar), 🗑️ (Eliminar), 💾 (Salvar e Invitar), 📤 (Cargar Logo), 📧 (Correos), 📹 (Reuniones), 🔒 (Seguridad), 🔐 (Biometría).
 
-*De sistema (nuevos):* Advertencia, Saludos, Contraseña, Cambiar contraseña, Exito, Motivación, Rango superior, Error.
-
-*De módulos:* correos, chats, tareas, alarmas, calendario, hub, enlace movil, Reuniones, otras actividades, llamar.
-
-*Biométricos:* rostro, patron, huella.
-
-**Emojis pendientes de reemplazar por SVG:**
-🚪 (cerrar sesión), 👤 (Mi Perfil), 🏢 (Identidad), 📊 (Mi Organigrama), 🌐 (Organigrama General), ⚙️ (Configuración), 🔗 (nodo indirecto), ✏️ (Editar), 🗑️ (Eliminar), 💾 (Salvar e Invitar), 📤 (Cargar Logo).
-
-**Estado:** ⏳ Pendiente (incluido en el texto entregado a Cline el 17/10/2026).
+**Estado:** ⏳ En proceso. Se rompió la visualización de la cartelera al inyectar los SVG, requiere reparación.
 
 ---
 
@@ -620,23 +613,15 @@
 
 ---
 
-### 45. AJUSTES AL TEXTO `A_DONDE_VA_STRATOS.md`
+### 45. DISEÑO DE LA PANTALLA DE REDACCIÓN DE CORREOS
 
-**Comentarios del Arquitecto aplicados en la versión final:**
-1. **Medio:** separación explícita entre Organigrama Personal (comunicación) y Organigrama General (jerarquía).
-2. **Posibilidades de análisis:** orden reestructurado, iniciando con "Contar con información de principio a fin".
-3. **Objetivo 4:** se agregaron las llamadas telefónicas y los Correos.
-4. **Objetivos:** se incluyó el Objetivo 5 sobre la unificación de pantallas, botones, cartelera, avisos y sello de agua.
-5. **FODA:** debilidades y amenazas redactadas con tono objetivo, sin ser hirientes. Dependencia de WhatsApp reubicada como fortaleza (IMAP/SMTP).
-6. **Banco de datos:** distinción clara entre el banco de actividad y el archivo de comunicaciones (correos, chats, llamadas) codificado.
-7. **Rango de uso:** se restauró la primera línea sobre el registro de entrada/salida y se destacó la diferencia entre tiempo total y tiempo por módulo.
-8. **Símbolos:** se añadió la sección de Pantalla y botones (sección H) antes de Símbolos (sección I).
-9. **Módulos:** movidos a la sección 10.
-10. **Vero:** se especificó su rol, aprendizaje global sin filtración de datos de terceros, y adaptación al nivel del usuario.
-11. **Cierre:** se estableció la premisa de que todo debe generar datos de medición.
-12. **Redacción:** en tercera persona formal y tono positivo.
+- Se definió crear la pantalla de redacción de correos inspirada en la simplicidad de Gmail.
+- Debe ocupar la pantalla completa respetando el encabezado y pie.
+- **Campos:** De (fijo con correo del perfil), Para (con autocompletado), Asunto, Mensaje.
+- **Botones:** ENVIAR, ENVIAR + TAREA, ENVIAR + ALARMA, DESCARTAR y adjuntar archivo.
+- **Trabajo invisible:** Registrar la hora de envío y la acción generada (tarea/alarma). Aclaración clave: la espera de respuesta del proveedor se medirá luego en la línea de tiempo, separando el tiempo total del proceso del tiempo real de trabajo del usuario.
 
-**Estado:** ✅ Texto entregado al Arquitecto para su validación final.
+**Estado:** ⏳ Pendiente (texto entregado a Cline, falta verificar implementación).
 
 ---
 
@@ -702,7 +687,7 @@
 | 48 | Login: registrar hora entrada/salida, errores de tipeo, aviso al jefe, sugerir cambio de contraseña | ✅ Hecho (parcial) |
 | 49 | Correos: implementar todo el módulo | ✅ Hecho (pantalla local) |
 | 50 | Correos (Spam): implementar filtro de spam propio de Stratos | Pendiente |
-| 51-54 | Invitaciones y permisos (ventana intermedia de selección de módulos) | Pendiente (hasta que Comunicación esté implementado) |
+| 51-54 | Invitaciones y permisos (ventana intermedia de selección de módulos) | Pendiente |
 | 55 | Cambiar iconos biométricos en Login por los SVG de `Colores-y-Estetica/iconos/` | ✅ Hecho |
 | 56 | Agregar enrolamiento biométrico en Perfil (con los SVG nuevos) | ✅ Hecho |
 | 57 | Quitar cartelera de Login | ✅ Hecho |
@@ -725,14 +710,18 @@
 | 74 | Regla nueva: antes de poner icono, revisar carpeta; si no hay, preguntar | ✅ Definida (va en reglas de `instrucciones.md`) |
 | 75 | Sincronización del autocompletado con el perfil editado | ✅ Hecho |
 | 76 | Cambio de forma del botón "Otras Actividades" (Píldora) | ⏳ En proceso (texto entregado 17/10/2026) |
+| 77 | Ocultar ventana negra de PowerShell del Vigía al iniciar Windows (usando `.vbs`) | ✅ Hecho |
+| 78 | Crear pantalla de redacción de correos y el botón "Redactar" | ⏳ En proceso (texto entregado hoy) |
+| 79 | Reparar la cartelera (HTML roto por inyección de iconos SVG) | ⏳ En proceso (texto entregado hoy) |
 
 ---
 
-## NOTAS DEL DÍA 17/10/2026
+## NOTAS DEL DÍA 18/10/2026
 
-- **Texto de `A_DONDE_VA_STRATOS.md` validado:** El Arquitecto revisó y aprobó la nueva redacción, incluyendo la diferenciación de los organigramas y la restauración de la sección G (Rango de uso).
-- **Parte 2 para Cline:** Se preparó y entregó el texto con 4 puntos clave: (1) Botón Color del Slogan, (2) Registro de actividad en Identidad, (3) Reemplazo de emojis por SVGs, y (4) Cambio de hexágono a píldora en "Otras Actividades".
-- **Diseño del Logo:** Se generaron propuestas con Ideogram/DeeVid AI. El concepto de los cubos ascendentes, las líneas de medición y la "A" con flecha verde fue aprobado por el Arquitecto. Se descartó la idea de cambiar la tipografía.
+- **Texto de `A_DONDE_VA_STRATOS.md` validado:** Confirmado y listo. El Arquitecto ya tiene la versión final sin las "PARTES" numeradas, con la diferenciación de organigramas, sección H de pantallas y botones, y el FODA ajustado.
+- **Problema del Vigía:** Se solucionó la ventana negra de PowerShell al iniciar Windows implementando un archivo `.vbs` invisible (`lanzar_vigia_oculto.vbs`) y actualizando el instalador para usar `-RunLevel Highest`. Se reinstaló la tarea correctamente.
+- **Pantalla de Redacción de Correos:** Se diseñó el concepto (basado en Gmail) y se preparó el texto para Cline, pero aún está en cola de implementación.
+- **Error Crítico en la Cartelera:** Al intentar reemplazar los emojis por los SVG, Cline rompió el código de la cartelera. El HTML literal (`<img src...>`) se muestra en pantalla o el texto desaparece por completo. Se le entregó un texto a Cline para reparar el error y terminar el reemplazo de los emojis faltantes.
 
 ---
 
