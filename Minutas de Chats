@@ -46,12 +46,18 @@
 - Cambia 1 vez al día.
 - Duración: 6 seg (prioridad media).
 
+**Regla de colores de iconos (Ley de Diseño):**
+- **Naranja (`#ff8c00`):** Mensajes de un superior (directo o indirecto).
+- **Rojo (`#e53935`):** Mensajes urgentes o de atención inmediata.
+- **Verde Stratos (`#00ff88`):** Mensajes normales (colegas, subalternos, sistema).
+- Esta clasificación está ligada a la prioridad: mensajes con icono naranja o rojo son de prioridad ALTA (10s).
+
 **Lógica de segmentación de textos (misión, visión, valores):**
 - El sistema NO fragmenta el texto. Se lo pasa a la IA completa cuando esté implementada.
 - Mientras la IA no esté: el sistema filtra fragmentos que no sean oraciones completas.
 - Reglas: segmento ideal 51-200 caracteres, máximo 250. Delimitadores: coma (solo si el fragmento tiene ≥50 caracteres), punto y punto y coma (siempre). Sin guiones ni números solos.
 
-**Estado:** ✅ Hecho (con reparación de HTML pendiente el día de hoy por error en la inyección de iconos).
+**Estado:** ✅ Hecho (incluye la regla de colores de iconos).
 
 ---
 
@@ -485,12 +491,13 @@
 **Reglas permanentes:**
 - **Iconos:** antes de poner un icono, revisar la carpeta `Colores-y-Estetica/Iconos/`. Si no existe uno adecuado, la IA NO debe inventarlo, NO usar emoji, NO usar otro icono en su lugar. Debe preguntar al Arquitecto.
 - **Todo mensaje de cartelera y de sistema lleva su icono.**
+- **Tamaño de iconos:** Los iconos dentro de botones mantienen su tamaño grande. Los iconos fuera de botones (textos, títulos, listas) deben ser de ~30px.
 
 **Estado:** ✅ Actualizado.
 
 ---
 
-### 35. INSTALACIÓN DEL ARRANQUE AUTOMÁTICO DEL VIGÍA (ACTUALIZADO)
+### 35. INSTALACIÓN DEL ARRANQUE AUTOMÁTICO DEL VIGÍA
 
 - Se implementó el script `lanzar_vigia_oculto.vbs` para ejecutar el vigía en segundo plano sin abrir la ventana de PowerShell.
 - El instalador `instalar_arranque_vigia.ps1` se actualizó para llamar al `.vbs` y usar `-RunLevel Highest` (permisos de administrador).
@@ -536,7 +543,7 @@
 - El halo/contorno de cada botón va en el color de su función: verde `#00ff88` (principal), naranja `#ff8c00` (secundaria), rojo `#e53935` (irreversible).
 - Si el usuario define color de Botones en Identidad Corporativa, ese color manda.
 
-**Estado:** ✅ Hecho (16/10/2026). Corregido en `datos.js`, `.tuerca-navegacion` y `validarEntrada`/`cerrarSesion`.
+**Estado:** ✅ Hecho (16/10/2026).
 
 ---
 
@@ -553,14 +560,12 @@
 
 ### 40. BOTÓN "COLOR" PARA EL SLOGAN
 
-- Agregar un tercer selector en el bloque del Slogan de Identidad Corporativa: **Color**.
-- Junto a Tipografía y Estilo.
-- Debe desplegar los **mismos 8 colores** de la paleta superior (la que se genera a partir del logo).
-- Al elegir un color, el Slogan cambia a ese color.
-- Se guarda en la configuración de la empresa.
-- El tamaño y la distribución de los 3 selectores se pueden ajustar para que quepan en el espacio actual.
+- Se agregó un tercer selector en el bloque del Slogan: **Color**.
+- Despliega los 8 colores de la paleta superior.
+- Al elegir un color, el Slogan cambia y se guarda.
+- **Pendiente de mejora:** Actualmente muestra el código hexadecimal (`#533483`) en lugar de un cuadro visual del color. Se necesita ajustar el diseño para que sea más estético (mostrar el color real).
 
-**Estado:** ⏳ Pendiente (incluido en el texto entregado a Cline el 17/10/2026).
+**Estado:** ⏳ A medias (funcional, pero requiere mejora visual).
 
 ---
 
@@ -569,9 +574,7 @@
 - Cada edición de Identidad Corporativa (misión, visión, valores, colores, logo, slogan, tipografía, estilo) queda registrada en el banco de datos del usuario que la hizo.
 - Registra: quién, cuándo, qué cambió.
 
-**Motivo:** es actividad laboral real y vale la pena el historial de cómo evolucionó la identidad de la empresa.
-
-**Estado:** ⏳ Pendiente (incluido en el texto entregado a Cline el 17/10/2026).
+**Estado:** ✅ Hecho.
 
 ---
 
@@ -580,48 +583,55 @@
 **Reglas:**
 - Todo mensaje de cartelera y todo aviso del sistema va acompañado de su icono.
 - Los iconos se guardan en `Colores-y-Estetica/Iconos/` y se usan en verde brillante (`#00ff88`).
-- **Regla nueva (16/10/2026):** de ahora en adelante, antes de poner un icono, revisar la carpeta `Iconos/`. Si no existe uno adecuado, la IA NO debe inventarlo, NO usar emoji, NO usar otro icono en su lugar. Debe preguntar al Arquitecto.
+- **Regla nueva:** antes de poner un icono, revisar la carpeta `Iconos/`. Si no existe uno adecuado, la IA NO debe inventarlo, NO usar emoji, NO usar otro icono en su lugar. Debe preguntar al Arquitecto.
+- Se agregaron los iconos: `flecha izquierda.svg`, `flecha derecha.svg`, `Error-rojo.svg`, `Advertencia-naranja.svg`, entre otros.
 
-**Emojis pendientes de reemplazar por SVG (en proceso de corrección por error de visualización):**
-🚪 (cerrar sesión), 👤 (Mi Perfil), 🏢 (Identidad), 📊 (Mi Organigrama), 🌐 (Organigrama General), ⚙️ (Configuración), 🔗 (nodo indirecto), ✏️ (Editar), 🗑️ (Eliminar), 💾 (Salvar e Invitar), 📤 (Cargar Logo), 📧 (Correos), 📹 (Reuniones), 🔒 (Seguridad), 🔐 (Biometría).
-
-**Estado:** ⏳ En proceso. Se rompió la visualización de la cartelera al inyectar los SVG, requiere reparación.
+**Estado:** ✅ Hecho.
 
 ---
 
 ### 43. BOTÓN "OTRAS ACTIVIDADES" (FORMA DE PÍLDORA)
 
-- Se cambió el diseño del hexágono a una forma de píldora (cápsula alargada con los extremos redondeados).
+- Se cambió el diseño del hexágono a una forma de píldora (cápsula alargada).
 - Motivo: el uso de `clip-path` para el hexágono cortaba el halo y el contorno. Con la píldora, el botón brilla igual que los demás.
 - Se eliminó `clip-path` y `drop-shadow`; se aplicó `border-radius: 999px` y los efectos de hover/active normales.
 
-**Estado:** ⏳ Pendiente (incluido en el texto entregado a Cline el 17/10/2026).
+**Estado:** ✅ Hecho.
 
 ---
 
 ### 44. DISEÑO DEL LOGO
 
-- Se utilizó la IA **Ideogram** (y alternativa DeeVid AI) para generar propuestas visuales del logo de Stratos.
-- **Concepto definido:** Fondo oscuro `#0b0f19`, acentos en verde neón `#00ff88`, tipografía ancha y tecnológica.
-- **Elementos visuales aprobados:**
-  - Tres bloques (cubos) en ascenso diagonal, que representan los módulos de actividades y el crecimiento constante.
-  - La letra "A" con un triángulo verde interior que simula una flecha hacia arriba (crecimiento).
-  - Elementos gráficos de medición (regla a la izquierda, barras de gráfico a la derecha).
-- El Slogan "HERRAMIENTA MULTIFUNCIONAL" se integra debajo de la palabra "STRATOS".
+- Se utilizó la IA **Ideogram** para generar propuestas visuales del logo.
+- **Concepto definido:** Fondo oscuro `#0b0f19`, acentos en verde neón `#00ff88`, tipografía ancha.
+- **Elementos visuales aprobados:** Tres bloques (cubos) en ascenso diagonal (módulos y crecimiento), letra "A" con triángulo verde (flecha hacia arriba), regla y barras de medición.
+- El Slogan "HERRAMIENTA MULTIFUNCIONAL" se integra debajo de "STRATOS".
 
-**Estado:** ✅ Concepto aprobado por el Arquitecto.
+**Estado:** ✅ Concepto aprobado.
 
 ---
 
 ### 45. DISEÑO DE LA PANTALLA DE REDACCIÓN DE CORREOS
 
 - Se definió crear la pantalla de redacción de correos inspirada en la simplicidad de Gmail.
-- Debe ocupar la pantalla completa respetando el encabezado y pie.
-- **Campos:** De (fijo con correo del perfil), Para (con autocompletado), Asunto, Mensaje.
+- Debe abrirse como ventana emergente (modal).
+- **Campos:** De (fijo con correo del perfil), Para, Asunto, Mensaje.
 - **Botones:** ENVIAR, ENVIAR + TAREA, ENVIAR + ALARMA, DESCARTAR y adjuntar archivo.
-- **Trabajo invisible:** Registrar la hora de envío y la acción generada (tarea/alarma). Aclaración clave: la espera de respuesta del proveedor se medirá luego en la línea de tiempo, separando el tiempo total del proceso del tiempo real de trabajo del usuario.
+- **Trabajo invisible:** Registrar la hora de envío y la acción generada.
+- **Función de adjuntar:** El botón de clip debe abrir el explorador de archivos real y mostrar el nombre del archivo seleccionado.
 
-**Estado:** ⏳ Pendiente (texto entregado a Cline, falta verificar implementación).
+**Estado:** ⏳ Pendiente (texto entregado a Cline el 19/10/2026).
+
+---
+
+### 46. REDISEÑO ESTRUCTURAL DE LA PANTALLA DE CORREOS
+
+- **Proporciones:** El menú lateral ocupará máximo 1/3 del ancho. La lista de correos ocupará los 2/3 restantes.
+- **Botones laterales:** Estado normal sin sombra brillante. Estado activo (presionado) con texto verde y borde iluminado.
+- **Detalle del correo:** Al hacer doble clic, se abrirá en una ventana emergente (modal), no se expandirá hacia abajo.
+- **Diseño de la lista:** Remitente en negrita y fecha a la derecha (línea 1), asunto en negrita (línea 2), vista previa de 3 líneas (línea 3). Se inyectarán correos de prueba para verificar el diseño.
+
+**Estado:** ⏳ En proceso (texto entregado a Cline el 19/10/2026).
 
 ---
 
@@ -704,24 +714,28 @@
 | 68 | Ajustes al texto `A_DONDE_VA_STRATOS.md` (comentarios del Arquitecto) | ✅ Hecho |
 | 69 | Corrección del sistema de subida a GitHub (Background Exec) | ✅ Hecho |
 | 70 | Corrección del color base de botones (4 puntos) | ✅ Hecho (16/10/2026) |
-| 71 | Botón "Color" para el Slogan | ⏳ En proceso (texto entregado 17/10/2026) |
-| 72 | Registro de actividad en Identidad Corporativa | ⏳ En proceso (texto entregado 17/10/2026) |
-| 73 | Cambio de iconos actuales (emoji → SVG de la carpeta) | ⏳ En proceso (texto entregado 17/10/2026) |
-| 74 | Regla nueva: antes de poner icono, revisar carpeta; si no hay, preguntar | ✅ Definida (va en reglas de `instrucciones.md`) |
+| 71 | Botón "Color" para el Slogan (funcional, falta mejorar estética visual) | ⏳ A medias |
+| 72 | Registro de actividad en Identidad Corporativa | ✅ Hecho |
+| 73 | Cambio de iconos actuales (emoji → SVG de la carpeta) | ✅ Hecho |
+| 74 | Regla nueva: antes de poner icono, revisar carpeta; si no hay, preguntar | ✅ Definida |
 | 75 | Sincronización del autocompletado con el perfil editado | ✅ Hecho |
-| 76 | Cambio de forma del botón "Otras Actividades" (Píldora) | ⏳ En proceso (texto entregado 17/10/2026) |
+| 76 | Cambio de forma del botón "Otras Actividades" (Píldora) | ✅ Hecho |
 | 77 | Ocultar ventana negra de PowerShell del Vigía al iniciar Windows (usando `.vbs`) | ✅ Hecho |
-| 78 | Crear pantalla de redacción de correos y el botón "Redactar" | ⏳ En proceso (texto entregado hoy) |
-| 79 | Reparar la cartelera (HTML roto por inyección de iconos SVG) | ⏳ En proceso (texto entregado hoy) |
+| 78 | Crear ventana flotante de redacción de correos y el botón "Redactar" | ⏳ En proceso |
+| 79 | Reparar la cartelera (HTML roto por inyección de iconos SVG) | ✅ Hecho |
+| 80 | Regla de colores de iconos (naranja/rojo/verde según jerarquía) | ⏳ En proceso (definición en A_DONDE_VA_STRATOS y código) |
+| 81 | Ajuste de proporciones y diseño visual de la pantalla de Correos | ⏳ En proceso (texto entregado el 19/10/2026) |
 
 ---
 
-## NOTAS DEL DÍA 18/10/2026
+## NOTAS DEL DÍA 19/10/2026
 
-- **Texto de `A_DONDE_VA_STRATOS.md` validado:** Confirmado y listo. El Arquitecto ya tiene la versión final sin las "PARTES" numeradas, con la diferenciación de organigramas, sección H de pantallas y botones, y el FODA ajustado.
-- **Problema del Vigía:** Se solucionó la ventana negra de PowerShell al iniciar Windows implementando un archivo `.vbs` invisible (`lanzar_vigia_oculto.vbs`) y actualizando el instalador para usar `-RunLevel Highest`. Se reinstaló la tarea correctamente.
-- **Pantalla de Redacción de Correos:** Se diseñó el concepto (basado en Gmail) y se preparó el texto para Cline, pero aún está en cola de implementación.
-- **Error Crítico en la Cartelera:** Al intentar reemplazar los emojis por los SVG, Cline rompió el código de la cartelera. El HTML literal (`<img src...>`) se muestra en pantalla o el texto desaparece por completo. Se le entregó un texto a Cline para reparar el error y terminar el reemplazo de los emojis faltantes.
+- **Logo:** Se definió la herramienta (Ideogram) y se aprobó el concepto visual con los bloques de medición y crecimiento.
+- **Vigía:** Se solucionó la ventana negra de PowerShell implementando un lanzador `.vbs` invisible.
+- **Nuevos iconos:** El Arquitecto subió los iconos de `flecha izquierda`, `flecha derecha`, `Error-rojo` y `Advertencia-naranja`.
+- **Regla de colores de iconos:** Se estableció que los mensajes de superiores serán naranjas y los urgentes rojos, para llamar la atención visualmente.
+- **Pantalla de Correos:** Se ajustó el diseño para que se vea más como Gmail (menú lateral, proporciones, modal de detalle) y se está trabajando en la ventana modal de Redacción.
+- **Dudas aclaradas:** El paso entre dispositivos (PC a Celular) y la sincronización de correos requerirán un servidor backend, que se construirá después de terminar la interfaz visual.
 
 ---
 
