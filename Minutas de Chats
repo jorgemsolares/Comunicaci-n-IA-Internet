@@ -187,36 +187,38 @@
 
 ### 9. TAREAS
 
-**9.1. Vista Principal:** botón "Crear tarea", columnas Título / F. Emisión / Periodo.
-**9.2. Ventana de Detalle:** título, fechas, prioridad, integrantes, área de mensaje/contexto, botones Enviar/Editar.
-**9.3. Comportamiento Visual:** película semitransparente tipo Gantt, verde → rojo según campana de Gauss.
-**9.4. Archivo:** automático al terminar.
-**9.5. Seguimiento:** la IA propone tareas de seguimiento al delegar.
+**9.1. Vista Principal:** Menú lateral (1/4) con filtros: Todas, Mis Tareas, Asignadas a mí, Enviadas, En Seguimiento, Terminadas. Lista (3/4).
+**9.2. Diferenciación visual en la lista:** Película blanca (propias), verde Stratos (asignadas a otros), beige (seguimiento). Tareas terminadas no llevan película.
+**9.3. Ventana de Detalle/Creación:** Título dinámico ("Nueva Tarea" o "Detalle de Tarea"). Campos: Título, fechas (una, varias o periódicas), prioridad, integrantes. Área de contexto (correos/mensajes relacionados).
+**9.4. Seguimiento:** Al crear una tarea para otro, el sistema abre automáticamente la ventana de "Seguimiento a Tarea" (con los datos del otro ya cargados) para que el usuario configure una, varias o periódicas fechas/horas y grabe.
+**9.5. Comportamiento Visual:** En la lista, indicador de tiempo (reloj de arena) que cambia de verde a naranja y de ahí a rojo según la fecha. En el detalle, barra o película más grande. Al terminar, pierde color.
 
-**Estado:** ⏳ Pendiente.
+**Estado:** ⏳ Pendiente (diseño conceptual listo).
 
 ---
 
 ### 10. ALARMAS
 
-**10.1. Vista Principal:** Título, Hora de inicio, Integrantes. Orden por importancia/estado/proximidad.
-**10.2. Ventana de Detalle:** título, hora, periodicidad (única/diaria/semanal/anual), integrantes, sonido del dispositivo.
-**10.3. Comportamiento:** asignación a otros crea tarea de seguimiento; aviso en cartelera; jerarquía y prioridad igual que Tareas.
-**10.4. Botón de Borrar:** en ventana de detalle; al borrar avisa en cartelera a todos los integrantes.
+**10.1. Vista Principal:** Misma estructura que Tareas (menú lateral 1/4 y lista 3/4). Filtros: Todas, Mis Alarmas, Asignadas, Terminadas.
+**10.2. Diferenciación visual:** Película blanca (propias), verde Stratos (asignadas). El icono de la lista es un reloj de arena que cambia de color (verde → naranja → rojo) y muestra en su interior el tiempo restante (ej. "2 D", "3 H"). No lleva foto ni acrónimo, se muestra el nombre (o Nickname).
+**10.3. Ventana de Detalle/Creación:** Título dinámico ("Nueva Alarma" o "Detalle de Alarma"). Campos: Título, Hora de inicio (digital), Periodicidad (una, varias o periódicas), Integrantes, Sonido (del dispositivo) y opción de Vibración.
+**10.4. Seguimiento:** Al asignar a otro, se abre la ventana de "Seguimiento a Alarma" para configurar fechas/horas.
+**10.5. Botón de Borrar:** En ventana de detalle; al borrar avisa en cartelera a todos los integrantes.
 
-**Estado:** ⏳ Pendiente.
+**Estado:** ⏳ Pendiente (diseño conceptual listo).
 
 ---
 
-### 11. CONTACTOS
+### 11. CONTACTOS Y NICKNAMES (ALIAS)
 
-- Vinculación con Gmail (contactos, nombres, correos, notas, categorías).
-- Alias/nickname en silencio.
-- Detección y resolución de discrepancias.
-- Sugerencia de contactos nuevos por frecuencia.
-- Agrupación por categorías de Gmail.
+- **Vinculación con Gmail:** contactos, nombres, correos, notas, categorías.
+- **Nickname / Alias:** El nombre con el que tú guardas a un contacto en tu Organigrama Personal es tu "Nickname" para esa persona. El sistema debe usarlo en tus pantallas (tareas, alarmas, correos).
+- **Cruce de datos:** Si escribes un nombre que no está en tu primera línea, Vero debe buscar en el banco de datos general si ese correo/celular ya fue vinculado por alguien más para reconocer que es la misma persona.
+- **Detección y resolución de discrepancias.**
+- **Sugerencia de contactos nuevos por frecuencia.**
+- **Agrupación por categorías de Gmail.**
 
-**Estado:** ⏳ Pendiente.
+**Estado:** ⏳ Pendiente (lógica definida, falta implementación técnica).
 
 ---
 
@@ -287,7 +289,7 @@
 
 **Migración al cargar:** respaldo previo, rellenar campos nuevos sin borrar nada.
 
-**El banco de datos registra también las ediciones de Identidad Corporativa** (quién, cuándo, qué cambió: misión, visión, valores, colores, logo, slogan, tipografía, estilo).
+**El banco de datos registra también las ediciones de Identidad Corporativa** (quién, cuándo, qué cambió).
 
 **Estado:** ✅ Hecho.
 
@@ -563,9 +565,9 @@
 - Se agregó un tercer selector en el bloque del Slogan: **Color**.
 - Despliega los 8 colores de la paleta superior.
 - Al elegir un color, el Slogan cambia y se guarda.
-- **Pendiente de mejora:** Actualmente muestra el código hexadecimal (`#533483`) en lugar de un cuadro visual del color. Se necesita ajustar el diseño para que sea más estético (mostrar el color real).
+- **Pendiente de mejora:** Actualmente muestra el código hexadecimal (`#533483`) en lugar de un cuadro visual del color.
 
-**Estado:** ⏳ A medias (funcional, pero requiere mejora visual).
+**Estado:** ⏳ A medias (funcional, requiere mejora visual).
 
 ---
 
@@ -619,6 +621,7 @@
 - **Botones:** ENVIAR, ENVIAR + TAREA, ENVIAR + ALARMA, DESCARTAR y adjuntar archivo.
 - **Trabajo invisible:** Registrar la hora de envío y la acción generada.
 - **Función de adjuntar:** El botón de clip debe abrir el explorador de archivos real y mostrar el nombre del archivo seleccionado.
+- **Editor enriquecido:** Debe incluir opciones de formato (negrita, cursiva, etc.) y la firma automática del usuario.
 
 **Estado:** ⏳ Pendiente (texto entregado a Cline el 19/10/2026).
 
@@ -626,12 +629,15 @@
 
 ### 46. REDISEÑO ESTRUCTURAL DE LA PANTALLA DE CORREOS
 
-- **Proporciones:** El menú lateral ocupará máximo 1/3 del ancho. La lista de correos ocupará los 2/3 restantes.
+- **Proporciones:** El menú lateral ocupará 1/4 del ancho. La lista de correos ocupará los 3/4 restantes.
 - **Botones laterales:** Estado normal sin sombra brillante. Estado activo (presionado) con texto verde y borde iluminado.
 - **Detalle del correo:** Al hacer doble clic, se abrirá en una ventana emergente (modal), no se expandirá hacia abajo.
 - **Diseño de la lista:** Remitente en negrita y fecha a la derecha (línea 1), asunto en negrita (línea 2), vista previa de 3 líneas (línea 3). Se inyectarán correos de prueba para verificar el diseño.
+- **Checkbox maestro:** Cada correo tendrá un checkbox a la izquierda para seleccionar uno o varios. Arriba debe haber un checkbox para "Seleccionar todos".
+- **Correos leídos/no leídos:** Los no leídos tendrán una película de fondo blanca (o más clara). Al marcarlos como leídos, pierden ese fondo.
+- **Acciones por clic derecho:** Al hacer clic derecho o seleccionar varios, se desplegarán las opciones (mover a carpeta, archivar, eliminar).
 
-**Estado:** ⏳ En proceso (texto entregado a Cline el 19/10/2026).
+**Estado:** ⏳ En proceso (texto entregado a Cline el 20/10/2026).
 
 ---
 
@@ -724,18 +730,21 @@
 | 78 | Crear ventana flotante de redacción de correos y el botón "Redactar" | ⏳ En proceso |
 | 79 | Reparar la cartelera (HTML roto por inyección de iconos SVG) | ✅ Hecho |
 | 80 | Regla de colores de iconos (naranja/rojo/verde según jerarquía) | ⏳ En proceso (definición en A_DONDE_VA_STRATOS y código) |
-| 81 | Ajuste de proporciones y diseño visual de la pantalla de Correos | ⏳ En proceso (texto entregado el 19/10/2026) |
+| 81 | Ajuste de proporciones y diseño visual de la pantalla de Correos | ⏳ En proceso (texto entregado el 20/10/2026) |
+| 82 | Implementar checkbox maestro y selección múltiple en correos | ⏳ En proceso |
+| 83 | Implementar el cambio de película (leído/no leído) en correos | ⏳ En proceso |
+| 84 | Implementar la lógica de Tareas (películas, reloj de arena, seguimiento) | ⏳ En proceso (diseño conceptual listo) |
+| 85 | Implementar la lógica de Alarmas (películas, reloj de arena, sonido, seguimiento) | ⏳ En proceso (diseño conceptual listo) |
 
 ---
 
-## NOTAS DEL DÍA 19/10/2026
+## NOTAS DEL DÍA 20/10/2026
 
-- **Logo:** Se definió la herramienta (Ideogram) y se aprobó el concepto visual con los bloques de medición y crecimiento.
-- **Vigía:** Se solucionó la ventana negra de PowerShell implementando un lanzador `.vbs` invisible.
-- **Nuevos iconos:** El Arquitecto subió los iconos de `flecha izquierda`, `flecha derecha`, `Error-rojo` y `Advertencia-naranja`.
-- **Regla de colores de iconos:** Se estableció que los mensajes de superiores serán naranjas y los urgentes rojos, para llamar la atención visualmente.
-- **Pantalla de Correos:** Se ajustó el diseño para que se vea más como Gmail (menú lateral, proporciones, modal de detalle) y se está trabajando en la ventana modal de Redacción.
-- **Dudas aclaradas:** El paso entre dispositivos (PC a Celular) y la sincronización de correos requerirán un servidor backend, que se construirá después de terminar la interfaz visual.
+- **Cline y modelo:** Se agotó el límite del modelo gratuito en Cline. Se sugirió cambiar a **Nemotron 3.5 Super VL** o **MiniMax M3.1 Flash** (gratuitos y rápidos) para continuar.
+- **Pantalla de Correos:** Se ajustaron detalles visuales y se definió la lógica de leído/no leído, checkboxes de selección múltiple y las proporciones (1/4 y 3/4).
+- **Tareas:** Se definió que las tareas propias tendrán película blanca, las asignadas verde Stratos y las de seguimiento beige. El indicador visual será un reloj de arena con contador (D, H, m) que cambia de verde a naranja y rojo.
+- **Alarmas:** Se definió la misma estructura que Tareas (menú lateral, películas, reloj de arena). Se agregó la opción de sonido y vibración en el modal de creación.
+- **Nickname / Alias:** Se aclaró que el sistema guarda el nombre real del perfil, pero el usuario ve el nombre con el que lo guardó en su Organigrama Personal. Se dejó como pendiente para la fase de Contactos.
 
 ---
 
