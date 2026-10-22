@@ -189,9 +189,9 @@
 
 **9.1. Vista Principal:** Menú lateral (1/4) con filtros: Todas, Mis Tareas, Asignadas a mí, Enviadas, En Seguimiento, Terminadas. Lista (3/4).
 **9.2. Diferenciación visual en la lista:** Película blanca (propias), verde Stratos (asignadas a otros), beige (seguimiento). Tareas terminadas no llevan película.
-**9.3. Ventana de Detalle/Creación:** Título dinámico ("Nueva Tarea" o "Detalle de Tarea"). Campos: Título, fechas (una, varias o periódicas), prioridad, integrantes. Área de contexto (correos/mensajes relacionados).
-**9.4. Seguimiento:** Al crear una tarea para otro, el sistema abre automáticamente la ventana de "Seguimiento a Tarea" (con los datos del otro ya cargados) para que el usuario configure una, varias o periódicas fechas/horas y grabe.
-**9.5. Comportamiento Visual:** En la lista, indicador de tiempo (reloj de arena) que cambia de verde a naranja y de ahí a rojo según la fecha. En el detalle, barra o película más grande. Al terminar, pierde color.
+**9.3. Ventana de Detalle/Creación:** Título dinámico ("Nueva Tarea" o "Detalle de Tarea"). Campos: Título, fechas (una, varias o periódicas), prioridad, integrantes. Área de contexto.
+**9.4. Seguimiento:** Al crear una tarea para otro, el sistema abre la ventana de "Seguimiento a Tarea" (con los datos ya cargados) para configurar fechas.
+**9.5. Comportamiento Visual:** En la lista, indicador de tiempo (reloj de arena) que cambia de verde a naranja y de ahí a rojo. En el detalle, barra más grande. Al terminar, pierde color.
 
 **Estado:** ⏳ Pendiente (diseño conceptual listo).
 
@@ -200,7 +200,7 @@
 ### 10. ALARMAS
 
 **10.1. Vista Principal:** Misma estructura que Tareas (menú lateral 1/4 y lista 3/4). Filtros: Todas, Mis Alarmas, Asignadas, Terminadas.
-**10.2. Diferenciación visual:** Película blanca (propias), verde Stratos (asignadas). El icono de la lista es un reloj de arena que cambia de color (verde → naranja → rojo) y muestra en su interior el tiempo restante (ej. "2 D", "3 H"). No lleva foto ni acrónimo, se muestra el nombre (o Nickname).
+**10.2. Diferenciación visual:** Película blanca (propias), verde Stratos (asignadas). El icono de la lista es un reloj de arena que cambia de color (verde → naranja → rojo) y muestra en su interior el tiempo restante (ej. "2 D", "3 H").
 **10.3. Ventana de Detalle/Creación:** Título dinámico ("Nueva Alarma" o "Detalle de Alarma"). Campos: Título, Hora de inicio (digital), Periodicidad (una, varias o periódicas), Integrantes, Sonido (del dispositivo) y opción de Vibración.
 **10.4. Seguimiento:** Al asignar a otro, se abre la ventana de "Seguimiento a Alarma" para configurar fechas/horas.
 **10.5. Botón de Borrar:** En ventana de detalle; al borrar avisa en cartelera a todos los integrantes.
@@ -494,6 +494,7 @@
 - **Iconos:** antes de poner un icono, revisar la carpeta `Colores-y-Estetica/Iconos/`. Si no existe uno adecuado, la IA NO debe inventarlo, NO usar emoji, NO usar otro icono en su lugar. Debe preguntar al Arquitecto.
 - **Todo mensaje de cartelera y de sistema lleva su icono.**
 - **Tamaño de iconos:** Los iconos dentro de botones mantienen su tamaño grande. Los iconos fuera de botones (textos, títulos, listas) deben ser de ~30px.
+- **Regla de Diseño (Sección H):** Todo código nuevo debe aplicar las reglas de la Sección H de `A_DONDE_VA_STRATOS.md`.
 
 **Estado:** ✅ Actualizado.
 
@@ -641,6 +642,19 @@
 
 ---
 
+### 47. NUEVAS REGLAS DE UNIFORMIDAD (A_DONDE_VA_STRATOS.md)
+
+Se actualizó la Sección H de `A_DONDE_VA_STRATOS.md` con las siguientes reglas:
+- **Tamaños de pantalla:** Angostas (480px) para formularios y menús de entrada; Anchas (875px) para layouts de gestión, vistas de datos y configuración compleja.
+- **Tamaños de modales:** Informativos (Máx 500px); De trabajo (Máx 875px). Si se edita desde un modal informativo, este se expande.
+- **Regla de Iconos como Botones:** Todo icono que funcione como botón (clip, cargar logo, edición, etc.) debe llevar el recuadro, colores y efectos (halo) de la regla general de botones.
+- **Regla de tamaño de letra en botones:** La letra debe ajustarse para evitar que el texto se rompa en dos líneas.
+- **Color de letras:** Incluye explícitamente las "X" de cerrar y textos generados por JS.
+
+**Estado:** ✅ Hecho (21/10/2026).
+
+---
+
 ## PENDIENTES
 
 ### Pendientes de Definición
@@ -729,7 +743,7 @@
 | 77 | Ocultar ventana negra de PowerShell del Vigía al iniciar Windows (usando `.vbs`) | ✅ Hecho |
 | 78 | Crear ventana flotante de redacción de correos y el botón "Redactar" | ⏳ En proceso |
 | 79 | Reparar la cartelera (HTML roto por inyección de iconos SVG) | ✅ Hecho |
-| 80 | Regla de colores de iconos (naranja/rojo/verde según jerarquía) | ⏳ En proceso (definición en A_DONDE_VA_STRATOS y código) |
+| 80 | Regla de colores de iconos (naranja/rojo/verde según jerarquía) | ✅ Hecho |
 | 81 | Ajuste de proporciones y diseño visual de la pantalla de Correos | ⏳ En proceso (texto entregado el 20/10/2026) |
 | 82 | Implementar checkbox maestro y selección múltiple en correos | ⏳ En proceso |
 | 83 | Implementar el cambio de película (leído/no leído) en correos | ⏳ En proceso |
@@ -738,13 +752,12 @@
 
 ---
 
-## NOTAS DEL DÍA 20/10/2026
+## NOTAS DEL DÍA 21/10/2026
 
-- **Cline y modelo:** Se agotó el límite del modelo gratuito en Cline. Se sugirió cambiar a **Nemotron 3.5 Super VL** o **MiniMax M3.1 Flash** (gratuitos y rápidos) para continuar.
-- **Pantalla de Correos:** Se ajustaron detalles visuales y se definió la lógica de leído/no leído, checkboxes de selección múltiple y las proporciones (1/4 y 3/4).
-- **Tareas:** Se definió que las tareas propias tendrán película blanca, las asignadas verde Stratos y las de seguimiento beige. El indicador visual será un reloj de arena con contador (D, H, m) que cambia de verde a naranja y rojo.
-- **Alarmas:** Se definió la misma estructura que Tareas (menú lateral, películas, reloj de arena). Se agregó la opción de sonido y vibración en el modal de creación.
-- **Nickname / Alias:** Se aclaró que el sistema guarda el nombre real del perfil, pero el usuario ve el nombre con el que lo guardó en su Organigrama Personal. Se dejó como pendiente para la fase de Contactos.
+- **Modelo de IA:** Se evaluaron las opciones gratuitas de Cline y se recomendó **Nemotron 3.5 Super VL** por su capacidad de código y velocidad.
+- **Unificación de diseño (Sección H):** Se definieron los tamaños exactos para pantallas (Angostas 480px / Anchas 875px) y modales (Informativos 500px / Trabajo 875px). Se agregó la regla de "Iconos como Botones" y se ajustó la regla de colores de texto.
+- **Memoria.md:** Se agregó una regla de control de uniformidad para que toda IA verifique la Sección H antes de dar por terminado un cambio.
+- **Historial_Bitacora.md:** Se estableció (a nivel conceptual) la regla de mover la bitácora antigua (más de 3 meses) a este archivo para mantener la Memoria ágil.
 
 ---
 
