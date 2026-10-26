@@ -129,4 +129,7 @@ Sección 6: ejemplo de fecha actualizado a 15/10/2026.
 
 Sección 8: dice "los 6 archivos obligatorios y los 4 archivos de código".
 
+10. REGLA DE VERIFICACIÓN OBLIGATORIA (PARA LA IA DE INTERNET):
+Está ESTRICTAMENTE PROHIBIDO dar diagnósticos, textos para Cline o afirmar cómo funciona una función basándose en la memoria o en reportes previos. Antes de responder cualquier consulta sobre el sistema, la IA DEBE leer los archivos actuales en GitHub (raw) usando sus herramientas. Si la herramienta falla o no puede acceder, DEBE decir "No puedo acceder al archivo en este momento" en lugar de inventar una respuesta.
+
 
