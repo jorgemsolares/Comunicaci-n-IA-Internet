@@ -8,151 +8,102 @@
 
 | Zona | Elemento | Estado |
 |------|----------|--------|
-| **Superior Izquierda** | Logo de Stratos + Slogan de la compañía usuaria | ✅ **Hecho:** logo 140x40px; slogan centrado, máx. 140px. |
-| **Superior Restante** | Área de Mensajes (Cartelera) | Fijo (excepto en Login, que no debe tener cartelera). |
+| **Superior Izquierda** | Logo de Stratos + Slogan de la empresa | ✅ **Hecho:** logo 140x40px; slogan centrado. |
+| **Superior Restante** | Área de Mensajes (Cartelera) | Fijo (excepto en Login). |
 | **Inferior Izquierda** | Sello de agua y slogan de Stratos | Fijo |
-| **Inferior Centro** | Botón de IA (Vero) | ✅ **Hecho:** efectos visuales, sonido de micrófono e indicador de detección de voz. |
+| **Inferior Centro** | Botón de IA (Vero) | ✅ **Hecho:** efectos, sonido e indicador de voz. |
 | **Inferior Derecha** | Botón "Libro" (Menú General) | Fijo (excepto en Login). |
 
-**Reglas de aparición:**
-- **Login:** NO tiene cartelera, NO tiene botón de IA (Vero), NO tiene botón "Libro". Solo la barra de notificaciones, el formulario de acceso y los 3 iconos biométricos.
-- **Resto de pantallas:** cartelera + botón IA + botón Libro, todos visibles.
+**Reglas:** Login no tiene cartelera, ni IA, ni Libro. Solo formulario y biometría.
 
 ---
 
 ### 2. COMPORTAMIENTO DE LA CARTELERA DE AVISOS
 
-**Lo que ya existe:**
-- Rotación automática de avisos.
-- Desaparición al completar la tarea asociada.
-- Cada mensaje va acompañado de su icono correspondiente.
-
-**Duración por prioridad:**
-
-| Prioridad | Tipo de aviso | Duración |
-|-----------|---------------|----------|
-| **Alta** | Mensaje de un superior. Aviso de atención inmediata (acciones en menos de 1 hora, correos prioritarios). | 10 seg |
-| **Media** | Acciones programadas entre 1 hora y 1 día. Mensajes de colegas o subalternos. Anuncio motivacional diario. | 6 seg |
-| **Baja** | Acciones a más de 1 día. Informativos. Saludo inicial. Avisos de acciones realizadas en silencio. | 4 seg |
-
-**Separación de elementos:**
-
-| Elemento | Qué es | Duración | Quién lo usa |
-|----------|--------|----------|--------------|
-| **Barra de notificaciones** (`#barra-notificaciones`) | Franja superior que se sobrepone. Avisos inmediatos (éxito/advertencia/error). Contraste fijo. | 3 seg | El sistema |
-| **Cartelera de mensajes** (`#zona-cartelera`) | Área superior derecha. Fondo translúcido. Texto con `--color-texto`. | 10s / 6s / 4s | El sistema y la IA |
-
-**Anuncio Motivacional Diario:**
-- Cambia 1 vez al día.
-- Duración: 6 seg (prioridad media).
-
-**Regla de colores de iconos (Ley de Diseño):**
-- **Naranja (`#ff8c00`):** Mensajes de un superior (directo o indirecto).
-- **Rojo (`#e53935`):** Mensajes urgentes o de atención inmediata.
-- **Verde Stratos (`#00ff88`):** Mensajes normales (colegas, subalternos, sistema).
-
-**Lógica de segmentación de textos (misión, visión, valores):**
-- El sistema NO fragmenta el texto. Se lo pasa a la IA completa cuando esté implementada.
-- Mientras la IA no esté: el sistema filtra fragmentos que no sean oraciones completas.
-
-**Estado:** ✅ Hecho (incluye la regla de colores de iconos).
+- Cada mensaje lleva su icono.
+- **Duración:** Alta (10s), Media (6s), Baja (4s).
+- **Regla de colores de iconos (Jerarquía y Urgencia):**
+  - **Naranja (`#ff8c00`):** Mensajes de un superior.
+  - **Rojo (`#e53935`):** Mensajes urgentes.
+  - **Verde (`#00ff88`):** Mensajes normales (colegas, sistema).
 
 ---
 
 ### 3. CONFIGURACIÓN DE LA ASISTENTE IA – FLUJO INICIAL
 
-**Cambios en Configuración:**
-- ✅ Se eliminaron Sonido, Vibración, Modo Nocturno.
-- ✅ Se implementó el botón de configuración de IA.
-- ✅ Se quitó el campo "Nombre de tu asistente".
-- ✅ Se quitó el checkbox "Habilitar autenticación biométrica".
-
-**Flujo completo:**
-1. Usuario completa Datos Generales.
-2. Presiona "Grabar" → redirige a Configuración.
-3. Configuración de voz: un botón alterna entre voz masculina y femenina.
-4. Botón "Grabar Cambios": guarda, reinicia y redirige a Login.
-
-**Interacción con la IA:**
-- El usuario no puede desactivar a la IA por completo. Siempre debe haber al menos un canal activo.
-- Duración del aviso: `(número de palabras / 3.5) + 0.75` segundos.
-
-**Estado:** ✅ Hecho.
+- Eliminados Sonido, Vibración, Modo Nocturno.
+- Se quitó "Nombre de tu asistente" y el checkbox de biometría.
+- **Nuevo bloque de IA:** Se ajustó a un diseño de dos columnas (50% texto, 50% esfera) para reducir el alto de la pantalla.
+- **Firma:** Se implementó el área de configuración de la firma en esta pantalla (reemplazando el bloque de Seguridad).
 
 ---
 
 ### 4. PANTALLA DE LOGIN Y SALUDO PERSONALIZADO
 
-**Reglas del Login:**
-- NO tiene cartelera, NO tiene botón de IA, NO tiene botón "Libro".
-- Solo tiene: barra de notificaciones, formulario de acceso y los 3 iconos biométricos.
 - Coincidencia EXACTA en `nombreCompleto + idEmpleado + contrasena`.
-- Si el usuario edita su perfil, el autocompletado (`stratos_recordar` y `usuarios_del_dispositivo`) se actualiza con el nuevo `nombreCompleto`.
-
-**Estado:** ✅ Hecho.
+- Si el usuario edita su perfil, el autocompletado (`stratos_recordar` y `usuarios_del_dispositivo`) se actualiza.
+- NO tiene cartelera, ni botón de IA, ni botón Libro.
 
 ---
 
 ### 5. PANTALLA DE COMUNICACIÓN
 
-**Botones (9):** Correos, Chats, Tareas, Alarmas, Calendario, Hub de Archivos, Enlace Móvil, Reuniones y Otras Actividades (forma de píldora).
-**Regla:** Fondo `--color-botones`, letras `--color-letras`, halo verde/naranja/rojo según función, efecto unificado.
-
-**Estado:** ✅ Hecho.
+- 9 botones (Correos, Chats, Tareas, Alarmas, Calendario, Hub, Enlace Móvil, Reuniones, Otras Actividades).
+- **Otras Actividades:** Cambiado de hexágono a forma de píldora.
+- **Regla:** Fondo `--color-botones`, letras `--color-letras`, halo verde/naranja/rojo según función.
 
 ---
 
 ### 6. LA ASISTENTE IA (NOMBRE OFICIAL INTERNO: VERO)
 
 - Vero aprende de todos, da info de su nivel, cada quien la adecúa.
-- NUNCA datos concretos de otro usuario (salvo primera línea o propios).
+- NUNCA datos de otro usuario (salvo primera línea o propios).
 - No da soluciones no pedidas.
 
 ---
 
-### 7. CORREO Y HUB DE ARCHIVOS (Lógica y Reglas)
+### 7. CORREO Y HUB DE ARCHIVOS
 
-**Orden de la Lista (Algoritmo de Prioridad):**
-1. **Relevancia y Urgencia:** Urgente de línea directa/subalterno → Aviso importante del jefe → Correos medios.
-2. **Reloj de Arena (Indicador de eficiencia):** Verde < 2.5h, Naranja 2.5-4h, Rojo > 4h. No manda el orden, pero indica el tiempo transcurrido.
+**Orden de la Lista:**
+1. **Relevancia y Urgencia:** Urgente de subalterno → Aviso de jefe → Medios.
+2. **Reloj de Arena:** Verde < 2.5h, Naranja 2.5-4h, Rojo > 4h (Indicador de eficiencia).
 
-**Estructura del Modal (Redactar, Responder, Reenviar):**
-- **Título:** Arriba la acción, debajo el subtítulo con fecha y remitente.
+**Modal (Redactar, Responder, Reenviar):**
+- **Título:** Arriba acción, debajo subtítulo con fecha y remitente.
 - **Campos:** De (fijo), Para, CC, CCo.
-- **Firma:** 5 líneas en blanco, sello "FIRMA" (gris, mayúsculas, subrayado, efecto de aumento). Se sustituye al hacer clic.
-- **Clasificación de Importancia:** Selector Alto, Medio (por defecto), Bajo.
-- **Botones de Edición:** Línea horizontal entre el texto y los botones de acción. Deben funcionar.
+- **Firma:** 5 líneas, sello "FIRMA" (gris, mayúsculas, subrayado, con efecto de escala).
+- **Clasificación:** Selector Alto, Medio (por defecto), Bajo.
+- **Botones de Edición:** En línea horizontal entre el texto y los botones de acción.
+- **Botones de Acción:** En una sola línea.
 
-**Reglas de Visibilidad y Color:**
-- **Para:** Verde/Naranja según remitente, Rojo si se clasifica importante.
-- **CC:** Naranja (o verde si no aplica jerarquía), Rojo si es importante.
-- **CCo:** Naranja por defecto, Rojo si es urgente. El receptor CCo ve Para y CC, pero los demás no saben de su existencia.
-- **Película de fondo:** Depende del tipo (Para, CC, CCo) con sus colores. Se quita al abrir el correo.
+**Reglas de Visibilidad y Color (Película):**
+- **Para:** Verde/Naranja (según remitente) o Rojo (si es importante).
+- **CC:** Naranja (o verde si no aplica jerarquía) o Rojo (si es importante).
+- **CCo:** Naranja por defecto o Rojo (si es urgente).
+- **Comportamiento:** Al abrir el correo, la película se quita (se marca como leído).
+- **Checkboxes:** Individuales y maestro en la cabecera.
 
-**El Banco de Nicknames:**
-- Cruzar el nombre del Organigrama (ej. "Pachu") con el correo real (`ja.ca.vas@stratos.com`).
+**Banco de Nicknames:**
+- Cruzar el nombre del Organigrama (ej. "Pachu") con el correo real.
+- Si no está en la primera línea, Vero busca en el banco de datos.
 
-**Detalles del Modal de Detalle:**
+**Modal de Detalle:**
 - Texto alineado como lo escribió el emisor.
-- Mostrar De, Para, CC, CCo.
-
-**Estado:** ⏳ Pendiente (lógica definida, falta implementar).
+- Mostrar claramente De, Para, CC y CCo.
 
 ---
 
 ### 8. CHATS
 
-*(Pendiente de definición).*
+*(Pendiente).*
 
 ---
 
 ### 9. TAREAS
 
-**Estructura:** Menú lateral (1/4), lista (3/4). Filtros: Todas, Mis Tareas, Asignadas, Enviadas, Seguimiento, Terminadas.
-**Visual:** Película blanca (propias), verde (asignadas), beige (seguimiento). Reloj de arena verde/naranja/rojo.
+**Estructura:** Menú lateral (1/4) y lista (3/4). Filtros: Todas, Mis Tareas, Asignadas, Enviadas, Seguimiento, Terminadas.
+**Visual:** Película blanca (propias), verde (asignadas), beige (seguimiento). Reloj de arena (verde/naranja/rojo).
 **Seguimiento:** Al crear para otro, se abre ventana de "Seguimiento a Tarea".
-
-**Estado:** ⏳ Pendiente.
 
 ---
 
@@ -161,300 +112,55 @@
 **Estructura:** Igual que Tareas.
 **Visual:** Película blanca/verde. Reloj de arena con tiempo restante (ej. "2 D").
 **Ventana de Detalle:** Título, Hora, Periodicidad (una, varias o periódicas), Integrantes, Sonido y Vibración.
-**Seguimiento:** Al asignar a otro, se abre ventana de "Seguimiento a Alarma".
-
-**Estado:** ⏳ Pendiente.
 
 ---
 
-### 11. CONTACTOS Y NICKNAMES (ALIAS)
+### 11. CONTACTOS Y NICKNAMES
 
-- **Vinculación:** Sincronización con Gmail.
-- **Nickname:** El nombre del Organigrama Personal es el Nickname. El sistema debe usarlo en pantallas.
-- **Cruce:** Buscar en el banco de datos por correo/celular para reconocer que "Pachu" y "JuanCa" son la misma persona.
-
-**Estado:** ⏳ Pendiente (lógica definida, falta implementación).
+- Sincronización con Gmail.
+- Nickname: Nombre del Organigrama Personal.
+- Cruce: Buscar por correo/celular para unificar identidades.
 
 ---
 
-### 12. CALENDARIO
+### 12. CALENDARIO, 13. MIGRACIÓN, 14. SEMANA TÍPICA, 15. TRABAJO INVISIBLE, 16. ORGANIGRAMA, 17. BANCO DE DATOS, 18. BACKUPS, 19. KPIs, 20. MODULARIDAD, 21. IA, 22. TRABAJO INVISIBLE, 23. LÍNEAS DE TIEMPO, 24. OTRAS ACTIVIDADES, 25. TEMAS FUTUROS
 
-*(Se mantiene igual que en la minuta anterior).*
-
----
-
-### 13. MIGRACIÓN COMPLETA
-
-*(Se mantiene igual).*
+*(Se mantienen iguales según la minuta anterior).*
 
 ---
 
-### 14. SEMANA TÍPICA Y MEJORA CONTINUA
+### 26. PALETA DE COLORES (ALGORITMO DE DIVERSIDAD)
 
-*(Se mantiene igual).*
+**Lógica de Construcción (3 Casos):**
+1. **Escaneo:** Analizar el logo, descartar Blanco y Negro. Si hay colores similares, agruparlos.
+2. **Caso 0 (0 colores):** Blanco, Negro, Azul Fondo, Azul Útil, Naranja, Rojo, Verde, Combinación (75% Verde + 25% Azul Útil).
+3. **Caso 1 (1 color):** Color encontrado, Combinación (75% Color + 25% Verde), Combinación (75% Color + 25% Rojo), Blanco, Negro, Azul Fondo, Azul Útil, Naranja.
+4. **Caso 2 (2+ colores):** Color 1, Color 2, Blanco, Negro, Verde, Naranja, Combinación (75% C1 + 25% Rojo), Combinación (75% C2 + 25% Verde).
+5. **Mejora de Contraste:** Si el color base es oscuro, la mezcla de las combinaciones será 60% Color Base + 40% Color Stratos. Si es claro, se mantiene 75% / 25%.
 
----
-
-### 15. NUEVO ALCANCE DE STRATOS (Trabajo invisible y medición justa)
-
-*(Se mantiene igual).*
-
----
-
-### 16. ORGANIGRAMA Y PERMISOS
-
-**16.1. Tipos de Contacto:** Observador, Indirecto.
-**16.2. Permisos por Rol:** No.1, Colaborador, Observador, Indirecto.
-**16.3. Crecimiento Automático.**
-**16.4. Detección de Duplicados.**
-**16.8. Centrado del Nodo No.1.**
-
-**Estado:** ✅ Hecho (con correcciones pendientes).
+**Botones de Control (Nuevos):**
+- Se agregaron dos botones sobre la paleta (distribución 3/7 - 1/7 - 3/7):
+  - **"Mantener colores actuales"** (Verde): Mantiene los colores ya seleccionados.
+  - **"Volver a colores Stratos"** (Rojo): Resetea la paleta a los valores por defecto de Stratos.
+- **Paleta:** Se volvió al formato cuadrado.
 
 ---
 
-### 17. BANCO DE DATOS Y TRAZABILIDAD
+### 27. CONFIGURACIÓN Y FIRMA (DETALLES)
 
-*(Se mantiene igual).*
-
----
-
-### 18. BACKUPS CODIFICADOS
-
-*(Se mantiene igual).*
+- **Área de Firma:** Tiene botones de Tipografía, Estilo, Tamaño y Color.
+- **Problema detectado:** Usan `prompt()` del navegador (mal) en lugar de menús desplegables (como Slogan).
+- **Solución:** Deben replicar el comportamiento de Slogan. El botón de Color debe desplegar la misma paleta de cuadros de colores.
 
 ---
 
-### 19. KPIs
-
-*(Se mantiene igual).*
-
----
-
-### 20. MÓDULO DE COMUNICACIÓN – DESCRIPCIÓN DE FUNCIONALIDADES
-
-*(Se mantiene igual).*
-
----
-
-### 21. MODULARIDAD – PANTALLAS
-
-*(Se mantiene igual).*
-
----
-
-### 22. LA IA – ACTIVACIÓN, PROGRAMACIÓN Y LÍMITES
-
-*(Se mantiene igual).*
-
----
-
-### 23. TRABAJO INVISIBLE
-
-*(Se mantiene igual).*
-
----
-
-### 24. LÍNEAS DE TIEMPO EN CALENDARIO
-
-*(Se mantiene igual).*
-
----
-
-### 25. PROYECTOS FUTUROS – OTRAS ACTIVIDADES
-
-*(Se mantiene igual).*
-
----
-
-### 26. TEMAS FUTUROS
-
-*(Se mantiene igual).*
-
----
-
-### 27. ESTRATEGIA DE INTEGRACIÓN DE IA (Confirmado)
-
-*(Se mantiene igual).*
-
----
-
-### 28. DEFINICIONES DE VERO.JS
-
-*(Se mantiene igual).*
-
----
-
-### 29. PAQUETE DE INTEGRACIÓN PARA LA EMPRESA
-
-*(Se mantiene igual).*
-
----
-
-### 30. TABLA DE PANTALLAS PARA REVISIÓN DE LA IA
-
-*(Se mantiene igual).*
-
----
-
-### 31. VOZ DE LA IA
-
-*(Se mantiene igual).*
-
----
-
-### 32. ACUERDOS POR PANTALLA
-
-*(Se mantiene igual).*
-
----
-
-### 33. INVITACIONES Y PERMISOS
-
-*(Se mantiene igual).*
-
----
-
-### 34. REGLAS PARA LOS TEXTOS DE `instrucciones.md`
-
-**Reglas permanentes:**
-- **Iconos:** Revisar la carpeta `Colores-y-Estetica/Iconos/`. Si no existe, preguntar.
-- **Todo mensaje de cartelera lleva su icono.**
-- **Tamaño de iconos:** Los de botones mantienen su tamaño grande. Los de texto, ~30px.
-- **Regla de Diseño (Sección H):** Todo código nuevo debe aplicar las reglas de la Sección H de `A_DONDE_VA_STRATOS.md`.
-
-**Estado:** ✅ Actualizado.
-
----
-
-### 35. INSTALACIÓN DEL ARRANQUE AUTOMÁTICO DEL VIGÍA
-
-- Script `lanzar_vigia_oculto.vbs` para segundo plano.
-- Instalador actualizado con `-RunLevel Highest`.
-- Tarea `StratosVigiaRespaldo`.
-
-**Estado:** ✅ Hecho.
-
----
-
-### 36. EFECTO UNIFICADO DE BOTONES
-
-- Normal: Sombra suave.
-- Hover: Borde iluminado + escala 1.08.
-- Active: Halo intenso.
-- Circulares: Rotación 90°.
-
-**Estado:** ✅ Hecho.
-
----
-
-### 37. COLOR DE LETRAS EN TODO EL SISTEMA
-
-- Amarrado a `--color-letras`.
-- Excepciones: barra de notificaciones y marca de agua.
-
-**Estado:** ✅ Hecho.
-
----
-
-### 38. COLOR BASE DE BOTONES
-
-- Por defecto `#0b0f19`.
-
-**Estado:** ✅ Hecho.
-
----
-
-### 39. LIBRO EN LOGIN
-
-- Oculto en Login.
-
-**Estado:** ✅ Hecho.
-
----
-
-### 40. BOTÓN "COLOR" PARA EL SLOGAN
-
-- Agregado con paleta.
-- Pendiente: Mejora visual (que muestre el color en lugar del código).
-
-**Estado:** ⏳ A medias.
-
----
-
-### 41. REGISTRO DE ACTIVIDAD EN IDENTIDAD CORPORATIVA
-
-- Registra quién, cuándo y qué cambió.
-
-**Estado:** ✅ Hecho.
-
----
-
-### 42. ICONOS DE CARTELERA Y SISTEMA
-
-- Regla de preguntar si no existe.
-- Iconos agregados: flechas, Error-rojo, Advertencia-naranja.
-
-**Estado:** ✅ Hecho.
-
----
-
-### 43. BOTÓN "OTRAS ACTIVIDADES" (FORMA DE PÍLDORA)
-
-- Cambiado de hexágono a píldora.
-
-**Estado:** ✅ Hecho.
-
----
-
-### 44. DISEÑO DEL LOGO
-
-- Concepto aprobado (bloques, flecha, medición).
-
-**Estado:** ✅ Aprobado.
-
----
-
-### 45. DISEÑO DE LA PANTALLA DE REDACCIÓN DE CORREOS
-
-- Modal flotante.
-- Campos: De, Para, Asunto, Mensaje.
-- Editor enriquecido y firma.
-- Botones: ENVIAR, ENVIAR + TAREA, ENVIAR + ALARMA, DESCARTAR.
-
-**Estado:** ⏳ En proceso.
-
----
-
-### 46. REDISEÑO ESTRUCTURAL DE LA PANTALLA DE CORREOS
-
-- Menú lateral 1/4 y lista 3/4 (ajustado a 1/5 y 4/5).
-- Botones laterales con efectos correctos.
-- Detalle en modal.
-- Checkboxes y películas según color.
-
-**Estado:** ⏳ En proceso.
-
----
-
-### 47. NUEVAS REGLAS DE UNIFORMIDAD (A_DONDE_VA_STRATOS.md)
-
-- Tamaños: Angostas (480px) y Anchas (875px).
-- Modales: Informativos (500px) y Trabajo (875px).
-- Iconos como botones.
-- Tamaño de letra ajustable.
-- Color de letras (incluye "X").
-
-**Estado:** ✅ Hecho.
-
----
-
-### 48. SISTEMA DE FIRMA
-
-- Configuración en pantalla de Configuración.
-- 5 líneas, sello "FIRMA", sustitución automática o por clic.
-
-**Estado:** ⏳ En proceso.
+### 28. REGLAS DE REDACCIÓN (NUEVAS)
+
+Se han asentado en `Arranque de Interacción` y `protocolo-stratos.md`:
+1. **Cero interpretaciones:** Cada instrucción debe decir exactamente qué hacer, dónde y cómo debe quedar.
+2. **Un cambio a la vez.**
+3. **Revisión previa obligatoria.**
+4. **Prohibiciones explícitas:** Incluir "Qué NO hacer" (ej. "NO uses alert()", "NO uses prompt()").
 
 ---
 
@@ -465,38 +171,40 @@
 | 1-70 | *(Se mantienen iguales)* | ... |
 | 71 | Botón "Color" para el Slogan (mejora visual) | ⏳ A medias |
 | 72-77 | *(Se mantienen iguales)* | ✅ Hecho |
-| 78 | Crear ventana flotante de redacción de correos y el botón "Redactar" | ⏳ En proceso |
+| 78 | Crear ventana flotante de redacción de correos y el botón "Redactar" | ✅ Hecho |
 | 79 | Reparar la cartelera (HTML roto por inyección de iconos SVG) | ✅ Hecho |
-| 80 | Regla de colores de iconos (naranja/rojo/verde según jerarquía) | ✅ Hecho |
+| 80 | Regla de colores de iconos (naranja/rojo/verde) | ✅ Hecho |
 | 81 | Ajuste de proporciones y diseño visual de la pantalla de Correos | ⏳ En proceso |
-| 82 | Implementar checkbox maestro y selección múltiple en correos | ⏳ En proceso |
-| 83 | Implementar el cambio de película (leído/no leído) en correos | ⏳ En proceso |
-| 84 | Implementar la lógica de Tareas (películas, reloj de arena, seguimiento) | ⏳ Pendiente |
-| 85 | Implementar la lógica de Alarmas (películas, reloj de arena, sonido, seguimiento) | ⏳ Pendiente |
-| 86 | Corregir Nodo Principal y Edición en Organigrama Personal | ⏳ En proceso |
-| 87 | Implementar avisos de feedback (Verde/Amarillo/Rojo) en botones de ejecución | ⏳ En proceso |
-| 88 | Reorganización de Configuración (IA 50/50, Firma del Usuario) | ⏳ En proceso |
-| 89 | Lógica de inserción y sustitución de la Firma (Sello "FIRMA") | ⏳ En proceso |
-| 90 | Lógica de Ordenamiento de Correos (Relevancia, Urgencia, Reloj de Arena) | ⏳ Pendiente |
+| 82 | Implementar checkbox maestro y selección múltiple en correos | ⏳ Pendiente |
+| 83 | Implementar el cambio de película (leído/no leído) en correos | ⏳ Pendiente |
+| 84 | Implementar la lógica de Tareas | ⏳ Pendiente |
+| 85 | Implementar la lógica de Alarmas | ⏳ Pendiente |
+| 86 | Corregir Nodo Principal y Edición en Organigrama Personal | ✅ Hecho |
+| 87 | Implementar avisos de feedback (Verde/Amarillo/Rojo) en botones | ✅ Hecho |
+| 88 | Reorganización de Configuración (IA 50/50, Firma del Usuario) | ✅ Hecho |
+| 89 | Lógica de inserción y sustitución de la Firma (Sello "FIRMA") | ⏳ Pendiente |
+| 90 | Lógica de Ordenamiento de Correos (Relevancia, Urgencia, Tiempo) | ⏳ Pendiente |
 | 91 | Lógica de CC y CCo en el modal de redacción | ⏳ Pendiente |
 | 92 | Botones de edición de texto en el modal de redacción | ⏳ Pendiente |
-| 93 | Banco de Nicknames (cruzar nombres del organigrama con correos) | ⏳ Pendiente |
+| 93 | Banco de Nicknames | ⏳ Pendiente |
 | 94 | Clasificación de importancia (Alto, Medio, Bajo) en el correo | ⏳ Pendiente |
+| 95 | Corregir el color de los textos y placeholders en Identidad | ⏳ Pendiente |
+| 96 | Volver la paleta a cuadrados | ⏳ Pendiente |
+| 97 | Igualar el tamaño de los botones "Mantener" y "Volver" | ⏳ Pendiente |
+| 98 | Hacer funcionar los botones de la Firma (sin `prompt`) | ⏳ Pendiente |
+| 99 | Registrar quién y cuándo se modifica la Identidad Corporativa | ⏳ Pendiente |
 
 ---
 
-## NOTAS DEL DÍA 23/10/2026
+## NOTAS DEL DÍA 28/10/2026
 
-- **Modelo de IA:** Se evaluó y recomendó **Nemotron 3.5 Super VL** para Cline.
-- **Unificación de diseño (Sección H):** Se definieron los tamaños exactos para pantallas (Angostas 480px / Anchas 875px) y modales (Informativos 500px / Trabajo 875px). Se agregó la regla de "Iconos como Botones".
-- **Memoria.md:** Se agregó la regla de control de uniformidad para verificar la Sección H antes de terminar un cambio.
-- **Lógica de Correos:** Se definió el algoritmo de ordenamiento (Relevancia/Urgencia > Tiempo), la lógica de colores (Para, CC, CCo), el sistema de firma y los Nicknames.
-- **Firma:** Se definió el sello "FIRMA" (5 líneas, efecto de escala, sustitución automática).
-
----
-
-**Nota final:** Cuando se solicite el texto para `instrucciones.md`, debe ser muy claro y bien detallado.
+- **Unificación de diseño:** Se logró corregir el fondo, el modal de redacción y el botón de editar perfil.
+- **Paleta de colores:** Se afinó el algoritmo para que no repita colores y aplique las combinaciones (75/25 o 60/40 para oscuros).
+- **Botones de control:** Se añadieron los botones de "Mantener" y "Volver" en Identidad.
+- **Configuración de Cline:** Se activó el Auto-Approve manual y se creó el archivo `.clinerules/protocolo-stratos.md` para obligar a la IA a seguir las reglas.
+- **Reglas de Redacción:** Se añadieron al Arranque de Interacción para evitar interpretaciones y el uso de atajos como `prompt()`.
+- **Pendiente:** Corregir los botones de la Firma (que usan `prompt()`), el color de los textos, el tamaño de los botones nuevos y registrar la actividad de Identidad.
 
 ---
 
-**Fin del documento.**
+**Fin del documento.
