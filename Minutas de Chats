@@ -154,13 +154,15 @@
 
 ---
 
-### 28. REGLAS DE REDACCIÓN (NUEVAS)
+### 28. REGLAS DE REDACCIÓN Y COMPORTAMIENTO DE LA IA (NUEVAS Y CRÍTICAS)
 
 Se han asentado en `Arranque de Interacción` y `protocolo-stratos.md`:
 1. **Cero interpretaciones:** Cada instrucción debe decir exactamente qué hacer, dónde y cómo debe quedar.
-2. **Un cambio a la vez.**
-3. **Revisión previa obligatoria.**
-4. **Prohibiciones explícitas:** Incluir "Qué NO hacer" (ej. "NO uses alert()", "NO uses prompt()").
+2. **Un cambio a la vez:** No se agrupan múltiples correcciones en un solo texto. Si un cambio requiere tocar varias partes, primero se hace una, se aprueba, y luego la siguiente.
+3. **Revisión previa obligatoria:** Antes de enviar el texto, se debe leer en voz alta y preguntarse: "¿Hay alguna forma en que la IA pueda malinterpretar esto?". Si la respuesta es sí, se reescribe.
+4. **Prohibiciones explícitas:** Siempre incluir un apartado de "Qué NO hacer" para bloquear los atajos (ej. "NO uses alert()", "NO uses prompt()", "NO modifiques archivos que no se mencionen").
+5. **Auto-Approve:** Desactivado para edición de archivos y ejecución de comandos en Cline, obligando a la aprobación manual del Arquitecto.
+6. **Lectura de GitHub obligatoria:** La IA de internet (como DeepSeek) no puede dar diagnósticos ni textos sin antes leer los archivos actuales en GitHub.
 
 ---
 
@@ -196,14 +198,19 @@ Se han asentado en `Arranque de Interacción` y `protocolo-stratos.md`:
 
 ---
 
-## NOTAS DEL DÍA 28/10/2026
+## REGISTRO DE DECISIONES Y HERRAMIENTAS
 
-- **Unificación de diseño:** Se logró corregir el fondo, el modal de redacción y el botón de editar perfil.
-- **Paleta de colores:** Se afinó el algoritmo para que no repita colores y aplique las combinaciones (75/25 o 60/40 para oscuros).
-- **Botones de control:** Se añadieron los botones de "Mantener" y "Volver" en Identidad.
-- **Configuración de Cline:** Se activó el Auto-Approve manual y se creó el archivo `.clinerules/protocolo-stratos.md` para obligar a la IA a seguir las reglas.
-- **Reglas de Redacción:** Se añadieron al Arranque de Interacción para evitar interpretaciones y el uso de atajos como `prompt()`.
-- **Pendiente:** Corregir los botones de la Firma (que usan `prompt()`), el color de los textos, el tamaño de los botones nuevos y registrar la actividad de Identidad.
+*Este espacio es para recordar definiciones de estrategia, configuración de herramientas y acuerdos que no son código, pero que afectan la línea de trabajo.*
+
+- **Cline:**
+  - Se desactivó el Auto-Approve para "Edit files" y "Execute commands".
+  - Se creó el archivo `.clinerules/protocolo-stratos.md` con las reglas de diseño (Sección H) y de comunicación.
+  - Se cambió el modelo a **Nemotron 3.5 Super VL** (por su capacidad de código y rapidez).
+- **IA de Internet (DeepSeek):**
+  - Se actualizó el archivo `Arranque de Interacción` para obligar a la IA a leer GitHub antes de dar diagnósticos.
+  - Se agregó la "Regla de Verificación Obligatoria" (prohibido responder de memoria).
+  - Se asentaron las "Reglas de Redacción de Instrucciones" (cero interpretaciones, un cambio a la vez, prohibiciones explícitas).
+- **GitHub:** Se confirmó que el Vigía (lanzar_vigia_oculto.vbs) arranca en segundo plano y sube los cambios sin molestar.
 
 ---
 
