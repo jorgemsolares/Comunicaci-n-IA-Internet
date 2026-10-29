@@ -22,41 +22,40 @@
 
 - Cada mensaje lleva su icono.
 - **Duración:** Alta (10s), Media (6s), Baja (4s).
-- **Regla de colores de iconos (Jerarquía y Urgencia):**
+- **Regla de colores de iconos:**
   - **Naranja (`#ff8c00`):** Mensajes de un superior.
   - **Rojo (`#e53935`):** Mensajes urgentes.
-  - **Verde (`#00ff88`):** Mensajes normales (colegas, sistema).
+  - **Verde (`#00ff88`):** Mensajes normales.
 
 ---
 
-### 3. CONFIGURACIÓN DE LA ASISTENTE IA – FLUJO INICIAL
+### 3. CONFIGURACIÓN DE LA ASISTENTE IA
 
 - Eliminados Sonido, Vibración, Modo Nocturno.
-- Se quitó "Nombre de tu asistente" y el checkbox de biometría.
-- **Nuevo bloque de IA:** Se ajustó a un diseño de dos columnas (50% texto, 50% esfera) para reducir el alto de la pantalla.
-- **Firma:** Se implementó el área de configuración de la firma en esta pantalla (reemplazando el bloque de Seguridad).
+- **Nuevo bloque de IA:** Diseño de dos columnas (texto a la izquierda, esfera a la derecha) para reducir el alto.
+- **Firma:** Se implementó el área de configuración de la firma.
 
 ---
 
 ### 4. PANTALLA DE LOGIN Y SALUDO PERSONALIZADO
 
 - Coincidencia EXACTA en `nombreCompleto + idEmpleado + contrasena`.
-- Si el usuario edita su perfil, el autocompletado (`stratos_recordar` y `usuarios_del_dispositivo`) se actualiza.
-- NO tiene cartelera, ni botón de IA, ni botón Libro.
+- NO tiene cartelera, ni IA, ni Libro.
+- Autocompletado sincronizado con el perfil editado.
 
 ---
 
 ### 5. PANTALLA DE COMUNICACIÓN
 
 - 9 botones (Correos, Chats, Tareas, Alarmas, Calendario, Hub, Enlace Móvil, Reuniones, Otras Actividades).
-- **Otras Actividades:** Cambiado de hexágono a forma de píldora.
-- **Regla:** Fondo `--color-botones`, letras `--color-letras`, halo verde/naranja/rojo según función.
+- **Otras Actividades:** Forma de píldora.
+- **Regla:** Fondo `--color-botones`, letras `--color-letras`, halo según función.
 
 ---
 
-### 6. LA ASISTENTE IA (NOMBRE OFICIAL INTERNO: VERO)
+### 6. LA ASISTENTE IA (VERO)
 
-- Vero aprende de todos, da info de su nivel, cada quien la adecúa.
+- Aprende de todos, da info de su nivel, cada quien la adecúa.
 - NUNCA datos de otro usuario (salvo primera línea o propios).
 - No da soluciones no pedidas.
 
@@ -64,32 +63,22 @@
 
 ### 7. CORREO Y HUB DE ARCHIVOS
 
-**Orden de la Lista:**
-1. **Relevancia y Urgencia:** Urgente de subalterno → Aviso de jefe → Medios.
-2. **Reloj de Arena:** Verde < 2.5h, Naranja 2.5-4h, Rojo > 4h (Indicador de eficiencia).
+**Orden:** Relevancia/Urgencia > Reloj de Arena (Verde < 2.5h, Naranja 2.5-4h, Rojo > 4h).
 
-**Modal (Redactar, Responder, Reenviar):**
-- **Título:** Arriba acción, debajo subtítulo con fecha y remitente.
-- **Campos:** De (fijo), Para, CC, CCo.
-- **Firma:** 5 líneas, sello "FIRMA" (gris, mayúsculas, subrayado, con efecto de escala).
-- **Clasificación:** Selector Alto, Medio (por defecto), Bajo.
-- **Botones de Edición:** En línea horizontal entre el texto y los botones de acción.
-- **Botones de Acción:** En una sola línea.
+**Modal:**
+- Título + subtítulo (fecha/remitente).
+- Campos: De, Para, CC, CCo.
+- Firma: 5 líneas, sello "FIRMA".
+- Clasificación: Alto, Medio, Bajo.
+- Botones de edición en línea horizontal.
 
-**Reglas de Visibilidad y Color (Película):**
-- **Para:** Verde/Naranja (según remitente) o Rojo (si es importante).
-- **CC:** Naranja (o verde si no aplica jerarquía) o Rojo (si es importante).
-- **CCo:** Naranja por defecto o Rojo (si es urgente).
-- **Comportamiento:** Al abrir el correo, la película se quita (se marca como leído).
-- **Checkboxes:** Individuales y maestro en la cabecera.
+**Visibilidad y Color (Película):**
+- **Para:** Verde/Naranja o Rojo.
+- **CC:** Naranja/Verde o Rojo.
+- **CCo:** Naranja o Rojo.
+- Al abrir, se quita la película.
 
-**Banco de Nicknames:**
-- Cruzar el nombre del Organigrama (ej. "Pachu") con el correo real.
-- Si no está en la primera línea, Vero busca en el banco de datos.
-
-**Modal de Detalle:**
-- Texto alineado como lo escribió el emisor.
-- Mostrar claramente De, Para, CC y CCo.
+**Nicknames:** Cruzar nombre del Organigrama con correo real.
 
 ---
 
@@ -101,68 +90,74 @@
 
 ### 9. TAREAS
 
-**Estructura:** Menú lateral (1/4) y lista (3/4). Filtros: Todas, Mis Tareas, Asignadas, Enviadas, Seguimiento, Terminadas.
-**Visual:** Película blanca (propias), verde (asignadas), beige (seguimiento). Reloj de arena (verde/naranja/rojo).
-**Seguimiento:** Al crear para otro, se abre ventana de "Seguimiento a Tarea".
+- Menú lateral (1/4) y lista (3/4). Filtros: Todas, Mis Tareas, etc.
+- Películas: blanca (propias), verde (asignadas), beige (seguimiento).
+- Reloj de arena (verde/naranja/rojo).
+- Seguimiento al crear para otro.
 
 ---
 
 ### 10. ALARMAS
 
-**Estructura:** Igual que Tareas.
-**Visual:** Película blanca/verde. Reloj de arena con tiempo restante (ej. "2 D").
-**Ventana de Detalle:** Título, Hora, Periodicidad (una, varias o periódicas), Integrantes, Sonido y Vibración.
+- Igual que Tareas.
+- Reloj de arena con tiempo restante.
+- Detalle: Hora, Periodicidad, Integrantes, Sonido, Vibración.
 
 ---
 
 ### 11. CONTACTOS Y NICKNAMES
 
 - Sincronización con Gmail.
-- Nickname: Nombre del Organigrama Personal.
-- Cruce: Buscar por correo/celular para unificar identidades.
+- Nickname = Nombre del Organigrama Personal.
+- Cruce por correo/celular.
 
 ---
 
 ### 12. CALENDARIO, 13. MIGRACIÓN, 14. SEMANA TÍPICA, 15. TRABAJO INVISIBLE, 16. ORGANIGRAMA, 17. BANCO DE DATOS, 18. BACKUPS, 19. KPIs, 20. MODULARIDAD, 21. IA, 22. TRABAJO INVISIBLE, 23. LÍNEAS DE TIEMPO, 24. OTRAS ACTIVIDADES, 25. TEMAS FUTUROS
 
-*(Se mantienen iguales según la minuta anterior).*
+*(Se mantienen iguales).*
 
 ---
 
-### 26. PALETA DE COLORES (ALGORITMO DE DIVERSIDAD)
+### 26. PALETA DE COLORES
 
 **Lógica de Construcción (3 Casos):**
-1. **Escaneo:** Analizar el logo, descartar Blanco y Negro. Si hay colores similares, agruparlos.
+1. **Escaneo:** Analizar logo, descartar Blanco/Negro, agrupar similares.
 2. **Caso 0 (0 colores):** Blanco, Negro, Azul Fondo, Azul Útil, Naranja, Rojo, Verde, Combinación (75% Verde + 25% Azul Útil).
-3. **Caso 1 (1 color):** Color encontrado, Combinación (75% Color + 25% Verde), Combinación (75% Color + 25% Rojo), Blanco, Negro, Azul Fondo, Azul Útil, Naranja.
+3. **Caso 1 (1 color):** Color, Combinación (75% Color + 25% Verde), Combinación (75% Color + 25% Rojo), Blanco, Negro, Azul Fondo, Azul Útil, Naranja.
 4. **Caso 2 (2+ colores):** Color 1, Color 2, Blanco, Negro, Verde, Naranja, Combinación (75% C1 + 25% Rojo), Combinación (75% C2 + 25% Verde).
-5. **Mejora de Contraste:** Si el color base es oscuro, la mezcla de las combinaciones será 60% Color Base + 40% Color Stratos. Si es claro, se mantiene 75% / 25%.
+5. **Mejora de Contraste:** Color base oscuro = 60% base + 40% Stratos. Color base claro = 75% base + 25% Stratos.
 
 **Botones de Control (Nuevos):**
-- Se agregaron dos botones sobre la paleta (distribución 3/7 - 1/7 - 3/7):
-  - **"Mantener colores actuales"** (Verde): Mantiene los colores ya seleccionados.
-  - **"Volver a colores Stratos"** (Rojo): Resetea la paleta a los valores por defecto de Stratos.
-- **Paleta:** Se volvió al formato cuadrado.
+- "Mantener colores actuales" (Verde): Mantiene colores y guarda logo.
+- "Volver a colores Stratos" (Rojo): Resetea y guarda valores por defecto.
+- **Paleta:** Formato cuadrado.
 
 ---
 
-### 27. CONFIGURACIÓN Y FIRMA (DETALLES)
+### 27. CONFIGURACIÓN Y FIRMA (CORRECCIONES)
 
-- **Área de Firma:** Tiene botones de Tipografía, Estilo, Tamaño y Color.
-- **Problema detectado:** Usan `prompt()` del navegador (mal) en lugar de menús desplegables (como Slogan).
-- **Solución:** Deben replicar el comportamiento de Slogan. El botón de Color debe desplegar la misma paleta de cuadros de colores.
+- **Problema:** Se usó `prompt()` para los botones de la firma y se eliminaron los textos de los botones (dejando solo menús desplegables).
+- **Solución:**
+  - Usar menús desplegables propios de la app (sin `prompt()`).
+  - Devolver los textos a los botones (Tipografía, Estilo, Tamaño, Color) en Slogan y Firma.
+  - Poner los botones de la firma en una fila horizontal.
+  - Quitar el emoji (✍️) y el color del título "Firma del Usuario".
+  - Fijar el tamaño del recuadro de la firma para que no se estire al cambiar la letra.
 
 ---
 
-### 28. REGLAS DE REDACCIÓN Y COMPORTAMIENTO DE LA IA (NUEVAS Y CRÍTICAS)
+### 28. REGLAS DE REDACCIÓN Y COMPORTAMIENTO DE LA IA
 
-Se han asentado en `Arranque de Interacción` y `protocolo-stratos.md`:
-1. **Cero interpretaciones:** Cada instrucción debe decir exactamente qué hacer, dónde y cómo debe quedar.
-2. **Un cambio a la vez:** No se agrupan múltiples correcciones en un solo texto. Si un cambio requiere tocar varias partes, primero se hace una, se aprueba, y luego la siguiente.
-3. **Revisión previa obligatoria:** Antes de enviar el texto, se debe leer en voz alta y preguntarse: "¿Hay alguna forma en que la IA pueda malinterpretar esto?". Si la respuesta es sí, se reescribe.
-4. **Prohibiciones explícitas:** Siempre incluir un apartado de "Qué NO hacer" para bloquear los atajos (ej. "NO uses alert()", "NO uses prompt()", "NO modifiques archivos que no se mencionen").
-5. **Auto-Approve:** Desactivado para edición de archivos y ejecución de comandos en Cline, obligando a la aprobación manual del Arquitecto.
-6. **Lectura de GitHub obligatoria:** La IA de internet (como DeepSeek) no puede dar diagnósticos ni textos sin antes leer los archivos actuales en GitHub.
+Asentadas en `Arranque de Interacción` y `protocolo-stratos.md`:
+1. **Cero interpretaciones:** Instrucciones exactas.
+2. **Un cambio a la vez.**
+3. **Revisión previa obligatoria.**
+4. **Prohibiciones explícitas:** "NO uses alert()", "NO uses prompt()".
+5. **Autorización Explícita de Modificación:** El texto de instrucciones debe incluir la frase que autoriza a modificar archivos sin pedir permiso.
+6. **Definición de Botones:** Si se pide un botón, se debe pedir su función exacta. Si no, la IA debe preguntar.
+7. **Auto-Approve:** Desactivado para edición y comandos.
+8. **Lectura de GitHub obligatoria:** Prohibido dar diagnósticos sin leer el código real.
 
 ---
 
@@ -193,24 +188,22 @@ Se han asentado en `Arranque de Interacción` y `protocolo-stratos.md`:
 | 95 | Corregir el color de los textos y placeholders en Identidad | ⏳ Pendiente |
 | 96 | Volver la paleta a cuadrados | ⏳ Pendiente |
 | 97 | Igualar el tamaño de los botones "Mantener" y "Volver" | ⏳ Pendiente |
-| 98 | Hacer funcionar los botones de la Firma (sin `prompt`) | ⏳ Pendiente |
+| 98 | Hacer funcionar los botones de la Firma (sin `prompt`) y devolver textos | ⏳ Pendiente |
 | 99 | Registrar quién y cuándo se modifica la Identidad Corporativa | ⏳ Pendiente |
 
 ---
 
 ## REGISTRO DE DECISIONES Y HERRAMIENTAS
 
-*Este espacio es para recordar definiciones de estrategia, configuración de herramientas y acuerdos que no son código, pero que afectan la línea de trabajo.*
+*Espacio para definiciones de estrategia, configuración y acuerdos que no son código, pero afectan la línea de trabajo.*
 
 - **Cline:**
-  - Se desactivó el Auto-Approve para "Edit files" y "Execute commands".
-  - Se creó el archivo `.clinerules/protocolo-stratos.md` con las reglas de diseño (Sección H) y de comunicación.
-  - Se cambió el modelo a **Nemotron 3.5 Super VL** (por su capacidad de código y rapidez).
+  - Auto-Approve desactivado (para "Edit files" y "Execute commands").
+  - Archivo `.clinerules/protocolo-stratos.md` creado con las reglas de diseño y comunicación.
+  - Modelo cambiado a **Nemotron 3.5 Super VL**.
 - **IA de Internet (DeepSeek):**
-  - Se actualizó el archivo `Arranque de Interacción` para obligar a la IA a leer GitHub antes de dar diagnósticos.
-  - Se agregó la "Regla de Verificación Obligatoria" (prohibido responder de memoria).
-  - Se asentaron las "Reglas de Redacción de Instrucciones" (cero interpretaciones, un cambio a la vez, prohibiciones explícitas).
-- **GitHub:** Se confirmó que el Vigía (lanzar_vigia_oculto.vbs) arranca en segundo plano y sube los cambios sin molestar.
+  - `Arranque de Interacción` actualizado con la Regla 10 (Lectura de GitHub obligatoria) y las Reglas de Redacción.
+- **GitHub:** Vigía (`lanzar_vigia_oculto.vbs`) confirmado en segundo plano.
 
 ---
 
