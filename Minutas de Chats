@@ -22,26 +22,24 @@
 
 - Cada mensaje lleva su icono.
 - **Duración:** Alta (10s), Media (6s), Baja (4s).
-- **Regla de colores de iconos:**
-  - **Naranja (`#ff8c00`):** Mensajes de un superior.
-  - **Rojo (`#e53935`):** Mensajes urgentes.
-  - **Verde (`#00ff88`):** Mensajes normales.
+- **Regla de colores de iconos:** Naranja (superior), Rojo (urgente), Verde (normal).
+- **Saludo:** Solo se muestra la primera vez del día (icono `Saludos.svg` pendiente de insertar).
 
 ---
 
 ### 3. CONFIGURACIÓN DE LA ASISTENTE IA
 
-- Eliminados Sonido, Vibración, Modo Nocturno.
-- **Nuevo bloque de IA:** Diseño de dos columnas (texto a la izquierda, esfera a la derecha) para reducir el alto.
-- **Firma:** Se implementó el área de configuración de la firma.
+- Diseño de dos columnas (texto a la izquierda, esfera a la derecha).
+- **Firma:** Se implementó el área de configuración de la firma (reemplazando el bloque de Seguridad). Falta insertar el icono `Firma.svg` y arreglar los botones para que funcionen como los del Slogan.
 
 ---
 
 ### 4. PANTALLA DE LOGIN Y SALUDO PERSONALIZADO
 
 - Coincidencia EXACTA en `nombreCompleto + idEmpleado + contrasena`.
-- NO tiene cartelera, ni IA, ni Libro.
-- Autocompletado sincronizado con el perfil editado.
+- **Biometría:** Los datos inscritos en Perfil se leen en Login.
+- **Botón "¿Olvidaste tu contraseña?":** Actualmente está oculto y solo aparece tras 7 intentos fallidos. Debe estar visible siempre y, al pasar el mouse, el texto debe ponerse verde Stratos.
+- **Avisos:** El marcador de intentos debe seguir apareciendo solo al haber errores.
 
 ---
 
@@ -49,7 +47,6 @@
 
 - 9 botones (Correos, Chats, Tareas, Alarmas, Calendario, Hub, Enlace Móvil, Reuniones, Otras Actividades).
 - **Otras Actividades:** Forma de píldora.
-- **Regla:** Fondo `--color-botones`, letras `--color-letras`, halo según función.
 
 ---
 
@@ -65,18 +62,9 @@
 
 **Orden:** Relevancia/Urgencia > Reloj de Arena (Verde < 2.5h, Naranja 2.5-4h, Rojo > 4h).
 
-**Modal:**
-- Título + subtítulo (fecha/remitente).
-- Campos: De, Para, CC, CCo.
-- Firma: 5 líneas, sello "FIRMA".
-- Clasificación: Alto, Medio, Bajo.
-- Botones de edición en línea horizontal.
+**Modal:** Título, subtítulo, De, Para, CC, CCo, Firma (5 líneas con sello), Clasificación, Botones de edición en línea horizontal.
 
-**Visibilidad y Color (Película):**
-- **Para:** Verde/Naranja o Rojo.
-- **CC:** Naranja/Verde o Rojo.
-- **CCo:** Naranja o Rojo.
-- Al abrir, se quita la película.
+**Visibilidad y Color (Película):** Depende de si es Para, CC o CCo. Al abrir, se quita.
 
 **Nicknames:** Cruzar nombre del Organigrama con correo real.
 
@@ -90,9 +78,7 @@
 
 ### 9. TAREAS
 
-- Menú lateral (1/4) y lista (3/4). Filtros: Todas, Mis Tareas, etc.
-- Películas: blanca (propias), verde (asignadas), beige (seguimiento).
-- Reloj de arena (verde/naranja/rojo).
+- Menú lateral (1/4) y lista (3/4). Películas: blanca, verde, beige. Reloj de arena.
 - Seguimiento al crear para otro.
 
 ---
@@ -100,7 +86,6 @@
 ### 10. ALARMAS
 
 - Igual que Tareas.
-- Reloj de arena con tiempo restante.
 - Detalle: Hora, Periodicidad, Integrantes, Sonido, Vibración.
 
 ---
@@ -113,7 +98,7 @@
 
 ---
 
-### 12. CALENDARIO, 13. MIGRACIÓN, 14. SEMANA TÍPICA, 15. TRABAJO INVISIBLE, 16. ORGANIGRAMA, 17. BANCO DE DATOS, 18. BACKUPS, 19. KPIs, 20. MODULARIDAD, 21. IA, 22. TRABAJO INVISIBLE, 23. LÍNEAS DE TIEMPO, 24. OTRAS ACTIVIDADES, 25. TEMAS FUTUROS
+### 12-25. (Calendario, Migración, Semana Típica, etc.)
 
 *(Se mantienen iguales).*
 
@@ -121,43 +106,37 @@
 
 ### 26. PALETA DE COLORES
 
-**Lógica de Construcción (3 Casos):**
-1. **Escaneo:** Analizar logo, descartar Blanco/Negro, agrupar similares.
-2. **Caso 0 (0 colores):** Blanco, Negro, Azul Fondo, Azul Útil, Naranja, Rojo, Verde, Combinación (75% Verde + 25% Azul Útil).
-3. **Caso 1 (1 color):** Color, Combinación (75% Color + 25% Verde), Combinación (75% Color + 25% Rojo), Blanco, Negro, Azul Fondo, Azul Útil, Naranja.
-4. **Caso 2 (2+ colores):** Color 1, Color 2, Blanco, Negro, Verde, Naranja, Combinación (75% C1 + 25% Rojo), Combinación (75% C2 + 25% Verde).
-5. **Mejora de Contraste:** Color base oscuro = 60% base + 40% Stratos. Color base claro = 75% base + 25% Stratos.
-
-**Botones de Control (Nuevos):**
-- "Mantener colores actuales" (Verde): Mantiene colores y guarda logo.
-- "Volver a colores Stratos" (Rojo): Resetea y guarda valores por defecto.
-- **Paleta:** Formato cuadrado.
+- Algoritmo de 3 casos (0, 1, 2+ colores) con combinaciones y contraste dinámico (60/40 o 75/25).
+- Botones "Mantener colores actuales" y "Volver a colores Stratos". Este último debe resetear los colores y aplicarlos visualmente.
 
 ---
 
 ### 27. CONFIGURACIÓN Y FIRMA (CORRECCIONES)
 
-- **Problema:** Se usó `prompt()` para los botones de la firma y se eliminaron los textos de los botones (dejando solo menús desplegables).
-- **Solución:**
-  - Usar menús desplegables propios de la app (sin `prompt()`).
-  - Devolver los textos a los botones (Tipografía, Estilo, Tamaño, Color) en Slogan y Firma.
-  - Poner los botones de la firma en una fila horizontal.
-  - Quitar el emoji (✍️) y el color del título "Firma del Usuario".
-  - Fijar el tamaño del recuadro de la firma para que no se estire al cambiar la letra.
+- **Problema:** Se usó `prompt()` para los botones de la firma y se eliminaron los textos de los botones.
+- **Solución:** Usar menús desplegables propios de la app. Devolver los textos a los botones (Tipografía, Estilo, Tamaño, Color) en Slogan y Firma. Fila horizontal. Quitar emoji y color del título. Fijar recuadro.
 
 ---
 
 ### 28. REGLAS DE REDACCIÓN Y COMPORTAMIENTO DE LA IA
 
 Asentadas en `Arranque de Interacción` y `protocolo-stratos.md`:
-1. **Cero interpretaciones:** Instrucciones exactas.
-2. **Un cambio a la vez.**
-3. **Revisión previa obligatoria.**
-4. **Prohibiciones explícitas:** "NO uses alert()", "NO uses prompt()".
-5. **Autorización Explícita de Modificación:** El texto de instrucciones debe incluir la frase que autoriza a modificar archivos sin pedir permiso.
-6. **Definición de Botones:** Si se pide un botón, se debe pedir su función exacta. Si no, la IA debe preguntar.
-7. **Auto-Approve:** Desactivado para edición y comandos.
-8. **Lectura de GitHub obligatoria:** Prohibido dar diagnósticos sin leer el código real.
+1. Cero interpretaciones.
+2. Un cambio a la vez.
+3. Revisión previa obligatoria.
+4. Prohibiciones explícitas.
+5. Autorización Explícita de Modificación.
+6. Definición de Botones.
+7. Auto-Approve desactivado.
+8. Lectura de GitHub obligatoria.
+
+---
+
+### 29. FUNCIÓN DE DESHACER (CTRL + Z)
+
+- **Inputs y textareas:** Usan el comportamiento nativo del navegador (letra por letra).
+- **Interfaz (colores, paleta, tipografía):** Usa un historial de "foto completa" para revertir el cambio de golpe.
+- **Implementación:** El listener de `keydown` detecta si el foco está en un input; si lo está, ignora el Ctrl+Z de Stratos y deja actuar al navegador.
 
 ---
 
@@ -169,41 +148,40 @@ Asentadas en `Arranque de Interacción` y `protocolo-stratos.md`:
 | 71 | Botón "Color" para el Slogan (mejora visual) | ⏳ A medias |
 | 72-77 | *(Se mantienen iguales)* | ✅ Hecho |
 | 78 | Crear ventana flotante de redacción de correos y el botón "Redactar" | ✅ Hecho |
-| 79 | Reparar la cartelera (HTML roto por inyección de iconos SVG) | ✅ Hecho |
-| 80 | Regla de colores de iconos (naranja/rojo/verde) | ✅ Hecho |
+| 79 | Reparar la cartelera | ✅ Hecho |
+| 80 | Regla de colores de iconos | ✅ Hecho |
 | 81 | Ajuste de proporciones y diseño visual de la pantalla de Correos | ⏳ En proceso |
 | 82 | Implementar checkbox maestro y selección múltiple en correos | ⏳ Pendiente |
-| 83 | Implementar el cambio de película (leído/no leído) en correos | ⏳ Pendiente |
+| 83 | Implementar el cambio de película en correos | ⏳ Pendiente |
 | 84 | Implementar la lógica de Tareas | ⏳ Pendiente |
 | 85 | Implementar la lógica de Alarmas | ⏳ Pendiente |
 | 86 | Corregir Nodo Principal y Edición en Organigrama Personal | ✅ Hecho |
-| 87 | Implementar avisos de feedback (Verde/Amarillo/Rojo) en botones | ✅ Hecho |
-| 88 | Reorganización de Configuración (IA 50/50, Firma del Usuario) | ✅ Hecho |
-| 89 | Lógica de inserción y sustitución de la Firma (Sello "FIRMA") | ⏳ Pendiente |
-| 90 | Lógica de Ordenamiento de Correos (Relevancia, Urgencia, Tiempo) | ⏳ Pendiente |
+| 87 | Implementar avisos de feedback en botones | ✅ Hecho |
+| 88 | Reorganización de Configuración | ✅ Hecho |
+| 89 | Lógica de inserción y sustitución de la Firma | ⏳ Pendiente |
+| 90 | Lógica de Ordenamiento de Correos | ⏳ Pendiente |
 | 91 | Lógica de CC y CCo en el modal de redacción | ⏳ Pendiente |
 | 92 | Botones de edición de texto en el modal de redacción | ⏳ Pendiente |
 | 93 | Banco de Nicknames | ⏳ Pendiente |
-| 94 | Clasificación de importancia (Alto, Medio, Bajo) en el correo | ⏳ Pendiente |
+| 94 | Clasificación de importancia en el correo | ⏳ Pendiente |
 | 95 | Corregir el color de los textos y placeholders en Identidad | ⏳ Pendiente |
 | 96 | Volver la paleta a cuadrados | ⏳ Pendiente |
 | 97 | Igualar el tamaño de los botones "Mantener" y "Volver" | ⏳ Pendiente |
-| 98 | Hacer funcionar los botones de la Firma (sin `prompt`) y devolver textos | ⏳ Pendiente |
+| 98 | Hacer funcionar los botones de la Firma y devolver textos | ⏳ Pendiente |
 | 99 | Registrar quién y cuándo se modifica la Identidad Corporativa | ⏳ Pendiente |
+| 100 | Hacer visible el botón "¿Olvidaste tu contraseña?" en Login | ⏳ Pendiente |
+| 101 | Insertar icono `Saludos.svg` en la cartelera | ⏳ Pendiente |
+| 102 | Insertar icono `Firma.svg` en Configuración | ⏳ Pendiente |
+| 103 | Corregir función del botón "Volver a colores Stratos" (aplicar visualmente) | ⏳ Pendiente |
+| 104 | Registrar sesiones (entradas/salidas) y tiempo por módulo en el banco de datos | ⏳ Pendiente |
 
 ---
 
 ## REGISTRO DE DECISIONES Y HERRAMIENTAS
 
-*Espacio para definiciones de estrategia, configuración y acuerdos que no son código, pero afectan la línea de trabajo.*
-
-- **Cline:**
-  - Auto-Approve desactivado (para "Edit files" y "Execute commands").
-  - Archivo `.clinerules/protocolo-stratos.md` creado con las reglas de diseño y comunicación.
-  - Modelo cambiado a **Nemotron 3.5 Super VL**.
-- **IA de Internet (DeepSeek):**
-  - `Arranque de Interacción` actualizado con la Regla 10 (Lectura de GitHub obligatoria) y las Reglas de Redacción.
-- **GitHub:** Vigía (`lanzar_vigia_oculto.vbs`) confirmado en segundo plano.
+- **Cline:** Auto-Approve desactivado. Archivo `.clinerules/protocolo-stratos.md` creado. Modelo: Nemotron 3.5 Super VL.
+- **IA de Internet (DeepSeek):** `Arranque de Interacción` actualizado con Regla 10 y Reglas de Redacción.
+- **GitHub:** Vigía (`lanzar_vigia_oculto.vbs`) confirmado.
 
 ---
 
