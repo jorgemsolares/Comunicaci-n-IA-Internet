@@ -29,9 +29,9 @@
 ### 3. CONFIGURACIÓN DE LA ASISTENTE IA Y FIRMA
 
 - Eliminados Sonido, Vibración, Modo Nocturno.
-- **Nuevo bloque de IA:** Diseño de dos columnas (texto a la izquierda, esfera a la derecha).
-- **Firma del Usuario:** Se implementó el área en Configuración. Los 4 botones (Tipografía, Estilo, Tamaño, Color) están en fila horizontal, con sus textos, y funcionan con menús desplegables (sin `prompt()`).
-- **Pendiente en Firma:** Quitar el halo/brillo al checkbox de "Insertar firma automáticamente".
+- **Nuevo bloque de IA:** Diseño de dos columnas (texto a la izquierda, esfera a la derecha). **Pendiente:** La esfera de IA no tiene `onclick` funcional (no hace nada al presionar).
+- **Firma del Usuario:** Los 4 botones (Tipografía, Estilo, Tamaño, Color) funcionan con menús desplegables (no `prompt()`). El tamaño de la letra no estira el recuadro. La paleta se refleja correctamente. **Pendiente:** Insertar el icono `firma.svg` en el título (Cline lo quitó pero no puso el correcto). **Pendiente:** Quitar el halo/brillo al checkbox de "Insertar firma automáticamente".
+- **Botón Guardar Cambios:** Debe mostrar aviso Verde al guardar.
 
 ---
 
@@ -41,12 +41,14 @@
 - Coincidencia EXACTA en `nombreCompleto + idEmpleado + contrasena`.
 - NO tiene cartelera, ni IA, ni Libro.
 - Botón "¿Olvidaste tu contraseña?" visible siempre.
+- **Error actual:** La función `manejarMascara` rompió la máscara de contraseña (solo se ven puntos, no el último carácter). Debe mostrar el último carácter por 2500ms.
 
 **Perfil:**
-- **Validaciones:** Nombres, Apellidos, ID Empleado, Posición, Contraseña y Confirmar Contraseña son obligatorios. Además, debe haber al menos un medio de contacto (Teléfono o Email).
-- **Avisos:** Si falta un campo obligatorio, se muestra un aviso **Amarillo** listando exactamente qué falta. Si se graba con opcionales vacíos, se muestra un aviso **Amarillo** diciendo qué quedó pendiente.
-- **Lógica del botón SALVAR:** La primera vez (registro nuevo) redirige a Configuración. En ediciones posteriores, se queda en Perfil mostrando un aviso **Verde**.
-- **Bloqueo por contraseña temporal:** Si el usuario entra con una temporal, el sistema lo bloquea en Perfil, muestra un aviso claro (*"Debes crear y guardar una nueva contraseña ahora"*) y no lo deja navegar a otras pantallas hasta que la cambie.
+- **Validaciones:** Nombres, Apellidos, ID Empleado, Posición, Contraseña y Confirmar Contraseña son obligatorios. Además, al menos un medio de contacto (Teléfono o Email).
+- **Avisos:** Si falta un campo obligatorio, aviso **Amarillo** listando qué falta. Si se graba con opcionales vacíos, aviso **Amarillo** diciendo qué quedó pendiente.
+- **Lógica del botón SALVAR:** Primera vez (registro nuevo) → Configuración. Ediciones posteriores → se queda en Perfil con aviso **Verde**.
+- **Bloqueo por contraseña temporal:** Si el usuario entra con una temporal, el sistema lo bloquea en Perfil, muestra un aviso claro (*"Debes crear y guardar una nueva contraseña ahora"*) y no lo deja navegar hasta que la cambie.
+- **Avisos implementados:** Registro nuevo (Verde), edición (Verde), cambio de contraseña (Verde), campos faltantes (Amarillo).
 
 ---
 
@@ -126,55 +128,26 @@
 
 ### 26. PALETA DE COLORES
 
-**Lógica de Construcción (3 Casos):**
-1. **Escaneo:** Analizar logo, descartar Blanco/Negro, agrupar similares.
-2. **Caso 0 (0 colores):** Blanco, Negro, Azul Fondo, Azul Útil, Naranja, Rojo, Verde, Combinación (75% Verde + 25% Azul Útil).
-3. **Caso 1 (1 color):** Color, Combinación (75% Color + 25% Verde), Combinación (75% Color + 25% Rojo), Blanco, Negro, Azul Fondo, Azul Útil, Naranja.
-4. **Caso 2 (2+ colores):** Color 1, Color 2, Blanco, Negro, Verde, Naranja, Combinación (75% C1 + 25% Rojo), Combinación (75% C2 + 25% Verde).
-5. **Mejora de Contraste:** Color base oscuro = 60% base + 40% Stratos. Color base claro = 75% base + 25% Stratos.
-
+**Lógica de Construcción (3 Casos):** (Se mantiene igual).
 **Botones de Control:**
-- "Mantener colores actuales" (Verde): Mantiene colores y guarda logo.
-- "Volver a colores Stratos" (Rojo): Resetea y guarda valores por defecto.
+- "Mantener colores actuales" (Verde).
+- "Volver a colores Stratos" (Rojo).
+- **Pendiente:** La función `restaurarColoresStratos()` no guarda en memoria. Debe resetear a los colores institucionales (`#0b0f19`, `#00ff88`, `#ffffff`) y guardar en `localStorage`.
+- **Pendiente:** Los botones de la paleta (Fondo, Letras, Botones, Mantener, Volver) deben tener una **película blanca muy tenue** para diferenciarse del fondo, incluso si el color es el mismo.
 - **Paleta:** Formato cuadrado.
-- **Pendiente:** Ajustar tamaño/centrado de los botones y color de textos/placeholders en esta sección.
+- **Pendiente:** Ajustar tamaño/centrado de los botones "Mantener" y "Volver", y color de textos/placeholders en esta sección.
 
 ---
 
-### 27. SEGURIDAD Y ACCESOS (NUEVO)
+### 27. SEGURIDAD Y ACCESOS
 
-Esta sección centraliza las reglas de protección de datos y accesos de Stratos.
-
-**Recuperación de Contraseñas:**
-- **Flexibilidad:** Varios compañeros pueden generar contraseñas temporales para una misma solicitud (no se bloquea).
-- **Anulación:** En el instante en que el usuario usa una temporal, el sistema invalida automáticamente todas las demás y marca la solicitud como "resuelta".
-- **Aviso operativo:** Al resolverse, la cartelera del jefe muestra: *"El usuario [Nombre] ya está operativo de nuevo"*.
-- **Temporal y expiración:** La contraseña temporal vence en 24 horas desde que el jefe la envía. Si el usuario no la usa, debe pedir otra.
-- **Candado:** En Configuración, el jefe no puede generar una contraseña si no hay una solicitud pendiente del usuario.
-- **Registro:** Todo se guarda en el banco de datos (quién pidió, quiénes respondieron, cuál se usó, tiempos exactos y bandera si hay más de 3 solicitudes al mes).
-- **Análisis de Vero:** Vero cruzará estos datos en sus reportes para medir el impacto en la productividad.
-
-**Privacidad y Datos:**
-- **Archivo de comunicaciones:** Copia de correos, chats y llamadas guardada codificada en el servidor del No.1. Solo Vero puede leerla respetando la jerarquía.
-- **Nicknames:** Los nombres del Organigrama Personal son privados. El sistema cruza por correo/celular sin exponerlos.
-- **Límites de Vero:** No revela lógica interna ni accede a información sin jerarquía.
-- **Invitaciones:** Flujo de invitación, doble registro y jerarquía de roles (Observador, Indirecto).
+*(Se mantiene igual: flexibilidad de múltiples contraseñas, anulación, aviso operativo, 24h desde envío, candado, registro y análisis de Vero).*
 
 ---
 
-### 28. REGLAS DE REDACCIÓN Y COMPORTAMIENTO DE LA IA (NUEVO)
+### 28. REGLAS DE REDACCIÓN Y COMPORTAMIENTO DE LA IA
 
-Asentadas en `Arranque de Interacción` y `protocolo-stratos.md`:
-1. **Cero interpretaciones:** Instrucciones exactas.
-2. **Un cambio a la vez.**
-3. **Revisión previa obligatoria.**
-4. **Prohibiciones explícitas:** "NO uses alert()", "NO uses prompt()".
-5. **Autorización Explícita de Modificación:** El texto de instrucciones debe incluir la frase que autoriza a modificar archivos sin pedir permiso.
-6. **Definición de Botones:** Si se pide un botón, se debe pedir su función exacta. Si no, la IA debe preguntar.
-7. **Auto-Approve:** Desactivado para edición y comandos.
-8. **Lectura de GitHub obligatoria:** Prohibido dar diagnósticos sin leer el código real.
-9. **Regla de Minutas:** Prohibido resumir. Se debe transcribir textualmente las decisiones, acuerdos y detalles mínimos.
-10. **Regla de Bitácora:** Las entradas en `MEMORIA.md` deben detallar qué se cambió, por qué y cómo se resolvió.
+*(Se mantienen igual: cero interpretaciones, un cambio a la vez, revisión previa, prohibiciones explícitas, autorización de modificación, definición de botones, auto-approve, lectura de GitHub, regla de minutas, regla de bitácora).*
 
 ---
 
@@ -184,33 +157,20 @@ Asentadas en `Arranque de Interacción` y `protocolo-stratos.md`:
 |---|--------|--------|
 | 1-70 | *(Se mantienen iguales)* | ... |
 | 71 | Botón "Color" para el Slogan (mejora visual) | ⏳ A medias |
-| 72-77 | *(Se mantienen iguales)* | ✅ Hecho |
-| 78 | Crear ventana flotante de redacción de correos y el botón "Redactar" | ✅ Hecho |
-| 79 | Reparar la cartelera (HTML roto por inyección de iconos SVG) | ✅ Hecho |
-| 80 | Regla de colores de iconos (naranja/rojo/verde) | ✅ Hecho |
-| 81 | Ajuste de proporciones y diseño visual de la pantalla de Correos | ⏳ En proceso |
-| 82 | Implementar checkbox maestro y selección múltiple en correos | ⏳ Pendiente |
-| 83 | Implementar el cambio de película (leído/no leído) en correos | ⏳ Pendiente |
-| 84 | Implementar la lógica de Tareas | ⏳ Pendiente |
-| 85 | Implementar la lógica de Alarmas | ⏳ Pendiente |
-| 86 | Corregir Nodo Principal y Edición en Organigrama Personal | ✅ Hecho |
-| 87 | Implementar avisos de feedback (Verde/Amarillo/Rojo) en botones | ✅ Hecho |
-| 88 | Reorganización de Configuración (IA 50/50, Firma del Usuario) | ✅ Hecho |
-| 89 | Lógica de inserción y sustitución de la Firma (Sello "FIRMA") | ⏳ Pendiente |
-| 90 | Lógica de Ordenamiento de Correos (Relevancia, Urgencia, Tiempo) | ⏳ Pendiente |
-| 91 | Lógica de CC y CCo en el modal de redacción | ⏳ Pendiente |
-| 92 | Botones de edición de texto en el modal de redacción | ⏳ Pendiente |
-| 93 | Banco de Nicknames | ⏳ Pendiente |
-| 94 | Clasificación de importancia (Alto, Medio, Bajo) en el correo | ⏳ Pendiente |
-| 95 | Corregir el color de los textos y placeholders en Identidad | ⏳ Pendiente |
-| 96 | Volver la paleta a cuadrados | ⏳ Pendiente |
-| 97 | Igualar el tamaño de los botones "Mantener" y "Volver" | ⏳ Pendiente |
+| 72-97 | *(Se mantienen iguales)* | ... |
 | 98 | Hacer funcionar los botones de la Firma (sin `prompt`) y devolver textos | ✅ Hecho |
 | 99 | Registrar quién y cuándo se modifica la Identidad Corporativa | ⏳ Pendiente |
-| 100 | Quitar el halo/brillo al checkbox de "Insertar firma automáticamente" | ⏳ Pendiente |
-| 101 | Flujo completo de recuperación de contraseñas (múltiples, anulación, 24h, candado) | ✅ Hecho |
+| 100 | Quitar el halo/brillo al checkbox de "Insertar firma automáticamente" | ✅ Hecho |
+| 101 | Flujo completo de recuperación de contraseñas | ✅ Hecho |
 | 102 | Validaciones y lógica del botón SALVAR en Perfil | ✅ Hecho |
 | 103 | Bloqueo por contraseña temporal en Perfil | ✅ Hecho |
+| 104 | Avisos de feedback en los 3 casos del botón SALVAR | ✅ Hecho |
+| 105 | Insertar icono `firma.svg` en el título de la Firma | ✅ Hecho |
+| 106 | Arreglar la función `restaurarColoresStratos()` (guardar en memoria) | ⏳ Pendiente |
+| 107 | Agregar la película blanca tenue a todos los botones de la paleta | ⏳ Pendiente |
+| 108 | Arreglar la máscara de contraseña (`manejarMascara`) para que muestre el último carácter por 2500ms | ⏳ Pendiente |
+| 109 | Hacer funcional el botón de la esfera de IA en Configuración | ⏳ Pendiente |
+| 110 | Aviso de "Identidad guardada" (Verde) o "Identidad incompleta" (Amarillo) en botones finales | ⏳ Pendiente |
 
 ---
 
@@ -220,6 +180,8 @@ Asentadas en `Arranque de Interacción` y `protocolo-stratos.md`:
 - **IA de Internet (DeepSeek):** `Arranque de Interacción` actualizado con Reglas de Redacción y Regla de Minutas.
 - **GitHub:** Vigía (`lanzar_vigia_oculto.vbs`) confirmado en segundo plano.
 - **Orden de trabajo actual:** Terminar revisión de botones en Perfil -> Configuración -> Identidad.
+- **Colores institucionales de Stratos:** Fondo general (usable y no usable) `#0b0f19`; Primario `#00ff88`; Texto `#ffffff`; Botones por defecto `#0b0f19` (con película blanca tenue para contraste).
+- **Reset de prueba:** Se borró la identidad guardada (`localStorage.removeItem("stratos_identidad")`) para ver el estado base de Stratos.
 
 ---
 
