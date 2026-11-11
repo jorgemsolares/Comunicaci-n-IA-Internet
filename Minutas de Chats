@@ -23,15 +23,16 @@
 - Cada mensaje lleva su icono.
 - **Duración:** Alta (10s), Media (6s), Baja (4s).
 - **Regla de colores de iconos:** Naranja (superior), Rojo (urgente), Verde (normal).
+- **Regla de exclusividad:** La cartelera es solo para mensajes entre usuarios (superior, colegas, sistema). Los avisos de validación o error de la interfaz van en la barra de notificaciones (toast).
 
 ---
 
 ### 3. CONFIGURACIÓN DE LA ASISTENTE IA Y FIRMA
 
 - Eliminados Sonido, Vibración, Modo Nocturno.
-- **Nuevo bloque de IA:** Diseño de dos columnas (texto a la izquierda, esfera a la derecha). **Pendiente:** La esfera de IA no tiene `onclick` funcional (no hace nada al presionar).
-- **Firma del Usuario:** Los 4 botones (Tipografía, Estilo, Tamaño, Color) funcionan con menús desplegables (no `prompt()`). El tamaño de la letra no estira el recuadro. La paleta se refleja correctamente. **Pendiente:** Insertar el icono `firma.svg` en el título (Cline lo quitó pero no puso el correcto). **Pendiente:** Quitar el halo/brillo al checkbox de "Insertar firma automáticamente".
-- **Botón Guardar Cambios:** Debe mostrar aviso Verde al guardar.
+- **Nuevo bloque de IA:** Diseño de dos columnas (texto a la izquierda, esfera a la derecha). **Pendiente:** La esfera de IA no tiene `onclick` funcional.
+- **Firma del Usuario:** Los 4 botones (Tipografía, Estilo, Tamaño, Color) funcionan con menús desplegables. **Pendiente:** El icono `firma.svg` en el título (Cline lo quitó pero no puso el correcto). **Pendiente:** Quitar el halo/brillo al checkbox.
+- **Botón Guardar Cambios:** Muestra aviso Verde al guardar.
 
 ---
 
@@ -39,15 +40,14 @@
 
 **Login:**
 - Coincidencia EXACTA en `nombreCompleto + idEmpleado + contrasena`.
-- NO tiene cartelera, ni IA, ni Libro.
 - Botón "¿Olvidaste tu contraseña?" visible siempre.
-- **Error actual:** La función `manejarMascara` rompió la máscara de contraseña (solo se ven puntos, no el último carácter). Debe mostrar el último carácter por 2500ms.
+- **Máscara de contraseña:** Funciona con la mecánica de ocultar la letra anterior al escribir la siguiente, y ocultar la última a los 2.5s.
 
 **Perfil:**
-- **Validaciones:** Nombres, Apellidos, ID Empleado, Posición, Contraseña y Confirmar Contraseña son obligatorios. Además, al menos un medio de contacto (Teléfono o Email).
-- **Avisos:** Si falta un campo obligatorio, aviso **Amarillo** listando qué falta. Si se graba con opcionales vacíos, aviso **Amarillo** diciendo qué quedó pendiente.
+- **Validaciones:** Nombres, Apellidos, ID Empleado, Posición, Contraseña, Confirmar Contraseña y al menos un medio de contacto (Teléfono o Email).
+- **Avisos:** Amarillo si falta un campo obligatorio, Amarillo si se graba con opcionales vacíos.
 - **Lógica del botón SALVAR:** Primera vez (registro nuevo) → Configuración. Ediciones posteriores → se queda en Perfil con aviso **Verde**.
-- **Bloqueo por contraseña temporal:** Si el usuario entra con una temporal, el sistema lo bloquea en Perfil, muestra un aviso claro (*"Debes crear y guardar una nueva contraseña ahora"*) y no lo deja navegar hasta que la cambie.
+- **Bloqueo por contraseña temporal:** Si el usuario entra con una temporal, el sistema lo bloquea en Perfil, muestra un aviso claro y no lo deja navegar hasta que la cambie.
 - **Avisos implementados:** Registro nuevo (Verde), edición (Verde), cambio de contraseña (Verde), campos faltantes (Amarillo).
 
 ---
@@ -129,6 +129,7 @@
 ### 26. PALETA DE COLORES
 
 **Lógica de Construcción (3 Casos):** (Se mantiene igual).
+
 **Botones de Control:**
 - "Mantener colores actuales" (Verde).
 - "Volver a colores Stratos" (Rojo).
@@ -139,9 +140,23 @@
 
 ---
 
-### 27. SEGURIDAD Y ACCESOS
+### 27. SEGURIDAD Y ACCESOS (ACTUALIZADO)
 
-*(Se mantiene igual: flexibilidad de múltiples contraseñas, anulación, aviso operativo, 24h desde envío, candado, registro y análisis de Vero).*
+**Recuperación de Contraseñas:**
+- **Solicitud:** El solicitante pide la recuperación. El sistema busca al contacto (por email/celular) y, si no hay solicitud, bloquea el envío y muestra un aviso **Amarillo**. Si hay solicitud, procede.
+- **Validación:** El facilitador ingresa el email/celular y las contraseñas. El sistema valida en tiempo real que coincidan (Iconos SVG).
+- **Envío:** El facilitador presiona "ENVIAR". El sistema envía el correo/mensaje con la contraseña en texto claro y muestra un aviso **Verde** al facilitador.
+- **Anulación:** En el instante en que el usuario usa una temporal, el sistema invalida automáticamente todas las demás y marca la solicitud como "resuelta".
+- **Aviso operativo:** Al resolverse, la cartelera del jefe muestra: *"El usuario [Nombre] ya está operativo de nuevo"*.
+- **Temporal y expiración:** Vence en 24 horas desde que el facilitador la envía.
+- **Registro:** Todo se guarda en el banco de datos (quién pidió, quiénes respondieron, cuál se usó, tiempos exactos y bandera si hay más de 3 solicitudes al mes).
+- **Correos de registro:** Se generan correos silenciosos para dejar registro de la solicitud, del cierre de la recuperación y de los avisos operativos. Vero los marca como leídos y los archiva después de un tiempo.
+
+**Privacidad y Datos:**
+- **Archivo de comunicaciones:** Copia de correos, chats y llamadas guardada codificada en el servidor del No.1. Solo Vero puede leerla respetando la jerarquía.
+- **Nicknames:** Los nombres del Organigrama Personal son privados. El sistema cruza por correo/celular sin exponerlos.
+- **Límites de Vero:** No revela lógica interna ni accede a información sin jerarquía.
+- **Invitaciones:** Flujo de invitación, doble registro y jerarquía de roles (Observador, Indirecto).
 
 ---
 
@@ -149,16 +164,16 @@
 
 *(Se mantienen igual: cero interpretaciones, un cambio a la vez, revisión previa, prohibiciones explícitas, autorización de modificación, definición de botones, auto-approve, lectura de GitHub, regla de minutas, regla de bitácora).*
 
+**Nueva regla:** Si una instrucción es ambigua o falta detalle, la IA debe detenerse y preguntar al Arquitecto antes de escribir una sola línea de código.
+
 ---
 
 ## PENDIENTES
 
 | # | Acción | Estado |
 |---|--------|--------|
-| 1-70 | *(Se mantienen iguales)* | ... |
-| 71 | Botón "Color" para el Slogan (mejora visual) | ⏳ A medias |
-| 72-97 | *(Se mantienen iguales)* | ... |
-| 98 | Hacer funcionar los botones de la Firma (sin `prompt`) y devolver textos | ✅ Hecho |
+| 1-97 | *(Se mantienen iguales)* | ... |
+| 98 | Hacer funcionar los botones de la Firma y devolver textos | ✅ Hecho |
 | 99 | Registrar quién y cuándo se modifica la Identidad Corporativa | ⏳ Pendiente |
 | 100 | Quitar el halo/brillo al checkbox de "Insertar firma automáticamente" | ✅ Hecho |
 | 101 | Flujo completo de recuperación de contraseñas | ✅ Hecho |
@@ -168,9 +183,12 @@
 | 105 | Insertar icono `firma.svg` en el título de la Firma | ✅ Hecho |
 | 106 | Arreglar la función `restaurarColoresStratos()` (guardar en memoria) | ⏳ Pendiente |
 | 107 | Agregar la película blanca tenue a todos los botones de la paleta | ⏳ Pendiente |
-| 108 | Arreglar la máscara de contraseña (`manejarMascara`) para que muestre el último carácter por 2500ms | ⏳ Pendiente |
+| 108 | Arreglar la máscara de contraseña (`manejarMascara`) | ✅ Hecho |
 | 109 | Hacer funcional el botón de la esfera de IA en Configuración | ⏳ Pendiente |
 | 110 | Aviso de "Identidad guardada" (Verde) o "Identidad incompleta" (Amarillo) en botones finales | ⏳ Pendiente |
+| 111 | Validación de solicitud al escribir el contacto (Aviso Amarillo/Verde) | ✅ Hecho |
+| 112 | Revisión y cambio de todos los iconos genéricos del sistema | ✅ Hecho |
+| 113 | Lógica del botón ENVIAR (Aviso Rojo + registro de error si no hay solicitud) | ⏳ Pendiente |
 
 ---
 
