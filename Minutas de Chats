@@ -22,8 +22,9 @@
 
 - Cada mensaje lleva su icono.
 - **Duración:** Alta (10s), Media (6s), Baja (4s).
-- **Regla de colores de iconos:** Naranja (superior), Rojo (urgente), Verde (normal).
+- **Regla de colores de iconos:** Naranja (superior/prioritario), Rojo (urgente/atención), Verde (normal).
 - **Regla de exclusividad:** La cartelera es solo para mensajes entre usuarios (superior, colegas, sistema). Los avisos de validación o error de la interfaz van en la barra de notificaciones (toast).
+- **Prioridad de Módulos:** El usuario debe poder clasificar la importancia (Alta, Media, Baja) de los correos, alarmas, citas, etc. Esa clasificación define el color del icono en la cartelera.
 
 ---
 
@@ -31,7 +32,7 @@
 
 - Eliminados Sonido, Vibración, Modo Nocturno.
 - **Nuevo bloque de IA:** Diseño de dos columnas (texto a la izquierda, esfera a la derecha). **Pendiente:** La esfera de IA no tiene `onclick` funcional.
-- **Firma del Usuario:** Los 4 botones (Tipografía, Estilo, Tamaño, Color) funcionan con menús desplegables. **Pendiente:** El icono `firma.svg` en el título (Cline lo quitó pero no puso el correcto). **Pendiente:** Quitar el halo/brillo al checkbox.
+- **Firma del Usuario:** Los 4 botones (Tipografía, Estilo, Tamaño, Color) funcionan con menús desplegables. **Pendiente:** Insertar el icono `firma.svg` en el título. **Pendiente:** Quitar el halo/brillo al checkbox.
 - **Botón Guardar Cambios:** Muestra aviso Verde al guardar.
 
 ---
@@ -47,8 +48,7 @@
 - **Validaciones:** Nombres, Apellidos, ID Empleado, Posición, Contraseña, Confirmar Contraseña y al menos un medio de contacto (Teléfono o Email).
 - **Avisos:** Amarillo si falta un campo obligatorio, Amarillo si se graba con opcionales vacíos.
 - **Lógica del botón SALVAR:** Primera vez (registro nuevo) → Configuración. Ediciones posteriores → se queda en Perfil con aviso **Verde**.
-- **Bloqueo por contraseña temporal:** Si el usuario entra con una temporal, el sistema lo bloquea en Perfil, muestra un aviso claro y no lo deja navegar hasta que la cambie.
-- **Avisos implementados:** Registro nuevo (Verde), edición (Verde), cambio de contraseña (Verde), campos faltantes (Amarillo).
+- **Bloqueo por contraseña temporal:** Si el usuario entra con una temporal, el sistema lo bloquea en Perfil y no lo deja navegar hasta que la cambie.
 
 ---
 
@@ -71,12 +71,12 @@
 ### 7. CORREO Y HUB DE ARCHIVOS
 
 **Orden:** Relevancia/Urgencia > Reloj de Arena (Verde < 2.5h, Naranja 2.5-4h, Rojo > 4h).
+**Clasificación de Importancia:** El usuario puede marcar el correo como Alto, Medio o Bajo (esto define el icono en la cartelera).
 
 **Modal:**
 - Título + subtítulo (fecha/remitente).
 - Campos: De, Para, CC, CCo.
 - Firma: 5 líneas, sello "FIRMA" (gris, mayúsculas, subrayado, con efecto de escala).
-- Clasificación: Alto, Medio, Bajo.
 - Botones de edición en línea horizontal.
 
 **Visibilidad y Color (Película):**
@@ -106,8 +106,7 @@
 
 ### 10. ALARMAS
 
-- Igual que Tareas.
-- Reloj de arena con tiempo restante.
+- Igual que Tareas. Clasificación de importancia (Alto, Medio, Bajo) para la cartelera.
 - Detalle: Hora, Periodicidad, Integrantes, Sonido, Vibración.
 
 ---
@@ -120,30 +119,28 @@
 
 ---
 
-### 12. CALENDARIO, 13. MIGRACIÓN, 14. SEMANA TÍPICA, 15. TRABAJO INVISIBLE, 16. ORGANIGRAMA, 17. BANCO DE DATOS, 18. BACKUPS, 19. KPIs, 20. MODULARIDAD, 21. IA, 22. TRABAJO INVISIBLE, 23. LÍNEAS DE TIEMPO, 24. OTRAS ACTIVIDADES, 25. TEMAS FUTUROS
+### 12-25
 
-*(Se mantienen iguales).*
+*(Se mantienen iguales: Calendario, Migración, Semana Típica, Trabajo Invisible, Organigrama, Banco de Datos, Backups, KPIs, Modularidad, IA, Líneas de Tiempo, Otras Actividades, Temas Futuros).*
 
 ---
 
 ### 26. PALETA DE COLORES
 
 **Lógica de Construcción (3 Casos):** (Se mantiene igual).
-
 **Botones de Control:**
 - "Mantener colores actuales" (Verde).
 - "Volver a colores Stratos" (Rojo).
 - **Pendiente:** La función `restaurarColoresStratos()` no guarda en memoria. Debe resetear a los colores institucionales (`#0b0f19`, `#00ff88`, `#ffffff`) y guardar en `localStorage`.
-- **Pendiente:** Los botones de la paleta (Fondo, Letras, Botones, Mantener, Volver) deben tener una **película blanca muy tenue** para diferenciarse del fondo, incluso si el color es el mismo.
+- **Pendiente:** Los botones de la paleta (Fondo, Letras, Botones, Mantener, Volver) deben tener una **película blanca muy tenue** para diferenciarse del fondo.
 - **Paleta:** Formato cuadrado.
-- **Pendiente:** Ajustar tamaño/centrado de los botones "Mantener" y "Volver", y color de textos/placeholders en esta sección.
 
 ---
 
-### 27. SEGURIDAD Y ACCESOS (ACTUALIZADO)
+### 27. SEGURIDAD Y ACCESOS
 
 **Recuperación de Contraseñas:**
-- **Solicitud:** El solicitante pide la recuperación. El sistema busca al contacto (por email/celular) y, si no hay solicitud, bloquea el envío y muestra un aviso **Amarillo**. Si hay solicitud, procede.
+- **Flujo:** El solicitante pide la recuperación. El sistema busca al contacto y, si no hay solicitud, bloquea el envío y muestra un aviso **Amarillo**. Si hay solicitud, procede.
 - **Validación:** El facilitador ingresa el email/celular y las contraseñas. El sistema valida en tiempo real que coincidan (Iconos SVG).
 - **Envío:** El facilitador presiona "ENVIAR". El sistema envía el correo/mensaje con la contraseña en texto claro y muestra un aviso **Verde** al facilitador.
 - **Anulación:** En el instante en que el usuario usa una temporal, el sistema invalida automáticamente todas las demás y marca la solicitud como "resuelta".
@@ -162,9 +159,29 @@
 
 ### 28. REGLAS DE REDACCIÓN Y COMPORTAMIENTO DE LA IA
 
-*(Se mantienen igual: cero interpretaciones, un cambio a la vez, revisión previa, prohibiciones explícitas, autorización de modificación, definición de botones, auto-approve, lectura de GitHub, regla de minutas, regla de bitácora).*
+1. **Cero interpretaciones:** Instrucciones exactas.
+2. **Un cambio a la vez.**
+3. **Revisión previa obligatoria.**
+4. **Prohibiciones explícitas:** "NO uses alert()", "NO uses prompt()".
+5. **Autorización Explícita de Modificación.**
+6. **Definición de Botones:** Si se pide un botón, se debe pedir su función exacta.
+7. **Auto-Approve:** Desactivado para edición y comandos.
+8. **Lectura de GitHub obligatoria:** Prohibido dar diagnósticos sin leer el código real.
+9. **Regla de Minutas:** Prohibido resumir. Se debe transcribir textualmente.
+10. **Regla de Bitácora:** Las entradas en `MEMORIA.md` deben detallar qué se cambió, por qué y cómo se resolvió.
+11. **Regla de Instrucciones Ambiguas:** Si el texto de `instrucciones.md` no especifica con precisión, la IA debe detenerse y preguntar.
 
-**Nueva regla:** Si una instrucción es ambigua o falta detalle, la IA debe detenerse y preguntar al Arquitecto antes de escribir una sola línea de código.
+---
+
+### 29. LEYES VISUALES DE UNIFICACIÓN (NUEVO)
+
+- **Tamaño de iconos:** Todos los iconos del sistema (biometría, cartelera, encabezados, modales) deben ser de **33px**.
+- **Encabezados de área:** TODOS los títulos de sección deben llevar un icono a la izquierda (33px).
+- **Tamaño de texto:** Todos los avisos (validación, cartelera, encabezados) a **0.95rem**.
+- **Textos de botones:** Máximo **0.85rem** (adaptándose al espacio).
+- **Contraste de avisos (validación y modales):** Fondo con película al **25%** de opacidad del color del aviso. Texto en **Azul Stratos (`#0b0f19`)**. Icono en su color fuerte.
+- **Cartelera:** Se mantiene con la película blanca tenue actual.
+- **Logo:** El branding inicial usa la imagen `Logo.png` (subida a la carpeta de iconos) en lugar del texto "STRATOS".
 
 ---
 
@@ -172,34 +189,26 @@
 
 | # | Acción | Estado |
 |---|--------|--------|
-| 1-97 | *(Se mantienen iguales)* | ... |
-| 98 | Hacer funcionar los botones de la Firma y devolver textos | ✅ Hecho |
-| 99 | Registrar quién y cuándo se modifica la Identidad Corporativa | ⏳ Pendiente |
-| 100 | Quitar el halo/brillo al checkbox de "Insertar firma automáticamente" | ✅ Hecho |
-| 101 | Flujo completo de recuperación de contraseñas | ✅ Hecho |
-| 102 | Validaciones y lógica del botón SALVAR en Perfil | ✅ Hecho |
-| 103 | Bloqueo por contraseña temporal en Perfil | ✅ Hecho |
-| 104 | Avisos de feedback en los 3 casos del botón SALVAR | ✅ Hecho |
-| 105 | Insertar icono `firma.svg` en el título de la Firma | ✅ Hecho |
-| 106 | Arreglar la función `restaurarColoresStratos()` (guardar en memoria) | ⏳ Pendiente |
-| 107 | Agregar la película blanca tenue a todos los botones de la paleta | ⏳ Pendiente |
-| 108 | Arreglar la máscara de contraseña (`manejarMascara`) | ✅ Hecho |
+| 1-108 | *(Se mantienen iguales)* | ... |
 | 109 | Hacer funcional el botón de la esfera de IA en Configuración | ⏳ Pendiente |
 | 110 | Aviso de "Identidad guardada" (Verde) o "Identidad incompleta" (Amarillo) en botones finales | ⏳ Pendiente |
 | 111 | Validación de solicitud al escribir el contacto (Aviso Amarillo/Verde) | ✅ Hecho |
 | 112 | Revisión y cambio de todos los iconos genéricos del sistema | ✅ Hecho |
 | 113 | Lógica del botón ENVIAR (Aviso Rojo + registro de error si no hay solicitud) | ⏳ Pendiente |
+| 114 | Crear el banco de contraseñas temporales (`contrasenasTemporales`) en el perfil y lógica del botón ENVIAR | ⏳ Pendiente |
+| 115 | Modificar el Login para que valide contra el banco de contraseñas temporales | ⏳ Pendiente |
+| 116 | Conectar la clasificación de prioridad (Alta/Media/Baja) con los colores e iconos de la cartelera | ⏳ Pendiente |
+| 117 | Reemplazar el texto "STRATOS" por la imagen `Logo.png` | ⏳ Pendiente |
+| 118 | Unificar todos los iconos a 33px y aplicar la Ley de Unificación (Sección 29) | ⏳ Pendiente |
 
 ---
 
 ## REGISTRO DE DECISIONES Y HERRAMIENTAS
 
-- **Cline:** Auto-Approve desactivado. Archivo `.clinerules/protocolo-stratos.md` creado. Modelo cambiado a **Gemini 2.5 Flash Lite** (con API Key gratuita).
-- **IA de Internet (DeepSeek):** `Arranque de Interacción` actualizado con Reglas de Redacción y Regla de Minutas.
-- **GitHub:** Vigía (`lanzar_vigia_oculto.vbs`) confirmado en segundo plano.
-- **Orden de trabajo actual:** Terminar revisión de botones en Perfil -> Configuración -> Identidad.
-- **Colores institucionales de Stratos:** Fondo general (usable y no usable) `#0b0f19`; Primario `#00ff88`; Texto `#ffffff`; Botones por defecto `#0b0f19` (con película blanca tenue para contraste).
-- **Reset de prueba:** Se borró la identidad guardada (`localStorage.removeItem("stratos_identidad")`) para ver el estado base de Stratos.
+- **Cline:** Auto-Approve desactivado. Modelo Gemini 2.5 Flash Lite.
+- **IA de Internet:** Protocolo de arranque y reglas actualizadas.
+- **Colores institucionales:** Fondo `#0b0f19`; Primario `#00ff88`; Texto `#ffffff`; Botones `#0b0f19` (con película blanca tenue).
+- **Orden de trabajo actual:** Terminar botón ENVIAR -> Login (banco de claves) -> Cartelera (iconos/colores) -> Leyes visuales.
 
 ---
 
